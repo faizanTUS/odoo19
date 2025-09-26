@@ -34,7 +34,7 @@
     techultra
     techultra solutions private limited
     """,
-"summary": """Boost customer retention with POS referral and loyalty points. Reward referrers and new customers instantly at checkout.
+    "summary": """Boost customer retention with POS referral and loyalty points. Reward referrers and new customers instantly at checkout.
     POS refer a friend program
     POS customer referral system
     POS loyalty points module
@@ -69,6 +69,8 @@
     'category': 'Sales/Loyalty',
     "author": "TechUltra Solutions Private Limited",
     "website": "https://www.techultrasolutions.com",
+    'price': 29.45,
+    'currency': 'USD',
     "license": "OPL-1",
     'depends': ['base', 'loyalty', 'point_of_sale', 'mail'],
     'data': [
