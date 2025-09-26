@@ -113,7 +113,6 @@
         Display SO PO info on contact view
         Odoo user rights for order visibility
         Odoo custom field order tracking
-
     """,
     'category': 'Sales/Purchases/Contact',
     'author': 'Techultra Solutions Private Limited',
