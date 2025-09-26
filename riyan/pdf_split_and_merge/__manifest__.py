@@ -140,8 +140,8 @@
     "images": [
         "static/description/main_screen.gif",
     ],
-    'price': 15.00,
-    'currency': 'EUR',
+    'price': 17.67,
+    'currency": "USD",
     'license': 'OPL-1',
     'installable': True,
     'auto_install': False,

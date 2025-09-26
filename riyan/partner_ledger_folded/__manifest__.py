@@ -102,7 +102,6 @@
     'depends': ['account_reports'],
 
     "data": [
-
     ],
     "images": [
         "static/description/main_screen.gif",
