@@ -153,6 +153,6 @@
         'views/res_config_settings_views.xml',
     ],
     'images': ["static/description/main_screen.gif"],
-    'price': 15.00,
-    'currency': 'EUR'
+    'price': 10.60,
+    'currency': 'USD'
 }
