@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="view_account_payment_register_form_inherit_tus" model="ir.ui.view">
+            <field name="name">account.payment.register.form.inherit.tus</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='amount']" position="before">
+                    <field name="is_multiple_record" invisible="1" />
+                    <field name="allow_custom_currency_rate" invisible="1" />
+                    <field name="is_company_currency" invisible="1" />
+                    <field name="is_not_company_invoice_currency" invisible="1" />
+                    <field
+                        name="currency_rate"
+                        invisible="is_multiple_record == True or allow_custom_currency_rate != True or is_company_currency == True or is_not_company_invoice_currency == True"
+                    />
+                    <field
+                        name="manual_currency_rate"
+                        invisible="is_multiple_record == True or allow_custom_currency_rate != True or is_company_currency == True or is_not_company_invoice_currency == True"
+                    />
+                    <field
+                        name="currency_rate_for_currency_to_invoice_currency"
+                        invisible="is_not_company_invoice_currency != True"
+                    />
+                    <field
+                        name="currency_rate_for_invoice_currency_to_company_currency"
+                        invisible="is_not_company_invoice_currency != True"
+                    />
+                    <label
+                        for="custom_amount"
+                        invisible="is_not_company_invoice_currency != True or can_edit_wizard == False or (can_group_payments == True and group_payment == False)"
+                    />
+                    <div
+                        name="custom_amount_div"
+                        class="o_row"
+                        invisible="is_not_company_invoice_currency != True or can_edit_wizard == False or (can_group_payments == True and group_payment == False)"
+                    >
+                        <field name="custom_amount"/>
+                        <field
+                            name="currency_id"
+                            required="1"
+                            options="{'no_create': True, 'no_open': True}"
+                            groups="base.group_multi_currency"
+                        />
+                    </div>
+                </xpath>
+                <xpath expr="//label[@for='amount']" position="attributes">
+                    <attribute name="invisible">is_not_company_invoice_currency == True or can_edit_wizard == False or (can_group_payments == True and group_payment == False)</attribute>
+                </xpath>
+                <xpath expr="//div[@name='amount_div']" position="attributes">
+                    <attribute name="invisible">is_not_company_invoice_currency == True or can_edit_wizard == False or (can_group_payments == True and group_payment == False)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='communication']" position="after">
+                    <field name="is_multiple_record" invisible="1" />
+                    <field
+                        name="currency_rate_for_multiple_records"
+                        invisible="allow_custom_currency_rate != True or is_multiple_record != True"
+                        required="allow_custom_currency_rate == True or is_multiple_record == True"
+                    />
+                    <field
+                        name="currency_amount_difference"
+                        readonly="1"
+                        string="Currency Amount Difference"
+                        invisible="allow_custom_currency_rate != True or is_multiple_record == True"
+                    />
+                </xpath>
+                <xpath expr="//group[@name='group1']//div[1]" position="attributes">
+                    <attribute name="invisible">allow_custom_currency_rate == True or payment_difference == 0.0 or can_edit_wizard == False or (can_group_payments == True and group_payment == False)</attribute>
+<!--                    <attribute name="invisible">{'invisible': ['|', '|', ('allow_custom_currency_rate', '=', True), ('payment_difference', '=', 0.0), '|', ('can_edit_wizard', '=', False), '&amp;', ('can_group_payments', '=', True), ('group_payment', '=', False)]}</attribute>-->
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
