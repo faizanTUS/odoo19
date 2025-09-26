@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="ft_paints_product_pricelist_item_form_form_inherit" model="ir.ui.view">
+        <field name="name">ft_paints_product_pricelist_item_form_form_inherit</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='base']" position="after">
+                <label for="min_cost" string="Min Cost"
+                       invisible="base != 'standard_price'"/>
+                <div class="o_row" invisible="base != 'standard_price'" style="width: 40% !important;">
+                    <field name="min_cost"/>
+                </div>
+                 <label for="max_cost" string="Max Cost"
+                       invisible="base != 'standard_price'"/>
+                <div class="o_row" invisible="base != 'standard_price'" style="width: 40% !important;">
+                    <field name="max_cost"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
