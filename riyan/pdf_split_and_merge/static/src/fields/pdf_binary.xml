@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="pdf_split_and_merge.PDFBinaryField" t-inherit="web.BinaryField">
+        <xpath expr="//t[@t-elif='props.record.resId and props.record.data[props.name]']" position="replace">
+            <t t-elif="props.record.resId and props.record.data[props.name]">
+                <div class="o_image_box float-start" t-att-data-tooltip="'Download ' + fileName">
+                    <a class="o_form_uri d-flex align-items-center" href="#" t-on-click.stop="onFileDownload">
+                        <span style="cursor: zoom-in;" class="o_image o_hover" data-mimetype="application/pdf" data-ext="pdf" role="img" t-on-click.stop="onFileOpen"/>
+                        <t t-if="fileName" t-esc="fileName" />
+                    </a>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+</templates>
