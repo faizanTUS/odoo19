@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Smart buttons on Contact -->
+    <record id="view_partner_form_inherit_mail_counts" model="ir.ui.view">
+        <field name="name">res.partner.form.mail.counts</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="30"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//div[@class='oe_button_box']" position="inside">
+                <button name="action_view_incoming_mails"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-sign-in">
+                    <field name="incoming_mail_count" widget="statinfo"/>
+<!--                    <div class="o_stat_info">-->
+<!--                        <span class="o_stat_value" t-esc="record.incoming_mail_count"/>-->
+<!--                        <span class="o_stat_text">Incoming</span>-->
+<!--                    </div>-->
+                </button>
+                <button name="action_view_outgoing_mails"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-sign-out">
+                    <field string="Outgoing" name="outgoing_mail_count" widget="statinfo"/>
+<!--                    <div class="o_stat_info">-->
+<!--                        <span class="o_stat_value" t-esc="record.outgoing_mail_count"/>-->
+<!--                        <span class="o_stat_text">Outgoing</span>-->
+<!--                    </div>-->
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

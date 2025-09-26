@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_partner_mail_mail" model="ir.actions.act_window">
+        <field name="name">Emails</field>
+        <field name="res_model">mail.mail</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem id="menu_contacts_emails_root"
+              name="Emails"
+              parent="contacts.menu_contacts"
+              action="action_partner_mail_mail"
+              sequence="95"/>
+</odoo>
