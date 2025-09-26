@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_bulk_order_wizard" model="ir.ui.view">
+        <field name="name">bulk.order.wizard.form</field>
+        <field name="model">bulk.order.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Bulk Order">
+                <sheet>
+                    <div id="bulk_order_grid_container" class="oe_structure"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_bulk_order_wizard" model="ir.actions.act_window">
+        <field name="name">Add Bulk Order</field>
+        <field name="res_model">bulk.order.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_bulk_order_grid" model="ir.actions.client">
+        <field name="name">Bulk Order Grid</field>
+        <field name="tag">bulk_order_grid_action</field>
+    </record>
+</odoo>

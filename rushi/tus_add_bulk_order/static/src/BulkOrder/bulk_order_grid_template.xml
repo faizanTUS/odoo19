@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve" id="template" name="Bulk Order Grid Template">
+    <t t-name="tus_add_bulk_order.BulkOrderGridComponent">
+        <div class="o_form_view o_form_sheet bg-white" style="padding: 24px;">
+            <div class="d-flex justify-content-between mb-3">
+                <button class="btn btn-secondary" t-on-click="onBackClick">
+                    <i class="fa fa-arrow-left mr-1"/>
+                    Back
+                </button>
+                <div style="padding-right: 15px;"/>
+                <button class="btn btn-primary" t-on-click="onAddToSaleOrderClick">
+                    <i class="fa fa-plus mr-1"/>
+                    Add to Sale Order
+                </button>
+                <h2 class="mx-auto">
+                    ADD Bulk Products in
+                    -<t t-out="saleOrderName"/>
+                </h2>
+            </div>
+            <div id="bulk_order_grid_container" class="table-responsive" style="max-height: 900px; overflow-y: auto;">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr style="height: 70px !important; min-height: 70px;
+                            text-align: center; vertical-align: middle !important;">
+                            <th style="min-width: 60px; width: 60px;">Line no.</th>
+                            <th style="min-width: 200px; width: 100px;">Photo</th>
+                            <th style="min-width: 190px; width: 100px;">Model Code</th>
+                            <th style="min-width: 350px; width: 100px;">Product</th>
+                            <th style="min-width: 350px; width: 100px;">Variants &amp; Quantities</th>
+                            <th style="min-width: 100px; width: 100px;">Total Qty</th>
+                            <th style="min-width: 100px; width: 100px;">Sales Price</th>
+                            <th style="min-width: 100px; width: 100px;">TOTAL</th>
+                            <th style="min-width: 130px; width: 100px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="rows" t-as="row" t-key="row_index" t-index="row_index">
+                            <tr t-att-class="row_index % 2 == 0 ? 'even-row' : 'odd-row'"
+                                style="height: 70px !important; min-height: 70px; vertical-align: middle !important;">
+                                <td>
+                                    <t t-esc="row_index + 1"/>
+                                </td>
+                                <!-- Product Image -->
+                                <td>
+                                    <img t-if="row.image_128" t-att-src="'data:image/png;base64,' + row.image_128"
+                                         style="height: 90px; width: 90px; object-fit: cover;"/>
+                                </td>
+
+                                <!-- Model Code Search -->
+                                <td>
+                                    <div class="position-relative" style="overflow: visible;">
+                                        <input type="text" class="form-control"
+                                               style="border: none; text-align: center; height: 50px !important; min-height: 50px;"
+                                               placeholder="Search..." t-att-value="row.model_code"
+                                               t-att-data-row-index="row_index" t-on-input="onSearchInput"
+                                               t-on-focus="showSuggestions" t-on-blur="hideSuggestions"/>
+                                        <ul t-if="row.showSuggestions and row.suggestions.length"
+                                            class="list-unstyled position-absolute bg-white border rounded shadow-sm"
+                                            style="z-index: 1000; width: 100%; max-height: 200px; overflow-y: auto; margin-top: 2px;">
+                                            <li t-foreach="row.suggestions" t-as="product" t-key="product.id"
+                                                class="px-3 py-2"
+                                                style="cursor: pointer; border-bottom: 1px solid #eee;"
+                                                t-att-data-index="row_index" t-att-data-product="serialize(product)"
+                                                t-on-click="selectProductFromEvent"
+                                                onmouseover="this.style.backgroundColor='#f8f9fa'"
+                                                onmouseout="this.style.backgroundColor='white'">
+                                                <t t-esc="product.model_name"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+
+                                <!-- Product Name -->
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <span t-esc="row.title_color"/>
+                                </td>
+
+                                <!-- Variants & Quantities -->
+                                <td>
+                                    <t t-if="row.variants_data and row.variants_data.length">
+                                        <div class="d-flex flex-column" style="max-height: 150px; overflow-y: auto;">
+                                            <t t-foreach="row.variants_data" t-as="variant" t-key="variant_index"
+                                               t-index="variant_index">
+                                                <div class="d-flex align-items-center justify-content-between py-1 px-2 border-bottom">
+                                                    <div class="text-left flex-grow-1">
+                                                        <strong style="font-size: 12px;"><t t-esc="variant.attributes_display"/></strong>
+                                                        <br/>
+                                                        <small class="text-muted" style="font-size: 10px;">
+                                                            <t t-if="variant.qty_available > 0">
+                                                                <span class="text-success"><t t-esc="variant.qty_available"/>
+                                                                    In Stock</span>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <span class="text-danger">Out of Stock</span>
+                                                            </t>
+                                                        </small>
+                                                    </div>
+                                                    <input type="number" min="0"
+                                                           class="form-control form-control-sm ml-2"
+                                                           style="width: 60px; text-align: center; height: 30px; margin:5px;"
+                                                           t-att-value="variant.quantity_input || ''"
+                                                           t-att-data-row-index="row_index"
+                                                           t-att-data-variant-index="variant_index"
+                                                           t-on-input="onQuantityChange"
+                                                           t-att-disabled="variant.qty_available === 0 ? 'disabled' : null"
+                                                           placeholder="qty"/>
+
+                                                    <input type="number" min="0"
+                                                           class="form-control form-control-sm ml-2"
+                                                           style="width: 80px; text-align: center; height: 30px; margin:5px;"
+                                                           t-att-value="variant.list_price || ''"
+                                                           t-att-data-row-index="row_index"
+                                                           t-att-data-variant-index="variant_index"
+                                                           t-on-input="onPriceChange"
+                                                           placeholder="Price"/>
+                                                </div>
+                                            </t>
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="text-muted text-center" style="font-size: 12px;">
+                                            Select a product to see variants
+                                        </div>
+                                    </t>
+                                </td>
+
+                                <!-- Total Quantity -->
+                                <td style="height: 70px !important; min-height: 70px; text-align: center; vertical-align: middle;">
+                                    <strong t-esc="row.total_qty || 0"/>
+                                </td>
+
+                                <!-- Sales Price (This will now be the sum of variant prices) -->
+                                <td style="height: 70px !important; min-height: 70px; text-align: center; vertical-align: middle;">
+                                    <span t-esc="row.total_list_price || 0"/>
+                                </td>
+
+                                <!-- Total Price -->
+                                <td style="height: 70px !important; min-height: 70px; text-align: center; vertical-align: middle;">
+                                    <strong t-esc="row.total_price || 0"/>
+                                </td>
+
+                                <!-- Actions -->
+                                <td style="height: 70px !important; min-height: 70px; text-align: center; vertical-align: middle;">
+                                    <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                        <span style="padding: 10px;">
+                                            <i class="fa fa-shopping-cart text-success" title="Add to Cart"
+                                               style="cursor: pointer; font-size: 20px;"
+                                               t-att-data-row-index="row_index"
+                                               t-on-click="onAddRowToSaleOrder"/>
+                                        </span>
+
+                                        <!--                                        <span style="padding: 5px;">-->
+                                        <!--                                            <i class="fa fa-copy text-info" title="Copy Quantities"-->
+                                        <!--                                               style="cursor: pointer; font-size: 20px;"-->
+                                        <!--                                               t-att-data-row-index="row_index"-->
+                                        <!--                                               t-on-click="onCopyQuantities"/>-->
+                                        <!--                                        </span>-->
+                                        <!--                                        <span style="padding: 5px;">-->
+                                        <!--                                            <i class="fa fa-paste text-info" title="Paste Quantities"-->
+                                        <!--                                               style="cursor: pointer; font-size: 20px;"-->
+                                        <!--                                               t-att-data-row-index="row_index"-->
+                                        <!--                                               t-on-click="onPasteQuantities"/>-->
+                                        <!--                                        </span>-->
+                                        <span style="padding: 10px;">
+                                            <i class="fa fa-trash text-danger" title="Remove Line"
+                                               style="cursor: pointer; font-size: 20px;"
+                                               t-att-data-row-index="row_index"
+                                               t-on-click="onRemoveRowClick"/>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+</templates>

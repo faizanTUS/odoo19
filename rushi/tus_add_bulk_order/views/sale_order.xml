@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_sale_order_bulk_order">
+        <field name="name">sale.order.bulk.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="before">
+                <button name="%(action_bulk_order_grid)d"
+                        type="action"
+                        context="{'default_sale_order_id': id}"
+                        string="Add Bulk Products"
+                        class="btn-primary"
+                        invisible="state != 'draft'"
+                />
+            </xpath>
+            <!--            <xpath expr="//notebook" position="inside">-->
+            <!--                <page string="Bulk Products in Order">-->
+            <!--                    <button name="%(action_bulk_order_grid)d"-->
+            <!--                            type="action"-->
+            <!--                            context="{'default_sale_order_id': id}"-->
+            <!--                            string="Add Bulk Products"-->
+            <!--                            class="btn-primary"-->
+            <!--                    />-->
+            <!--                </page>-->
+            <!--            </xpath>-->
+        </field>
+    </record>
+</odoo>
