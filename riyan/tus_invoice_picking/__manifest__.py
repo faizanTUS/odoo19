@@ -82,8 +82,8 @@
     "images": [
         "static/description/main_screen.gif",
     ],
-    'price': 12.00,
-    'currency': 'EUR',
+    'price': 14.14,
+    'currency': 'USD',
     'installable': True,
     'auto_install': False,
     'application': True,
