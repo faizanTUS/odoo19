@@ -144,7 +144,8 @@
              Discount management in Odoo 16 purchase orders
     """,
     'license': 'OPL-1',
-    'price': 0,
+    'price': 23.56,
+    'currency': 'USD',
 
     'depends': ['purchase'],
     'data': [
