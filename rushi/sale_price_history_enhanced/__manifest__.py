@@ -111,6 +111,8 @@
     "images": [
         "static/description/main_screen.gif",
     ],
+    'price': 14.14,
+    'currency': 'USD',
     'installable': True,
     'application': False,
 }
