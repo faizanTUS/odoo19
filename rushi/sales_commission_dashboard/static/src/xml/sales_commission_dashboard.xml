@@ -1,0 +1,163 @@
+<templates xml:space="preserve">
+    <t t-name="sales_commission_dashboard.SalesCommissionDashTemplate">
+        <div class="sales-commission-dashboard" t-ref="dashboardContainer">
+            <div class="filters"
+             style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem; padding: 0.5rem 1rem; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <div style="display: flex; flex-direction: column; min-width: 200px;">
+              <label style="font-weight: 500; margin-bottom: 4px;">Select User</label>
+              <select t-att-value="state.selectedUser" t-on-change="onUserSelectionChange"
+                      style="padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc;">
+                <option value="">All Users</option>
+                <t t-foreach="state.allUsers" t-as="user" t-key="user.id">
+                  <option t-att-value="user.id" t-esc="user.name"></option>
+                </t>
+              </select>
+            </div>
+
+        </div>
+            <!-- 2x2 Grid Layout -->
+            <div class="dashboard-grid-2x2">
+                <!-- Top Left - Commission Summary -->
+                <div class="grid-item top-left">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Commission Summary</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Salesperson</th>
+                                            <th>Target Amount</th>
+                                            <th>Commission</th>
+                                            <th>Achieved</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody t-ref="commissionSummaryBody">
+                                        <!-- Data populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Right - Customer Commission -->
+                <div class="grid-item top-right">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Inactive Customers</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody t-ref="customerCommissionBody">
+                                        <!-- Data populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Left - Monthly Performance -->
+                <div class="grid-item bottom-left">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Pending SO's for Quotation</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Order</th>
+                                            <th>Date</th>
+                                            <th>Customer</th>
+                                            <th>SalesPerson</th>
+                                            <th>Company</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody t-ref="monthlyPerformanceBody">
+                                        <!-- Data populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Right - Commission Plans -->
+                <div class="grid-item bottom-right">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Pending For Deliveries</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Reference</th>
+                                            <th>Scheduled Date</th>
+                                            <th>Customer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody t-ref="PendingForDeliveries">
+                                        <!-- Data populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Left - Monthly Performance -->
+                <div class="grid-item bottom-left">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Payment due date</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Order</th>
+                                            <th>Due Date</th>
+                                            <th>SalesPerson</th>
+                                            <th>Customer</th>
+                                            <th>Company</th>
+                                            <th>Amount Residual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody t-ref="Paymentduedate">
+                                        <!-- Data populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-overlay" t-ref="loadingSpinner" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p>Loading dashboard data...</p>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,13 @@
+<odoo>
+    <record id="action_sales_commission_dashboard_chart" model="ir.actions.client">
+        <field name="name">Commission Chart</field>
+        <field name="tag">sales_commission_dashboard_widget</field>
+    </record>
+    <menuitem
+            id="sales_commission_dashboard_menu"
+            name="Sales Commission Dashbord"
+            action="action_sales_commission_dashboard_chart"
+            parent="sale.sale_menu_root"
+            sequence="555"
+    />
+</odoo>

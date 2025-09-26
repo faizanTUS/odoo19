@@ -1,0 +1,229 @@
+ .sales-commission-dashboard {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  /*  overflow: scroll;*/
+}
+
+
+.o_web_client:has(.sales-commission-dashboard){
+    overflow-y: scroll !important;
+}
+
+html .o_web_client > .o_action_manager:has(.sales-commission-dashboard){
+    overflow: unset !important;
+}
+
+.sales-commission-dashboard .grid-item:last-child {
+	padding-bottom: 20px !important;
+}
+
+.sales-commission-dashboard .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sales-commission-dashboard .dashboard-title {
+    margin: 0;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.sales-commission-dashboard .dashboard-global-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* 2x2 Grid Layout */
+.sales-commission-dashboard .dashboard-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    height: calc(100vh - 150px);
+}
+
+.sales-commission-dashboard .grid-item {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.sales-commission-dashboard .grid-item .card {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sales-commission-dashboard .grid-item .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Header with Filter */
+.sales-commission-dashboard .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 12px 20px;
+}
+
+.sales-commission-dashboard .card-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.sales-commission-dashboard .card-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sales-commission-dashboard .card-filter {
+    min-width: 150px;
+}
+
+.sales-commission-dashboard .table-filter {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.sales-commission-dashboard .table-filter:focus {
+    background: white;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+
+.card-body {
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.sales-commission-dashboard .table-responsive {
+    flex: 1;
+    max-height: calc(50vh - 120px);
+    overflow-y: auto;
+}
+
+.sales-commission-dashboard .table {
+    margin: 0;
+    font-size: 13px;
+}
+
+.sales-commission-dashboard .table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border: none;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+.sales-commission-dashboard .table td, .table th {
+    padding: 8px 12px;
+    vertical-align: middle;
+    border-color: #e9ecef;
+}
+
+/* Different colors for each grid item */
+.top-left .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.top-right .card-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.bottom-left .card-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.bottom-right .card-header {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Loading Overlay */
+.sales-commission-dashboard .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sales-commission-dashboard .dashboard-grid-2x2 {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 350px);
+        height: auto;
+    }
+
+    /*.sales-commission-dashboard .dashboard-header {
+        flex-direction: column;
+        gap: 10px;
+    }*/
+
+    .sales-commission-dashboard .dashboard-global-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .sales-commission-dashboard .card-header-content {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .sales-commission-dashboard .card-filter {
+        width: 100%;
+    }
+
+    .sales-commission-dashboard .date-inputs {
+        justify-content: center;
+    }
+}
+
+.sales-commission-dashboard .table-responsive::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sales-commission-dashboard .table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.sales-commission-dashboard .table-responsive::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.sales-commission-dashboard .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="sale_commission_report_view_list_inherit" model="ir.ui.view">
+            <field name="name">sale.commission.report.list.view.inherit</field>
+            <field name="model">sale.commission.report</field>
+            <field name="inherit_id" ref="sale_commission.sale_commission_report_view_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+
+                    <field name="date_tos"/>
+<!--&lt;!&ndash;                    <field name="supersede_ids" widget="many2many_tags" options='{"no_edit": True, "no_create": True}'/>&ndash;&gt;-->
+<!--                    <field name="product_supersede_ids" widget="many2many_tags" options='{"no_edit": True, "no_create": True}'/>-->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
