@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+
+         <record model="res.groups.privilege" id="module_token_model">
+            <field name="name">Token</field>
+            <field name="description"></field>
+            <field name="sequence">12</field>
+        </record>
+
+        <record id="group_token_model_user" model="res.groups">
+            <field name="name">User</field>
+<!--            <field name="category_id" ref="odoo_json_rpc.module_token_model"/>-->
+        </record>
+
+        <record id="group_token_model_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="privilege_id" ref="odoo_json_rpc.module_token_model"/>
+        </record>
+
+    </data>
+</odoo>
