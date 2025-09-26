@@ -76,7 +76,7 @@ Great for Sales Managers and Executives to take quick actions based on live data
     'depends': [
         'base',
         'sale',
-        'sales_team','sale_commission',
+        'sales_team', 'sale_commission',
     ],
 
     'data': [
@@ -84,12 +84,12 @@ Great for Sales Managers and Executives to take quick actions based on live data
     ],
 
     "assets": {
-            "web.assets_backend": [
-                "sales_commission_dashboard/static/src/css/sales_commission_dashboard.css",
-                "sales_commission_dashboard/static/src/xml/sales_commission_dashboard.xml",
-                "sales_commission_dashboard/static/src/js/sales_commission_dashboard.js",
-            ]
-        },
+        "web.assets_backend": [
+            "sales_commission_dashboard/static/src/css/sales_commission_dashboard.css",
+            "sales_commission_dashboard/static/src/xml/sales_commission_dashboard.xml",
+            "sales_commission_dashboard/static/src/js/sales_commission_dashboard.js",
+        ]
+    },
     "images": [
         "static/description/main_screen.gif",
     ],
@@ -100,7 +100,8 @@ Great for Sales Managers and Executives to take quick actions based on live data
     'auto_install': False,
 
     # Module price (if selling on Odoo Apps Store)
-    'price': 0.00,
+    'price': 14.14,
+    'currency': 'USD',
 
     # Version compatibility
     'odoo_version': '18.0',
