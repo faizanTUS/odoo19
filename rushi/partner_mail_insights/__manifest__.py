@@ -113,6 +113,8 @@
         "views/res_partner_views.xml",
         "views/menu.xml"
     ],
+    'price': 9.42,
+    'currency': 'USD',
     "images": [
         "static/description/main_screen.gif",
     ],
