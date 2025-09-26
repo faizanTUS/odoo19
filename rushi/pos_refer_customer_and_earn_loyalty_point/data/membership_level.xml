@@ -1,0 +1,10 @@
+<odoo>
+     <record id="mail_activity_type_membership_level_upgrae" model="mail.activity.type">
+        <field name="name">Membership Level Upgrade</field>
+        <field name="icon">fa-check</field>
+    </record>
+    <record id="mail_activity_type_generate_points_expire" model="mail.activity.type">
+        <field name="name">Points expire after 6 months of inactivity</field>
+        <field name="icon">fa-check</field>
+    </record>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="ir_cron_generate_points_expire" model="ir.cron">-->
+<!--            <field name="name">Points expire after 6 months of inactivity</field>-->
+<!--            <field name="model_id" ref="loyalty.model_loyalty_card"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model._cron_generate_points_expire_emails()</field>-->
+<!--            <field name="interval_number">1</field>-->
+<!--            <field name="interval_type">days</field>-->
+<!--            <field name="active" eval="True"/>-->
+<!--        </record>-->
+<!--         <record id="ir_cron_generate_unique_referral_code" model="ir.cron">-->
+<!--            <field name="name">Generate Unique Referral Codes</field>-->
+<!--            <field name="model_id" ref="base.model_res_partner"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model._cron_generate_unique_referral_code()</field>-->
+<!--            <field name="interval_number">1</field>-->
+<!--            <field name="interval_type">days</field>-->
+<!--            <field name="numbercall">1</field>-->
+<!--            <field name="active" eval="True"/>-->
+<!--        </record>-->
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="PartnerDetailsEdit" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension">
+         <xpath expr="//div[hasclass('partner-details-box')]" position="inside">
+            <div class="partner-detail col">
+                        <label class="form-label label" for="vat">Referral Code</label>
+                        <input class="detail vat form-control" id="ref_by_code" name="ref_by_code" t-model="changes.ref_by_code"/>
+                    </div>
+         </xpath>
+
+    </t>
+</templates>
