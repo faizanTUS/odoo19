@@ -93,7 +93,7 @@
     ''',
     'author': "Techultra Solutions Private Limited",
     'website': "https://www.techultrasolutions.com/",
-    "price": 9,
+    "price": 15.32,
     "currency": "USD",
     'images': ['static/description/main_screen.gif'],
     'depends': ['website_sale'],
