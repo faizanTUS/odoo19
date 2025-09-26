@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="worksheet_custom_page_inherit" inherit_id="industry_fsm_report.worksheet_custom_page">
+            <xpath expr="//div[@name='worksheet_task_timesheet']" position="after">
+                <div name="Worksheet" style="margin-top:20px;page-break-inside: avoid">
+                    <h2>Worksheet</h2>
+                    <div class="row mb-2 col-12" style="page-break-inside: avoid">
+                        <div class="col-12">
+                           <table class="table o_main_table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th class="text-start">Serial Number</th>
+                                        <th class="text-start">Name</th>
+                                        <th class="text-start">Manufacturer</th>
+                                        <th class="text-end">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.project_task_worksheet_ids" t-as="worksheet">
+                                        <t t-foreach="doc.project_task_worksheet_ids" t-as="worksheet" t-foreach-index="line_index">
+                                            <td>
+                                                <t t-esc="worksheet.serial_number"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="worksheet.name"/>
+                                            </td>
+                                            <td class="text-start">
+                                                <t t-esc="worksheet.manufacturer.name"/>
+                                            </td>
+                                            <td class="text-end">
+                                                <t t-esc="worksheet.date"/>
+                                            </td>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>
