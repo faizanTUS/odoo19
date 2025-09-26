@@ -149,6 +149,8 @@
     "images": [
         "static/description/main_screen.gif",
     ],
+    'price': 10.60,
+    'currency': 'USD',
     'installable': True,
     'auto_install': False,
     "license": "OPL-1",
