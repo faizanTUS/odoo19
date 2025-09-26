@@ -101,5 +101,7 @@
     "images": [
         "static/description/main_screen.gif",
     ],
+    'price': 11.78,
+    'currency': 'USD',
     'license': 'OPL-1',
 }
