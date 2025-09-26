@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record id="purchase_order_form_global_discount" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit.discount</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//page[@name='products']//field[@name='order_line']//list//field[@name='discount']"
+                       position="attributes">
+                    <attribute name="optional">show</attribute>
+                </xpath>
+                <xpath expr="//field[@name='tax_totals']" position="before">
+                    <div class="float-end d-flex gap-1 mb-2" name="Po_button_below_order_lines">
+                        <button string="Discount" name="action_open_discount_wizard" type="object"
+                                class="btn btn-secondary"
+                                invisible="state not in ['draft', 'sent']"
+                                groups="tus_purchase_discount_advanced.group_purchase_discount"/>
+                    </div>
+                </xpath>
+                <!--                                <xpath expr="//field[@name='tax_totals']" position="after">-->
+                <!--                    <field name="discount_type" invisible="1"/>-->
+                <!--                    <field name="global_discount"-->
+                <!--                           invisible="discount_type != 'global'"-->
+                <!--                           widget="percentage"-->
+                <!--                           groups="purchase_discount.group_purchase_discount"/>-->
+                <!--                    <field name="fixed_discount"-->
+                <!--                           invisible="discount_type != 'fixed'"-->
+                <!--                           widget="monetary"-->
+                <!--                           groups="purchase_discount.group_purchase_discount"/>-->
+                <!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>
