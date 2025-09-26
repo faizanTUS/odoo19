@@ -1,0 +1,22 @@
+ <templates>
+
+        <t t-name="restrict_create_product_customer.ButtonListRenderer" t-inherit="web.ListView" t-inherit-mode="primary">
+            <xpath expr="//button[hasclass('o_list_button_add')]" position="attributes">
+                <attribute name="t-if">!hasAccess</attribute>
+            </xpath>
+        </t>
+
+        <t t-name="restrict_create_product_customer.ButtonKanbanController" t-inherit="web.KanbanView" t-inherit-mode="primary">
+            <xpath expr="//button[hasclass('o-kanban-button-new')]" position="attributes">
+                <attribute name="t-if">!hasAccess</attribute>
+            </xpath>
+        </t>
+     <t t-name="restrict_create_product_customer.ButtonFormRenderer" t-inherit="web.FormView" t-inherit-mode="primary">
+         <xpath expr="//button[hasclass('o_form_button_create')]" position="attributes">
+                <attribute name="t-if">!hasAccess</attribute>
+            </xpath>
+<!--         <xpath expr="//t[6]//button[hasclass('o_form_button_create')]" position="attributes">-->
+<!--                <attribute name="t-if">!hasAccess</attribute>-->
+<!--            </xpath>-->
+     </t>
+    </templates>
