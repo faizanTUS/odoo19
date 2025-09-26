@@ -1,0 +1,28 @@
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">sale.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+         <field name="priority" eval="70"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='companies_setting_container']" position="after">
+                <block title="Sales Price History" name="sales_price_History">
+                <group string="Sales Price History">
+                     <setting string="Item Limit">
+                        <field name="item_limit"/>
+                    </setting>
+                    <setting string="Show Confirm Sales Orders">
+                        <field name="filter_confirmed"/>
+                    </setting>
+                     <setting string="Show Quotation Sent Sales Orders">
+                        <field name="filter_sent"/>
+                    </setting>
+                    <setting string="Show Draft Sales Orders">
+                        <field name="filter_draft"/>
+                    </setting>
+                </group>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

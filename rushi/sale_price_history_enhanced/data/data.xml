@@ -1,0 +1,12 @@
+<odoo>
+    <record id="default_sales_price_history_settings" model="ir.config_parameter">
+        <field name="key">sale_price_history.item_limit</field>
+        <field name="value">10</field>
+    </record>
+
+    <!-- Register Sale Price History Model -->
+    <record id="model_sale_price_history" model="ir.model">
+        <field name="name">Sale Price History</field>
+        <field name="model">sale.price.history</field>
+    </record>
+</odoo>
