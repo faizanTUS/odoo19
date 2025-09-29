@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data>
-        <template id="remove_powered_by_odoo_survey" inherit_id="survey.layout" name="Remove Powered by Odoo Survey">
-            <xpath expr="//div[contains(@class, 'px-2 py-2 d-inline-block')]" position="replace"/>
-        </template>
-    </data>
-</odoo>
