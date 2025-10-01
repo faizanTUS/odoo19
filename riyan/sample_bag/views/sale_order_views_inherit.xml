@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="sale_order_sample_bag_form_view_inherit" model="ir.ui.view">
+        <field name="name">sale.order.sample.bag.form.view.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//form//page[@name='other_information']//group[@name='sales_person']//field[@name='team_id']"
+                position="before"
+            >
+                <field name="is_sample_bag" readonly="1" />
+                <field name="sample_bag_id" readonly="1" />
+                <field name="is_sale_from_sample_bag" readonly="1" />
+                <field name="sale_from_sample_bag_id" readonly="1" />
+            </xpath>
+            <xpath expr="/form//header" position="inside">
+                <button
+                    name='mark_sample_bag'
+                    string="Mark SO as Sample Bag"
+                    type="object"
+                    invisible="state not in ['sale'] or is_sample_bag == True or sale_from_sample_bag_id != False"
+                />
+                <!--                    attrs="{'invisible': ['|','|',('state', 'not in', ['sale']),('is_sample_bag','=',True),('sale_from_sample_bag_id','!=',False)]}"-->
+                <!--                    invisible="1"-->
+                <!--                <button name='unmark_sample_bag' string="Un-Mark SO from Sample Bag" type="object" attrs="{'invisible': ['|','|',('state', 'in', ['sale','done','cancel']),('is_sample_bag','=',False),('sample_bag_id','!=',False)]}"/>-->
+                <button
+                    name="%(sample_bag.sample_bag_from_so_action)d"
+                    type="action"
+                    string="Create Sample Bag"
+                    invisible="is_sample_bag == False or sample_bag_id != False or sale_from_sample_bag_id != False"
+                />
+                <!--                    attrs="{'invisible': ['|','|',('is_sample_bag', '=', False),('sample_bag_id','!=',False),('sale_from_sample_bag_id','!=',False)]}"-->
+                <!--                    invisible="1"-->
+            </xpath>
+            <xpath expr="//form//div[@class='oe_button_box']" position="inside">
+                <button
+                    class="oe_stat_button"
+                    type="object"
+                    name="sample_bag_from_so_btn"
+                    string="Sample Bag"
+                    icon="fa-shopping-basket"
+                    invisible="sample_bag_id == False"
+                >
+                    <!--                <field string="Sample Bag" name="sample_bag_id" widget="statinfo"/>-->
+                </button>
+                <!--                    attrs="{'invisible': [('sample_bag_id', '=', False)]}"-->
+                <!--                    invisible="1"-->
+            </xpath>
+        </field>
+    </record>
+</odoo>

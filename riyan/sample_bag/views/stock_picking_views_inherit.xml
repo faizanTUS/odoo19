@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="stock_picking_sample_bag_form_view_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.sample.bag.form.view.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form//field[@name='origin']" position="after">
+                <field name="sample_bag_id" readonly="1" invisible="1" />
+            </xpath>
+            <xpath
+                expr="//form//group[@name='other_infos']//field[@name='company_id']"
+                position="after"
+            >
+                <field name="is_sample_bag" readonly="1" />
+                <field name="sample_bag_id" readonly="1" />
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button
+                    name='mark_sample_bag'
+                    string="Mark Transfer as Sample Bag"
+                    type="object"
+                    invisible="state not in ['done'] or is_sample_bag == True or picking_type_code != 'internal'"
+                />
+                <!--                    attrs="{'invisible':-->
+                <!--                ['|','|',('state', 'not in', ['done']),('is_sample_bag','=',True),('picking_type_code','!=','internal')]}"-->
+                <button
+                    name="%(sample_bag.sample_bag_from_so_action)d"
+                    type="action"
+                    string="Create Sample Bag"
+                    invisible="is_sample_bag == False or sample_bag_id != False"
+                />
+                <!--                    attrs="{'invisible':-->
+                <!--                ['|',('is_sample_bag', '=', False),('sample_bag_id','!=',False)]}"-->
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ul88_base_view_picking_type_form_inherit" model="ir.ui.view">
+        <field name="name">ul88.base.view.picking.type.form.inherit</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='first']/group[2]" position="inside">
+                <field name="is_sample_bag_to_warehouse" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

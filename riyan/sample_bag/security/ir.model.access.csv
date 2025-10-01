@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sample_bag,access_sample_bag,model_sample_bag,,1,1,1,1
+access_sample_bag_line,access_sample_bag_line,model_sample_bag_line,,1,1,1,1
+access_update_salesperson,access_update_salesperson,model_update_salesperson,,1,1,1,1
+access_sample_bag_create_so,access_sample_bag_create_so,model_sample_bag_create_so,,1,1,1,1
+access_sample_bag_create_so_line,access_sample_bag_create_so_line,model_sample_bag_create_so_line,,1,1,1,1
+access_sample_bag_from_so,access_sample_bag_from_so,model_sample_bag_from_so,,1,1,1,1
+access_scrap_quantity,access_scrap_quantity,model_scrap_quantity,,1,1,1,1
+access_scrap_quantity_line,access_scrap_quantity_line,model_scrap_quantity_line,,1,1,1,1
+access_warehouse_transfer,access_warehouse_transfer,model_warehouse_transfer,,1,1,1,1
+access_warehouse_transfer_line,access_warehouse_transfer_line,model_warehouse_transfer_line,,1,1,1,1

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sample_bag_from_so_form_view" model="ir.ui.view">
+        <field name="name">sample_bag_from_so_form_view</field>
+        <field name="model">sample.bag.from.so</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field
+                            name="sample_bag_id"
+                            domain="[('state','not in',['done'])]"
+                            invisible="is_existing_sample_bag == False"
+                            required="is_existing_sample_bag == True"
+                            options="{'no_create_edit': True}"
+                        />
+                        <!--                            attrs="{'invisible': [('is_existing_sample_bag', '=', False)],'required': [('is_existing_sample_bag','=',True)]}"-->
+                        <field name="is_existing_sample_bag" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="create_new_sample_bag"
+                        string="Create Sample Bag"
+                        type="object"
+                        class="btn-primary"
+                        invisible="is_existing_sample_bag == True"
+                    />
+                    <!--                        attrs="{'invisible': [('is_existing_sample_bag', '=', True)]}"-->
+                    <button
+                        name="update_existing_sample_bag"
+                        string="Update Existing Sample Bag"
+                        type="object"
+                        class="btn-primary"
+                        invisible="is_existing_sample_bag == False"
+                    />
+                    <!--                        attrs="{'invisible': [('is_existing_sample_bag', '=', False)]}"-->
+                    <button string="cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="sample_bag_from_so_action" model="ir.actions.act_window">
+        <field name="name">Sample Bag</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sample.bag.from.so</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

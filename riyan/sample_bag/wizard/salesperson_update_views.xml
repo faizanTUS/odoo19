@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="update_salesperson_form_view" model="ir.ui.view">
+        <field name="name">update.salesperson.form.view</field>
+        <field name="model">update.salesperson</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field
+                                name="salesperson_id"
+                                required="0"
+                                options="{'no_create': True, 'no_create_edit':True}"
+                                invisible="is_partial == True or is_complete_transfer == True"
+                            />
+                            <!--                                attrs="{'invisible': ['|',('is_partial', '=', True),('is_complete_transfer','=',True)]}"-->
+                            <field
+                                name="sample_bag_id"
+                                domain="[('state', 'not in', ['done'])]"
+                                options="{'no_create': True, 'no_create_edit':True}"
+                                required="is_partial == True or is_complete_transfer == True"
+                                invisible="is_partial == False and is_complete_transfer == False"
+                            />
+                            <!--                                attrs="{'required': ['|',('is_partial', '=', True),('is_complete_transfer', '=', True)],-->
+                            <!--                                     'invisible': [('is_partial', '=', False),('is_complete_transfer','=',False)]}"-->
+                        </group>
+                        <group>
+                            <field name="is_partial" />
+                            <field name="xls_file" invisible="add_file == False" />
+                            <!--                                attrs="{'invisible': [('add_file', '=', False)]}"-->
+                            <field
+                                name="add_file"
+                                invisible="is_partial == False and is_complete_transfer == False or is_complete_transfer == True"
+                            />
+                            <!--                                attrs="{'invisible': ['|','&amp;',('is_partial', '=', False),('is_complete_transfer', '=', False),('is_complete_transfer','=',True)]}"-->
+                            <field name="filename" invisible="1" />
+                            <field name="is_complete_transfer" />
+                        </group>
+                    </group>
+                    <field
+                        name="sample_bag_create_so_line_ids"
+                        invisible="is_partial == False"
+                    >
+                        <!--                        attrs="{'invisible': [('is_partial', '=', False)]}"-->
+                        <list editable="bottom">
+<!--                            <field name="is_core"/>-->
+                            <field name="internal_reference" />
+                            <field
+                                name="product_id"
+                                force_save="1"
+                                options="{'no_create': True, 'no_create_edit':True}"
+                            />
+                            <field name="lst_price" />
+                            <field name="available_sample_qty" readonly="1" />
+                            <field name="sample_qty" />
+                            <field
+                                name="qty_at_location"
+                                string="Warehouse Qty"
+                                readonly="1"
+                                force_save="1"
+                                invisible="1"
+                            />
+                        </list>
+                    </field>
+                </sheet>
+                <footer>
+                    <button
+                        name="reassign_salesperson"
+                        type="object"
+                        string="Update Salesperson"
+                        class="btn-primary"
+                        invisible="is_partial == True or is_complete_transfer == True"
+                    />
+                    <!--                        attrs="{'invisible': ['|',('is_partial', '=', True),('is_complete_transfer','=',True)]}"-->
+                    <button
+                        name="create_partial_sample_bag"
+                        type="object"
+                        string="Update Partial/Complete Sample Bag"
+                        class="btn-primary"
+                        invisible="is_partial == False and is_complete_transfer == False"
+                    />
+                    <!--                        attrs="{'invisible': [('is_partial', '=', False),('is_complete_transfer','=',False)]}"-->
+                    <button string="cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="update_salesperson_action" model="ir.actions.act_window">
+        <field name="name">Update Salesperson</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">update.salesperson</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

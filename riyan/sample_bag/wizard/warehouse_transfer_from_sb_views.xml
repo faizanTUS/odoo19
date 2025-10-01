@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="warehouse_transfer_form_view" model="ir.ui.view">
+        <field name="name">warehouse.transfer.form.view</field>
+        <field name="model">warehouse.transfer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field
+                            name="partner_id"
+                            required="1"
+                            options="{'no_create': True, 'no_create_edit':True}"
+                        />
+                        <field
+                            name="stock_picking_type_id"
+                            required="1"
+                            domain="[('is_sample_bag_to_warehouse','=',True)]"
+                            options="{'no_create': True, 'no_create_edit':True}"
+                        />
+                        <field name="sample_bag_id" readonly="1" invisible="1" />
+                    </group>
+                    <group>
+                        <field name="xls_file" invisible="add_file == False" />
+                        <!--                            attrs="{'invisible': [('add_file', '=', False)]}"-->
+                        <field name="add_file" />
+                        <field name="filename" invisible="1" />
+                    </group>
+                    <div class="alert alert-info" role="alert">
+                        <a
+                            href="/sample_bag/static/demo_data/excel_format.xlsx"
+                            target="_blank"
+                        >
+                            <strong
+                            >Click Here To Download Sample Warehouse Transfer Excel file</strong>
+                        </a>
+                    </div>
+                    <notebook>
+                        <page string="Sample Bag Products" name="sample_bag_products">
+                            <field name="warehouse_transfer_line_ids">
+                                <list editable="bottom">
+                                    <field name="internal_reference" />
+                                    <field
+                                        name="product_id"
+                                        create="false"
+                                        edit="false"
+                                        force_save="1"
+                                    />
+                                    <field name="lst_price" />
+                                    <field name="sample_qty" />
+                                    <field name="sb_available_qty" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button
+                        name="create_warehouse_internal_transfer_from_sb"
+                        string="Make Transfer"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="action_warehouse_transfer_from_sample_bag"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Warehouse Transfer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">warehouse.transfer</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
