@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sample_bag_form_view" model="ir.ui.view">
+        <field name="name">sample_bag_form_view</field>
+        <field name="model">sample.bag</field>
+        <field name="arch" type="xml">
+            <form duplicate="0">
+                <header>
+                    <button
+                        name="start_process"
+                        string="Start Process"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state not in ['draft']"
+                    />
+                    <!--                        attrs="{'invisible': [('state','not in',['draft'])]}"-->
+                    <button
+                        name="reset_to_draft"
+                        string="Reset To Draft"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state not in ['in_process']"
+                    />
+                    <!--                        attrs="{'invisible': [('state','not in',['in_process'])]}"-->
+                    <button
+                        name="export_sample_bag_xlsx_report"
+                        string="GENERATE XLSX"
+                        type="object"
+                        class="btn-primary"
+                    />
+<!--               =========== commented this refill and create so part from sample bag as the requirement now shift to sale order  =============   -->
+                    <button
+                        name="%(update_salesperson_action)d"
+                        string="Reassign"
+                        type="action"
+                        class="btn-primary"
+                        invisible="state not in ['in_process']"
+                    />
+                    <!--                        attrs="{'invisible': [('state','not in',['in_process'])]}"-->
+                    <button
+                        name="%(sample_bag_create_so_action)d"
+                        string="Create SO"
+                        type="action"
+                        class="btn-primary"
+                        invisible="state not in ['in_process']"
+                    />
+                    <!--                        attrs="{'invisible': [('state','not in',['in_process'])]}"-->
+                    <button
+                        name="%(scrap_quantity_action)d"
+                        string="Scrap Quantity"
+                        type="action"
+                        class="btn-primary"
+                        invisible="state not in ['in_process']"
+                    />
+                    <!--                        attrs="{'invisible': [('state','not in',['in_process'])]}"-->
+                    <button
+                        name="%(action_warehouse_transfer_from_sample_bag)d"
+                        string="Warehouse Transfer"
+                        type="action"
+                        class="btn-primary"
+                        invisible="state not in ['in_process']"
+                    />
+                    <!--                        attrs="{'invisible': [('state','not in',['in_process'])]}"-->
+                    <!--                    <button name="open_refill_form_view" string="Refill" type="object" class="btn-primary" attrs="{'invisible': [('state','not in',['in_process'])]}"/>-->
+<!--                    ===============================================         -->
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            class="oe_stat_button"
+                            type="object"
+                            name="get_sample_bag_so"
+                            icon="fa-usd"
+                            invisible="sample_bag_so_count == 0"
+                        >
+                            <field
+                                string="Customer Orders"
+                                name="sample_bag_so_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            class="oe_stat_button"
+                            type="object"
+                            name="get_so_to_sample_bag"
+                            icon="fa-usd"
+                            invisible="so_to_sample_bag_count == 0"
+                        >
+                            <!--                            attrs="{'invisible': [('so_to_sample_bag_count', '=', 0)]}"-->
+                            <!--                            <field string="SO->SB" name="so_to_sample_bag_count" widget="statinfo"/>-->
+                            <field
+                                string="Distributor Orders"
+                                name="so_to_sample_bag_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            class="oe_stat_button"
+                            type="object"
+                            name="get_sample_bag_transfers"
+                            icon="fa-truck"
+                            invisible="sample_bag_transfers_count == 0"
+                        >
+                            <!--                            attrs="{'invisible': [('sample_bag_transfers_count', '=', 0)]}"-->
+                            <field
+                                string="Transfers"
+                                name="sample_bag_transfers_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            class="oe_stat_button"
+                            type="object"
+                            string="Buffer Products"
+                            name="get_buffer_products_list"
+                            icon="fa-arrow-right"
+                        >
+<!--                            <field string="Buffer Products" name="" widget="statinfo"/>-->
+                        </button>
+                    </div>
+                    <field name="image_1920" widget="image" class="oe_avatar" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly='1' />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="salesperson_id"
+                                required="1"
+                                readonly="state not in ['draft']"
+                                options="{'no_create': True, 'no_create_edit':True}"
+                            />
+                            <!--                                attrs="{'readonly': [('state', 'not in', ['draft'])]}"-->
+                            <field
+                                name="warehouse_id"
+                                required="1"
+                                readonly="state not in ['draft']"
+                            />
+                            <!--                                attrs="{'readonly': [('state', 'not in', ['draft'])]}"-->
+                        </group>
+                        <group>
+                            <field
+                                name="create_date"
+                                readonly="state not in ['draft']"
+                            />
+                            <!--                                readonly="1"-->
+                            <!--                                attrs="{'readonly': [('state', 'not in', ['draft'])]}"-->
+                            <field
+                                name="sample_bag_date"
+                                readonly="state not in ['draft']"
+                            />
+                            <!--                                attrs="{'readonly': [('state', 'not in', ['draft'])]}"-->
+                            <field name="last_refill_date" readonly="1" invisible="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sample Bag Products" name="sample_bag_products">
+                            <field name="sample_bag_lines_ids" readonly="1">
+                                <list
+                                    editable="bottom"
+                                    decoration-danger="sample_qty==0"
+                                >
+<!--                                    <field name="is_core" optional="show"/>-->
+                                    <field name="last_refill_date" optional="show" />
+                                    <field name="internal_reference" readonly="1" />
+                                    <field name="product_id" required="1" />
+                                    <field name="sample_qty" />
+                                    <field name="lst_price" optional="show" />
+                                    <field
+                                        name="qty_at_location"
+                                        string="Warehouse Qty"
+                                        optional="show"
+                                    />
+                                    <field name="out_sample_bag" />
+                                    <field name="sequence" invisible="1" />
+                                    <button
+                                        name="sample_bags_redirect_action"
+                                        string=""
+                                        type="object"
+                                        icon="fa-shopping-basket"
+                                        invisible="out_sample_bag &lt;= 0"
+                                    />
+                                    <!--                                        attrs="{'invisible': [('out_sample_bag', '&lt;=', 0)]}"-->
+                                    <!--                                    width="0.1" options='{"warn": true}'-->
+                                </list>
+                            </field>
+                            <group>
+                                <field name="total_items" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+<!--    =========== kanban view ================ -->
+    <record id="sample_bag_kanban_view" model="ir.ui.view">
+        <field name="name">sample_bag_kanban_view</field>
+        <field name="model">sample.bag</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name" />
+                <field name="salesperson_id" />
+                <field name="image_1920" />
+                <templates>
+                    <t t-name="card">
+<!--                    <t t-name="kanban-box">-->
+<!--                        <t t-set="color" t-value="kanban_color(record.color)"/>-->
+                        <div class="o_kanban_record_top">
+                            <t>
+                                <div class="o_kanban_image m-2">
+                                    <div class="o_kanban_image_wrapper">
+                                        <field name="image_1920" widget="image" class="o_kanban_image_fill_left"/>
+                                    </div>
+                                </div>
+                            </t>
+                            <div class="o_kanban_details_wrapper">
+                                <strong><field name="name" class="text-truncate fw-bold fs-5"/></strong><br/>
+                                <strong>Salesperson:
+                                    <field name="salesperson_id"/>
+                                </strong><br />
+                                <strong>Total items in Sample Bag :
+                                    <field name="total_items"/>
+                                </strong><br />
+                                <strong>Last Refill Date:
+                                    <field name="last_refill_date"/>
+                                </strong><br />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+<!--    =========== kanban view ================ -->
+
+    <record id="sample_bag_tree_view" model="ir.ui.view">
+        <field name="name">sample_bag_tree_view</field>
+        <field name="model">sample.bag</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="salesperson_id" />
+                <field name="warehouse_id" />
+                <field name="sample_bag_date" />
+            </list>
+        </field>
+    </record>
+
+    <record id="sample_bag_action" model="ir.actions.act_window">
+        <field name="name">Sample Bag</field>
+        <field name="res_model">sample.bag</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <menuitem
+        name="Sample Bags"
+        id="sample_bag.sample_bag_main_menu"
+        web_icon="sample_bag,static/description/icon.png"
+        action="sample_bag.sample_bag_action"
+    />
+
+</odoo>
