@@ -2,7 +2,7 @@
 <odoo>
     <record id="action_partner_mail_mail" model="ir.actions.act_window">
         <field name="name">Emails</field>
-        <field name="res_model">mail.mail</field>
+        <field name="res_model">mail.message</field>
         <field name="view_mode">list,form</field>
         <field name="context">{}</field>
     </record>

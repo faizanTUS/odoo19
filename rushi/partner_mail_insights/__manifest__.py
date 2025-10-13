@@ -1,7 +1,7 @@
 # Part of Odoo. See COPYRIGHT & LICENSE files for full copyright and licensing details.
 {
     "name": "Partner Mail Insights (Incoming/Outgoing)",
-    "version": "19.0",
+    "version": "19.0.0.0",
     "description": """
     This module enhances the Contacts app by adding smart buttons to track Incoming and Outgoing Emails, providing quick access to detailed mail records directly from the contact form.
     Odoo email tracking
