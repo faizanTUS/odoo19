@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="printnode_attachment_print_form_view" model="ir.ui.view">
+            <field name="name">printnode.attachment.print.form.view</field>
+            <field name="model">printnode.attachment.print</field>
+            <field name="arch" type="xml">
+                <form string="Print Attachments">
+                    <div class="alert alert-info info_icon" role="alert">
+                        <span class="fa fa-lightbulb-o">
+                        </span>
+                        Only PDF type documents will be print!
+                    </div>
+                    <group string="Attachments to Print">
+                        <field name="attachment_line_ids" nolabel="1">
+                            <tree
+                                string="Attachments to Print"
+                                editable="top"
+                                create="false"
+                                delete="true"
+                            >
+                                <field
+                                    name="attachment_id"
+                                    readonly="1"
+                                    force_save="1"
+                                />
+                                <field name="printnode_printer_id" />
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button
+                            string="Print"
+                            class="oe_highlight"
+                            type="object"
+                            name="do_direct_print"
+                        />
+                        <button
+                            string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"
+                        />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_attachment_print_form_view" model="ir.actions.act_window">
+            <field name="name">Print Attachments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">printnode.attachment.print</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context" />
+        </record>
+    </data>
+</odoo>

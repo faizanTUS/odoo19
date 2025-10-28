@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_printnode_system_form" model="ir.ui.view">
+            <field name="name">printnode.system.form</field>
+            <field name="model">printnode.system</field>
+            <field name="arch" type="xml">
+                <form string="PrintNode System">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label
+                                class="oe_edit_only"
+                                for="name"
+                                string="System Name"
+                            />
+                            <h1>
+                                <field name="name" placeholder="System Name" />
+                            </h1>
+                        </div>
+                        <group string="Details">
+                            <group>
+                                <field name="printnode_id" />
+                                <field name="config_id" />
+                                <field name="hostname" />
+                            </group>
+                            <group>
+                                <field name="state" />
+                                <field name="inet" />
+                                <field name="inet6" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="printers" string="Printers">
+                                <field name="printer_ids" nolabel="1" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_printnode_system_list" model="ir.ui.view">
+            <field name="name">printnode.system.list</field>
+            <field name="model">printnode.system</field>
+            <field name="arch" type="xml">
+                <list string="PrintNode System">
+                    <field name="name" />
+                    <field name="inet" />
+                    <field name="hostname" />
+                    <field name="printnode_id" />
+                    <field name="config_id" />
+                    <field name="state" />
+                </list>
+            </field>
+        </record>
+
+         <record id="action_printnode_system" model="ir.actions.act_window">
+            <field name="name">System</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">printnode.system</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem
+            id="menu_action_printnode_computer"
+            name="System"
+            parent="menu_printnode_config"
+            groups="tus_printnode.printnode_group_manager"
+            action="action_printnode_system"
+            sequence="11"
+        />
+    </data>
+</odoo>
