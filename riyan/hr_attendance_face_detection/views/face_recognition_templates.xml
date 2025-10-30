@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="face_recognition_page" name="Face Recognition Page">
+        <t t-call="website.layout">
+            <t t-set="head">
+                <script type="text/javascript" src="/hr_attendance_face_detection/static/src/js/face_page.js"></script>
+            </t>
+
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <h1 class="mb-4">🎭 Face Recognition Attendance</h1>
+                        <p class="lead">Click to toggle attendance (Check-in ↔ Check-out)</p>
+
+                        <button class="btn btn-primary btn-lg mb-4" onclick="startFaceRecognition()">
+                            <i class="fa fa-camera"></i>
+                            Start Face Recognition
+                        </button>
+
+                        <div class="mb-4">
+                            <button class="btn btn-info" onclick="testLocation()">🗺️ Test Location</button>
+                        </div>
+
+                        <script>
+                            function testLocation() {
+                            if (!navigator.geolocation) {
+                            alert("Geolocation not supported");
+                            return;
+                            }
+
+                            navigator.geolocation.getCurrentPosition(
+                            (pos) => {
+                            alert(`Location: ${pos.coords.latitude}, ${pos.coords.longitude}\nAccuracy:
+                            ${pos.coords.accuracy}m`);
+                            },
+                            (err) => {
+                            alert(`Location Error: ${err.message}\nCode: ${err.code}`);
+                            },
+                            { enableHighAccuracy: true, timeout: 10000 }
+                            );
+                            }
+                        </script>
+
+                        <div id="video-container" class="mt-4">
+                        </div>
+
+                        <div class="mt-4">
+                            <small class="text-muted">
+                                💡 Make sure your face is well-lit and clearly visible to the camera.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="face_attendance_template">
+        <t t-name="face_attendance.FaceAttendanceTemplate">
+            <button class="btn btn-primary" t-on-click="onCheckInOut">
+                Start Camera for Face Recognition
+            </button>
+        </t>
+    </template>
+
+    <record id="action_face_recognition" model="ir.actions.act_url">
+        <field name="name">Face Attendance</field>
+        <field name="type">ir.actions.act_url</field>
+        <field name="url">/face_recognition</field>
+        <field name="target">self</field>
+    </record>
+
+    <!-- Add button to Employee form view -->
+    <record id="view_employee_form_face_encoding" model="ir.ui.view">
+        <field name="name">hr.employee.form.face.encoding</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <header>
+                    <button name="generate_face_encoding_manual"
+                            string="Generate Face Encoding"
+                            type="object"
+                            class="btn-primary"
+                            invisible="image_1920 == False"/>
+                </header>
+            </xpath>
+            <field name="pin" position="after">
+                <field name="face_encoding" invisible="1"/>
+                <field name="face_encoding" widget="binary"
+                       string="Face Encoding Status"
+                       readonly="1"
+                       invisible="face_encoding == False"/>
+            </field>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_face_recognition_root"
+              name="Face Attendance"
+              parent="hr_attendance.menu_hr_attendance_root"
+              action="action_face_recognition"
+              sequence="10"/>
+</odoo>
