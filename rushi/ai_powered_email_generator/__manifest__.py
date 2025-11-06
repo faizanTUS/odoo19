@@ -51,7 +51,7 @@
                 Odoo AI Integration
                 Personalized Email Workflows""",
     'sequence': 10,
-    'version': '18.0',
+    'version': '19.0.0.0',
     'category': 'Tools',
     'author': 'TechUltra Solutions Private Limited',
     'company': 'TechUltra Solutions Private Limited',
