@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+	<record id="payment_acquirer_cashfree" model="payment.provider">
+		<field name="name">Cashfree</field>
+		<field name="image_128" type="base64" file="payment_cashfree/static/description/icon.png" />
+		<field name="module_id" ref="base.module_payment_cashfree"/>
+		<field name="code">cashfree</field>
+		<field name="company_id" ref="base.main_company" />
+		<field name="redirect_form_view_id" ref="cashfree_redirect_form" />
+		<!-- Note: state and credentials (cashfree_app_id, cashfree_secret_key) are NOT set here -->
+		<!-- to prevent overwriting user-configured values on module update -->
+		<!-- They will be set by post_init_hook only if empty -->
+	</record>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    
+    <!-- Card Payment Method -->
+    <record id="payment_method_card_cashfree" model="payment.method">
+        <field name="name">Card</field>
+        <field name="code">card</field>
+        <field name="support_tokenization">True</field>
+        <field name="support_express_checkout">True</field>
+        <field name="support_refund">partial</field>
+    </record>
+
+    <!-- Net Banking Payment Method -->
+    <record id="payment_method_netbanking_cashfree" model="payment.method">
+        <field name="name">Net Banking</field>
+        <field name="code">netbanking</field>
+        <field name="support_tokenization">False</field>
+        <field name="support_express_checkout">False</field>
+        <field name="support_refund">partial</field>
+    </record>
+
+    <!-- UPI Payment Method -->
+    <record id="payment_method_upi_cashfree" model="payment.method">
+        <field name="name">UPI</field>
+        <field name="code">upi</field>
+        <field name="support_tokenization">False</field>
+        <field name="support_express_checkout">True</field>
+        <field name="support_refund">partial</field>
+    </record>
+
+    <!-- All Payment Methods (shows all methods on Cashfree checkout) -->
+    <record id="payment_method_all_cashfree" model="payment.method">
+        <field name="name">All Payment Methods</field>
+        <field name="code">all</field>
+        <field name="support_tokenization">False</field>
+        <field name="support_express_checkout">True</field>
+        <field name="support_refund">partial</field>
+    </record>
+
+</odoo>
