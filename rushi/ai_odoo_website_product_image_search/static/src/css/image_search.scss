@@ -1,0 +1,37 @@
+.image-search-dialog{
+    .drop-zone {
+        border: 2px dashed #000000;
+        padding: 30px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: border-color 0.3s;
+    }
+
+    .drop-zone.dragover {
+        border-color: #007bff;
+    }
+
+    .upload-label {
+        display: block;
+        color: #333;
+    }
+
+    .preview-img {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 8px;
+    }
+}
+
+.o_search_image_button {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.375rem 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.o_search_image_button i {
+    color: #333;
+    font-size: 1.0rem;
+}
