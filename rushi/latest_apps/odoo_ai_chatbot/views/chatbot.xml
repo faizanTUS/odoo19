@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.actions.client" id="chatbot_action">
+        <field name="name">Chatbot Action</field>
+        <field name="tag">chatbot_action</field>
+    </record>
+
+    <menuitem
+        name="Odoo AI Chatbot"
+        id="menu_chatbot"
+        sequence="22"
+        action="chatbot_action"
+        web_icon="odoo_ai_chatbot,static/description/icon.png"
+    />
+</odoo>

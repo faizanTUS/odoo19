@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="website_sale_image_search_button" inherit_id="website.website_search_box">
+        <xpath expr="//button" position="before">
+            <t t-if="request.env.company.product_image_search_enabled">
+                <button type="button" class="o_search_image_button">
+                    <i class="fa fa-image"></i>
+                </button>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="ai_odoo_product_image_form_view" model="ir.ui.view">
+        <field name="name">product.image.embedding.form</field>
+        <field name="model">product.image.embedding</field>
+        <field name="arch" type="xml">
+            <form string="Product Image Embedding">
+                <header>
+                    <button name="tus_action_reset_to_draft" string="Reset to Draft" type="object"
+                            invisible="state != 'stored'"/>
+                    <button name="tus_action_store_product_image_embeddings" string="Store Product Image Embeddings" type="object"
+                            invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,stored"/>
+                </header>
+                <sheet>
+                    <div class="d-flex justify-content-between">
+                        <div class="oe_title w-100">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <div class="d-flex">
+                                    <field readonly="state != 'draft'" class="text-break" name="name"
+                                           options="{'line_breaks': False}" widget="text"
+                                           placeholder="e.g. Product Mapping Image"/>
+                                </div>
+                            </h1>
+                        </div>
+                        <div class="oe_title">
+                            <label for="published" string="Published"/>
+                            <h1>
+                                <div class="d-flex">
+                                    <field name="published" widget="boolean_toggle"/>
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_id" readonly="state != 'draft'"/>
+                            <field name="model" invisible="1"/>
+                            <field name="product_selection" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="product_show_limit"/>
+                            <field name="extra_image"/>
+                            <field name="result_accuracy"/>
+                        </group>
+                    </group>
+                    <group invisible="product_selection != 'selected'">
+                        <field name="selected_products_ids" widget="many2many_tags" readonly="state != 'draft'"
+                               invisible="model != 'product.template'"/>
+                        <field name="selected_variants_ids" widget="many2many_tags" readonly="state != 'draft'"
+                               invisible="model != 'product.product'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="ai_odoo_product_image_list_view" model="ir.ui.view">
+        <field name="name">product.image.embedding.list</field>
+        <field name="model">product.image.embedding</field>
+        <field name="arch" type="xml">
+            <list string="Product Image Embeddings">
+                <field name="name"/>
+                <field name="product_show_limit"/>
+                <field name="result_accuracy"/>
+                <field name="published"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_product_image_search" model="ir.actions.act_window">
+        <field name="name">Website Product Image Search</field>
+        <field name="res_model">product.image.embedding</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>Create and manage product image embedding configurations.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_product_image_search"
+              action="action_product_image_search"
+              parent="website.menu_website_global_configuration"
+              name="Website Product Image Search"/>
+
+</odoo>

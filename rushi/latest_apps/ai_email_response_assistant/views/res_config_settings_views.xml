@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_extended" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.extended</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='companies_setting_container']" position="after">
+                <block title="Generate Email content using AI" name="generate_email_content_using_ai">
+                    <setting string="LLM Model">
+                        <field name="select_llm_model"/>
+                    </setting>
+                    <setting invisible="select_llm_model not in ['gemini', 'chat_gpt']">
+                        <div class="o_form_label">
+                            <field name="llm_model_key_label" readonly="1"/>
+                        </div>
+                        <div>
+                            <field name="llm_model_key" placeholder="Enter Key Here" required="[('select_llm_model','=',True)]"/>
+                        </div>
+                    </setting>
+                    <setting string="No. of emails" help="AI consider threshold emails for generating dynamic email content">
+                        <field name="count"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

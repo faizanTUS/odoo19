@@ -1,0 +1,15 @@
+tr.o_data_row i.fa-comments {
+    display: none;
+}
+tr.o_data_row:hover i.fa-comments {
+    display: block;
+}
+
+.modal .modal-dialog .o_wa_meta_dialog .o_form_view .o_form_view_container .o-mail-Form-chatter {
+    display: block;
+    width: 100%;
+}
+
+.modal .modal-dialog .o_wa_meta_dialog .o_form_view .o_form_view_container .o_form_sheet_bg {
+    display: none;
+}

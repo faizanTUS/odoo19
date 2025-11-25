@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="chatbot.layout">
+        <div class="o_action tus_ai_chatbot">
+            <div class="chatbot-header">
+                <div
+                    class="chatbotHeader col-3 px-3 d-flex align-items-center justify-content-between"
+                >
+                    <div class="slider-hide" t-on-click="toggleSidebar">
+                        <i
+                            class="fa fa-angle-double-left"
+                            id="arrowIcon"
+                            style="font-size: 25px;"
+                        />
+                    </div>
+                    <div class="new-chat-btn" t-on-click="startNewChat">
+                            <i class="fa fa-plus" style="font-size: 23px;" />
+                    </div>
+                </div>
+            </div>
+            <div class="chat-section d-flex">
+                <div class="chat-container-left p-3 col-3" id="chatHistorySidebar">
+                    <ul class="history-list chat-history list-unstyled">
+                    <!-- Section for today's history -->
+                    <t t-if="state.todayHistory.length > 0">
+                        <li class="history-header">Today</li>
+                        <t
+                            t-foreach="state.todayHistory"
+                            t-as="history"
+                            t-key="history.id"
+                        >
+                            <li
+                                t-att-title="history.name"
+                                t-attf-class="history-item #{ history.id == state.chatbot_session_id ? 'active-history-item' : ''}"
+                                t-on-click="(ev) => this.onClickHistoryItem(ev, history.id)"
+                            >
+                            <span class="history-text">
+                                <t
+                                    t-esc="history.name.length > 35 ? history.name.slice(0, 35) + '...' : history.name"
+                                />
+                            </span>
+                            <div class="dropdown ms-2" t-on-click="ev => ev.stopPropagation()">
+                                <i class="fa fa-ellipsis-v"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false"
+                                   style="cursor:pointer;"/>
+                                    <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center"
+                                           t-on-click="(ev) => { ev.stopPropagation(); this.editHistory(ev, history) }">
+                                            <i class="fa fa-edit me-2"/>
+                                            Edit
+                                        </a>
+                                    </li>
+                                        <li>
+                                        <a class="dropdown-item text-danger d-flex align-items-center"
+                                           t-on-click="(ev) => { ev.stopPropagation(); this.deleteHistory(ev, history.id) }">
+                                            <i class="fa fa-trash me-2"/>
+                                            Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            </li>
+                        </t>
+                    </t>
+                    <!-- Section for yesterday's history -->
+                    <t t-if="state.yesterdayHistory.length > 0">
+                        <li class="history-header">Yesterday</li>
+                        <t
+                            t-foreach="state.yesterdayHistory"
+                            t-as="history"
+                            t-key="history.id"
+                        >
+                            <li t-att-title="history.name"
+                                t-attf-class="history-item d-flex justify-content-between align-items-center #{ history.id == state.chatbot_session_id ? 'active-history-item' : ''}"
+                                t-on-click="(ev) => this.onClickHistoryItem(ev, history.id)">
+                                <span class="history-text">
+                                    <t
+                                            t-esc="history.name.length > 35 ? history.name.slice(0, 35) + '...' : history.name"
+                                    />
+                                </span>
+                                <!-- 3 dots dropdown -->
+                                <div class="dropdown ms-2" t-on-click="ev => ev.stopPropagation()">
+                                    <i class="fa fa-ellipsis-v"
+                                       data-bs-toggle="dropdown"
+                                       aria-expanded="false"
+                                       style="cursor:pointer;"/>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center"
+                                               t-on-click="(ev) => { ev.stopPropagation(); this.editHistory(ev, history) }">
+                                                <i class="fa fa-edit me-2"/>
+                                                Edit
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-danger d-flex align-items-center"
+                                               t-on-click="(ev) => { ev.stopPropagation(); this.deleteHistory(ev, history.id) }">
+                                                <i class="fa fa-trash me-2"/>
+                                                Delete
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </t>
+                    </t>
+                    <!-- Section for older history -->
+                    <t t-if="state.olderHistory.length > 0">
+                        <li class="history-header mt-4">Previous 7 Days</li>
+                        <t
+                            t-foreach="state.olderHistory"
+                            t-as="history"
+                            t-key="history.id"
+                        >
+                            <li t-att-title="history.name"
+                                t-attf-class="history-item d-flex justify-content-between align-items-center #{ history.id == state.chatbot_session_id ? 'active-history-item' : ''}"
+                                t-on-click="(ev) => this.onClickHistoryItem(ev, history.id)">
+                                <span class="history-text">
+                                    <t
+                                        t-esc="history.name.length > 35 ? history.name.slice(0, 35) + '...' : history.name"
+                                    />
+                                </span>
+                            <!-- 3 dots dropdown -->
+                            <div class="dropdown ms-2" t-on-click="ev => ev.stopPropagation()">
+                                <i class="fa fa-ellipsis-v"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false"
+                                   style="cursor:pointer;"/>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center"
+                                           t-on-click="(ev) => { ev.stopPropagation(); this.editHistory(ev, history) }">
+                                            <i class="fa fa-edit me-2"/>
+                                            Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-danger d-flex align-items-center"
+                                           t-on-click="(ev) => { ev.stopPropagation(); this.deleteHistory(ev, history.id) }">
+                                            <i class="fa fa-trash me-2"/>
+                                            Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            </li>
+                        </t>
+                    </t>
+                </ul>
+                </div>
+                <div class="chat-container-right col-9">
+                        <ul class="messages" id="messages" t-ref="messages">
+                            <t t-if="state.isloading">
+                                <div class="chat-bubble">
+                                    <div class="typing">
+                                        <div class="dot" />
+                                        <div class="dot" />
+                                        <div class="dot" />
+                                    </div>
+                                </div>
+                            </t>
+                        </ul>
+                    <div class="chat-container p-3 col-9 mt-3 d-flex">
+                        <div class="input-container d-flex px-3">
+                            <input
+                                type="text"
+                                id="messageInput"
+                                t-ref="messageInput"
+                                t-on-keypress="ev => this.onKeyPress(ev)"
+                                placeholder="Ask Anything in Odoo.."
+                            />
+                            <button
+                                class="btn btn-primary ml-2"
+                                t-on-click="()=>this.sendMessage()"
+                                style="width: 65px; height: 45px;"
+                            >Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="email_compose_message_wizard_form_extended" model="ir.ui.view">
+        <field name="name">mail.compose.message.form.extended</field>
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='subject']" position="after">
+                <h2 style="width: 400px;" invisible="composition_mode != 'comment' or subtype_is_log">AI Powered Email Generator</h2><br/>
+                <p style="width: 400px; margin-bottom: 0px;" invisible="composition_mode != 'comment' or subtype_is_log">Generate Email Based On Selected Fields.</p><br/>
+                <div class="o_horizontal" style="display: flex; align-items: center; gap: 10px;" invisible="composition_mode != 'comment' or subtype_is_log">
+                    <label for="fields_ids" string="Fields" class="o_inline"/>
+                    <div class="highlight-section o_inline mt-0" style="flex: 1;">
+                        <field name="fields_ids" widget="many2many_tags" style="width: 400px;" options="{'no_create': True}" />
+                    </div>
+                    <button string="Generate" name="action_get_field_data"
+                            type="object" class="btn-primary o_mail_send o_inline" style="width: 150px;" data-hotkey="q" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
