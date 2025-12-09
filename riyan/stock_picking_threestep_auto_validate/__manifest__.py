@@ -169,6 +169,9 @@
         'views/stock_picking_type_inherit.xml',
     ],
     'images': ["static/description/main_screen.gif"],
+    'price': 17.47,
+    'currency': 'USD',
+    'application': True,
     'installable': True,
-    'application': False,
+    'auto_install': False,
 }
