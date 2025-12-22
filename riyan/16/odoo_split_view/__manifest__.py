@@ -179,6 +179,9 @@ tus
             'odoo_split_view/static/src/scss/*.scss',
         ],
     },
+    "images": [
+        "static/description/main_screen.gif",
+    ],
     'currency': 'USD',
     'price': 35.00,
     'installable': True,
