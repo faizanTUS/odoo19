@@ -1,0 +1,69 @@
+<templates xml:space="preserve">
+    <t t-name="pdf_split_and_merge.MergePdfDialog" owl="1">
+        <Dialog size="'xl'" header="false" footer="false">
+            <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
+                <h4 class="m-0">Merge PDF Pages</h4>
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="btn btn-primary px-3 py-2 fs-7 d-flex align-items-center"
+                            t-on-click="() => this.triggerFileInput()">
+                        <i class="fa fa-plus me-2"/>
+                        Add File
+                        <input t-ref="fileInput" type="file" accept=".pdf" t-on-change="(ev) => this.onFileUpload(ev)"
+                               style="display: none;"/>
+                    </button>
+                    <button type="button" class="btn btn-success px-3 py-2 fs-7 d-flex align-items-center"
+                            t-on-click="() => this.mergePages()">
+                        <i class="fa fa-object-group me-2"/>
+                        Merge
+                    </button>
+                    <a href="#" t-on-click="() => this.closeDialog()">
+                        <i class="fa fa-close" style="font-size: 20px; color: #000000;"/>
+                    </a>
+                </div>
+            </div>
+
+            <div class="p-3">
+                <div t-if="state.isLoading" class="text-center py-5">
+                    <i class="fa fa-spinner fa-spin fa-2x"/>
+                    <p class="mt-2">Loading PDF pages...</p>
+                </div>
+
+                <div t-if="state.error" class="alert alert-danger">
+                    <i class="fa fa-exclamation-triangle me-2"/>
+                    <t t-esc="state.error"/>
+                </div>
+
+                <div t-if="!state.isLoading and !state.error" class="container-fluid drop-zone"
+                     t-ref="dropZone" t-on-dragover.prevent="(ev) => this.handleDragOver(ev)">
+                    <div class="row gy-3">
+                        <t t-foreach="state.pageOrder" t-as="page" t-key="page_index">
+                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12" width="160" height="230">
+                                <div t-att-class="state.selectedPages.has(page_index) ? 'card h-100 card-selected' : 'card h-100'"
+                                     draggable="true"
+                                     t-on-dragstart="(ev) => this.handleDragStart(ev, page_index)"
+                                     t-on-dragover.prevent="(ev) => this.handleDragOver(ev, page_index)"
+                                     t-on-drop="(ev) => this.handleDrop(ev, page_index)"
+                                     t-on-click="() => this.togglePageSelection(page_index)"
+                                     style="cursor: pointer; height: 230px;">
+                                    <div class="card-header py-2 d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold">Page <t t-esc="page.page_number"/></span>
+                                        <input type="checkbox" class="pdf-checkbox"
+                                               t-att-checked="state.selectedPages.has(page_index) ? 'checked' : undefined"
+                                               t-on-click.stop="(ev) => this.onCheckboxClick(ev, page_index)"/>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="pdf-image-container">
+                                            <img t-att-src="page.preview_url" alt="Page Preview"
+                                                 class="pdf-image shadow-sm"
+                                                 onerror="this.src='/web/static/src/img/placeholder.png'"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </Dialog>
+    </t>
+</templates>
