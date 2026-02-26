@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree view for requested products (used in One2many on crm.lead) -->
+    <record id="crm_lead_purchase_line_view_tree" model="ir.ui.view">
+        <field name="name">crm.lead.purchase.line.tree</field>
+        <field name="model">crm.lead.purchase.line</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="product_id"/>
+                <field name="name"/>
+                <field name="product_qty"/>
+                <field name="product_uom_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="crm_lead_view_form_inherit_purchase_quotation" model="ir.ui.view">
+        <field name="name">crm.lead.form.purchase.quotation</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <!-- New Purchase Quotation button in header -->
+            <xpath expr="//button[@name='action_set_won_rainbowman']" position="after">
+                <button name="action_new_purchase_quotation" string="New Purchase Quotation"
+                        type="object" class="oe_highlight" invisible="not active"
+                        groups="purchase.group_purchase_user"/>
+            </xpath>
+            <!-- Smart buttons: Purchase Quotations and Purchase Orders -->
+            <xpath expr="//button[@name='action_show_potential_duplicates']" position="after">
+                <button name="action_view_purchase_quotations" type="object"
+                        class="oe_stat_button" icon="fa-file-text-o"
+                        invisible="purchase_quotation_count == 0">
+                    <field name="purchase_quotation_count" widget="statinfo" string="Purchase Quotations"/>
+                </button>
+                <button name="action_view_purchase_orders" type="object"
+                        class="oe_stat_button" icon="fa-shopping-cart"
+                        invisible="purchase_order_count == 0">
+                    <div class="o_field_statinfo">
+                        <span class="o_stat_text">Purchase Orders:
+                            <field name="purchase_order_count" class="o_stat_value"/>
+                        </span>
+                        <field style="font-size: 13px;" name="purchase_order_amount_total" widget="monetary"
+                               options="{'currency_field': 'company_currency'}" class="o_stat_value"/>
+                    </div>
+                </button>
+            </xpath>
+            <!-- Requested products and Required by date (optional block) -->
+            <xpath expr="//page[@name='internal_notes']" position="before">
+                <page string="Purchase (RFQ)" name="purchase_rfq" groups="purchase.group_purchase_user">
+                    <group>
+                        <group>
+                            <field name="required_by_date" placeholder="Optional: desired delivery date for RFQs"/>
+                        </group>
+                        <field name="purchase_line_ids" nolabel="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
