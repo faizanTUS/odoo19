@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <!-- Cashfree SDK is now loaded dynamically via JavaScript, no need for static script tag -->
-</odoo>

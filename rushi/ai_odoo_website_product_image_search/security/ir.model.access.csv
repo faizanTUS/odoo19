@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-"access_product_image_embedding","access.product.image.embedding","model_product_image_embedding",,1,1,1,1
-
