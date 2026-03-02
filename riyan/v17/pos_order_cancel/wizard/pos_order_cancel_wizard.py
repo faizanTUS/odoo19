@@ -122,10 +122,8 @@ class PosOrderCancelWizard(models.TransientModel):
                 move.with_context(**cancel_ctx).move_line_ids.unlink()
                 move.sudo().write({'state': 'cancel', 'picked': False})
                 continue
-            # Skip quant updates for consumables/services (no stock)
             if getattr(move.product_id, 'is_storable', True):
                 if move.move_line_ids:
-                    # Reverse stock per move line (handles lots, packages, owners)
                     for ml in move.move_line_ids:
                         if float_is_zero(ml.quantity, precision_rounding=ml.product_uom_id.rounding):
                             continue
@@ -146,7 +144,6 @@ class PosOrderCancelWizard(models.TransientModel):
                             owner_id=ml.owner_id,
                         )
                 else:
-                    # Fallback: move has no move lines, use move locations and quantity
                     StockQuant._update_available_quantity(
                         move.product_id,
                         move.location_dest_id,
@@ -175,14 +172,11 @@ class PosOrderCancelWizard(models.TransientModel):
         if not orders:
             raise UserError(_('No orders to cancel. Selected orders are already cancelled.'))
 
-        # Collect related records BEFORE changing order state (so relations are still valid)
         pickings_to_cancel = self.env['stock.picking']
         pickings_failed = self.env['stock.picking']
         invoices_to_cancel = self.env['account.move']
         if self.cancel_delivery_order:
-            # Pickings linked directly to POS order (pos_order_id on stock.picking)
             pickings_direct = orders.mapped('picking_ids')
-            # Pickings linked via procurement group (e.g. when using Shipping / delivery)
             procurement_groups = orders.mapped('procurement_group_id').filtered(None)
             pickings_via_group = self.env['stock.picking']
             if procurement_groups:
@@ -190,14 +184,12 @@ class PosOrderCancelWizard(models.TransientModel):
                     ('group_id', 'in', procurement_groups.ids)
                 ])
             all_pickings = (pickings_direct | pickings_via_group)
-            # Include all pickings that are not already cancelled (including 'done' – we try to cancel, done will fail and we skip)
             pickings_to_cancel = all_pickings.filtered(lambda p: p.state != 'cancel')
         if self.cancel_invoice:
             invoices_to_cancel = orders.mapped('account_move').filtered(
                 lambda m: m.exists() and m.state not in ('cancel',)
             )
 
-        # 1) Cancel related invoices first (so invoice is in 'cancel' state, not removed)
         if invoices_to_cancel:
             for inv in invoices_to_cancel:
                 try:
@@ -212,7 +204,6 @@ class PosOrderCancelWizard(models.TransientModel):
                         % {'name': inv.name, 'reason': str(e)}
                     ) from e
 
-        # 2) Cancel related delivery orders (pickings)
         if pickings_to_cancel:
             for picking in pickings_to_cancel:
                 try:
@@ -223,18 +214,12 @@ class PosOrderCancelWizard(models.TransientModel):
                         picking.name, e
                     )
                     pickings_failed |= picking
-                    # Continue with other pickings; do not block the whole operation
 
-        # 2b) Create negative payment entries (reversal) so Payments list shows minus entry and cash is reversed
-        # if self.cancellation_method in ('cancel_only', 'reset_draft'):
-        #     self._create_payment_reversals(orders)
-        # 2b) Create negative payment entries (reversal) so Payments list shows minus entry and cash is reversed
-        # 2b) Create negative payment entries (reversal) so Payments list shows minus entry and cash is reversed
         if self.cancellation_method in ('cancel_only', 'reset_draft'):
             orders_with_payments = orders.filtered(lambda o: o.payment_ids)
             if orders_with_payments:
                 try:
-                    with self.env.cr.savepoint():  # ← This is the key: isolates failure to reversal only
+                    with self.env.cr.savepoint():
                         self._create_payment_reversals(orders_with_payments)
                 except Exception as rev_e:
                     _logger.error(
@@ -243,22 +228,13 @@ class PosOrderCancelWizard(models.TransientModel):
                         rev_e,
                         exc_info=True
                     )
-                    # Optional: notify user (non-blocking)
-                    # You can return a notification but let the flow continue
-                    # For now, just log and proceed
-                    pass  # ← continue to step 3
-            # No raise → continue to step 3 (write state='cancel')
+                    pass
 
-
-        # 3) Cancel POS orders (set state to 'cancel')
         orders.with_context(pos_order_cancel=True).write({'state': 'cancel'})
 
-        # 4) Cancel only (stay cancelled), reset to draft, or delete
         if self.cancellation_method == 'cancel_only':
-            # Order already set to 'cancel' in step 3 – leave as is (form will show Cancelled)
             pass
         elif self.cancellation_method == 'reset_draft':
-            # If we cancelled invoices, clear the link so order can be re-invoiced
             if self.cancel_invoice and invoices_to_cancel:
                 orders.with_context(pos_order_cancel=True).write({
                     'state': 'draft',
@@ -267,14 +243,12 @@ class PosOrderCancelWizard(models.TransientModel):
             else:
                 orders.with_context(pos_order_cancel=True).write({'state': 'draft'})
         else:
-            # delete
             for order in orders:
                 order.payment_ids.sudo().unlink()
             orders.sudo().unlink()
 
-        # 5) For done delivery orders: reverse stock and set to cancelled (single entry, no return picking)
         pickings_cancelled = self.env['stock.picking']
-        pickings_failed_reasons = []  # list of (name, reason) for warning
+        pickings_failed_reasons = []
         if pickings_failed:
             for picking in pickings_failed.filtered(lambda p: p.state == 'done'):
                 ok, err = self._cancel_done_picking(picking)
@@ -282,11 +256,9 @@ class PosOrderCancelWizard(models.TransientModel):
                     pickings_cancelled |= picking
                 else:
                     pickings_failed_reasons.append((picking.name, err or _('Unknown error')))
-            # Non-done failed pickings (e.g. wrong state)
             for picking in pickings_failed.filtered(lambda p: p.state != 'done'):
                 pickings_failed_reasons.append((picking.name, _('Not in Done state.')))
 
-        # Notify user: success if done pickings were set to cancelled, warning if some could not be
         if pickings_cancelled:
             names = ', '.join(pickings_cancelled.mapped('name'))
             return {
