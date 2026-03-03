@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'POS Product Price Display Control | With Or Without Tax Price',
-    'version': '18.0.0.0',
+    'version': '19.0.0.0',
     'category': 'Sales/Point of Sale',
     'summary': """Display product prices on POS cards with tax or without tax
     
@@ -292,11 +292,11 @@ sales tax, depending on your business needs or regional requirements.
     ],
     'assets': {
         'point_of_sale._assets_pos': [
-            'pos_product_price_display_fixed/static/src/app/generic_components/product_card/product_card.xml',
-            'pos_product_price_display_fixed/static/src/app/generic_components/product_card/product_card.js',
-            'pos_product_price_display_fixed/static/src/app/screens/product_screen/product_screen.xml',
-            'pos_product_price_display_fixed/static/src/app/screens/product_screen/product_screen.js',
-            'pos_product_price_display_fixed/static/src/app/store/pos_redirect_patch.js',
+            'pos_product_price_display/static/src/app/components/product_card/product_card.xml',
+            'pos_product_price_display/static/src/app/components/product_card/product_card.js',
+            'pos_product_price_display/static/src/app/screens/product_screen/product_screen.xml',
+            'pos_product_price_display/static/src/app/screens/product_screen/product_screen.js',
+            'pos_product_price_display/static/src/app/store/pos_redirect_patch.js',
         ],
     },
     "images": [

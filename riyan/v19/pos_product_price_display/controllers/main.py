@@ -39,13 +39,13 @@ class PosManifestFix(http.Controller):
             "theme_color": "#714BB4",
             "icons": [
                 {
-                    "src": f"{base_url}/pos_product_price_display_fixed/static/img/pos-icon-192x192.png",
+                    "src": f"{base_url}/pos_product_price_display/static/img/pos-icon-192x192.png",
                     "sizes": "192x192",
                     "type": "image/png",
                     "purpose": "any maskable",
                 },
                 {
-                    "src": f"{base_url}/pos_product_price_display_fixed/static/img/pos-icon-512x512.png",
+                    "src": f"{base_url}/pos_product_price_display/static/img/pos-icon-512x512.png",
                     "sizes": "512x512",
                     "type": "image/png",
                     "purpose": "any maskable",
