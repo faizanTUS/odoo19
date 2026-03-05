@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="point_of_sale.ProductCard" owl="1"
+       t-inherit="point_of_sale.ProductCard"
+       t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('price-tag')]" position="replace">
+            <span t-if="props.price" class="price-tag text-primary py-1 fw-bolder d-flex flex-column lh-sm">
+                <span t-esc="props.price" />
+                <small t-if="props.priceLabel" class=" fw-normal" style="font-size:15px;">
+                    <t t-esc="props.priceLabel" />
+                </small>
+            </span>
+        </xpath>
+    </t>
+</templates>
