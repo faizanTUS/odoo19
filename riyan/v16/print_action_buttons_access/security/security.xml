@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--
+            Group: Show Print/Action Buttons
+            When assigned to a user, Print and Action buttons are visible in list/form views.
+            When not assigned, those buttons are hidden from the control panel sidebar.
+        -->
+        <record id="group_show_print_action_buttons" model="res.groups">
+            <field name="name">Show Print/Action Buttons</field>
+            <field name="comment">When this access is enabled, the user will see Print and Action buttons in the control panel (list and form views). When disabled, these buttons are completely hidden.</field>
+        </record>
+    </data>
+</odoo>
