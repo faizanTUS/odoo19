@@ -1,0 +1,184 @@
+/* ================================================================
+   tus_odoo_chatter_pin — style.css
+   Matches v17 Pinned Messages UI style
+   ================================================================ */
+
+/* ── Panel wrapper ── */
+.o_tus_PinnedPanel {
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    margin: 8px 12px 6px 12px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+/* ── Header row ── */
+.o_tus_header {
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 8px 14px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.o_tus_header:hover {
+    background: #f3f4f6;
+}
+
+.o_tus_header hr {
+    border-color: #d1d5db;
+    margin: 0 !important;
+    flex: 1;
+    opacity: 1;
+}
+
+.o_tus_header .badge {
+    font-size: 11px;
+}
+
+/* ── Individual pinned message card ── */
+.o_tus_PinnedPanel .o_PinnedMessage_item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f3f4f6;
+    background: #fff;
+    transition: background 0.15s;
+}
+
+.o_tus_PinnedPanel .o_PinnedMessage_item:last-child {
+    border-bottom: none;
+}
+
+.o_tus_PinnedPanel .o_PinnedMessage_item:hover {
+    background: #f9fafb;
+}
+
+/* ── Author row ── */
+.o_tus_author_row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.o_tus_avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+    flex-shrink: 0;
+}
+
+.o_tus_avatar_placeholder {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #6366f1;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.o_tus_author_name {
+    font-weight: 600;
+    font-size: 13px;
+    color: #111827;
+}
+
+.o_tus_email_icon {
+    color: #6b7280;
+    font-size: 11px;
+    margin-left: 2px;
+}
+
+.o_tus_pin_date {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-left: auto;
+}
+
+/* ── Message body ── */
+.o_tus_msg_body {
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.5;
+    word-break: break-word;
+    max-height: 60px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: 6px;
+    padding-left: 34px;
+}
+
+/* ── Action buttons ── */
+.o_tus_actions {
+    display: flex;
+    gap: 6px;
+    padding-left: 34px;
+}
+
+.o_tus_actions .btn {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* ── Pin button on messages (thumb-tack) ── */
+.o_tus_pin_btn {
+    opacity: 0;
+    transition: opacity 0.15s, color 0.15s;
+    color: #9ca3af;
+    border: none !important;
+    background: transparent !important;
+    padding: 2px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.o_Message:hover .o_tus_pin_btn {
+    opacity: 1;
+}
+
+.o_tus_pin_btn:hover {
+    color: #4f46e5 !important;
+    background: rgba(79, 70, 229, 0.08) !important;
+}
+
+.o_tus_pin_btn.tus_pinned,
+.o_tus_pin_btn[title="Unpin"] {
+    opacity: 1;
+    color: #d97706 !important;
+}
+
+/* ── Jump highlight animation ── */
+@keyframes tus_highlight {
+    0% {
+        background-color: #dbeafe;
+    }
+    70% {
+        background-color: #dbeafe;
+    }
+    100% {
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
+.o_pinned_message_highlight {
+    animation: tus_highlight 2.2s ease forwards;
+    border-radius: 6px;
+}

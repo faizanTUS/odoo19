@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="mail.Chatter" t-inherit="mail.Chatter" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_Chatter')]" position="inside">
+
+            <div t-if="pinnedMessages and pinnedMessages.length" class="o_PinnedMessages">
+
+                <!-- Header / toggle row -->
+                <div class="d-flex pt-2 cursor-pointer fw-bolder" t-on-click="togglePinnedMessages">
+                    <hr class="flex-grow-1 fs-3"/>
+                    <div class="d-flex align-items-center px-3">
+                        <i class="fa fa-fw"
+                           t-att-class="pinState.showPinnedMessages ? 'fa-caret-down' : 'fa-caret-right'"/>
+                        Pinned Messages
+                        <span t-if="!pinState.showPinnedMessages"
+                              class="badge rounded-pill ms-2 text-bg-primary">
+                            <t t-esc="pinnedMessages.length"/>
+                        </span>
+                    </div>
+                    <hr class="flex-grow-1 fs-3"/>
+                </div>
+
+                <!-- Pinned messages list -->
+                <t t-if="pinState.showPinnedMessages">
+                    <t t-foreach="pinnedMessages" t-as="message" t-key="message.id">
+                        <div class="o_PinnedMessage_item d-flex flex-column p-2 border-bottom">
+
+                            <!-- Author -->
+                            <div class="d-flex align-items-center mb-1">
+                                <img
+                                    t-if="message.author_id"
+                                    t-att-src="'/web/image/res.partner/' + message.author_id + '/avatar_128'"
+                                    class="rounded-circle me-2"
+                                    style="width:24px;height:24px;object-fit:cover;"
+                                    alt="Avatar"
+                                />
+                                <span class="fw-bold me-2" t-esc="message.author_name"/>
+                                <span class="text-muted small" t-esc="message.pinned_at"/>
+                            </div>
+
+                            <!-- Body preview -->
+                            <div class="o_PinnedMessage_body small" t-out="message.body"/>
+
+                            <!-- Actions -->
+                            <div class="d-flex gap-2 mt-1">
+                                <button class="btn btn-sm btn-outline-secondary"
+                                        t-on-click="() => this.jumpToMessage(message.id)">
+                                    Jump
+                                </button>
+                                <button class="btn btn-sm btn-outline-warning"
+                                        t-on-click="() => this.unpinMessage(message)">
+                                    <i class="fa fa-thumb-tack me-1"/>Unpin
+                                </button>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+
+            </div>
+
+        </xpath>
+    </t>
+
+</templates>
