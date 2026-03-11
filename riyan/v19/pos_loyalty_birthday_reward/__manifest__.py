@@ -211,7 +211,6 @@
     "website": "https://www.techultrasolution.com",
     'category': 'Sales/Loyalty',
     "images": [
-        "static/description/icon.png",
         "static/description/main_screen.gif",
     ],
     'depends': ['base', 'loyalty', 'point_of_sale', 'mail'],
