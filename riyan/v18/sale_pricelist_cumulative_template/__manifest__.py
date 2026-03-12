@@ -124,7 +124,7 @@
         "static/description/main_screen.gif",
     ],
     "currency": "USD",
-    "price": 20,
+    "price": 24.00,
     "license": "OPL-1",
     "installable": True,
     "application": True,
