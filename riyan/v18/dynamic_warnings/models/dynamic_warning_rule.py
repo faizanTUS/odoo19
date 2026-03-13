@@ -129,7 +129,6 @@ class DynamicWarningRule(models.Model):
             return False
         return True
 
-
     @api.model
     def get_warnings_for_record(self, model_name, res_id):
         _logger.warning("[DW] START model=%s res_id=%s", model_name, res_id)
