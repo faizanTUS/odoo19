@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_loyalty_birthday_program_user,loyalty.birthday.program.user,model_loyalty_program,base.group_user,0,0,0,0
-access_loyalty_birthday_program_manager,loyalty.birthday.program.manager,model_loyalty_program,sales_team.group_sale_manager,0,0,0,0
