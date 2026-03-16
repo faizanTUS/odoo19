@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Central menu: Pricelist & Vendor Setup under Sales > Configuration -->
+    <menuitem id="menu_pricelist_vendor_setup"
+        name="Pricelist &amp; Vendor Setup"
+        parent="sale.menu_sale_config"
+        sequence="35"
+        groups="product.group_product_pricelist,purchase.group_purchase_manager"/>
+
+    <menuitem id="menu_sale_pricelists_setup"
+        name="Sale Pricelists"
+        parent="odoo_pricelist_import.menu_pricelist_vendor_setup"
+        action="product.product_pricelist_action2"
+        sequence="10"
+        groups="product.group_product_pricelist"/>
+
+    <menuitem id="menu_vendor_price_rules_setup"
+        name="Vendor Price Rules"
+        parent="odoo_pricelist_import.menu_pricelist_vendor_setup"
+        action="product.product_supplierinfo_type_action"
+        sequence="20"
+        groups="purchase.group_purchase_manager"/>
+
+    <!-- Direct access to Pricelist Rules for bulk import -->
+    <menuitem id="menu_sale_pricelist_rules_setup"
+        name="Sale Pricelist Rules"
+        parent="odoo_pricelist_import.menu_pricelist_vendor_setup"
+        action="product.product_pricelist_item_action"
+        sequence="15"
+        groups="product.group_product_pricelist"/>
+</odoo>

@@ -1,0 +1,5 @@
+name,list_price,standard_price,type,categ_id/name,default_code,barcode,uom_id/name,uom_po_id/name
+Desk,250.00,150.00,consu,All / Saleable,DESK-001,1234567890123,Units,Units
+Office Chair,350.00,180.00,consu,All / Saleable,CHAIR-001,,Units,Units
+Monitor,250.00,120.00,consu,All / Saleable,MON-001,,Units,Units
+Computer Monitor,250.00,150.00,consu,All / Saleable,MON-002,,Units,Units
