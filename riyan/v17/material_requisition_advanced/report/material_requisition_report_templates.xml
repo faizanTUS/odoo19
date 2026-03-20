@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_material_requisition_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="doc"/>
+            <t t-set="lang" t-value="o.requested_by_id.lang or o.company_id.partner_id.lang or 'en_US'"/>
+            <div class="page" style="margin: 0; padding: 0; background: white;">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h4 style="font-weight: bold; color: #1e3a5f;">Material Requisition</h4>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <strong>Reference:</strong> <span t-field="o.name"/>
+                    </div>
+                    <div class="col-6">
+                        <strong>Request Date:</strong> <span t-field="o.request_date" t-options="{'widget': 'date'}"/>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <strong>Requested By:</strong> <span t-field="o.requested_by_id" t-options="{'widget': 'many2one', 'fields': ['name']}"/>
+                    </div>
+                    <div class="col-6">
+                        <strong>Department:</strong> <span t-field="o.department_id" t-options="{'widget': 'many2one', 'fields': ['name']}"/>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <strong>Destination Location:</strong> <span t-field="o.dest_location_id" t-options="{'widget': 'many2one', 'fields': ['complete_name']}"/>
+                    </div>
+                    <div class="col-6">
+                        <strong>Company:</strong> <span t-field="o.company_id" t-options="{'widget': 'many2one', 'fields': ['name']}"/>
+                    </div>
+                </div>
+                <div class="row mb-2" t-if="o.description">
+                    <div class="col-12"><strong>Description:</strong> <span t-field="o.description"/></div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12" style="padding: 0;">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr style="background: #8eddfb; color: white;">
+                                    <th style="padding: 8px;">Product</th>
+                                    <th style="padding: 8px;">Description</th>
+                                    <th style="padding: 8px; text-align: right;">Required Qty</th>
+                                    <th style="padding: 8px;">UoM</th>
+                                    <th style="padding: 8px; text-align: right;">Price</th>
+                                    <th style="padding: 8px;">Requisition Action</th>
+                                    <th style="padding: 8px;">Vendor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <tr>
+                                        <td style="padding: 8px;"><span t-field="line.product_id" t-options="{'widget': 'many2one', 'fields': ['name']}"/></td>
+                                        <td style="padding: 8px;"><span t-field="line.description"/></td>
+                                        <td style="padding: 8px; text-align: right;"><span t-field="line.required_qty"/></td>
+                                        <td style="padding: 8px;"><span t-field="line.product_uom_id" t-options="{'widget': 'many2one', 'fields': ['name']}"/></td>
+                                        <td style="padding: 8px; text-align: right;"><span t-field="line.purchase_price"/></td>
+                                        <td style="padding: 8px;">
+                                            <t t-if="line.requisition_action == 'purchase'">Purchase Order</t>
+                                            <t t-else="">Internal Picking</t>
+                                        </td>
+                                        <td style="padding: 8px;"><span t-field="line.vendor_id" t-options="{'widget': 'many2one', 'fields': ['name']}"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-4 text-center">
+                        <div style="border-top: 1px solid #333; padding-top: 8px; margin-top: 40px;">Prepared By</div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div style="border-top: 1px solid #333; padding-top: 8px; margin-top: 40px;">Approved By Department Manager</div>
+                    </div>
+                    <div class="col-4 text-center">
+                        <div style="border-top: 1px solid #333; padding-top: 8px; margin-top: 40px;">Approved By Requisition Officer</div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_material_requisition">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="lang" t-value="doc.requested_by_id.lang or doc.company_id.partner_id.lang or 'en_US'"/>
+                <t t-call="material_requisition_advanced.report_material_requisition_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

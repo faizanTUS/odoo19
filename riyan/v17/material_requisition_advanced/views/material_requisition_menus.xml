@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_material_requisition" model="ir.actions.act_window">
+        <field name="name">Material Requisitions</field>
+        <field name="res_model">material.requisition</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_material_requisition_search"/>
+        <field name="context">{'search_default_my': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first material requisition
+            </p>
+            <p>
+                Employees can request materials or products. Requests go through department manager and requisition officer approval, then you can generate internal pickings or purchase orders.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_material_requisition_config" model="ir.actions.act_window">
+        <field name="name">Material Requisition Configuration</field>
+        <field name="res_model">material.requisition.config</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'material_requisition_advanced'}</field>
+    </record>
+
+    <!-- Main menu: opens list/form -->
+    <menuitem id="menu_material_requisition_root"
+        name="Material Requisitions"
+        parent="stock.menu_stock_root"
+        action="action_material_requisition"
+        sequence="50"/>
+
+    <!-- Configuration as sibling under Inventory (not child of Material Requisitions) -->
+    <menuitem id="menu_material_requisition_config"
+        name="Material Requisition Configuration"
+        parent="stock.menu_stock_root"
+        action="action_material_requisition_config"
+        sequence="51"/>
+</odoo>
