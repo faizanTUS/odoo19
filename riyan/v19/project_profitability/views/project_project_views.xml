@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_project_form_profitability" model="ir.ui.view">
+        <field name="name">project.project.form.profitability</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Profitability" name="profitability_group">
+                    <group>
+                        <field name="sale_order_id" optional="show"/>
+                        <field name="current_margin" optional="show"/>
+                        <field name="current_margin_percentage" optional="show"/>
+                        <field name="profitability_status" optional="show"/>
+                        <field name="budget_status" optional="show"/>
+                    </group>
+                    <group>
+                        <field name="current_revenue" optional="show"/>
+                        <field name="current_cost" optional="show"/>
+                        <field name="current_profitability_id" invisible="True"/>
+                        <button name="action_view_profitability" type="object" string="View Profitability" class="btn-link"/>
+                        <button name="action_calculate_profitability" type="object" string="Calculate Profitability" class="btn-link"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
