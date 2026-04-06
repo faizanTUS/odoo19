@@ -281,9 +281,9 @@
                                                             <br/>
                                                             <small class="text-muted" t-esc="p.customer"/>
                                                         </td>
-                                                        <td class="text-end" t-esc="formatCurrency(p.costs.total)"/>
-                                                        <td class="text-end" t-esc="formatCurrency(p.budget.cost)"/>
-                                                        <td class="text-end text-danger" t-esc="formatCurrency(-p.variance.cost)"/>
+                                                        <td class="text-end" t-esc="formatCurrency(p.costs?.total ?? 0)"/>
+                                                        <td class="text-end" t-esc="formatCurrency(p.budget?.cost ?? 0)"/>
+                                                        <td class="text-end text-danger" t-esc="formatCurrency(-(p.variance?.cost ?? 0))"/>
                                                     </tr>
                                                 </t>
                                             </tbody>

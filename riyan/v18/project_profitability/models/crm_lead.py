@@ -28,7 +28,7 @@ class CrmLead(models.Model):
         Compute profitability data on-the-fly for dashboard/export.
         SO Total = sale order amount_total
         Cost = total of related POs (purchase order lines with analytic to project)
-        Budget = from analytic budget (crossovered.budget.lines) for project
+        Budget = from analytic budget (budget.line/budget.analytic in Odoo 18) for project
         No lead.profitability records required - computed on every refresh.
         """
         self.ensure_one()
@@ -123,14 +123,32 @@ class CrmLead(models.Model):
                     vendor_bill_cost += line.price_subtotal or 0
         total_cost = timesheet_cost + expense_cost + vendor_bill_cost + other_cost
 
-        # Budget = from analytic budget (crossovered.budget.lines)
+        # Budget = from analytic budget
         budget_revenue = budget_cost = budget_margin = 0.0
-        if analytic_account and self.env.get('crossovered.budget.lines'):
-            budget_lines = self.env['crossovered.budget.lines'].search([
-                ('analytic_account_id', '=', analytic_account.id)
-            ])
-            budget_revenue = sum(l.planned_amount for l in budget_lines if l.planned_amount > 0)
-            budget_cost = abs(sum(l.planned_amount for l in budget_lines if l.planned_amount < 0))
+        if analytic_account:
+            # ── Odoo 18: budget.analytic + budget.line ──
+            # budget_amount is always positive; budget_type ('revenue'/'expense'/'both')
+            # distinguishes direction. auto_account_id searches all analytic plan columns.
+            if 'budget.line' in self.env:
+                budget_lines = self.env['budget.line'].search([
+                    ('auto_account_id', '=', analytic_account.id),
+                    ('budget_analytic_id.state', 'not in', ['draft', 'canceled']),
+                ])
+                budget_revenue = sum(
+                    bl.budget_amount for bl in budget_lines
+                    if bl.budget_analytic_id.budget_type in ('revenue', 'both')
+                )
+                budget_cost = sum(
+                    bl.budget_amount for bl in budget_lines
+                    if bl.budget_analytic_id.budget_type in ('expense', 'both')
+                )
+            # ── Odoo 17 fallback: crossovered.budget.lines ──
+            elif 'crossovered.budget.lines' in self.env:
+                budget_lines = self.env['crossovered.budget.lines'].search([
+                    ('analytic_account_id', '=', analytic_account.id)
+                ])
+                budget_revenue = sum(l.planned_amount for l in budget_lines if l.planned_amount > 0)
+                budget_cost = abs(sum(l.planned_amount for l in budget_lines if l.planned_amount < 0))
             budget_margin = budget_revenue - budget_cost
 
         # Profitability

@@ -181,13 +181,35 @@ class LeadProfitability(models.Model):
     def _compute_budget(self):
         for record in self:
             record.budget_revenue = record.budget_cost = record.budget_margin = 0.0
-            if record.analytic_account_id and self.env.get('crossovered.budget.lines'):
+            if not record.analytic_account_id:
+                continue
+
+            # ── Odoo 18: budget.analytic + budget.line ──
+            # budget_amount is always positive; budget_type ('revenue'/'expense'/'both')
+            # distinguishes direction. auto_account_id searches all analytic plan columns.
+            if 'budget.line' in self.env:
+                budget_lines = self.env['budget.line'].search([
+                    ('auto_account_id', '=', record.analytic_account_id.id),
+                    ('budget_analytic_id.state', 'not in', ['draft', 'canceled']),
+                ])
+                record.budget_revenue = sum(
+                    bl.budget_amount for bl in budget_lines
+                    if bl.budget_analytic_id.budget_type in ('revenue', 'both')
+                )
+                record.budget_cost = sum(
+                    bl.budget_amount for bl in budget_lines
+                    if bl.budget_analytic_id.budget_type in ('expense', 'both')
+                )
+
+            # ── Odoo 17 fallback: crossovered.budget.lines ──
+            elif 'crossovered.budget.lines' in self.env:
                 budget_lines = self.env['crossovered.budget.lines'].search([
                     ('analytic_account_id', '=', record.analytic_account_id.id)
                 ])
                 record.budget_revenue = sum(l.planned_amount for l in budget_lines if l.planned_amount > 0)
                 record.budget_cost = abs(sum(l.planned_amount for l in budget_lines if l.planned_amount < 0))
-                record.budget_margin = record.budget_revenue - record.budget_cost
+
+            record.budget_margin = record.budget_revenue - record.budget_cost
 
     @api.depends('margin_percentage', 'total_cost', 'budget_cost')
     def _compute_status(self):

@@ -1,5 +1,6 @@
 # Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 # -*- coding: utf-8 -*-
+from typing import Any
 from odoo import http, fields
 from odoo.http import request
 from dateutil.relativedelta import relativedelta
@@ -16,7 +17,7 @@ class ProfitabilityDashboard(http.Controller):
             ('type', '=', 'opportunity'),
             ('company_id', '=', request.env.company.id),
         ])
-        lead_data_list = [lead.get_lead_profitability_data() for lead in opportunities]
+        lead_data_list: list[dict[str, Any]] = [lead.get_lead_profitability_data() for lead in opportunities]
 
         # Calculate overall KPIs from lead data
         total_revenue = sum(d['revenue']['recognized'] for d in lead_data_list)
@@ -29,21 +30,29 @@ class ProfitabilityDashboard(http.Controller):
             d for d in lead_data_list
             if (d.get('so_total') or 0) > 0 or (d.get('revenue', {}).get('recognized') or 0) > 0 or (d.get('costs', {}).get('total') or 0) > 0
         ]
-        sorted_by_margin = sorted(
+        sorted_by_margin: list[dict[str, Any]] = sorted(
             meaningful_leads,
             key=lambda d: (d.get('profitability', {}).get('margin') or 0, d.get('profitability', {}).get('margin_percentage') or 0),
             reverse=True
         )
-        top_5 = sorted_by_margin[:5]
+        top_5: list[dict[str, Any]] = list(sorted_by_margin[:5])
         # Bottom 5: exclude top 5, take 5 worst, show worst first
-        rest = sorted_by_margin[5:]
-        bottom_5 = rest[-5:][::-1] if len(rest) >= 5 else rest[::-1]
+        rest: list[dict[str, Any]] = list(sorted_by_margin[5:])
+        bottom_5: list[dict[str, Any]] = list(rest[-5:][::-1]) if len(rest) >= 5 else list(rest[::-1])
 
         # Budget alerts (over budget)
-        over_budget = [
-            d for d in lead_data_list
-            if d['budget']['cost'] > 0 and d['costs']['total'] / d['budget']['cost'] > 1.1
-        ]
+        # Add 'variance' key so OWL template can safely access p.variance.cost
+        over_budget = []
+        for d in lead_data_list:
+            budget_cost = (d.get('budget') or {}).get('cost') or 0
+            actual_cost = (d.get('costs') or {}).get('total') or 0
+            if budget_cost > 0 and actual_cost / budget_cost > 1.1:
+                d_copy = dict(d)
+                d_copy['variance'] = {
+                    'cost': budget_cost - actual_cost,       # negative = over budget
+                    'revenue': (d.get('budget') or {}).get('revenue', 0) - (d.get('revenue') or {}).get('recognized', 0),
+                }
+                over_budget.append(d_copy)
 
         # Lead & SO details (same as lead_data_list - computed on-the-fly)
         lead_so_details = lead_data_list

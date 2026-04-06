@@ -233,21 +233,44 @@ class ProjectProfitability(models.Model):
                 })
                 continue
 
-            # account_budget module adds crossovered.budget.lines
-            if self.env.get('crossovered.budget.lines'):
-                budget_lines = self.env['crossovered.budget.lines'].search([
-                    ('analytic_account_id', '=', record.analytic_account_id.id)
+            revenue_budget = 0.0
+            cost_budget = 0.0
+
+            # ── Odoo 18: account_budget module uses 'budget.line' + 'budget.analytic' ──
+            # budget.line inherits analytic.plan.fields.mixin, so analytic account is
+            # linked via auto_account_id (searches across all analytic plan columns).
+            # budget_amount is always POSITIVE; revenue/expense distinction is via
+            # budget_analytic_id.budget_type ('revenue' / 'expense' / 'both').
+            if 'budget.line' in self.env:
+                budget_lines = self.env['budget.line'].search([
+                    ('auto_account_id', '=', record.analytic_account_id.id),
+                    ('budget_analytic_id.state', 'not in', ['draft', 'canceled']),
                 ])
                 revenue_budget = sum(
-                    line.planned_amount for line in budget_lines
+                    bl.budget_amount
+                    for bl in budget_lines
+                    if bl.budget_analytic_id.budget_type in ('revenue', 'both')
+                )
+                cost_budget = sum(
+                    bl.budget_amount
+                    for bl in budget_lines
+                    if bl.budget_analytic_id.budget_type in ('expense', 'both')
+                )
+
+            # ── Odoo 17 fallback: crossovered.budget.lines ──
+            # planned_amount > 0 => revenue, planned_amount < 0 => expense
+            elif 'crossovered.budget.lines' in self.env:
+                budget_lines_v17 = self.env['crossovered.budget.lines'].search([
+                    ('analytic_account_id', '=', record.analytic_account_id.id),
+                ])
+                revenue_budget = sum(
+                    line.planned_amount for line in budget_lines_v17
                     if line.planned_amount > 0
                 )
                 cost_budget = abs(sum(
-                    line.planned_amount for line in budget_lines
+                    line.planned_amount for line in budget_lines_v17
                     if line.planned_amount < 0
                 ))
-            else:
-                revenue_budget = cost_budget = 0.0
 
             record.budget_revenue = revenue_budget
             record.budget_cost = cost_budget
@@ -408,7 +431,6 @@ class ProjectProfitability(models.Model):
             })
 
         # Demo: (project_name, partner_name, so_total, timesheet_cost, other_cost, budget_cost)
-        # budget_cost used when account_budget is installed
         demo_projects_data = [
             ('Website Redesign', 'Azure Interior', 45000.0, 12000.0, 3500.0, 18000.0),
             ('Mobile App Development', 'Deco Addict', 78000.0, 28000.0, 8500.0, 40000.0),
@@ -419,7 +441,6 @@ class ProjectProfitability(models.Model):
 
         budget_from = today - timedelta(days=90)
         budget_to = today + timedelta(days=90)
-        has_account_budget = 'crossovered.budget' in self.env
 
         for name, partner_name, so_total, timesheet_cost, other_cost, budget_cost in demo_projects_data:
             # 1. Get or create partner
@@ -443,7 +464,6 @@ class ProjectProfitability(models.Model):
             })
 
             # 3. Convert Lead to Opportunity (Odoo 18 workflow)
-            # Programmatic conversion: change type from 'lead' to 'opportunity'
             lead.write({'type': 'opportunity', 'expected_revenue': so_total})
             opportunity = lead
 
@@ -515,13 +535,53 @@ class ProjectProfitability(models.Model):
                 'company_id': company.id,
             })
 
-            # 7. Create Budget (when account_budget module is installed)
-            if has_account_budget:
+            # 7. Create Budget
+            # ── Odoo 18: budget.analytic + budget.line ──
+            # budget_amount is always positive; budget_type distinguishes revenue vs expense.
+            # auto_account_id is a computed magic field on budget.line that links to the
+            # analytic account via the appropriate analytic plan column.
+            if 'budget.analytic' in self.env:
+                try:
+                    # Revenue Budget
+                    budget_revenue = self.env['budget.analytic'].create({
+                        'name': f'{name} - Revenue Budget',
+                        'company_id': company.id,
+                        'date_from': budget_from,
+                        'date_to': budget_to,
+                        'budget_type': 'revenue',
+                    })
+                    self.env['budget.line'].create({
+                        'budget_analytic_id': budget_revenue.id,
+                        'budget_amount': so_total,
+                        'auto_account_id': analytic_account.id,
+                    })
+                    budget_revenue.action_budget_confirm()
+
+                    # Expense Budget
+                    budget_expense = self.env['budget.analytic'].create({
+                        'name': f'{name} - Expense Budget',
+                        'company_id': company.id,
+                        'date_from': budget_from,
+                        'date_to': budget_to,
+                        'budget_type': 'expense',
+                    })
+                    self.env['budget.line'].create({
+                        'budget_analytic_id': budget_expense.id,
+                        'budget_amount': budget_cost,
+                        'auto_account_id': analytic_account.id,
+                    })
+                    budget_expense.action_budget_confirm()
+
+                except Exception:
+                    pass  # Skip if budget structure differs
+
+            # ── Odoo 17 fallback: crossovered.budget + crossovered.budget.lines ──
+            # planned_amount > 0 => revenue budget, planned_amount < 0 => expense budget
+            elif 'crossovered.budget' in self.env:
                 try:
                     CrossoveredBudget = self.env['crossovered.budget']
                     CrossoveredBudgetLine = self.env['crossovered.budget.lines']
 
-                    # Build budget header vals (field names may vary by Odoo version)
                     budget_vals = {
                         'name': f'{name} - Revenue Budget',
                         'company_id': company.id,
@@ -532,8 +592,6 @@ class ProjectProfitability(models.Model):
                         budget_vals['date_to'] = budget_to
 
                     budget_revenue = CrossoveredBudget.create(budget_vals)
-
-                    # Build budget line vals for revenue (positive = revenue)
                     line_vals = {
                         'crossovered_budget_id': budget_revenue.id,
                         'analytic_account_id': analytic_account.id,
@@ -541,31 +599,29 @@ class ProjectProfitability(models.Model):
                     }
                     for date_field in ('date_from', 'date_to', 'start_date', 'end_date'):
                         if date_field in CrossoveredBudgetLine._fields:
-                            line_vals[date_field] = budget_from if 'from' in date_field or 'start' in date_field else budget_to
-
+                            line_vals[date_field] = (
+                                budget_from if 'from' in date_field or 'start' in date_field
+                                else budget_to
+                            )
                     CrossoveredBudgetLine.create(line_vals)
-
-                    # Open/confirm budget if method exists
                     for method in ('action_budget_open', 'action_budget_confirm', 'action_confirm'):
                         if hasattr(budget_revenue, method):
                             getattr(budget_revenue, method)()
                             break
 
-                    # Expense budget
                     budget_vals['name'] = f'{name} - Expense Budget'
                     budget_expense = CrossoveredBudget.create(budget_vals)
-
                     expense_line_vals = dict(line_vals)
                     expense_line_vals['crossovered_budget_id'] = budget_expense.id
                     expense_line_vals['planned_amount'] = -budget_cost
                     CrossoveredBudgetLine.create(expense_line_vals)
-
                     for method in ('action_budget_open', 'action_budget_confirm', 'action_confirm'):
                         if hasattr(budget_expense, method):
                             getattr(budget_expense, method)()
                             break
+
                 except Exception:
-                    pass  # Skip budget if structure differs (e.g. Odoo 18 Enterprise)
+                    pass  # Skip if structure differs
 
             # 8. Create profitability snapshot
             self.create({
