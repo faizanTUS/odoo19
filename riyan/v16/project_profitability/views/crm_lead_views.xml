@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_crm_lead_form_profitability" model="ir.ui.view">
+        <field name="name">crm.lead.form.profitability</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Profitability" name="profitability_group" attrs="{'invisible':[('type','!=','opportunity')]}">
+                    <group>
+                        <field name="current_profitability_id" invisible="1"/>
+                        <button name="action_view_lead_profitability" type="object" string="View Profitability" class="btn-link" attrs="{'invisible':[('current_profitability_id','=', False)]}"/>
+                        <button name="action_calculate_lead_profitability" type="object" string="Calculate Profitability" class="btn-link"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
