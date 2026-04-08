@@ -59,19 +59,38 @@ class SaleOrder(models.Model):
         lines = self._sale_out_of_stock_violation_lines()
         if not lines:
             return False
+
         base = self._sale_out_of_stock_restriction_base()
+
         if base == 'forecast':
             intro = _(
-                'You cannot confirm this order because the following products are out of stock '
-                'based on the forecast quantity:'
+                'You cannot confirm this order because the following products exceed forecast quantity:'
             )
         else:
             intro = _(
-                'You cannot confirm this order because the following products are out of stock '
-                'based on the quantity on hand:'
+                'You cannot confirm this order because the following products exceed available stock:'
             )
-        names = '\n'.join(f'- {line.product_id.display_name}' for line in lines)
-        return f'{intro}\n\n{names}'
+
+        details = []
+        for line in lines:
+            product = self._get_product_for_stock_check(line.product_id)
+
+            if base == 'forecast':
+                available = product.virtual_available
+            else:
+                available = product.qty_available
+
+            qty_ordered = line.product_uom._compute_quantity(
+                line.product_uom_qty,
+                line.product_id.uom_id,
+            )
+
+            details.append(
+                f"- {line.product_id.display_name} "
+                f"(Available: {available:.2f}, Ordered: {qty_ordered:.2f})"
+            )
+
+        return f"{intro}\n\n" + "\n".join(details)
 
     def action_confirm(self):
         for order in self:
