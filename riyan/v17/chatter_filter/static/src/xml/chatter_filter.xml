@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- 
+        Standard Odoo 19 Chatter Extension 
+        Inherits: mail.Chatter
+        Purpose: Injects a professional floating dropdown for advanced message filtering.
+    -->
+    <t t-name="chatter_filter.ChatterFilter" t-inherit="mail.Chatter" t-inherit-mode="extension">
+
+        <!-- ① Filter Dropdown Integration: Located after the topbar grow spacer -->
+        <xpath expr="//span[hasclass('o-mail-Chatter-topbarGrow')]" position="after">
+            <div class="o-chatter-filter d-flex align-items-center px-1 position-relative"
+                 t-att-class="{ 'd-none': state.isSearchOpen }">
+
+                <Dropdown
+                    position="'bottom-end'"
+                    menuClass="'o-chatter-filter-menu p-2'"
+                    togglerClass="'btn btn-secondary text-nowrap d-flex align-items-center o-chatter-filter-btn ' + (props.compactHeight ? '' : 'my-2')">
+                    <t t-set-slot="toggler">
+                        <i class="fa fa-filter me-2"/>
+                        <span>
+                            <t t-if="state.dateFilter === 'custom' and state.startDate">
+                                <t t-if="state.endDate">
+                                    <t t-esc="state.startDate.toFormat('LLL d')"/> - <t t-esc="state.endDate.toFormat('LLL d')"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="state.startDate.toFormat('LLL d')"/>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <t t-if="state.chatterFilter === 'all'">All Messages</t>
+                                <t t-else=""><t t-esc="(state.chatterFilter || 'all').slice(0, 1).toUpperCase() + (state.chatterFilter || 'all').slice(1)"/></t>
+                            </t>
+                        </span>
+                        <i class="fa fa-caret-down ms-2"/>
+                    </t>
+                    
+                    <t t-set-slot="default">
+                        <!-- Category Selection Section -->
+                        <div class="dropdown-header fw-bold text-uppercase pb-1 text-primary" style="font-size: 0.7rem;">By Type</div>
+                        
+                        <DropdownItem onSelected="() => this.setChatterFilter('all')" class="{'bg-light': state.chatterFilter === 'all', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">All Messages</span>
+                            <i t-if="state.chatterFilter === 'all'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <DropdownItem onSelected="() => this.setChatterFilter('communication')" class="{'bg-light': state.chatterFilter === 'communication', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">Communication</span>
+                            <i t-if="state.chatterFilter === 'communication'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <DropdownItem onSelected="() => this.setChatterFilter('sent')" class="{'bg-light': state.chatterFilter === 'sent', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">Sent</span>
+                            <i t-if="state.chatterFilter === 'sent'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <DropdownItem onSelected="() => this.setChatterFilter('received')" class="{'bg-light': state.chatterFilter === 'received', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">Received</span>
+                            <i t-if="state.chatterFilter === 'received'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <DropdownItem onSelected="() => this.setChatterFilter('notes')" class="{'bg-light': state.chatterFilter === 'notes', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">Notes</span>
+                            <i t-if="state.chatterFilter === 'notes'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <DropdownItem onSelected="() => this.setChatterFilter('system')" class="{'bg-light': state.chatterFilter === 'system', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">System</span>
+                            <i t-if="state.chatterFilter === 'system'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <DropdownItem onSelected="() => this.setChatterFilter('activities')" class="{'bg-light': state.chatterFilter === 'activities', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">Activities</span>
+                            <i t-if="state.chatterFilter === 'activities'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <div class="dropdown-divider my-1"></div>
+                        
+                        <!-- Date Range Selection Section -->
+                        <div class="dropdown-header fw-bold text-uppercase pb-1 text-primary" style="font-size: 0.7rem;">By Date</div>
+                        
+                        <DropdownItem onSelected="() => this.setDateFilter('all')" class="{'bg-light': state.dateFilter === 'all', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">All Time</span>
+                            <i t-if="state.dateFilter === 'all'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <DropdownItem onSelected="() => this.setDateFilter('today')" class="{'bg-light': state.dateFilter === 'today', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">Today</span>
+                            <i t-if="state.dateFilter === 'today'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <DropdownItem onSelected="() => this.setDateFilter('yesterday')" class="{'bg-light': state.dateFilter === 'yesterday', 'd-flex align-items-center rounded px-3 py-1 mb-1': true}">
+                            <span class="fw-bold o-filter-title">Yesterday</span>
+                            <i t-if="state.dateFilter === 'yesterday'" class="fa fa-check text-primary ms-2"/>
+                        </DropdownItem>
+                        
+                        <!-- Dual Date Input for Custom Ranges -->
+                        <div class="o-filter-custom-range-container pb-2 rounded mt-2" t-att-class="{'bg-light': state.dateFilter === 'custom'}">
+                            <div class="dropdown-header d-flex align-items-center fw-bold text-uppercase pb-1 text-primary" style="font-size: 0.7rem;">
+                                <span>Custom Range</span>
+                                <i t-if="state.dateFilter === 'custom'" class="fa fa-check text-primary ms-2"/>
+                            </div>
+                            <div class="px-3">
+                                <div class="d-flex flex-column gap-1">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <span class="text-muted small fw-bold me-2" style="min-width: 40px;">From:</span>
+                                        <DateTimeInput type="'date'" value="state.startDate" onChange.bind="onStartDateChange" class="'o-filter-date-input border rounded px-2 py-1 flex-grow-1'"/>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="text-muted small fw-bold me-2" style="min-width: 40px;">To:</span>
+                                        <DateTimeInput type="'date'" value="state.endDate" onChange.bind="onEndDateChange" class="'o-filter-date-input border rounded px-2 py-1 flex-grow-1'"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </Dropdown>
+
+            </div>
+        </xpath>
+
+        <!-- ② Prop Propagation: Passes active filters to the Thread component -->
+        <xpath expr="//Thread" position="attributes">
+            <attribute name="chatterFilter">chatterFilter</attribute>
+            <attribute name="dateFilter">dateFilter</attribute>
+            <attribute name="startDate">state.startDate</attribute>
+            <attribute name="endDate">state.endDate</attribute>
+        </xpath>
+
+        <!-- ③ Planned Activities Override: Responsive to both type and date filters -->
+        <xpath expr="//t[@t-call='mail.ActivityList']/.." position="replace">
+            <t t-if="props.hasActivities and activities.length
+                      and !state.isSearchOpen
+                      and (state.chatterFilter === 'all' or state.chatterFilter === 'activities')">
+                <t t-call="mail.ActivityList"/>
+            </t>
+        </xpath>
+
+    </t>
+
+    <t t-name="chatter_filter.ThreadFilter" t-inherit="mail.Thread" t-inherit-mode="extension">
+        <xpath expr="//t[@t-if='state.mountedAndLoaded']" position="attributes">
+            <attribute name="t-foreach">props.order === 'asc' ? filteredMessages : [...filteredMessages].reverse()</attribute>
+        </xpath>
+    </t>
+
+</templates>
