@@ -2,21 +2,23 @@
 <templates xml:space="preserve">
 
     <!-- 
-        Standard Odoo 19 Chatter Extension 
+        Standard Odoo 17 Chatter Extension 
         Inherits: mail.Chatter
         Purpose: Injects a professional floating dropdown for advanced message filtering.
     -->
-    <t t-name="chatter_filter.ChatterFilter" t-inherit="mail.Chatter" t-inherit-mode="extension">
+    <t t-name="tus_chatter_filter.ChatterFilter" t-inherit="mail.Chatter" t-inherit-mode="extension">
 
         <!-- ① Filter Dropdown Integration: Located after the topbar grow spacer -->
         <xpath expr="//span[hasclass('o-mail-Chatter-topbarGrow')]" position="after">
             <div class="o-chatter-filter d-flex align-items-center px-1 position-relative"
                  t-att-class="{ 'd-none': state.isSearchOpen }">
 
-                <Dropdown position="'bottom-end'" menuClass="'o-chatter-filter-menu shadow-lg p-2'">
-                    <!-- Trigger Button: Dynamic label based on active filter/date -->
-                    <button class="btn btn-light border shadow-sm fw-bold d-flex align-items-center o-chatter-filter-btn px-3 py-1">
-                        <i class="fa fa-filter me-2"/> 
+                <Dropdown
+                    position="'bottom-end'"
+                    menuClass="'o-chatter-filter-menu p-2'"
+                    togglerClass="'btn btn-secondary text-nowrap d-flex align-items-center o-chatter-filter-btn ' + (props.compactHeight ? '' : 'my-2')">
+                    <t t-set-slot="toggler">
+                        <i class="fa fa-filter me-2"/>
                         <span>
                             <t t-if="state.dateFilter === 'custom' and state.startDate">
                                 <t t-if="state.endDate">
@@ -28,13 +30,13 @@
                             </t>
                             <t t-else="">
                                 <t t-if="state.chatterFilter === 'all'">All Messages</t>
-                                <t t-else=""><t t-esc="state.chatterFilter.charAt(0).toUpperCase() + state.chatterFilter.slice(1)"/></t>
+                                <t t-else=""><t t-esc="(state.chatterFilter || 'all').slice(0, 1).toUpperCase() + (state.chatterFilter || 'all').slice(1)"/></t>
                             </t>
                         </span>
-                        <i class="fa fa-caret-down ms-2 text-muted"/>
-                    </button>
+                        <i class="fa fa-caret-down ms-2"/>
+                    </t>
                     
-                    <t t-set-slot="content">
+                    <t t-set-slot="default">
                         <!-- Category Selection Section -->
                         <div class="dropdown-header fw-bold text-uppercase pb-1 text-primary" style="font-size: 0.7rem;">By Type</div>
                         
@@ -103,11 +105,11 @@
                                 <div class="d-flex flex-column gap-1">
                                     <div class="d-flex align-items-center mb-1">
                                         <span class="text-muted small fw-bold me-2" style="min-width: 40px;">From:</span>
-                                        <DateTimeInput type="'date'" value="state.startDate" onSelect.bind="onStartDateChange" class="'o-filter-date-input border rounded px-2 py-1 flex-grow-1'"/>
+                                        <DateTimeInput type="'date'" value="state.startDate" onChange.bind="onStartDateChange" class="'o-filter-date-input border rounded px-2 py-1 flex-grow-1'"/>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <span class="text-muted small fw-bold me-2" style="min-width: 40px;">To:</span>
-                                        <DateTimeInput type="'date'" value="state.endDate" onSelect.bind="onEndDateChange" class="'o-filter-date-input border rounded px-2 py-1 flex-grow-1'"/>
+                                        <DateTimeInput type="'date'" value="state.endDate" onChange.bind="onEndDateChange" class="'o-filter-date-input border rounded px-2 py-1 flex-grow-1'"/>
                                     </div>
                                 </div>
                             </div>
@@ -128,13 +130,19 @@
 
         <!-- ③ Planned Activities Override: Responsive to both type and date filters -->
         <xpath expr="//t[@t-call='mail.ActivityList']/.." position="replace">
-            <t t-if="props.has_activities and activities.length
-                      and !messageSearch.searching and !messageSearch.searched
+            <t t-if="props.hasActivities and activities.length
+                      and !state.isSearchOpen
                       and (state.chatterFilter === 'all' or state.chatterFilter === 'activities')">
                 <t t-call="mail.ActivityList"/>
             </t>
         </xpath>
 
+    </t>
+
+    <t t-name="tus_chatter_filter.ThreadFilter" t-inherit="mail.Thread" t-inherit-mode="extension">
+        <xpath expr="//t[@t-if='state.mountedAndLoaded']" position="attributes">
+            <attribute name="t-foreach">props.order === 'asc' ? filteredMessages : [...filteredMessages].reverse()</attribute>
+        </xpath>
     </t>
 
 </templates>

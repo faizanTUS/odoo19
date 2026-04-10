@@ -2,11 +2,11 @@
 <templates xml:space="preserve">
 
     <!-- 
-        Standard Odoo 19 Chatter Extension 
+        Standard Odoo 18 Chatter Extension
         Inherits: mail.Chatter
         Purpose: Injects a professional floating dropdown for advanced message filtering.
     -->
-    <t t-name="chatter_filter.ChatterFilter" t-inherit="mail.Chatter" t-inherit-mode="extension">
+    <t t-name="tus_chatter_filter.ChatterFilter" t-inherit="mail.Chatter" t-inherit-mode="extension">
 
         <!-- ① Filter Dropdown Integration: Located after the topbar grow spacer -->
         <xpath expr="//span[hasclass('o-mail-Chatter-topbarGrow')]" position="after">

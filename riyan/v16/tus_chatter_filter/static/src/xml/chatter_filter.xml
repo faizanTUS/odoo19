@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <t t-name="chatter_filter.ChatterTopbarFilter" t-inherit="mail.ChatterTopbar" t-inherit-mode="extension">
+    <t t-name="tus_chatter_filter.ChatterTopbarFilter" t-inherit="mail.ChatterTopbar" t-inherit-mode="extension">
         <xpath expr="//div[hasclass('o_ChatterTopbar_rightSection')]" position="before">
             <div class="o-chatter-filter dropdown me-2" t-if="chatterTopbar.chatter.threadView">
                 <button
@@ -110,7 +110,7 @@
         </xpath>
     </t>
 
-    <t t-name="chatter_filter.MessageListFilterState" t-inherit="mail.MessageList" t-inherit-mode="extension">
+    <t t-name="tus_chatter_filter.MessageListFilterState" t-inherit="mail.MessageList" t-inherit-mode="extension">
         <xpath expr="//div[hasclass('o_MessageList')]" position="attributes">
             <attribute name="t-att-class">{ 'o-empty align-items-center justify-content-center': (messageListView.messageListViewItems || []).length === 0, 'pb-4': (messageListView.messageListViewItems || []).length !== 0 }</attribute>
         </xpath>

@@ -1,14 +1,14 @@
 # Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Advanced Chatter Filter with Date & Message Type Control | Smart Message Control Panel',
-    'version': '17.0.0.0',
+    'version': '19.0.0.0',
     'category': 'Productivity',
     'author': 'TechUltra Solutions Private Limited',
     'company': 'TechUltra Solutions Private Limited',
     'website': "https://www.techultrasolutions.com/",
     'summary': """Professional reactive chatter filters by Type (Communication, Notes, etc.) and Date Range.
-    
-    
+
+
     tus
     TUS
     TechUltra Solutions Private Limited
@@ -93,7 +93,7 @@
     instant data filtering
     advanced record communication
     user productivity enhancer
-    
+
     """,
     'description': """
 Advanced Reactive Chatter Filters
@@ -208,9 +208,9 @@ Key Features:
     'data': [],
     'assets': {
         'web.assets_backend': [
-            'chatter_filter/static/src/css/chatter_filter.css',
-            'chatter_filter/static/src/js/chatter_filter.js',
-            'chatter_filter/static/src/xml/chatter_filter.xml',
+            'tus_chatter_filter/static/src/css/chatter_filter.css',
+            'tus_chatter_filter/static/src/js/chatter_filter.js',
+            'tus_chatter_filter/static/src/xml/chatter_filter.xml',
         ],
     },
     'images': [

@@ -208,9 +208,9 @@ Key Features:
     'data': [],
     'assets': {
         'web.assets_backend': [
-            'chatter_filter/static/src/css/chatter_filter.css',
-            'chatter_filter/static/src/js/chatter_filter.js',
-            'chatter_filter/static/src/xml/chatter_filter.xml',
+            'tus_chatter_filter/static/src/css/chatter_filter.css',
+            'tus_chatter_filter/static/src/js/chatter_filter.js',
+            'tus_chatter_filter/static/src/xml/chatter_filter.xml',
         ],
     },
     'images': [
