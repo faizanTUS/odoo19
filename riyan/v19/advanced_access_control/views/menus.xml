@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_advanced_access_root"
+        name="Advanced Access Control"
+        parent="base.menu_custom"
+        sequence="25"
+        groups="base.group_system,advanced_access_control.group_advanced_access_manager"/>
+
+    <menuitem
+        id="menu_advanced_access_policies"
+        name="Policies"
+        parent="menu_advanced_access_root"
+        action="action_advanced_access_policy"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_advanced_access_audit"
+        name="Audit log"
+        parent="menu_advanced_access_root"
+        action="action_advanced_access_audit_log"
+        sequence="20"/>
+</odoo>
