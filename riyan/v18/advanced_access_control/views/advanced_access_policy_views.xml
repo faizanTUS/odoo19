@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_advanced_access_policy_tree" model="ir.ui.view">
+        <field name="name">advanced.access.policy.tree</field>
+        <field name="model">advanced.access.policy</field>
+        <field name="arch" type="xml">
+            <list string="Access policies">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="active"/>
+                <field name="global_readonly" optional="show"/>
+                <field name="hide_chatter" optional="show"/>
+                <field name="disable_debug" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_advanced_access_policy_form" model="ir.ui.view">
+        <field name="name">advanced.access.policy.form</field>
+        <field name="model">advanced.access.policy</field>
+        <field name="arch" type="xml">
+            <form string="Advanced access policy">
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="e.g. Sales team — restricted UI"/>
+                            <field name="active"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group string="Apply to">
+                            <field name="user_ids" widget="many2many_tags"/>
+                            <field name="group_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group string="Global options">
+                        <group>
+                            <field name="global_readonly"/>
+                            <field name="hide_chatter"/>
+                            <field name="disable_debug"/>
+                            <field name="global_disable_import"/>
+                            <field name="global_disable_export"/>
+                            <field name="global_disable_archive"/>
+                        </group>
+                        <group>
+                            <field name="enable_audit"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Model/Report/Action Access" name="models">
+                            <field name="model_line_ids" nolabel="1" context="{'default_policy_id': id}">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="model_name" optional="hide"/>
+                                    <field
+                                        name="hidden_report_ids"
+                                        string="Hide reports"
+                                        widget="many2many_tags"
+                                        options="{'no_create': True}"
+                                        domain="model_id and [('model', '=', model_name)] or [('id', '=', 0)]"
+                                    />
+                                    <field
+                                        name="hidden_sidebar_action_ids"
+                                        string="Hide actions"
+                                        widget="many2many_tags"
+                                        options="{'no_create': True}"
+                                        domain="model_id and [('binding_model_id', '=', model_id)] or [('id', '=', 0)]"
+                                    />
+                                    <field name="allow_read"/>
+                                    <field name="allow_create"/>
+                                    <field name="allow_write"/>
+                                    <field name="allow_unlink"/>
+                                    <field name="allow_export"/>
+                                    <field name="allow_duplicate"/>
+                                    <field name="allow_sidebar_cancel" optional="show"/>
+                                    <field name="allow_sidebar_send_email" optional="show"/>
+                                    <field name="allow_import"/>
+                                    <field name="allow_archive"/>
+                                    <field name="record_domain" optional="show"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Field modifiers" name="fields">
+                            <field name="field_line_ids" nolabel="1" context="{'default_policy_id': id}">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field
+                                        name="ir_field_id"
+                                        options="{'no_create': True}"
+                                        domain="[('model_id', '=', model_id)]"
+                                        context="{'default_model_id': model_id}"
+                                    />
+                                    <field name="field_name" optional="hide" readonly="1"/>
+                                    <field name="modifier"/>
+                                    <field name="apply_condition" placeholder="e.g. state == 'done'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hidden menus" name="menus">
+                            <field name="menu_line_ids" nolabel="1" context="{'default_policy_id': id}">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field name="model_name" optional="hide" readonly="1"/>
+                                    <field name="aac_menu_candidate_ids" column_invisible="1"/>
+                                    <field
+                                        name="menu_id"
+                                        options="{'no_create': True}"
+                                        domain="model_id and [('id', 'in', aac_menu_candidate_ids)] or [('id', '=', 0)]"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hidden buttons" name="buttons">
+                            <field name="button_line_ids" nolabel="1" context="{'default_policy_id': id}">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field
+                                        name="form_button_id"
+                                        options="{'no_create': True}"
+                                        domain="[('model_id', '=', model_id)]"
+                                        context="{'default_model_id': model_id}"
+                                    />
+                                    <field
+                                        name="button_name"
+                                        optional="show"
+                                        placeholder="XML name if not in list above"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Hidden notebook pages" name="tabs">
+                            <field name="tab_line_ids" nolabel="1" context="{'default_policy_id': id}">
+                                <list editable="bottom">
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                    <field
+                                        name="form_notebook_page_id"
+                                        options="{'no_create': True}"
+                                        domain="[('model_id', '=', model_id)]"
+                                        context="{'default_model_id': model_id}"
+                                    />
+                                    <field
+                                        name="page_string"
+                                        optional="show"
+                                        placeholder="Exact tab title if not in list above"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_advanced_access_policy" model="ir.actions.act_window">
+        <field name="name">Advanced Access Policies</field>
+        <field name="res_model">advanced.access.policy</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a policy to tune model access, hidden reports, notebook tabs, fields, menus, and buttons per user or group.
+            </p>
+        </field>
+    </record>
+</odoo>
