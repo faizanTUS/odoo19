@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.AttachmentViewer" t-inherit-mode="extension">
+        <xpath expr="//t[@t-if=&quot;attachmentViewer.attachmentViewerViewable.isVideo&quot;]" position="after">
+            <t t-if="attachmentViewer.attachmentViewerViewable.isMsOffice">
+                <i class="fa fa-file-o" role="img" title="Office document"/>
+            </t>
+        </xpath>
+        <xpath expr="//iframe[contains(@class,'o_AttachmentViewer_viewPdf')]" position="after">
+            <t t-if="attachmentViewer.attachmentViewerViewable.isMsOffice">
+                <div
+                    t-on-click.stop=""
+                    t-on-wheel="attachmentViewer.onWheelOffice"
+                    class="o-uap-office-outer w-75 h-100 d-flex align-items-center justify-content-center overflow-auto"
+                    t-att-class="{ 'w-100': messaging.device.isSmall }"
+                >
+                    <div
+                        class="o-uap-office-shell w-100 h-100"
+                        t-att-style="'transform: scale(' + (attachmentViewer.officeScale || 1) + '); transform-origin: center center;'"
+                    >
+                        <iframe
+                            class="o_AttachmentViewer_view o-uap-office-iframe w-100 h-100 border-0"
+                            t-att-src="attachmentViewer.attachmentViewerViewable.defaultSource"
+                            title="Office preview"
+                        />
+                    </div>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//div[contains(@class,'o_AttachmentViewer_toolbar')][@role='toolbar']" position="after">
+            <t t-if="attachmentViewer.attachmentViewerViewable.isMsOffice">
+                <div class="o_AttachmentViewer_toolbar position-absolute bottom-0 d-flex" role="toolbar">
+                    <div class="o_AttachmentViewer_toolbarButton p-3 rounded-0" t-on-click="attachmentViewer.officeZoomIn" title="Zoom In (+)" role="button">
+                        <i class="fa fa-fw fa-plus" role="img"/>
+                    </div>
+                    <div
+                        class="o_AttachmentViewer_toolbarButton p-3 rounded-0"
+                        t-att-class="{ 'o_disabled opacity-50': (attachmentViewer.officeScale || 1) === 1 }"
+                        t-on-click="attachmentViewer.officeResetZoom"
+                        role="button"
+                        title="Reset Zoom (0)"
+                    >
+                        <i class="fa fa-fw fa-search" role="img"/>
+                    </div>
+                    <div
+                        class="o_AttachmentViewer_toolbarButton p-3 rounded-0"
+                        t-att-class="{ 'o_disabled opacity-50': (attachmentViewer.officeScale || 1) &lt;= 0.45 }"
+                        t-on-click="attachmentViewer.officeZoomOut"
+                        role="button"
+                        title="Zoom Out (-)"
+                    >
+                        <i class="fa fa-fw fa-minus" role="img"/>
+                    </div>
+                    <div class="o_AttachmentViewer_toolbarButton p-3 rounded-0" t-on-click="attachmentViewer.openOfficeInNewTab" title="Open in new tab" role="button">
+                        <i class="fa fa-fw fa-external-link" role="img"/>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+</templates>
