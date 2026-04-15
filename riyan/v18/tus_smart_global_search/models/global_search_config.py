@@ -12,9 +12,10 @@ class ResUsers(models.Model):
         column2="model_id",
         string="Global Search Models",
         domain=[
+            "|",
             ("is_mail_thread", "=", True),
             ("is_mail_activity", "=", True),
         ],
         help="Models this user can search in the global search. "
-             "Leave empty to search all mail-thread + mail-activity models (default).",
+             "If none are selected, a built-in default set (contacts, common documents, …) is used.",
     )

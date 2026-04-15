@@ -366,9 +366,10 @@
     smart result filtering
     
     """,
-    "depends": ["web", "mail"],
+    "depends": ["web", "mail", "sale"],
     "data": [
         'views/global_search_config_view.xml',
+        'views/sale_order_search_fix.xml',
     ],
     "assets": {
         "web.assets_backend": [

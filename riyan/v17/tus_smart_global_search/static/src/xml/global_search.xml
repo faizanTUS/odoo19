@@ -49,40 +49,162 @@
             Search failed. Please try again.
           </div>
         </t>
-        <t t-elif="!state.query || state.query.length &lt; 2">
-          <t t-if="state.recentSearches.length">
-            <div class="o_global_search_group_name">Recent Searches</div>
-            <t t-foreach="state.recentSearches" t-as="term" t-key="term_index">
-              <div
-                class="o_global_search_item o_global_search_recent"
-                t-att-class="{ 'o_global_search_item_selected': state.selectedIndex === term_index }"
-                t-on-click="() => this.selectRecent(term)"
-                t-on-mouseenter="() => this.setSelectedIndex(term_index)"
-              >
-                <i class="oi oi-clock o_global_search_recent_icon"/>
-                <span t-esc="term"/>
-                <i
-                  class="fa fa-times text-muted o_remove_recent ms-auto"
-                  role="button"
-                  title="Remove"
-                  t-on-click.stop="() => this.removeRecent(term)"
-                />
+        <t t-elif="showNoModelsConfigured">
+          <div class="o_global_search_empty text-muted p-3 text-center">
+            <i class="fa fa-cog text-muted me-1"/>
+            Select at least one <strong>Global Search Models</strong> on your user profile before searching. With none selected, search stays empty.
+          </div>
+        </t>
+        <t t-elif="!showResultsPanel">
+          <div class="o_global_search_home px-2 pb-2">
+            <t t-if="state.configLoaded and !state.allowedModels.length">
+              <div class="o_global_search_empty text-muted p-3 text-center small">
+                No models are selected for global search. Open your user preferences, add <strong>Global Search Models</strong>, then try again.
               </div>
             </t>
-          </t>
-          <t t-else="">
-            <div class="o_global_search_empty text-muted p-3 text-center">
-              Type at least 2 characters to search.<br/>
-              <small>Results are grouped by type (Contacts, Sale Orders, etc.)</small>
-            </div>
-          </t>
+            <t t-if="filteredSuggestions.length">
+              <div class="o_global_search_group_name">Try searching for</div>
+              <div class="o_global_search_suggestions d-flex flex-wrap gap-1 px-2 pb-2">
+                <t t-foreach="filteredSuggestions" t-as="sug" t-key="sug_index">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-light border o_global_search_suggestion_chip"
+                    t-esc="sug.label"
+                    t-on-click="() => this.applySuggestion(sug)"
+                  />
+                </t>
+              </div>
+            </t>
+            <t t-if="state.allowedModels and state.allowedModels.length and !filteredSuggestions.length">
+              <div class="small text-muted px-2 pb-2">
+                Type below to search your selected models (no preset shortcuts match).
+              </div>
+            </t>
+            <t t-if="filteredFavourites.length">
+              <div class="o_global_search_group_name d-flex align-items-center justify-content-between px-2">
+                <span>Favourites</span>
+                <span class="small text-muted">Pinned records</span>
+              </div>
+              <t t-foreach="filteredFavourites" t-as="fav" t-key="fav.model + '-' + fav.id">
+                <div
+                  class="o_global_search_item o_global_search_frequent"
+                  role="button"
+                  tabindex="0"
+                  t-on-click="() => this.openFavouriteEntry(fav)"
+                >
+                  <div class="o_global_search_item_placeholder rounded">
+                    <i class="fa fa-star text-warning"/>
+                  </div>
+                  <span class="o_global_search_item_label text-truncate" t-esc="fav.display_name || fav.model"/>
+                  <button
+                    type="button"
+                    class="btn btn-link btn-sm p-0 o_global_search_icon_btn"
+                    title="Remove from favourites"
+                    aria-label="Remove from favourites"
+                    t-on-click.stop="() => this.removeFavouriteEntry(fav.model, fav.id)"
+                  >
+                    <i class="fa fa-times text-muted"/>
+                  </button>
+                </div>
+              </t>
+            </t>
+            <t t-if="filteredFrequent.length">
+              <div class="o_global_search_group_name px-2">Often opened</div>
+              <t t-foreach="filteredFrequent" t-as="fr" t-key="fr.model + '-' + fr.id">
+                <div
+                  class="o_global_search_item o_global_search_frequent"
+                  role="button"
+                  tabindex="0"
+                  t-on-click="() => this.openRecord(fr.model, fr)"
+                >
+                  <div class="o_global_search_item_placeholder rounded">
+                    <i class="fa fa-line-chart"/>
+                  </div>
+                  <div class="o_global_search_frequent_meta flex-grow-1 min-w-0">
+                    <div class="o_global_search_item_label text-truncate" t-esc="fr.display_name"/>
+                    <small class="text-muted text-truncate d-block" t-esc="fr.model"/>
+                  </div>
+                </div>
+              </t>
+            </t>
+            <t t-if="state.recentSearches.length">
+              <div class="o_global_search_group_name d-flex align-items-center justify-content-between px-2">
+                <span>Recent searches</span>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm py-0 o_global_search_clear_history"
+                  t-on-click="() => this.clearSearchHistory()"
+                >
+                  Clear history
+                </button>
+              </div>
+              <t t-foreach="state.recentSearches" t-as="term" t-key="term_index">
+                <div
+                  class="o_global_search_item o_global_search_recent"
+                  t-att-class="{ 'o_global_search_item_selected': state.selectedIndex === term_index }"
+                  t-on-click="() => this.selectRecent(term)"
+                  t-on-mouseenter="() => this.setSelectedIndex(term_index)"
+                >
+                  <i class="oi oi-clock o_global_search_recent_icon"/>
+                  <span t-esc="term"/>
+                  <i
+                    class="fa fa-times text-muted o_remove_recent ms-auto"
+                    role="button"
+                    title="Remove"
+                    t-on-click.stop="() => this.removeRecent(term)"
+                  />
+                </div>
+              </t>
+            </t>
+            <t t-if="!filteredSuggestions.length and !filteredFavourites.length and !filteredFrequent.length and !state.recentSearches.length and state.configLoaded and state.allowedModels.length">
+              <div class="o_global_search_empty text-muted p-3 text-center">
+                Type at least 2 characters to search.<br/>
+                <small>Only the models you selected under Global Search Models are searched.</small>
+              </div>
+            </t>
+          </div>
         </t>
         <t t-elif="state.groups.length === 0">
-          <div class="o_global_search_empty text-muted p-3 text-center">
-            No results for "<t t-esc="state.query"/>"
+          <div class="o_global_search_empty o_global_search_no_results p-3 text-center">
+            <t t-if="state.browseMode">
+              <div class="mb-2">
+                <i class="fa fa-folder-open-o fa-2x text-muted opacity-50"/>
+              </div>
+              <div class="fw-medium text-body mb-2">
+                No records to show
+              </div>
+              <p class="small text-muted mb-0">
+                This model may not be installed, you may not have access, or there are no records yet.
+                Try the related app menu for the full list.
+              </p>
+            </t>
+            <t t-else="">
+              <div class="mb-2">
+                <i class="fa fa-search fa-2x text-muted opacity-50"/>
+              </div>
+              <div class="fw-medium text-body mb-2">
+                No matches for "<t t-esc="state.query"/>"
+              </div>
+              <ul class="o_global_search_no_results_tips small text-muted text-start mb-0 ps-3">
+                <li>Check spelling or try a shorter keyword.</li>
+                <li>Search by name, reference, or partner.</li>
+                <li>Use the suggestions (Contact, Sale Order, …) to list recent records.</li>
+              </ul>
+            </t>
           </div>
         </t>
         <t t-else="">
+          <t t-if="state.browseMode and state.groups.length">
+            <div class="o_global_search_browse_bar px-3 pb-2 d-flex justify-content-end">
+              <button
+                type="button"
+                class="btn btn-link btn-sm py-0"
+                t-on-click="() => this.openFullListFromBrowse()"
+              >
+                Open full list in new tab
+              </button>
+            </div>
+          </t>
           <t t-foreach="state.groups" t-as="group" t-key="group.model">
             <div class="o_global_search_group_name" t-esc="group.name"/>
             <t t-foreach="group.results" t-as="result" t-key="result.id">
@@ -108,7 +230,33 @@
                     <i class="oi oi-apps"/>
                   </div>
                 </t>
-                <span class="o_global_search_item_label" t-esc="result.display_name"/>
+                <span class="o_global_search_item_label">
+                  <t t-foreach="highlightSegments(result.display_name)" t-as="seg" t-key="seg_index">
+                    <mark t-if="seg.hl" class="o_global_search_highlight"><t t-esc="seg.text"/></mark>
+                    <t t-else=""><t t-esc="seg.text"/></t>
+                  </t>
+                </span>
+                <div class="o_global_search_item_actions d-flex align-items-center gap-1 flex-shrink-0">
+                  <button
+                    type="button"
+                    class="btn btn-link btn-sm p-1 o_global_search_icon_btn"
+                    title="Open in new tab"
+                    aria-label="Open in new tab"
+                    t-on-click.stop="(ev) => this.openRecordInNewTab(group.model, result, ev)"
+                  >
+                    <i class="fa fa-external-link"/>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-link btn-sm p-1 o_global_search_icon_btn"
+                    t-att-title="isFavourite(group.model, result.id) ? 'Remove from favourites' : 'Pin to favourites'"
+                    t-att-aria-label="isFavourite(group.model, result.id) ? 'Remove from favourites' : 'Pin to favourites'"
+                    t-on-click.stop="(ev) => this.toggleFavourite(group.model, result, ev)"
+                  >
+                    <i t-if="isFavourite(group.model, result.id)" class="fa fa-star text-warning"/>
+                    <i t-else="" class="fa fa-star-o text-muted"/>
+                  </button>
+                </div>
               </div>
             </t>
           </t>

@@ -118,6 +118,57 @@
     white-space: nowrap;
 }
 
+.o_global_search_highlight {
+    background-color: rgba(255, 235, 59, 0.45);
+    color: inherit;
+    padding: 0 0.1em;
+    border-radius: 2px;
+}
+
+.o_global_search_item_actions {
+    opacity: 0.85;
+}
+
+.o_global_search_item:hover .o_global_search_item_actions,
+.o_global_search_item.o_global_search_item_selected .o_global_search_item_actions,
+.o_global_search_item:focus-within .o_global_search_item_actions {
+    opacity: 1;
+}
+
+.o_global_search_icon_btn {
+    line-height: 1;
+    min-width: 1.75rem;
+    color: var(--o-gray-600, #6c757d);
+
+    &:hover {
+        color: var(--o-link-color, #0d6efd);
+    }
+}
+
+.o_global_search_suggestion_chip {
+    border-radius: 999px;
+    font-size: 0.8125rem;
+}
+
+.o_global_search_home {
+    max-height: 55vh;
+    overflow-y: auto;
+}
+
+.o_global_search_clear_history {
+    font-size: 0.75rem;
+}
+
+.o_global_search_no_results {
+    .o_global_search_no_results_tips li {
+        margin-bottom: 0.25rem;
+    }
+}
+
+.o_global_search_frequent_meta {
+    line-height: 1.2;
+}
+
 .o_global_search_recent {
     .o_global_search_recent_icon {
         color: var(--o-gray-400, #adb5bd);
