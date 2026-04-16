@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Use "Customizations" so this group is not in the same exclusive
+        Administration / Settings (group_system) radio block as base.group_system.
+        Otherwise the user form can drop one of the two when saving.
+    -->
+    <record id="group_advanced_access_manager" model="res.groups">
+        <field name="name">Advanced Access Control - Manager</field>
+        <field name="category_id" ref="base.module_category_customizations"/>
+        <field name="comment">Configure advanced access policies. Assign only to trusted administrators. Full Settings administrators (group_system) receive this automatically.</field>
+    </record>
+
+    <!-- Every Settings / Access Rights admin can manage policies without a separate group tick. -->
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('advanced_access_control.group_advanced_access_manager'))]"/>
+    </record>
+</odoo>
