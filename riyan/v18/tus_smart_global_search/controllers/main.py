@@ -127,10 +127,20 @@ def _effective_global_search_models(env, user):
     selected = user.global_search_model_ids.sorted("name")
     if selected:
         return selected
+
+    # Use a simple request-level cache to avoid redundant ir.model searches in the same request
+    if hasattr(request, "tus_global_search_models"):
+        return request.tus_global_search_models
+
     IrModel = env["ir.model"].sudo()
     out = env["ir.model"].browse()
+    
+    # Search all fallback models at once instead of in a loop
+    ims = IrModel.search([("model", "in", _FALLBACK_GLOBAL_SEARCH_MODELS)])
+    model_to_im = {m.model: m for m in ims}
+
     for name in _FALLBACK_GLOBAL_SEARCH_MODELS:
-        im = IrModel.search([("model", "=", name)], limit=1)
+        im = model_to_im.get(name)
         if not im:
             continue
         try:
@@ -140,6 +150,8 @@ def _effective_global_search_models(env, user):
         if not getattr(Model, "_auto", False) or not _model_can_read(Model):
             continue
         out |= im
+    
+    request.tus_global_search_models = out
     return out
 
 
@@ -225,10 +237,10 @@ class GlobalSearchController(http.Controller):
             if not records:
                 return {"groups": []}
 
-            has_image = "image_1920" in Model._fields
-            fields_to_read = ["display_name", "id"]
-            if has_image:
-                fields_to_read.append("image_1920")
+            # Optimization: Never read binary fields (image_1920) in search results.
+            # It's an order of magnitude faster to let the browser load them as needed.
+            has_image_field = "image_128" in Model._fields or "image_1920" in Model._fields
+            fields_to_read = ["display_name"]
 
             try:
                 rows = records.read(fields_to_read)
@@ -241,7 +253,7 @@ class GlobalSearchController(http.Controller):
                 results.append({
                     "id": row["id"],
                     "display_name": row["display_name"] or "",
-                    "has_image": bool(has_image and row.get("image_1920")),
+                    "has_image": bool(has_image_field),
                 })
 
             ir_rec = request.env["ir.model"].sudo().search([("model", "=", model)], limit=1)
@@ -401,10 +413,10 @@ class GlobalSearchController(http.Controller):
                 if not records:
                     continue
 
-                has_image = "image_1920" in Model._fields
-                fields_to_read = ["display_name", "id"]
-                if has_image:
-                    fields_to_read.append("image_1920")
+                # Optimization: Never read binary fields (image_1920) in search results.
+                # It's an order of magnitude faster to let the browser load them as needed.
+                has_image_field = "image_128" in Model._fields or "image_1920" in Model._fields
+                fields_to_read = ["display_name"]
 
                 try:
                     rows = records.read(fields_to_read)
@@ -417,7 +429,7 @@ class GlobalSearchController(http.Controller):
                     results.append({
                         "id": row["id"],
                         "display_name": row["display_name"] or "",
-                        "has_image": bool(has_image and row.get("image_1920")),
+                        "has_image": bool(has_image_field),
                     })
 
                 groups.append({

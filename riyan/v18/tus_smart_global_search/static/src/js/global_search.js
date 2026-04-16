@@ -364,7 +364,7 @@ export class GlobalSearchPanel extends Component {
             this.state.loading = false;
             return;
         }
-        await this.loadConfigIfNeeded(true);
+        await this.loadConfigIfNeeded(false);
         if (!this.state.allowedModels.length) {
             this.state.groups = [];
             this.state.loading = false;
@@ -464,7 +464,7 @@ export class GlobalSearchPanel extends Component {
         if (this.inputRef.el) {
             this.inputRef.el.value = label;
         }
-        await this.loadConfigIfNeeded(true);
+        await this.loadConfigIfNeeded(false);
         if (!this.state.allowedModels.length) {
             this.state.loading = false;
             this.state.browseMode = false;

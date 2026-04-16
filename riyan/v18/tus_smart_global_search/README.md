@@ -1,4 +1,4 @@
-# Advanced Odoo Search | Global & User Based Control
+# Global Search Pro for Odoo - Multi-Model Search &amp; User Access Control
 
 Modern and efficient Global Search for Odoo. Search across multiple models from one place, with grouped results, keyboard navigation, recent searches, and record images.
 
@@ -36,11 +36,11 @@ Where `tus_smart_global_search` is at `/path/to/project/tus_smart_global_search`
 - Go to **Apps**.
 - Remove the "Apps" filter (if applied).
 - Click **Update Apps List** (if you don’t see the module).
-- Search for **Advanced Odoo Search | Global & User Based Control**.
+- Search for **Global Search Pro for Odoo - Multi-Model Search &amp; User Access Control**.
 
 ### 3. Install the module
 
-- Open the **Advanced Odoo Search | Global & User Based Control** module card.
+- Open the **Global Search Pro for Odoo - Multi-Model Search &amp; User Access Control** module card.
 - Click **Install**.
 
 No extra configuration is required. The search icon appears in the top bar (systray) for all backend users.
