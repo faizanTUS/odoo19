@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_list_kanban_auto_refresh" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.list.kanban.auto.refresh</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='languages']" position="after">
+                <div id="list_kanban_auto_refresh_settings">
+                    <h2>Auto Refresh — List &amp; Kanban</h2>
+                    <div class="row mt16 o_settings_container" name="list_kanban_auto_refresh_setting_container">
+                        <div class="col-12 col-lg-6 o_setting_box" id="list_kanban_auto_refresh_enabled_setting">
+                            <div class="o_setting_left_pane">
+                                <field name="list_kanban_auto_refresh_enabled"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Allow auto refresh data" for="list_kanban_auto_refresh_enabled"/>
+                                <div class="text-muted">
+                                    Enable soft data reload on list (tree) and kanban views. When off, automatic refresh stays disabled until turned on here or per view (if globally allowed).
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="list_kanban_auto_refresh_interval_setting">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <label string="Refresh interval (ms)" for="list_kanban_auto_refresh_interval_ms"/>
+                                <div class="text-muted">
+                                    Default delay between each soft reload, in milliseconds. Minimum 1000. Users may pause or resume from the view toolbar for the current session only.
+                                </div>
+                                <field name="list_kanban_auto_refresh_interval_ms" class="w-auto mt16"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

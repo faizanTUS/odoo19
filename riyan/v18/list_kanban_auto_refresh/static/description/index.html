@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>List &amp; Kanban Auto Refresh — Odoo 18 | Soft live data reload</title>
+    <meta name="description" content="Odoo 18 module: auto-refresh list and kanban views without full page reload. Configurable interval (min 1000 ms), General Settings, per-view toggle, visibility-aware timers."/>
+    <style>
+        body { font-family: system-ui, sans-serif; line-height: 1.5; color: #1f2937; max-width: 820px; margin: 0 auto; padding: 24px; }
+        h1 { font-size: 1.5rem; margin-top: 0; }
+        h2 { font-size: 1.15rem; margin-top: 1.5rem; }
+        ul { padding-left: 1.25rem; }
+        .tag { display: inline-block; background: #eef2ff; color: #3730a3; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem; margin: 2px 4px 2px 0; }
+        .note { background: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin: 16px 0; }
+    </style>
+</head>
+<body>
+    <h1>List &amp; Kanban Auto Refresh — Soft live data reload</h1>
+    <p>
+        <span class="tag">Odoo 18</span>
+        <span class="tag">List / Tree</span>
+        <span class="tag">Kanban</span>
+        <span class="tag">General Settings</span>
+    </p>
+    <p>
+        Keep <strong>list (tree)</strong> and <strong>kanban</strong> views up to date with periodic <strong>soft reloads</strong>
+        (data refresh only — no hard browser refresh). Ideal for queues, pipelines, and boards where records change often.
+    </p>
+
+    <h2>What you get</h2>
+    <ul>
+        <li><strong>Global control</strong> — Enable or disable auto refresh and set the default interval under <em>Settings → General Settings → Auto Refresh — List &amp; Kanban</em>.</li>
+        <li><strong>Minimum interval 1000 ms</strong> — Protects server performance; default interval 10&nbsp;000 ms.</li>
+        <li><strong>Per-view toolbar</strong> — Pause or resume for the current list/kanban screen; opening another menu or a new view instance restores the global default behaviour.</li>
+        <li><strong>Smarter refresh</strong> — Pauses while the tab is hidden; skips reload during list inline edit; avoids overlapping loads.</li>
+    </ul>
+
+    <h2>Configuration (short)</h2>
+    <ol>
+        <li>Install <strong>list_kanban_auto_refresh</strong> from Apps.</li>
+        <li>Open <strong>Settings → General Settings</strong>, configure <strong>Allow auto refresh data</strong> and <strong>Refresh interval (ms)</strong>, then <strong>Save</strong>.</li>
+        <li>Refresh the browser if you change settings so the session picks up new values.</li>
+        <li>Use the <strong>Auto Refresh</strong> button on list and kanban control panels.</li>
+    </ol>
+
+    <div class="note">
+        See <strong>CONFIGURATION.md</strong> in the module folder for a full step-by-step guide and behaviour table.
+    </div>
+
+    <h2>Search keywords</h2>
+    <p style="font-size:0.9rem;color:#4b5563;">
+        Odoo 18 list refresh, kanban refresh, auto reload tree view, soft refresh Odoo, live data list view,
+        interval refresh, CRM kanban live, helpdesk queue refresh, productivity module, General Settings auto refresh.
+    </p>
+</body>
+</html>
