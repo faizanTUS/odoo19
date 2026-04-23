@@ -1,0 +1,17 @@
+.o_attachment_many2many .o_attachment_wrap {
+    .o_map2_attachment_preview_btn {
+        min-width: 1.5rem;
+        margin-inline-start: 0.25rem;
+        align-self: center;
+
+        &:hover .fa {
+            opacity: 0.85;
+        }
+    }
+}
+
+.o-map2-office-outer {
+    .o-map2-office-shell {
+        transition: transform 0.08s ease-out;
+    }
+}

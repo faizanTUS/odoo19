@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Many2Many Attachment Preview — PDF, Image, Video &amp; Office | Odoo 18</title>
+    <meta name="description" content="Odoo 18 module: preview ir.attachment on many2many binary fields and chatter without downloading. PDF, JPEG, PNG, GIF, MP4 video, Word, Excel, PowerPoint. Saves time and storage."/>
+    <meta name="keywords" content="Odoo 18, attachment preview, many2many binary, PDF viewer, image preview, video preview, document preview, Word Excel PowerPoint, chatter, ir.attachment, productivity"/>
+    <style>
+        body { font-family: system-ui, sans-serif; line-height: 1.5; color: #1a1a1a; max-width: 820px; margin: 0 auto; padding: 1.5rem; }
+        h1 { font-size: 1.35rem; margin-top: 0; }
+        h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+        ul { padding-left: 1.2rem; }
+        .lead { font-size: 1.05rem; color: #333; }
+        .muted { color: #555; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <h1>Many2Many Attachment Preview — PDF, Image, Video &amp; Office</h1>
+    <p class="lead">
+        Preview documents <strong>before downloading</strong> them. Works on
+        <strong>many2many_binary</strong> fields and <strong>chatter</strong> files
+        in Odoo 18 — PDF, images, video, and optional Microsoft Office / Google Docs
+        embedding.
+    </p>
+
+    <h2>Why install</h2>
+    <ul>
+        <li>Reduces unnecessary downloads and saves user storage.</li>
+        <li>One consistent full-screen viewer for form attachments and mail attachments.</li>
+        <li>Advanced: Office Online or Google Docs viewer, zoom toolbar, extra video formats.</li>
+    </ul>
+
+    <h2>Quick setup</h2>
+    <ol>
+        <li>Put the addon under <code>odoo18/project/many2many_attachment_preview/</code> and add <code>.../odoo18/project</code> to <code>addons_path</code>.</li>
+        <li>Restart Odoo, update Apps list, install <strong>Many2Many Attachment Preview</strong>.</li>
+        <li>Use <code>widget="many2many_binary"</code> on <code>Many2many('ir.attachment')</code> fields.</li>
+        <li>For Office preview in production, set <strong>web.base.url</strong> to your public HTTPS URL.</li>
+    </ol>
+
+    <h2>Documentation in module</h2>
+    <ul>
+        <li><code>STEP_BY_STEP_CONFIGURATION.md</code> — numbered setup guide (start here).</li>
+        <li><code>doc/CONFIGURATION.rst</code> — same topics in reStructuredText.</li>
+        <li><code>static/description/DESCRIPTION.rst</code> — long description &amp; SEO text.</li>
+        <li><code>static/description/FEATURES.rst</code> — feature list for App Store listings.</li>
+    </ul>
+
+    <p class="muted">
+        Technical name: <code>many2many_attachment_preview</code> · License: LGPL-3 · Odoo 18.0
+    </p>
+</body>
+</html>
