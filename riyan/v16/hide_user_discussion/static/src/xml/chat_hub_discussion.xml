@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- Odoo 16: chat popup container is ChatWindowManagerContainer (no ChatWindowContainer template). -->
+    <t t-inherit="mail.ChatWindowManagerContainer" t-inherit-mode="extension" owl="1">
+        <xpath expr="//ChatWindowManager" position="attributes">
+            <attribute name="t-if">messaging and messaging.chatWindowManager and isDiscussionEnabled</attribute>
+        </xpath>
+    </t>
+</templates>
