@@ -5,8 +5,9 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//app[@name='general_settings']" position="inside">
-                <block
+            <xpath expr="//div[@id='languages']" position="after">
+                <div id="bulk_attachment">
+                    <block
                     title="Bulk attachment ZIP"
                     name="bulk_attachments_zip_setting"
                 >
@@ -29,6 +30,7 @@
                         <field name="bulk_attach_max_total_mb"/>
                     </setting>
                 </block>
+                </div>
             </xpath>
         </field>
     </record>

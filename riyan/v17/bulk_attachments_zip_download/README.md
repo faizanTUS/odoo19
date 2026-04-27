@@ -1,7 +1,7 @@
-# Bulk Attachments ZIP Download (Odoo 18)
+# Mass Attachment Download (Chatter + Binary Fields) | ZIP Export Tool (Odoo 18)
 
 SEO-oriented technical name: **`bulk_attachments_zip_download`**.  
-Display name: **Bulk Attachments ZIP Download — Mass Documents CRM Sales HR**.
+Display name: **Mass Attachment Download (Chatter + Binary Fields) | ZIP Export Tool — Mass Documents CRM Sales HR**.
 
 ## What it does
 
@@ -15,7 +15,7 @@ From any **list view**, select one or more records, open **Actions**, choose **D
 2. Restart the Odoo server.
 3. Enable **Developer mode** (optional but useful).
 4. **Apps** → **Update Apps List**.
-5. Remove the **Apps** filter, search **Bulk Attachments ZIP** (or the technical name).
+5. Remove the **Apps** filter, search **Mass Attachment Download (Chatter + Binary Fields) | ZIP Export Tool** (or the technical name).
 6. Click **Install**.
 
 ### 2. Use it (end users)

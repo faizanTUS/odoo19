@@ -1,3 +1,4 @@
+# Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 # -*- coding: utf-8 -*-
 import io
 import zipfile
@@ -21,7 +22,7 @@ class BulkAttachmentsZipLine(models.TransientModel):
     wizard_id = fields.Many2one(
         "bulk.attachments.zip.wizard", required=True, ondelete="cascade"
     )
-    attachment_id = fields.Many2one("ir.attachment", required=True, ondelete="restrict")
+    attachment_id = fields.Many2one("ir.attachment", required=True, ondelete="cascade")
     name = fields.Char(related="attachment_id.name", readonly=True)
     mimetype = fields.Char(related="attachment_id.mimetype", readonly=True)
     file_size = fields.Integer(related="attachment_id.file_size", readonly=True)

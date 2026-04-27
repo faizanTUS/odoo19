@@ -4,7 +4,7 @@ import { _t } from "@web/core/l10n/translation";
 import { patch } from "@web/core/utils/patch";
 import { ListController } from "@web/views/list/list_controller";
 
-patch(ListController.prototype, {
+patch(ListController.prototype, "bulk_attachments_zip_download.ListController" ,{
     getActionMenuItems() {
         const menus = super.getActionMenuItems();
         const other = [...(menus.other || [])];

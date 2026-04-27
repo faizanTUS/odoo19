@@ -1,7 +1,7 @@
-# Bulk Attachments ZIP Download (Odoo 18)
+# Bulk Attachment ZIP Downloader | Mass Download Files & Documents(Odoo 18)
 
 SEO-oriented technical name: **`bulk_attachments_zip_download`**.  
-Display name: **Bulk Attachments ZIP Download — Mass Documents CRM Sales HR**.
+Display name: **Bulk Attachment ZIP Downloader | Mass Download Files & Documents— Mass Documents CRM Sales HR**.
 
 ## What it does
 

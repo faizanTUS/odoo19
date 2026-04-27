@@ -22,7 +22,7 @@
                             <!-- not editable: avoids OWL/x2many issues updating lines when toggling chatter -->
                             <tree create="0" delete="1">
                                 <!-- Required for save: client must keep attachment_id when toggling chatter / Refresh -->
-                                <field name="attachment_id" invisible="1"/>
+                                <field name="attachment_id" invisible="1" optional="hide"/>
                                 <field name="name" string="Filename"/>
                                 <field name="mimetype" string="Type"/>
                                 <field name="file_size" string="Size"/>

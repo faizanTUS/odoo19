@@ -1,5 +1,5 @@
 ================================================================================
-Bulk Attachments ZIP Download — feature list (Odoo App Store / SEO)
+Bulk Attachment ZIP Downloader | Mass Download Files & Documents — feature list (Odoo App Store / SEO)
 ================================================================================
 
 Short pitch

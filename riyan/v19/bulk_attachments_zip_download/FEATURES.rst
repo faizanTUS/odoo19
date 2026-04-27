@@ -1,5 +1,5 @@
 ================================================================================
-Bulk Attachments ZIP Download — feature list (Odoo App Store / SEO)
+Mass Attachment Download (Chatter + Binary Fields) | ZIP Export Tool — feature list (Odoo App Store / SEO)
 ================================================================================
 
 Short pitch
@@ -20,7 +20,7 @@ Core features
 
 Advanced / administrator
 ------------------------
-* **General settings block** “Bulk attachment ZIP”: default chatter inclusion, max files, max total MB.
+* **General settings block** “Mass Attachment Download (Chatter + Binary Fields) | ZIP Export Tool”: default chatter inclusion, max files, max total MB.
 * **Per-action opt-out:** set context key ``disable_bulk_attachment_zip`` on a window action to hide the menu entry on specific list views.
 * **Domain selection:** supports “Select all” / domain-based selection within Odoo’s active-id limit.
 
