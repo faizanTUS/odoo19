@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="project.view_task_form2"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet/group/group[1]//field[@name='project_id'][@widget='project']" position="after">
-                <field name="lead_id" options="{'no_create': True}" readonly="1"/>
+                <field name="lead_id" options="{'no_create': True}" readonly="1" no_label="1"/>
             </xpath>
         </field>
     </record>

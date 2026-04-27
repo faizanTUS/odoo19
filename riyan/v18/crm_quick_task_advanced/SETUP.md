@@ -1,4 +1,4 @@
-# Quick Task from Leads/Opportunity (Advanced) – Step-by-Step Setup
+# Smart CRM Task Generator | Create Project Tasks from Leads – Step-by-Step Setup
 
 This guide explains how to install and configure the **crm_quick_task_advanced** module in Odoo 18 so you can create project tasks directly from Leads or Opportunities with pre-filled data (Subject, Project, Tags, Assignee, Customer).
 
@@ -28,7 +28,7 @@ This guide explains how to install and configure the **crm_quick_task_advanced**
 2. Go to **Apps**.
 3. Click **Update Apps List** (enable **Developer Mode** first if the button is hidden: Settings → Activate Developer Mode).
 4. In the search box, type **Quick Task** or **crm_quick_task**.
-5. Find **Quick Task from Leads/Opportunity (Advanced)** and click **Install**.
+5. Find **Smart CRM Task Generator | Create Project Tasks from Leads** and click **Install**.
 
 ---
 
