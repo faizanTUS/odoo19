@@ -1,9 +1,106 @@
+# Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 # -*- coding: utf-8 -*-
 {
-    "name": "List & Kanban Auto Refresh — Soft Live Data Reload",
-    "summary": "Auto-refresh list and kanban views without full page reload: configurable interval, global defaults in General Settings, per-view toggle, visibility-aware timers.",
+    "name": "Auto Refresh List & Kanban Views | Real-Time Data Reload",
+    "version": "18.0.0.0",
+    "category": "Productivity/Interface",
+    'author': 'TechUltra Solutions Private Limited',
+    'company': 'TechUltra Solutions Private Limited',
+    'website': "https://www.techultrasolutions.com/",
+    "summary": """Auto-refresh list and kanban views without full page reload: configurable interval, global defaults in General Settings, per-view toggle, visibility-aware timers.
+        
+    tus
+    TUS
+    TechUltra Solutions Private Limited
+    techUltra solutions private limited 
+    list
+    kanban
+    refresh
+    refresh list
+    refresh kanban
+    reload
+    view
+    data
+    record
+    without refresh
+    sync
+    reflect
+    auto refresh list view
+    auto refresh kanban view
+    real time data refresh
+    live data reload
+    dynamic view refresh
+    auto reload backend data
+    real time record update
+    live sync data
+    auto refresh records
+    background data refresh
+    instant data update
+    live backend refresh
+    refresh without reload
+    auto refresh interface
+    real time list update
+    real time kanban update
+    auto refresh system
+    dynamic data update
+    auto refresh module
+    live data monitoring
+    automatic record refresh
+    auto refresh dashboard
+    real time system updates
+    auto refresh UI
+    background refresh odoo
+    list view auto reload
+    kanban auto reload
+    real time business data
+    auto update records
+    live record sync
+    data refresh automation
+    smart auto refresh
+    auto refresh configuration
+    real time refresh tool
+    dynamic backend refresh
+    auto refresh solution
+    live update system
+    instant refresh module
+    auto refresh feature
+    real time UI update
+    auto refresh functionality
+    live system data
+    auto refresh backend
+    real time data sync
+    auto refresh list data
+    kanban refresh automation
+    auto refresh records module
+    dynamic record refresh
+    real time tracking data
+    auto refresh performance
+    live business updates
+    auto refresh integration
+    automatic data reload
+    real time data visibility
+    auto refresh optimization
+    auto refresh control
+    auto refresh toggle
+    auto refresh settings
+    live update feature
+    auto refresh enhancement
+    real time monitoring tool
+    auto refresh enterprise
+    auto refresh productivity
+    auto refresh workflow
+    real time collaboration data
+    auto refresh usability
+    auto refresh experience
+    auto refresh solution module
+    auto refresh improvement
+    auto refresh performance tool
+    auto refresh system module
+    real time backend solution
+    
+    """,
     "description": """
-List & Kanban Auto Refresh for Odoo 18
+Auto Refresh List & Kanban Views | Real-Time Data Reload for Odoo 18
 ======================================
 
 Keep **tree (list)** and **kanban** views up to date with **soft reloads** (data refresh only — no browser hard refresh).
@@ -21,12 +118,97 @@ Live dashboards, support queues, manufacturing boards, CRM pipelines, helpdesk t
 **Keywords (SEO)**
 ------------------
 Odoo 18, list view refresh, kanban refresh, auto reload, soft refresh, live data, interval refresh, tree view, real-time board, productivity, General Settings.
+
+
+    tus
+    TUS
+    TechUltra Solutions Private Limited
+    techUltra solutions private limited
+    list
+    kanban
+    refresh
+    refresh list
+    refresh kanban
+    reload
+    view
+    data
+    record
+    without refresh
+    sync
+    reflect
+    auto refresh list view
+    auto refresh kanban view
+    real time data refresh
+    live data reload
+    dynamic view refresh
+    auto reload backend data
+    real time record update
+    live sync data
+    auto refresh records
+    background data refresh
+    instant data update
+    live backend refresh
+    refresh without reload
+    auto refresh interface
+    real time list update
+    real time kanban update
+    auto refresh system
+    dynamic data update
+    auto refresh module
+    live data monitoring
+    automatic record refresh
+    auto refresh dashboard
+    real time system updates
+    auto refresh UI
+    background refresh odoo
+    list view auto reload
+    kanban auto reload
+    real time business data
+    auto update records
+    live record sync
+    data refresh automation
+    smart auto refresh
+    auto refresh configuration
+    real time refresh tool
+    dynamic backend refresh
+    auto refresh solution
+    live update system
+    instant refresh module
+    auto refresh feature
+    real time UI update
+    auto refresh functionality
+    live system data
+    auto refresh backend
+    real time data sync
+    auto refresh list data
+    kanban refresh automation
+    auto refresh records module
+    dynamic record refresh
+    real time tracking data
+    auto refresh performance
+    live business updates
+    auto refresh integration
+    automatic data reload
+    real time data visibility
+    auto refresh optimization
+    auto refresh control
+    auto refresh toggle
+    auto refresh settings
+    live update feature
+    auto refresh enhancement
+    real time monitoring tool
+    auto refresh enterprise
+    auto refresh productivity
+    auto refresh workflow
+    real time collaboration data
+    auto refresh usability
+    auto refresh experience
+    auto refresh solution module
+    auto refresh improvement
+    auto refresh performance tool
+    auto refresh system module
+    real time backend solution
     """,
-    "version": "18.0.1.0.0",
-    "category": "Productivity/Interface",
-    "author": "Custom",
-    "website": "https://www.odoo.com",
-    "license": "LGPL-3",
     "depends": ["web", "base_setup"],
     "data": [
         "views/res_config_settings_views.xml",
@@ -37,7 +219,13 @@ Odoo 18, list view refresh, kanban refresh, auto reload, soft refresh, live data
             "list_kanban_auto_refresh/static/src/js/list_kanban_auto_refresh.js",
         ],
     },
-    "installable": True,
-    "application": False,
-    "auto_install": False,
+    'images': [
+        'static/description/main_screen.gif'
+    ],
+    'price': 15.00,
+    'currency': 'USD',
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'OPL-1',
 }

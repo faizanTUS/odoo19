@@ -1,3 +1,4 @@
+# Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 # -*- coding: utf-8 -*-
 """Automated tests for ``list_kanban_auto_refresh`` on **Odoo 17**.
 

@@ -1,4 +1,4 @@
-# Features — List & Kanban Auto Refresh (Odoo 17)
+# Features — Auto Refresh List & Kanban Views | Real-Time Data Reload (Odoo 17)
 
 SEO-oriented feature list for documentation and marketplace copy.
 

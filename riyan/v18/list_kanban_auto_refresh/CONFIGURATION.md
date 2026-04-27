@@ -1,11 +1,11 @@
-# List & Kanban Auto Refresh — step-by-step configuration
+# Auto Refresh List & Kanban Views | Real-Time Data Reload — step-by-step configuration
 
 Use this guide after installing **`list_kanban_auto_refresh`** on **Odoo 18**.
 
 ## 1. Install the module
 
 1. Optional: enable **Developer Mode** (Settings → scroll down → Developer Tools).
-2. Open **Apps**, clear the *Apps* filter, search for **List & Kanban Auto Refresh** or the technical name **`list_kanban_auto_refresh`**.
+2. Open **Apps**, clear the *Apps* filter, search for **Auto Refresh List & Kanban Views | Real-Time Data Reload** or the technical name **`list_kanban_auto_refresh`**.
 3. Click **Activate** / **Install**.
 
 ## 2. Global defaults — Settings → General Settings

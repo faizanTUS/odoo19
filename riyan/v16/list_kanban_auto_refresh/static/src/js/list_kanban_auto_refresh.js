@@ -87,9 +87,9 @@ async function autoRefreshTick(controller) {
     }
 }
 
-patch(ListController.prototype, {
+patch(ListController.prototype, "list_kanban_auto_refresh.ListController" ,{
     setup() {
-        super.setup(...arguments);
+        this._super(...arguments);
         setupAutoRefresh(this);
     },
 
@@ -97,15 +97,15 @@ patch(ListController.prototype, {
         toggleAutoRefresh(this);
     },
 
-    get listKanbanAutoRefreshClass() {
+    getListKanbanAutoRefreshClass() {
         return getAutoRefreshClass(this);
     },
 
-    get listKanbanAutoRefreshTitle() {
+    getListKanbanAutoRefreshTitle() {
         return getAutoRefreshTitle(this);
     },
 
-    get listKanbanAutoRefreshDisabled() {
+    getListKanbanAutoRefreshDisabled() {
         return !getAutoRefreshSession().global_enabled;
     },
 
@@ -114,9 +114,9 @@ patch(ListController.prototype, {
     },
 });
 
-patch(KanbanController.prototype, {
+patch(KanbanController.prototype, "list_kanban_auto_refresh.KanbanController", {
     setup() {
-        super.setup(...arguments);
+        this._super(...arguments);
         setupAutoRefresh(this);
     },
 
@@ -124,15 +124,15 @@ patch(KanbanController.prototype, {
         toggleAutoRefresh(this);
     },
 
-    get listKanbanAutoRefreshClass() {
+    getListKanbanAutoRefreshClass() {
         return getAutoRefreshClass(this);
     },
 
-    get listKanbanAutoRefreshTitle() {
+    getListKanbanAutoRefreshTitle() {
         return getAutoRefreshTitle(this);
     },
 
-    get listKanbanAutoRefreshDisabled() {
+    getListKanbanAutoRefreshDisabled() {
         return !getAutoRefreshSession().global_enabled;
     },
 
