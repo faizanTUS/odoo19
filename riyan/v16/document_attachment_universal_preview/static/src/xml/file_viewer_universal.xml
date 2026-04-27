@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.AttachmentViewer" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-if='attachmentViewer.attachmentViewerViewable.isVideo']" position="after">
+            <t t-if="attachmentViewer.attachmentViewerViewable.isMsOffice">
+                <i class="fa fa-file-o" role="img" title="Office document"/>
+            </t>
+        </xpath>
+        <xpath expr="//t[@t-if='attachmentViewer.attachmentViewerViewable.isPdf']" position="after">
+            <t t-if="attachmentViewer.attachmentViewerViewable.isMsOffice">
+                <iframe
+                    class="o_AttachmentViewer_view o_AttachmentViewer_viewIframe o_uap_office_iframe w-75 h-100 border-0"
+                    t-att-class="{ 'w-100': messaging.device.isSmall }"
+                    t-att-src="attachmentViewer.attachmentViewerViewable.defaultSource"
+                    title="Office preview"
+                />
+            </t>
+        </xpath>
+    </t>
+
+</templates>

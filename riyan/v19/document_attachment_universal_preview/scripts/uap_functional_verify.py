@@ -1,3 +1,4 @@
+# Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 # -*- coding: utf-8 -*-
 """Run with: odoo-bin shell -d DB --addons-path=... --shell-file=path/to/uap_functional_verify.py
 Verifies config parameters, session_info keys, and sample Office/PDF attachments.
@@ -44,6 +45,13 @@ print("[OK] derived uap_office_preview=%s uap_google_office_fallback=%s (same ru
 partner = env.ref("base.main_partner", raise_if_not_found=False) or env["res.partner"].search([], limit=1)
 tiny = base64.b64encode(b"PK\x03\x04 minimal office-like blob for test")
 
+# 🔥 FIX OLD ATTACHMENTS WITHOUT TOKEN
+print("\n[INFO] Fixing existing attachments without access_token...")
+old_atts = env["ir.attachment"].search([("access_token", "=", False)])
+for att in old_atts:
+    att.generate_access_token()
+    print("✅ FIXED TOKEN:", att.id, att.access_token)
+
 # 4) Sample attachments (Office + PDF + image) for preview rules
 Att = env["ir.attachment"].sudo()
 names_types = [
@@ -62,8 +70,12 @@ for name, mime in names_types:
         "res_model": partner._name,
         "res_id": partner.id,
     })
+    rec.generate_access_token()
     created.append(rec.id)
-    print("[OK] attachment id=%s name=%s mimetype=%s" % (rec.id, name, mime))
+    # print("[OK] attachment id=%s name=%s mimetype=%s" % (rec.id, name, mime))
+    print("[OK] attachment id=%s name=%s mimetype=%s token=%s" % (
+        rec.id, name, mime, rec.access_token
+    ))
 
 print("[DONE] UAP functional verify: %s attachment(s), partner=%s" % (len(created), partner.id))
 env.cr.commit()

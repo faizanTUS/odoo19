@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Usage: run_functional_test.sh /path/to/odoo-bin /path/to/addons1:/path/to/addons2:... [database_name]
+#Usage: run_functional_test.sh /home/tus-222/workspace/odoo18/odoo18/odoo-bin /home/tus-222/workspace/odoo18/odoo18/addons /home/tus-222/workspace/odoo18/enterprise ... [20_april_v18]
 set -euo pipefail
-ODOO_BIN="${1:?odoo-bin path}"
-ADDONS_PATH="${2:?addons path}"
-DBNAME="${3:-test_uap_functional}"
+ODOO_BIN="${1:-/home/tus-225/Workspace/odoo18/odoo/odoo-bin}"
+ADDONS_PATH="${2:-/home/tus-225/Workspace/odoo18/odoo/addons,/home/tus-225/Workspace/odoo18/project}"
+DBNAME="${3:-document_attachment_universal_preview_18es}"
 echo "Creating database ${DBNAME} and installing mail + document_attachment_universal_preview..."
 dropdb "${DBNAME}" 2>/dev/null || true
 createdb "${DBNAME}"

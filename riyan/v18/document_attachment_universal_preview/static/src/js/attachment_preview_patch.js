@@ -2,7 +2,6 @@
 
 import { Attachment } from "@mail/core/common/attachment_model";
 import { patch } from "@web/core/utils/patch";
-import { url } from "@web/core/utils/urls";
 import { browser } from "@web/core/browser/browser";
 import { session } from "@web/session";
 
@@ -53,6 +52,19 @@ const EXTRA_VIDEO_TYPES = [
     "audio/webm",
 ];
 
+const CSV_MIMETYPES = new Set(["text/csv", "application/csv"]);
+const RTF_MIMETYPES = new Set(["application/rtf", "text/rtf"]);
+const LOCAL_TEXT_PREVIEW_EXTENSIONS = new Set(["csv", "rtf"]);
+
+function extractExt(file) {
+    const raw = file.extension || file.filename || file.name || "";
+    const clean = String(raw).trim().toLowerCase();
+    if (clean.includes(".")) {
+        return clean.split(".").pop().trim();
+    }
+    return clean;
+}
+
 function uapOfficePreviewEnabled() {
     return session.uap_office_preview !== false;
 }
@@ -61,16 +73,29 @@ function uapUseGoogleViewer() {
     return Boolean(session.uap_google_office_fallback);
 }
 
+function toAbsolutePreviewUrl(route) {
+    if (!route) {
+        return route;
+    }
+    if (/^https?:\/\//i.test(route)) {
+        return route;
+    }
+    const publicBaseUrl = (browser.location.origin || session.uap_base_url || "").replace(/\/$/, "");
+    if (!publicBaseUrl) {
+        return route;
+    }
+    return new URL(route, `${publicBaseUrl}/`).toString();
+}
+
 patch(Attachment.prototype, {
     get isMsOffice() {
+        const ext = extractExt(this);
+        if (LOCAL_TEXT_PREVIEW_EXTENSIONS.has(ext)) {
+            return false;
+        }
         if (this.mimetype && OFFICE_MIMETYPES.has(this.mimetype)) {
             return true;
         }
-        const ext = (
-            this.extension ||
-            (this.filename && this.filename.includes(".") && this.filename.split(".").pop()) ||
-            ""
-        ).toLowerCase();
         return OFFICE_EXTENSIONS.has(ext);
     },
 
@@ -81,7 +106,22 @@ patch(Attachment.prototype, {
         return EXTRA_VIDEO_TYPES.includes(this.mimetype);
     },
 
+    get isText() {
+        const ext = extractExt(this);
+        if (LOCAL_TEXT_PREVIEW_EXTENSIONS.has(ext)) {
+            return true;
+        }
+        if (super.isText) {
+            return true;
+        }
+        return LOCAL_TEXT_PREVIEW_EXTENSIONS.has(ext) || CSV_MIMETYPES.has(this.mimetype) || RTF_MIMETYPES.has(this.mimetype);
+    },
+
     get isViewable() {
+        const ext = extractExt(this);
+        if (!this.uploading && LOCAL_TEXT_PREVIEW_EXTENSIONS.has(ext)) {
+            return true;
+        }
         if (this.voice) {
             return false;
         }
@@ -95,9 +135,21 @@ patch(Attachment.prototype, {
     },
 
     get defaultSource() {
+        const ext = extractExt(this);
+
+        // Keep CSV / RTF on module preview route and force inline text rendering.
+        if (LOCAL_TEXT_PREVIEW_EXTENSIONS.has(ext)) {
+            return `/uap/preview/${this.id}/${this.checksum || "none"}?filename=${encodeURIComponent(
+                this.name || this.filename || "document"
+            )}&inline=1&as_text=1`;
+        }
+
         if (this.isMsOffice && uapOfficePreviewEnabled()) {
-            const route = url(this.urlRoute, this.urlQueryParams);
-            const absoluteUrl = `${browser.location.origin}${route}`;
+            const route = `/uap/preview/${this.id}/${this.checksum || "none"}?filename=${encodeURIComponent(
+                this.name || this.filename || "document"
+            )}`;
+            const absoluteUrl = toAbsolutePreviewUrl(route);
+
             if (uapUseGoogleViewer()) {
                 return `https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(absoluteUrl)}`;
             }

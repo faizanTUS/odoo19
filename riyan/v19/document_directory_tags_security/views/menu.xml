@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_document_hub_root"
+              name="Document"
+              groups="document_directory_tags_security.group_document_hub_manager,document_directory_tags_security.group_document_hub_user,document_directory_tags_security.group_document_hub_employee"
+              sequence="46"/>
+
+    <menuitem id="menu_document_hub_directories"
+              name="Directories"
+              parent="menu_document_hub_root"
+              action="action_document_directory"
+              groups="document_directory_tags_security.group_document_hub_manager,document_directory_tags_security.group_document_hub_user"
+              sequence="10"/>
+
+    <menuitem id="menu_document_hub_directory_structure"
+              name="Directory Structure"
+              parent="menu_document_hub_root"
+              action="action_document_directory_structure"
+              groups="document_directory_tags_security.group_document_hub_manager,document_directory_tags_security.group_document_hub_user"
+              sequence="15"/>
+
+    <menuitem id="menu_document_hub_all_documents"
+              name="All Documents"
+              parent="menu_document_hub_root"
+              action="action_document_hub_all_attachments"
+              groups="document_directory_tags_security.group_document_hub_manager,document_directory_tags_security.group_document_hub_user"
+              sequence="20"/>
+
+    <menuitem id="menu_document_hub_configuration"
+              name="Configuration"
+              parent="menu_document_hub_root"
+              groups="document_directory_tags_security.group_document_hub_manager"
+              sequence="90"/>
+
+    <menuitem id="menu_document_hub_directory_tags"
+              name="Directory Tags"
+              parent="menu_document_hub_configuration"
+              action="action_document_directory_tag"
+              sequence="10"/>
+
+    <menuitem id="menu_document_hub_document_tags"
+              name="Document Tags"
+              parent="menu_document_hub_configuration"
+              action="action_document_tag"
+              sequence="20"/>
+
+    <menuitem id="menu_document_hub_my_documents"
+              name="My Documents"
+              parent="menu_document_hub_root"
+              action="action_document_hub_my_attachments"
+              groups="document_directory_tags_security.group_document_hub_manager,document_directory_tags_security.group_document_hub_user,document_directory_tags_security.group_document_hub_employee"
+              sequence="30"/>
+</odoo>

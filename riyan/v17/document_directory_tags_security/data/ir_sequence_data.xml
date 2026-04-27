@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="sequence_document_hub_default" model="ir.sequence">
+        <field name="name">Document Hub — Default DOC/</field>
+        <field name="code">document.hub.default</field>
+        <field name="prefix">DOC/</field>
+        <field name="padding">5</field>
+        <field name="implementation">standard</field>
+    </record>
+</odoo>
