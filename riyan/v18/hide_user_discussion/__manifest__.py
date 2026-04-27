@@ -1,9 +1,106 @@
+# Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 # -*- coding: utf-8 -*-
 {
-    "name": "Discuss & Chat Access Control — Per-User Privacy (Odoo 18)",
-    "summary": "Hide Discuss app, messaging systray, and chat pop-ups unless a user is explicitly allowed — cleaner UI and tighter communication privacy.",
+    "name": "User wise Discuss Access Control | Hide Chat, Messaging & Discuss App",
+    "version": "18.0.0.0",
+    "category": "Productivity/Discuss",
+    'author': 'TechUltra Solutions Private Limited',
+    'company': 'TechUltra Solutions Private Limited',
+    'website': "https://www.techultrasolutions.com/",
+    "summary": """Hide Discuss app, messaging systray, and chat pop-ups unless a user is explicitly allowed — cleaner UI and tighter communication privacy.
+    
+    
+    tus
+    TUS
+    TechUltra Solutions Private Limited
+    techUltra solutions private limited
+    discuss
+    chat
+    message
+    communication
+    user
+    live chat
+    user access control
+    discuss access restriction
+    chat access control
+    messaging restriction
+    hide discuss app
+    disable chat odoo
+    restrict messaging users
+    user wise permission control
+    hide chat icon
+    disable discuss module
+    control internal communication
+    employee chat restriction
+    limit user communication
+    odoo discuss control
+    messaging access manager
+    user role restriction
+    restrict discuss per user
+    disable notifications odoo
+    hide messaging menu
+    block chat popups
+    productivity tools odoo
+    reduce distractions odoo
+    employee focus tool
+    secure internal communication
+    privacy control messaging
+    user group restriction
+    backend access control
+    frontend ui restriction
+    odoo security module
+    restrict user features
+    manage user permissions
+    internal chat control
+    hide discuss icon
+    disable discuss for users
+    communication control system
+    odoo usability improvement
+    user interface cleaner
+    role based visibility
+    system access management
+    odoo customization tool
+    control user interface elements
+    enterprise communication control
+    restrict discuss functionality
+    manage user roles effectively
+    odoo productivity module
+    clean dashboard experience
+    user based feature toggle
+    restrict app visibility
+    employee restriction module
+    control chat notification
+    hide discuss menu
+    disable discuss notifications
+    restrict employee chat usage
+    odoo backend restriction
+    per user settings control
+    advanced user management
+    improve workflow efficiency
+    business process control
+    odoo performance usability
+    reduce system noise
+    simplify user interface
+    enterprise user control
+    communication governance
+    access rights management
+    user restriction tool
+    smart permission control
+    odoo system optimization
+    modular access control
+    role based communication
+    control discuss access
+    hide odoo chat
+    block internal messaging
+    restrict discuss access
+    enable disable chat per user
+    user level configuration
+    odoo ui customization
+    clean user experience
+    
+    """,
     "description": """
-Discuss & Chat Access Control for Odoo 18
+User wise Discuss Access Control | Hide Chat, Messaging & Discuss App for Odoo 18
 =========================================
 
 **What it does**
@@ -25,11 +122,95 @@ By default, **internal users do not** see Odoo **Discuss**, the **messaging / ch
 **SEO / keywords**
 ------------------
 Odoo 18, disable discuss, hide discuss, turn off chat, messaging menu, systray, live chat, per user, security group, privacy, UI cleanup, internal users.
+
+    tus
+    TUS
+    TechUltra Solutions Private Limited
+    techUltra solutions private limited
+    discuss
+    chat
+    message
+    communication
+    user
+    live chat
+    user access control
+    discuss access restriction
+    chat access control
+    messaging restriction
+    hide discuss app
+    disable chat odoo
+    restrict messaging users
+    user wise permission control
+    hide chat icon
+    disable discuss module
+    control internal communication
+    employee chat restriction
+    limit user communication
+    odoo discuss control
+    messaging access manager
+    user role restriction
+    restrict discuss per user
+    disable notifications odoo
+    hide messaging menu
+    block chat popups
+    productivity tools odoo
+    reduce distractions odoo
+    employee focus tool
+    secure internal communication
+    privacy control messaging
+    user group restriction
+    backend access control
+    frontend ui restriction
+    odoo security module
+    restrict user features
+    manage user permissions
+    internal chat control
+    hide discuss icon
+    disable discuss for users
+    communication control system
+    odoo usability improvement
+    user interface cleaner
+    role based visibility
+    system access management
+    odoo customization tool
+    control user interface elements
+    enterprise communication control
+    restrict discuss functionality
+    manage user roles effectively
+    odoo productivity module
+    clean dashboard experience
+    user based feature toggle
+    restrict app visibility
+    employee restriction module
+    control chat notification
+    hide discuss menu
+    disable discuss notifications
+    restrict employee chat usage
+    odoo backend restriction
+    per user settings control
+    advanced user management
+    improve workflow efficiency
+    business process control
+    odoo performance usability
+    reduce system noise
+    simplify user interface
+    enterprise user control
+    communication governance
+    access rights management
+    user restriction tool
+    smart permission control
+    odoo system optimization
+    modular access control
+    role based communication
+    control discuss access
+    hide odoo chat
+    block internal messaging
+    restrict discuss access
+    enable disable chat per user
+    user level configuration
+    odoo ui customization
+    clean user experience
     """,
-    "version": "18.0.1.0.0",
-    "category": "Productivity/Discuss",
-    "author": "Custom",
-    "license": "LGPL-3",
     "depends": ["mail", "base_setup"],
     "data": [
         "security/discussion_security.xml",
@@ -42,7 +223,13 @@ Odoo 18, disable discuss, hide discuss, turn off chat, messaging menu, systray, 
             "hide_user_discussion/static/src/js/discussion_feature_boot.js",
         ],
     },
-    "installable": True,
-    "application": False,
-    "auto_install": False,
+    'images': [
+        'static/description/main_screen.gif'
+    ],
+    'price': 12.00,
+    'currency': 'USD',
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'OPL-1',
 }
