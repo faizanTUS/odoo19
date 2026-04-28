@@ -59,7 +59,7 @@ def _name_search_context(model_name):
 def _global_search_domain_for_model(Model, query):
     """Return a domain for global search across user-selected models.
 
-    Odoo 18+ :meth:`~odoo.models.Model.name_search` filters on ``display_name`` only.
+    Odoo :meth:`~odoo.models.Model.name_search` filters on ``display_name`` only.
     Searching ``display_name`` normally delegates to :meth:`~odoo.models.Model._search_display_name`,
     which uses ``_rec_names_search`` / ``_rec_name`` — but many list views also search extra
     columns (``ref``, ``client_order_ref``, customer, …). We rebuild that behaviour for **any**

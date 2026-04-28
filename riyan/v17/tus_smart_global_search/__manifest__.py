@@ -1,6 +1,6 @@
 # Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 {
-    "name": "Advanced Odoo Search | Global & User Based Control",
+    "name": "Global Search Pro for Odoo - Multi-Model Search & User Access Control",
     "version": "17.0.0.0",
     "category": "Productivity",
     'author': 'TechUltra Solutions Private Limited',
