@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.AttachmentList"
+       t-inherit-mode="extension">
+
+        <xpath expr="//div[hasclass('o-mail-AttachmentCard-info')]"
+               position="inside">
+            <t t-if="attachment.file_size">
+                <small class="o_AttachmentCard_size text-muted ms-auto">
+                    <strong>File Size</strong> : <t t-esc="(attachment.file_size / 1048576).toFixed(2)"/> MB
+                </small>
+            </t>
+        </xpath>
+
+    </t>
+
+</templates>

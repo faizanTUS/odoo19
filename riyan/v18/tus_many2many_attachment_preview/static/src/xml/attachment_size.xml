@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Many2many binary widget: show size next to extension -->
+    <t t-inherit="web.Many2ManyBinaryField.attachment_preview" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('caption')][hasclass('small')]/a" position="after">
+            <t t-if="file.file_size !== undefined">
+                <small class="text-muted o_map2_attachment_size">
+                    <strong>File Size</strong> : <t t-esc="(file.file_size / 1048576).toFixed(2)"/> MB
+                </small>
+            </t>
+        </xpath>
+    </t>
+
+    <!-- Chatter / Discuss attachment cards: Odoo 18 uses `size` (from Store) -->
+    <t t-inherit="mail.AttachmentList" t-inherit-mode="extension">
+        <xpath expr="//t[@t-ref='nonImageMain']//small[@t-if='attachment.extension']" position="after">
+            <t t-if="attachment.size !== undefined">
+                <small class="text-muted o_map2_attachment_size ms-2">
+                    <strong>File Size</strong> : <t t-esc="(attachment.size / 1048576).toFixed(2)"/> MB
+                </small>
+            </t>
+        </xpath>
+    </t>
+
+    <!-- Mail composer wizard attachments -->
+    <t t-inherit="mail.MailComposerAttachmentList" t-inherit-mode="extension">
+        <xpath expr="//li//a" position="after">
+            <t t-if="file.file_size !== undefined">
+                <small class="text-muted o_map2_attachment_size ms-2 me-2">
+                    <strong>File Size</strong> : (<t t-esc="(file.file_size / 1048576).toFixed(2)"/> MB)
+                </small>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

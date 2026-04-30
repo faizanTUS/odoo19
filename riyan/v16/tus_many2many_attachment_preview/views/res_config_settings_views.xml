@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_map2" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.map2.preview</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mail.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='emails']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box" id="map2_office_preview_setting" title="Office document preview">
+                    <div class="o_setting_left_pane">
+                        <field name="map2_office_online_preview"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="map2_office_online_preview" string="Attachment preview: Microsoft Office online"/>
+                        <div class="text-muted">
+                            Preview Word, Excel, PowerPoint, CSV, and OpenDocument in the file viewer (chatter and many2many binary fields). Requires web.base.url as a reachable HTTPS URL for external viewers.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box" id="map2_google_viewer_setting" title="Google Docs viewer">
+                    <div class="o_setting_left_pane">
+                        <field name="map2_google_docs_viewer"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="map2_google_docs_viewer" string="Use Google Docs viewer for Office files"/>
+                        <div class="text-muted">
+                            Embeds Office documents with Google Docs viewer instead of Microsoft. Enable only if permitted by your security policy.
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
