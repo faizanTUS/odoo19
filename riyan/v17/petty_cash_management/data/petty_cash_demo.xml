@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="demo_petty_cash_category_office" model="petty.cash.category">
+        <field name="name">Office Supplies</field>
+        <field name="code">OFF</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    <record id="demo_petty_cash_category_transport" model="petty.cash.category">
+        <field name="name">Transport</field>
+        <field name="code">TRN</field>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+    <record id="demo_petty_cash_policy_standard" model="petty.cash.policy">
+        <field name="name">Standard Petty Cash Policy</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="max_amount_per_voucher">500</field>
+        <field name="daily_limit_per_employee">200</field>
+        <field name="monthly_limit_per_employee">2000</field>
+        <field name="require_receipt" eval="True"/>
+        <field name="category_ids" eval="[(6, 0, [ref('demo_petty_cash_category_office'), ref('demo_petty_cash_category_transport')])]"/>
+    </record>
+</odoo>
