@@ -8,6 +8,20 @@
     'website': "https://www.techultrasolutions.com/",
     "summary": """
     This module provides a unified and user-friendly attachment preview experience across Odoo by enabling in-browser viewing of various file types such as Word, Excel, PowerPoint, images, videos, and audio files. It improves productivity by eliminating the need to download files for quick viewing and supports configuration options for choosing the preview provider.
+    attachment file size display
+    show file size in Odoo chatter
+    document size visibility
+    attachment size preview Odoo
+    file size tracking
+    display attachment details
+    chatter file information
+    file size indicator in Odoo attachments
+    document management features
+    attachment metadata display
+    file preview with size
+    manage attachments in Odoo chatter
+    file size viewer module
+    file details enhancement
     file preview in chatter
     attachment preview module
     document preview addon
@@ -52,7 +66,21 @@
      """,
 
     "description": """
-    This Odoo module enhances the default attachment viewer by allowing users to preview multiple file formats directly within Odoo—without downloading them.It extends the standard chatter attachment preview system to support not only PDFs and images but also Microsoft Office files, OpenDocument formats, videos, and audio files. The module integrates online document viewers (Microsoft Office Online or Google Docs) to render supported files seamlessly inside a modal viewer.
+    This Odoo module enhances the default attachment viewer by allowing users to preview multiple file formats directly within Odoo—without downloading them.It extends the standard chatter attachment preview system to support not only PDFs and images but also Microsoft Office files, OpenDocument formats, videos, and audio files. The module integrates online document viewers (Microsoft Office Online or Google Docs) to render supported files seamlessly inside a modal viewer.Additionally, it displays the file size of each attachment directly in the chatter for better visibility and management.
+    attachment file size display
+    show file size in Odoo chatter
+    document size visibility
+    attachment size preview Odoo
+    file size tracking
+    display attachment details
+    chatter file information
+    file size indicator in Odoo attachments
+    document management features
+    attachment metadata display
+    file preview with size
+    manage attachments in Odoo chatter
+    file size viewer module
+    file details enhancement
     file preview in chatter
     attachment preview module
     document preview addon
@@ -101,6 +129,10 @@
     ],
     "assets": {
         "web.assets_backend": [
+            "document_attachment_universal_preview/static/src/scss/attachment_list.css",
+            "document_attachment_universal_preview/static/src/xml/attachment_list.xml",
+            "document_attachment_universal_preview/static/src/js/attachment_size.js",
+            "document_attachment_universal_preview/static/src/xml/messaging_attachment_size.xml",
             "document_attachment_universal_preview/static/src/js/attachment_preview_patch.js",
             "document_attachment_universal_preview/static/src/js/file_viewer_universal_patch.js",
             "document_attachment_universal_preview/static/src/xml/file_viewer_universal.xml",

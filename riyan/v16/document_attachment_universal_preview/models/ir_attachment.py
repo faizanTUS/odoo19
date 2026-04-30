@@ -26,3 +26,25 @@ class IrAttachment(models.Model):
                 if rec_id in tokens_by_id and not rec.get("access_token"):
                     rec["access_token"] = tokens_by_id[rec_id]
         return records
+
+    def _attachment_format(self, legacy=False):
+        """Ensure attachment payload includes file_size/size for web clients.
+
+        The mail._attachment_format in core omits size; include both file_size
+        and size so frontend Attachment records keep consistent size after reload.
+        """
+        res_list = super(IrAttachment, self)._attachment_format(legacy=legacy)
+        # super returns list in same order as records
+        for att, res in zip(self, res_list):
+            try:
+                if hasattr(att, 'file_size'):
+                    res['file_size'] = att.file_size
+                    # keep backward compatibility: also set 'size'
+                    if 'size' not in res:
+                        res['size'] = att.file_size
+                elif 'file_size' in res and 'size' not in res:
+                    res['size'] = res.get('file_size')
+            except Exception:
+                # be defensive: don't break formatting if something goes wrong
+                continue
+        return res_list

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="web.Many2ManyBinaryField.attachment_preview"
+       t-inherit-mode="extension">
+
+        <xpath expr="//div[hasclass('o_attachment_wrap')]"
+               position="inside">
+
+                <t t-if="file.size">
+                    <small class="text-muted">
+                        File size:
+                        <t t-esc="(file.size / 1048576).toFixed(2)"/> MB
+                    </small>
+                </t>
+
+        </xpath>
+
+    </t>
+
+
+</templates>
