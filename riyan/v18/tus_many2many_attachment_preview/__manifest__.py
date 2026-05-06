@@ -283,6 +283,7 @@ installation, ``addons_path`` (``odoo18/project``), and ``web.base.url`` setup.
     ],
     "assets": {
         "web.assets_backend": [
+            "tus_many2many_attachment_preview/static/src/css/main.css",
             "tus_many2many_attachment_preview/static/src/scss/many2many_preview.scss",
             "tus_many2many_attachment_preview/static/src/js/previewable_ir_attachment.js",
             "tus_many2many_attachment_preview/static/src/js/mail_attachment_preview_patch.js",

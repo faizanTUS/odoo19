@@ -4,752 +4,994 @@
     <title>Page Title</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
 <main>
-    <div class="contianer" style="font-family: Montserrat;">
+    <div class="container-fluid" style="font-family: Montserrat;">
         <div class="px-md-5 py-md-4 p-2 mb-4 shadow-sm "
              style="background-color: #2575eb0d;border-radius:20px; font-family: Montserrat;">
-            <section class="oe_container pt16 mt16" style="background-color: transparent;">
-                <div class="row o_equal_col_sm" style="max-width:1540px; margin:0 auto; border-radius:15px">
-                    <div class="" style="display:block; margin:0 auto;width:80%">
-                <span style="width:100%; display:inline-block">
-                  <img class="img img-responsive mt24 mb8" src="logo.png" style="display:block; margin:0 auto">
-                </span>
+
+            <section style="margin:50px 0; background-image: linear-gradient(to right, #7B2CBF, #3A0CA3, #0077B6, #00D4FF), url('image/bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            min-height: 580px;
+            padding: 40px;
+            border-radius: 20px;">
+                <div class="row" style="display:flex;">
+                    <div class="col-8" style="width:70%;">
+                        <span style="width:100%; display:inline-block; ">
+                          <img class="img img-responsive" src="company_logo.png"
+                               style="width: 85%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 1.35); display:block; margin-bottom: 20px !important; margin-top:-20px !important; margin:0 auto">
+                        </span>
+
+                        <div class=" w-100" style="color:#000;padding:0px 30px; margin-left: -25px;">
+                            <h3 style="color:white;border-bottom: 1px solid white;font-size: 35px;">
+                                <b>
+                                    Smart Attachment Preview Pro with File Size Viewer | Chatter &amp; Many2many Binary
+                                    Viewer | PDF, Image, Video &amp; Office Viewer
+                                </b>
+                            </h3>
+                            <div>
+                                <p style="padding-right:20px; text-align:justify;color: #fff; font-size: 18px;">
+                                    Handling attachments in Odoo can be slow and inefficient when users need to download
+                                    files just to check their content or size.<br/>
+
+                                    Smart Attachment Preview Pro with File Size Viewer solves this by enabling instant file
+                                    preview and file size visibility directly inside Odoo, improving both usability and
+                                    productivity.<br/>
+
+                                    This module works seamlessly across:<br/>
+
+                                    - Chatter (message thread)<br/>
+                                    - Many2many Binary attachment fields<br/>
+
+                                    Users can preview files like PDFs, images, videos, and Office documents without
+                                    downloading, while also seeing the exact file size upfront - helping them make quick
+                                    decisions and avoid
+                                    unnecessary downloads.<br/>
+
+                                    Whether you're reviewing sales documents, checking attachments in chatter, or managing
+                                    files in forms, everything becomes faster, clearer, and more efficient.<br/>
+
+                                    With integration for Microsoft Office Online and Google Docs Viewer, even complex file
+                                    formats like Word, Excel, and PowerPoint are easily viewable.<br/>
+                                </p>
+                                <p style="padding-right:20px; text-align:justify;color: #fff;    font-size: 18px;">
+                                    Improve productivity, enhance user experience, and streamline document workflows across
+                                    your entire Odoo system.<br/>
+                                    A smarter way to manage attachments - preview instantly, know file sizes, and work
+                                    faster.
+                                </p>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="col-4 d-flex" style="width:30%;">
+
+                        <div class="d-flex flex-column w-100"
+                             style="padding:0px 30px; height: 100%; min-height: 580px; padding: 0; margin-right: -10px;">
+
+                            <ul class="d-flex justify-content-around" style="padding: 0;">
+                                <img src="all.png" width="100%" style="
+            width: 406px;
+            height: 46px;
+            position: relative;
+            bottom: 13px;
+            padding-right: 45px;
+            /* left: 48px; */
+            object-fit: contain;
+            ">
+                                <!--                            <li class="mx-2" style="display:flex; color:white;">-->
+                                <!--                                <i class="fa fa-check" style="margin:4px 5px 0 0"></i>-->
+                                <!--                                <b>Community</b>-->
+                                <!--                            </li>-->
+                                <!--                            <li class="mx-2" style="display:flex; color:white">-->
+                                <!--                                |-->
+                                <!--                            </li>-->
+                                <!--                            <li style="display:flex; color:white">-->
+                                <!--                                <i class="fa fa-check" style="margin:4px 5px 0 0"></i>-->
+                                <!--                                <b>Enterprise</b>-->
+                                <!--                            </li>-->
+                                <!--                            <li class="mx-2" style="display:flex; color:white">-->
+                                <!--                                |-->
+                                <!--                            </li>-->
+                                <!--                            <li style="display:flex; color:white">-->
+                                <!--                                <i class="fa fa-check" style="margin:4px 5px 0 0"></i>-->
+                                <!--                                <b>Odoo.Sh</b>-->
+                                <!--                            </li>-->
+                            </ul>
+
+                            <ul class="d-flex p-0"
+                                style="margin-right:20px; display:flex; align-items:flex-end; margin-top:auto;">
+                                <li class="mx-2" style="display:flex; color:white;    padding-right: 10px;">
+                                    <a href="https://www.techultrasolutions.com/" target="_blank">
+                                        <img class="" src="./Tus.png"
+                                             style="object-fit: contain; background: white; border-radius: 10px;"
+                                             alt="image" width="50px"
+                                             height="100%">
+                                    </a>
+                                </li>
+                                <li class="mx-2" style="display:flex; color:white;    padding-right: 10px;">
+                                    <a href="mailto:support@techultra.in" target="_blank">
+                                        <img class="" src="./email.png"
+                                             style="object-fit: contain; background: white; border-radius: 10px;"
+                                             alt="image" width="50px"
+                                             height="100%">
+                                    </a>
+                                </li>
+                                <li class="mx-2" style="display:flex; color:white;    padding-right: 10px;">
+                                    <img class="" src="./wp.png"
+                                         style="object-fit: contain; background: white; border-radius: 10px;" alt="image"
+                                         width="200px"
+                                         height="100%">
+                                </li>
+
+                            </ul>
+
+
+                        </div>
+
                     </div>
                 </div>
             </section>
-            <div class="px-md-5 py-md-4 p-2 mb-4 shadow" style="
-    margin: auto;box-shadow: -1px 1rem 14rem rgba(0, 0, 0, 0.15) !important;position: relative;
-    bottom: 95px;background-color: #2575eb0d;border-radius:20px; font-family: Montserrat;">
-                <div class="col-12 justify-content-end"
-                     style="padding: 0;text-align: revert;display: flex;justify-content: end;margin-left: 34px;">
+
+            <section style="margin: 50px 0;
+            background: #0564d6d6;
+            min-height: 580px;
+            padding: 70px;
+            border-radius: 20px;
+            padding-bottom: 0;">
+                <div class="row" style="">
+
                     <div>
-                        <img src="all.png" width="100%" style="
-        width: 406px;
-    height: 46px;
-    position: relative;
-    bottom: 13px;
-    /* left: 48px; */
-    object-fit: contain;
-        ">
+                        <h3 style="color: white;font-size: 30px;text-align: center; margin-top: -20px;">
+                            <b>
+                                Smart Attachment Preview Pro with File Size Viewer | Chatter &amp; Many2many Binary Viewer |
+                                PDF, Image, Video &amp; Office Viewer
+                            </b>
+                        </h3>
                     </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+
+
+                        <!-- ═══════════════════════════════════════════ -->
+                        <!--           YOUTUBE VIDEO SECTION             -->
+                        <!-- ═══════════════════════════════════════════ -->
+                        <div style="margin: 0 0 50px 0; padding: 30px 20px; background-color: #2575eb0d; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.35); text-align: center;">
+
+                            <h4 style="font-family: Montserrat; font-size: 22px; font-weight: 700; color: white; margin-bottom: 6px; letter-spacing: 0.5px;">
+                                &#9654;&nbsp; Watch Module Demo
+                            </h4>
+                            <p style="font-family: Montserrat; font-size: 15px; color: white; margin-bottom: 24px; line-height: 1.6; ">
+                                See how Smart Attachment Preview Pro with File Size Viewer | Chatter &amp; Many2many Binary
+                                Viewer |
+                                PDF, Image, Video &amp; Office Viewer works.
+                            </p>
+
+                            <!-- Clickable YouTube Thumbnail -->
+                            <a href="https://www.youtube.com/watch?v=vwrOObTXr9k" target="_blank"
+                               style="display: block; max-width: 820px; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.15); border: 2px solid #27AAE1; text-decoration: none; position: relative;">
+
+                                <img src="https://img.youtube.com/vi/vwrOObTXr9k/maxresdefault.jpg"
+                                     alt="Watch Module Demo on YouTube"
+                                     style="width: 100%; display: block; border-radius: 10px;">
+
+                                <!-- Play button overlay -->
+                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.18); border-radius: 10px;">
+                                    <div style="width: 72px; height: 72px; background: #ff0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+                                        <div style="width: 0; height: 0; border-top: 18px solid transparent; border-bottom: 18px solid transparent; border-left: 30px solid #ffffff; margin-left: 5px;"></div>
+                                    </div>
+                                </div>
+
+                            </a>
+
+                            <!-- Watch on YouTube button matching page style -->
+                            <div style="margin-top: 20px;">
+                                <a href="https://www.youtube.com/watch?v=vwrOObTXr9k" target="_blank"
+                                   style="background-color: #27AAE1; border-radius: 35px; display: inline-block; padding: 9px 30px; font-weight: 600; border: 1px solid #27AAE1; text-decoration: none;">
+                                    <span style="font-family: Montserrat; color: #fff; font-size: 15px;">&#9654;&nbsp; Watch on YouTube</span>
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- ═══════════════════════════════════════════ -->
+                        <!--         END YOUTUBE VIDEO SECTION           -->
+                        <!-- ═══════════════════════════════════════════ -->
+                    </div>
+
+
                 </div>
-                <h2 class="whiteText"
-                    style="font-family: Montserrat;color:#fff !important; font-size:70px; text-align:center;margin-bottom: 9px;">
-              <span class="themeColor"
-                    style="color:#000000 !important; font-weight:600 !important; font-size:48px !important">
-                    Smart Attachment Preview Pro with File Size Viewer | Chatter &amp; Many2many Binary Viewer | PDF, Image, Video &amp; Office Viewer
-              </span>
-                </h2>
-                <p style="font-family: Montserrat;font-family: Montserrat;color:#000000; text-align:center; font-size:18px">
-                    Handling attachments in Odoo can be slow and inefficient when users need to download files just to
-                    check their content or size.<br/>
+            </section>
 
-                    Smart Attachment Preview Pro with File Size Viewer solves this by enabling instant file preview and file size visibility
-                    directly inside Odoo, improving both usability and productivity.<br/>
+            <style>
+                .feature_section .d-flex {
+                    margin-bottom: 22px;
+                }
+            </style>
 
-                    This module works seamlessly across:<br/>
+            <section style="margin: 50px 0;
+            border-radius: 10px;
+            padding-bottom: 0;">
+                <div class="row" style="">
 
-                    - Chatter (message thread)<br/>
-                    - Many2many Binary attachment fields<br/>
+                    <div class="col-12">
+                        <h3 style="color:white;border-bottom: 1px solid white;font-size: 40px;color: black;"
+                            class="text-center mb-5">
+                            <b>Features</b>
+                        </h3>
+                    </div>
 
-                    Users can preview files like PDFs, images, videos, and Office documents without downloading, while
-                    also seeing the exact file size upfront - helping them make quick decisions and avoid unnecessary
-                    downloads.<br/>
+                    <div class="feature_section" style="margin-bottom: 22px;">
+                        <div class="feature-card d-flex">
 
-                    Whether you're reviewing sales documents, checking attachments in chatter, or managing files in
-                    forms, everything becomes faster, clearer, and more efficient.<br/>
+                            <span style="margin-right:5px;">
 
-                    With integration for Microsoft Office Online and Google Docs Viewer, even complex file formats like
-                    Word, Excel, and PowerPoint are easily viewable.<br/>
-
-                </p>
-                <p style="font-family: Montserrat;font-family: Montserrat;color:#000000; font-size:18px; text-align:center">
-                    Improve productivity, enhance user experience, and streamline document workflows across your
-                    entire Odoo system.<br/>
-                    A smarter way to manage attachments - preview instantly, know file sizes, and work faster.
-                </p>
-                <div class="text-center d-flex flex-column justify-content-center align-items-center"
-                     style="margin-top: 33px;">
-                    <img src="wp.png" width="100%" style="
-                    height: 114px;
-                    width: 126px;
-                object-fit: contain;
-                    ">
-                    <strong style="font-size: 15px;
-    color: green;position: relative;
-    top: 4px;">https://wa.me/message/VENRAJRHMSWEB1</strong>
-                    <strong style="position: relative;
-    top: 13px;">OR</strong>
-                </div>
-                <div class="text-center " style="margin-top: 31px;">
-                    <a href="mailto:support@techultra.in" target="_blank"
-                       style="background-color:#27AAE1 !important; border-radius:35px; display:inline-block; padding:7px 33px; font-weight:600; border:1px solid #27AAE1 !important"
-                       class="mx-1 mb-2">
-                        <span class="pl-2" style="font-family: Montserrat;color:#fff; font-size:16px">Email Us</span>
-                    </a>
-                    <a href="skype:live:kzii?chat" target="_blank"
-                       style="background-color:#27AAE1 !important; border-radius:35px; display:inline-block; padding:7px 33px; font-weight:600; border:1px solid #27AAE1 !important"
-                       class="mx-1 mb-2 ">
-                        <span class="pl-2"
-                              style="font-family: Montserrat;color:#fff; font-size:16px; vertical-align:middle">Skype Us</span>
-                    </a>
-                </div><hr/>
-
-                <!-- ═══════════════════════════════════════════ -->
-                <!--           YOUTUBE VIDEO SECTION             -->
-                <!-- ═══════════════════════════════════════════ -->
-                <div style="margin: 40px 0 10px 0; padding: 30px 20px; background-color: #2575eb0d; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 1px solid #dddbd8; text-align: center;">
-
-                    <h4 style="font-family: Montserrat; font-size: 22px; font-weight: 700; color: #212121; margin-bottom: 6px; letter-spacing: 0.5px;">
-                        &#9654;&nbsp; Watch Module Demo
-                    </h4>
-                    <p style="font-family: Montserrat; font-size: 15px; color: #555555; margin-bottom: 24px; line-height: 1.6;">
-                        See how Smart Attachment Preview Pro with File Size Viewer | Chatter &amp; Many2many Binary Viewer | PDF, Image, Video &amp; Office Viewer works.
-                    </p>
-
-                    <!-- Clickable YouTube Thumbnail -->
-                    <a href="https://www.youtube.com/watch?v=vwrOObTXr9k" target="_blank"
-                       style="display: block; max-width: 820px; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.15); border: 2px solid #27AAE1; text-decoration: none; position: relative;">
-
-                        <img src="https://img.youtube.com/vi/vwrOObTXr9k/maxresdefault.jpg"
-                             alt="Watch Module Demo on YouTube"
-                             style="width: 100%; display: block; border-radius: 10px;">
-
-                        <!-- Play button overlay -->
-                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.18); border-radius: 10px;">
-                            <div style="width: 72px; height: 72px; background: #ff0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
-                                <div style="width: 0; height: 0; border-top: 18px solid transparent; border-bottom: 18px solid transparent; border-left: 30px solid #ffffff; margin-left: 5px;"></div>
+                                <img src="image/icons/chatter_attachment.png"
+                                     style="width:80px;margin-right: 10px;"/>
+                            </span>
+                            <div>
+                                <span style="font-weight:bold; color:black; font-size:17px">
+                                    Chatter Attachment Preview :
+                                </span>
+                                <ul class="p-0" style="margin-right:20px;">
+                                    <li class="d-flex mb-1" style="padding-right: 10px;">
+                                        Instantly preview attachments directly inside Odoo chatter (message thread)
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                        <div class="feature-card d-flex">
 
-                    </a>
+                            <span style="margin-right:5px;">
 
-                    <!-- Watch on YouTube button matching page style -->
-                    <div style="margin-top: 20px;">
-                        <a href="https://www.youtube.com/watch?v=vwrOObTXr9k" target="_blank"
-                           style="background-color: #27AAE1; border-radius: 35px; display: inline-block; padding: 9px 30px; font-weight: 600; border: 1px solid #27AAE1; text-decoration: none;">
-                            <span style="font-family: Montserrat; color: #fff; font-size: 15px;">&#9654;&nbsp; Watch on YouTube</span>
-                        </a>
+                                <img src="image/icons/many_to_many.png"
+                                     style="width:80px;margin-right: 10px;"/>
+                            </span>
+                            <div>
+                                <span style="font-weight:bold; color:black; font-size:17px">
+                                    Many2many Binary Field Support :
+                                </span>
+                                <ul class="p-0" style="margin-right:20px;">
+                                    <li class="d-flex mb-1" style="padding-right: 10px;">
+                                        Full preview support for attachments in Many2many binary fields across forms
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="feature-card d-flex">
+
+                            <span style="margin-right:5px;">
+
+                                <img src="image/icons/show_file_size.png"
+                                     style="width:80px;margin-right: 10px;"/>
+                            </span>
+                            <div>
+                                <span style="font-weight:bold; color:black; font-size:17px">
+                                    Show File Size :
+                                </span>
+                                <ul class="p-0" style="margin-right:20px;">
+                                    <li class="d-flex mb-1" style="padding-right: 10px;">
+                                        Instantly view file size in both chatter and Many2many fields before opening
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="feature-card d-flex">
+
+                            <span style="margin-right:5px;">
+
+                                <img src="image/icons/_no_download_requirement.png"
+                                     style="width:80px;margin-right: 10px;"/>
+                            </span>
+                            <div>
+                                <span style="font-weight:bold; color:black; font-size:17px">
+                                    No Download Required :
+                                </span>
+                                <ul class="p-0" style="margin-right:20px;">
+                                    <li class="d-flex mb-1" style="padding-right: 10px;">
+                                        Open files instantly without downloading
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="feature-card d-flex">
+
+                            <span style="margin-right:5px;">
+
+                                <img src="image/icons/multiple_formet.png"
+                                     style="width:80px;margin-right: 10px;"/>
+                            </span>
+                            <div>
+                                <span style="font-weight:bold; color:black; font-size:17px">
+                                    Multi-Format Preview :
+                                </span>
+                                <ul class="p-0" style="margin-right:20px;">
+                                    <li class="d-flex mb-1" style=" padding-right: 10px;">
+                                        Supports PDF, images (JPG, PNG, and
+                                        etc), videos (MP4, WEBM, MOV and etc), and Office files (DOCX, XLSX,
+                                        PPT and etc).
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="feature-card d-flex">
+
+                            <span style="margin-right:5px;">
+
+                                <img src="image/icons/Boost-Productivity.png"
+                                     style="width:80px;margin-right: 10px;"/>
+                            </span>
+                            <div>
+                                <span style="font-weight:bold; color:black; font-size:17px">
+                                    Boost Productivity :
+                                </span>
+                                <ul class="p-0" style="margin-right:20px;">
+                                    <li class="d-flex mb-1" style=" padding-right: 10px;">
+                                        Reduce clicks and save time in daily workflows
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="feature-card d-flex">
+
+                            <span style="margin-right:5px;">
+
+                                <img src="image/icons/file_viewer.png"
+                                     style="width:80px;margin-right: 10px;"/>
+                            </span>
+                            <div>
+                                <span style="font-weight:bold; color:black; font-size:17px">
+                                    Office File Viewer Integration :
+                                </span>
+                                <ul class="p-0" style="margin-right:20px;">
+                                    <li class="d-flex mb-1" style=" padding-right: 10px;">
+                                        Preview Word, Excel, and PowerPoint using Microsoft Office Online and optional
+                                        Google Docs Viewer
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="feature-card d-flex">
+
+                            <span style="margin-right:5px;">
+
+                                <img src="image/icons/all_modules.png"
+                                     style="width:80px;margin-right: 10px;"/>
+                            </span>
+                            <div>
+                                <span style="font-weight:bold; color:black; font-size:17px">
+                                    Works Across All Modules :
+                                </span>
+                                <ul class="p-0" style="margin-right:20px;">
+                                    <li class="d-flex mb-1" style=" padding-right: 10px;">
+                                        Compatible with Sales, Accounting, HR, Projects, and custom modules
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                <!-- ═══════════════════════════════════════════ -->
-                <!--         END YOUTUBE VIDEO SECTION           -->
-                <!-- ═══════════════════════════════════════════ -->
+            </section>
 
-            </div>
-            <section class="oe_container mt32 mb32" style="background-color: transparent !important;">
-                <div id="loempia_tabs" class="row shadow"
-                     style="padding: 45px;max-width:1540px; margin:0 auto; padding-bottom:64px; border-radius:15px">
-                    <ul role="tablist" class="nav nav-tabs justify-content-center" data-tabs="tabs"
-                        style="border:none; background-color:unset; margin:0 auto;">
-                        <li class="nav-item" style="display: flex;
-    align-items: center;
-    justify-content: center; background-color: #27AAE1 !important; margin-right:10px; border:1px solid #ddd; border-bottom:0">
-                            <a href="#tus_screen" data-bs-toggle="tab" aria-expanded="true" class="show active"
-                               style="font-family: Montserrat; text-transform:uppercase; font-weight:600; font-size:15px; letter-spacing:1px; padding:11px 20px; color:#000; border:1px solid transparent">
-                                <img src="manual.png" style="width:18px; margin-top:-4px; margin-right:6px">Screenshots
-                            </a>
-                        </li>
+            <section style="background-color: transparent !important;">
+            <div id="loempia_tabs" class="row "
+                 style="max-width:1540px; margin:0 auto; padding-bottom:64px; border-radius:15px;padding-top: 0px;">
+                <ul role="tablist" class="nav nav-tabs justify-content-center" data-tabs="tabs"
+                    style="border:none; background-color:unset; margin:0 auto;">
+                    <li class="nav-item" style="display: flex;
+        align-items: center;
+        justify-content: center; background-color: #E5F2FF !important; margin-right:10px;  border-bottom:0">
+                        <a href="#tus_screen" data-bs-toggle="tab" aria-expanded="true" class="show active"
+                           style="font-family: Montserrat; text-transform:uppercase; font-weight:600; font-size:15px; letter-spacing:1px; padding:11px 20px; color:#000; border:1px solid transparent">
+                            <img src="manual.png" style="width:18px; margin-top:-4px; margin-right:6px">Screenshots
+                        </a>
+                    </li>
 
-                        <li class="nav-item" style="display: flex;
-    align-items: center;
-    justify-content: center; background-color: #27AAE1 !important; margin-right:10px; border:1px solid #ddd; border-bottom:0">
-                            <a href="#tus_feature" data-bs-toggle="tab" aria-expanded="true" class="show"
-                               style="font-family: Montserrat; text-transform:uppercase; font-weight:600; font-size:15px; letter-spacing:1px; padding:11px 20px; color:#000; border:1px solid transparent">
-                                <img src="feature.png" style="width:18px; margin-top:-4px; margin-right:6px">Features
-                            </a>
-                        </li>
+                    <li class="nav-item" style="display: flex;
+        align-items: center;
+        justify-content: center; background-color: #E5F2FF !important; margin-right:10px; border-bottom:0">
+                        <a href="#tus_feature" data-bs-toggle="tab" aria-expanded="true" class="show"
+                           style="font-family: Montserrat; text-transform:uppercase; font-weight:600; font-size:15px; letter-spacing:1px; padding:11px 20px; color:#000; border:1px solid transparent">
+                            <img src="feature.png" style="width:18px; margin-top:-4px; margin-right:6px">Features
+                        </a>
+                    </li>
 
-                        <li class="nav-item" style="display: flex;
-    align-items: center;
-    justify-content: center; background-color: #27AAE1 !important; margin-right:10px; border:1px solid #ddd; border-bottom:0">
-                            <a href="#tus_support" data-bs-toggle="tab" aria-expanded="true" class="show"
-                               style="font-family: Montserrat; text-transform:uppercase; font-weight:600; font-size:15px; letter-spacing:1px; padding:11px 20px; color:#000; border:1px solid transparent">
-                                <img src="customer-support.png" style="width:18px; margin-top:-4px; margin-right:6px">Support
-                            </a>
-                        </li>
+                    <li class="nav-item" style="display: flex;
+        align-items: center;
+        justify-content: center; background-color: #E5F2FF !important; margin-right:10px;  border-bottom:0">
+                        <a href="#tus_support" data-bs-toggle="tab" aria-expanded="true" class="show"
+                           style="font-family: Montserrat; text-transform:uppercase; font-weight:600; font-size:15px; letter-spacing:1px; padding:11px 20px; color:#000; border:1px solid transparent">
+                            <img src="customer-support.png" style="width:18px; margin-top:-4px; margin-right:6px">Support
+                        </a>
+                    </li>
 
-                        <li class="nav-item" style="display: flex;
-    align-items: center;
-    justify-content: center; background-color: #27AAE1 !important; margin-right:10px; border:1px solid #ddd; border-bottom:0">
-                            <a href="#tus_faq" data-bs-toggle="tab" aria-expanded="true" class="show"
-                               style="font-family: Montserrat; text-transform:uppercase; font-weight:600; font-size:15px; letter-spacing:1px; padding:11px 20px; color:#000; border:1px solid transparent">
-                                <img src="chat.png" style="width:18px; margin-top:-4px; margin-right:6px">FAQs </a>
-                        </li>
-                    </ul>
-                    <div class="container-fluid" style="border-top: 1px solid #c2c2c2;">
-                        <div class="tab-content container pt-3" id="tabs_content">
-                            <!-- Screen Shot Tabs -->
-                            <div class="tab-pane active show" id="tus_screen">
-                                <!-- 1. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>1. Preview Configuration.</h4>
+                    <li class="nav-item" style="display: flex;
+        align-items: center;
+        justify-content: center; background-color: #E5F2FF !important; margin-right:10px;  border-bottom:0">
+                        <a href="#tus_faq" data-bs-toggle="tab" aria-expanded="true" class="show"
+                           style="font-family: Montserrat; text-transform:uppercase; font-weight:600; font-size:15px; letter-spacing:1px; padding:11px 20px; color:#000; border:1px solid transparent">
+                            <img src="chat.png" style="width:18px; margin-top:-4px; margin-right:6px">FAQs </a>
+                    </li>
+                </ul>
+                <div class="container-fluid" style="background-color: #E5F2FF;    border-radius: 10px;">
+	                    <div class="tab-content container-fluid pt-3 px-0" id="tabs_content">
+                        <!-- Screen Shot Tabs -->
+                        <div class="tab-pane active show" id="tus_screen">
+
+                            <div class="vt-tabs" style="text-align: center;">
+                                <!--
+                                  Note:
+                                  Odoo's module/app description rendering often sanitizes/removes <input> elements.
+                                  So we implement tabs using anchor targets instead of radio inputs.
+                                -->
+
+                                <!-- Markers are the :target, so we can style both panels and labels -->
+                                <span id="vt-tab1" class="vt-marker"></span>
+                                <span id="vt-tab2" class="vt-marker"></span>
+                                <span id="vt-tab3" class="vt-marker"></span>
+
+                                <div class="vt-content">
+                                    <div id="vt-content1" class="vt-panel">
+                                        <h4><b> Preview Configuration.</b></h4>
                                         <p>
                                             After installing the module, go to:<br/>
                                             Settings -> General Settings -> Discuss<br/>
 
                                             You can enable:<br/>
 
-                                            <ul><li> <strong>Microsoft Office Online Preview</strong><br/>
-                                            Preview Word, Excel, PowerPoint, CSV, and OpenDocument files inside
-                                            Odoo.<br/>
-                                            Requires a publicly accessible HTTPS web.base.url.</li>
-                                            <li> <strong>Google Docs Viewer Integration</strong><br/>
-                                            Use Google Docs viewer as an alternative preview engine for Office files.
-                                            (Recommended only if compliant with your organization's security policy.)</li></ul>
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li style="text-align: center;">
+                                                <strong>Microsoft Office Online Preview</strong><br/>
+                                                <p>
+                                                    Preview Word, Excel, PowerPoint, CSV, and OpenDocument files
+                                                    inside Odoo.<br/>
+                                                    Requires a publicly accessible HTTPS web.base.url.
+                                                </p>
+                                            </li>
+                                            <li style="text-align: center;">
+                                                <strong>Google Docs Viewer Integration</strong><br/>
+                                                <p>
+                                                    Use Google Docs viewer as an alternative preview engine for Office
+                                                    files.
+                                                    (Recommended only if compliant with your organization's security
+                                                    policy.)
+                                                </p>
+                                            </li>
+                                        </ul>
 
                                         </p>
-
                                         <img src="image/configuration.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
-
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
                                     </div>
-                                </div>
-                                <!-- 2. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>2. File Size Display.</h4>
+
+                                    <div id="vt-content2" class="vt-panel">
+                                        <h4><b> File Size Display.</b></h4>
                                         <p>
                                             - Automatically displays file size for attachments<br/>
                                             - Works in both:
-                                            <ul>
-                                                <li>Chatter</li>
-                                                <li>Many2many binary fields</li>
-                                            </ul>
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Chatter</li>
+                                            <li>Many2many binary fields</li>
+                                        </ul>
                                         </p>
-
                                         <img src="image/file_size.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
-
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
                                     </div>
-                                </div>
 
-                                <!-- 3. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>3. CSV File Preview.</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Instant preview inside Odoo interface</li>
-                                                <li>Simple and clean tabular view</li>
-                                                <li>Quick download option available</li>
-                                            </ul>
-
-                                        </p>
-
+                                    <div id="vt-content3" class="vt-panel">
+                                        <h3><b>Files Previews</b>.</h3>
+                                        <h4> CSV File Preview.</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Instant preview inside Odoo interface</li>
+                                            <li>Simple and clean tabular view</li>
+                                            <li>Quick download option available</li>
+                                        </ul>
+                                        <!--                                        </p>-->
                                         <img src="image/csv_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 4. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>4. Word File Preview (.doc).</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Preview Word documents directly inside chatter</li>
-                                                <li>Zoom in / Zoom out support</li>
-                                                <li>Open file in a new browser tab</li>
-                                                <li>Easy download option</li>
-                                            </ul>
-                                        </p>
-
+                                        <h4> Word File Preview (.doc).</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Preview Word documents directly inside chatter</li>
+                                            <li>Zoom in / Zoom out support</li>
+                                            <li>Open file in a new browser tab</li>
+                                            <li>Easy download option</li>
+                                        </ul>
+                                        <!--                                        </p>-->
                                         <img src="image/doc_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 5. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>5. Word File Preview (.docx).</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Smooth preview for modern Word documents</li>
-                                                <li>Supports zoom controls</li>
-                                                <li>Open externally in new tab</li>
-                                                <li>Download anytime</li>
-                                            </ul>
-                                        </p>
+                                        <h4> Word File Preview (.docx).</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Smooth preview for modern Word documents</li>
+                                            <li>Supports zoom controls</li>
+                                            <li>Open externally in new tab</li>
+                                            <li>Download anytime</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/docx_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 6. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>6. OpenDocument Spreadsheet Preview (.ods)</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Preview OpenOffice/LibreOffice spreadsheets</li>
-                                                <li>Zoom controls for better visibility</li>
-                                                <li>Open in new tab</li>
-                                                <li>Download supported</li>
-                                            </ul>
-                                        </p>
+                                        <h4> OpenDocument Spreadsheet Preview (.ods)</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Preview OpenOffice/LibreOffice spreadsheets</li>
+                                            <li>Zoom controls for better visibility</li>
+                                            <li>Open in new tab</li>
+                                            <li>Download supported</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/ods_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 7. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>7. OpenDocument Text Preview (.odt).</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Preview text documents instantly</li>
-                                                <li>Clean and readable format</li>
-                                                <li>Zoom options available</li>
-                                                <li>Open externally or download</li>
-                                            </ul>
-                                        </p>
+                                        <h4> OpenDocument Text Preview (.odt).</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Preview text documents instantly</li>
+                                            <li>Clean and readable format</li>
+                                            <li>Zoom options available</li>
+                                            <li>Open externally or download</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/odt_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
 
-                                <!-- 8. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>8. PowerPoint File Preview (.ppt).</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Slide-by-slide preview inside Odoo</li>
-                                                <li>Presentation-friendly layout</li>
-                                                <li>Zoom and navigation support</li>
-                                                <li>Open in new tab + download</li>
-                                            </ul>
-                                        </p>
+                                        <h4> PowerPoint File Preview (.ppt).</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Slide-by-slide preview inside Odoo</li>
+                                            <li>Presentation-friendly layout</li>
+                                            <li>Zoom and navigation support</li>
+                                            <li>Open in new tab + download</li>
+                                        </ul>
+                                        <hr/>
+                                        <br/>
+                                        <!--                                        </p>-->
 
                                         <img src="image/ppt_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 9. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>9. Excel File Preview (.xls)</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Spreadsheet preview inside Odoo</li>
-                                                <li>Clear data visualization</li>
-                                                <li>Zoom functionality</li>
-                                                <li>Open in new tab + download option</li>
-                                            </ul>
-                                        </p>
+                                        <h4> Excel File Preview (.xls)</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Spreadsheet preview inside Odoo</li>
+                                            <li>Clear data visualization</li>
+                                            <li>Zoom functionality</li>
+                                            <li>Open in new tab + download option</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/xls_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 10. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>10. Excel File Preview (.xlsx)</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Advanced Excel preview support</li>
-                                                <li>Maintains formatting and structure</li>
-                                                <li>Zoom in / out available</li>
-                                                <li>Open in tab or download</li>
-                                            </ul>
-                                        </p>
+                                        <h4> Excel File Preview (.xlsx)</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Advanced Excel preview support</li>
+                                            <li>Maintains formatting and structure</li>
+                                            <li>Zoom in / out available</li>
+                                            <li>Open in tab or download</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/xlsx_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 11. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>11. MP4 File Preview (.mp4)</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Video preview inside Odoo</li>
-                                                <li>Clear data visualization</li>
-                                                <li>Video Speed functionality</li>
-                                                <li>Download option</li>
-                                            </ul>
-                                        </p>
+                                        <h4> MP4 File Preview (.mp4)</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Video preview inside Odoo</li>
+                                            <li>Clear data visualization</li>
+                                            <li>Video Speed functionality</li>
+                                            <li>Download option</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/mp4_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 12. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>12. WEBM File Preview (.webm)</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Video preview inside Odoo</li>
-                                                <li>Clear data visualization</li>
-                                                <li>Video Speed functionality</li>
-                                                <li>Download option</li>
-                                            </ul>
-                                        </p>
+                                        <h4> WEBM File Preview (.webm)</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Video preview inside Odoo</li>
+                                            <li>Clear data visualization</li>
+                                            <li>Video Speed functionality</li>
+                                            <li>Download option</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/webm_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 13. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>13. Image File Preview (.png)</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Image preview inside Odoo</li>
-                                                <li>Clear data visualization</li>
-                                                <li>Print and Rotate functionality</li>
-                                                <li>Download option</li>
-                                            </ul>
-                                        </p>
+                                        <h4> Image File Preview (.png)</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Image preview inside Odoo</li>
+                                            <li>Clear data visualization</li>
+                                            <li>Print and Rotate functionality</li>
+                                            <li>Download option</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/png_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 14. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>14. Image File Preview (.jpg)</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Image preview inside Odoo</li>
-                                                <li>Clear data visualization</li>
-                                                <li>Print and Rotate functionality</li>
-                                                <li>Download option</li>
-                                            </ul>
-                                        </p>
+                                        <h4> Image File Preview (.jpg)</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Image preview inside Odoo</li>
+                                            <li>Clear data visualization</li>
+                                            <li>Print and Rotate functionality</li>
+                                            <li>Download option</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/jpg_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
-                                    </div>
-                                </div>
-
-                                <!-- 15. -->
-                                <div class="tus-section" style="margin-top:20px; border-radius: 10px; border: 1px solid #dddbd8; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                                    <div style="padding:10px 15px 10px 15px; margin-top:5px; margin-left:5px;">
-                                        <h4>15. Image File Preview (.jpeg)</h4>
-                                        <p>
-                                            <ul>
-                                                <li>Image preview inside Odoo</li>
-                                                <li>Clear data visualization</li>
-                                                <li>Print and Rotate functionality</li>
-                                                <li>Download option</li>
-                                            </ul>
-                                        </p>
+                                        <h4> Image File Preview (.jpeg)</h4>
+                                        <!--                                        <p>-->
+                                        <ul style="display: inline-block;text-align: left;">
+                                            <li>Image preview inside Odoo</li>
+                                            <li>Clear data visualization</li>
+                                            <li>Print and Rotate functionality</li>
+                                            <li>Download option</li>
+                                        </ul>
+                                        <!--                                        </p>-->
 
                                         <img src="image/jpeg_file_preview.png" alt="" width="100%"
-                                                style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                             style="border-radius: 10px; margin: 10px 0; border: 1px solid #faad18;">
+                                        <hr/>
+                                        <br/>
 
                                     </div>
                                 </div>
 
-                            </div>
-                            <!-- Features Tabs -->
-                            <div class="tab-pane" id="tus_feature">
-                                <div class="container">
-                                    <ul style="padding:0">
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            <strong>Chatter Attachment Preview</strong> - Instantly preview attachments directly inside Odoo chatter (message thread)
-                                        </li>
-
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            <strong>Many2many Binary Field Support</strong> - Full preview support for attachments in Many2many binary fields across forms
-                                        </li>
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            <strong>Show File Size</strong> - Instantly view file size in both chatter and Many2many fields before opening
-                                        </li>
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            <strong>No Download Required</strong> - Open files instantly without downloading
-                                        </li>
-
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            <strong>Multi-Format Preview</strong> - Supports PDF, images (JPG, PNG, and
-                                            etc), videos (MP4, WEBM, MOV and etc), and Office files (DOCX, XLSX,
-                                            PPT and etc).
-
-                                        </li>
-
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            <strong>Boost Productivity</strong> - Reduce clicks and save time in daily workflows
-                                        </li>
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            <strong>Office File Viewer Integration</strong> - Preview Word, Excel, and PowerPoint using Microsoft Office Online and optional Google Docs Viewer
-                                        </li>
-
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            <strong>Works Across All Modules</strong> - Compatible with Sales, Accounting, HR, Projects, and custom modules
-                                        </li>
-
-                                    </ul>
+                                <!-- Tab Labels/Buttons -->
+                                <div class="vt-labels">
+                                    <a class="vt-tab" href="#vt-tab1">Preview Configuration.</a>
+                                    <a class="vt-tab" href="#vt-tab2">File Size Display</a>
+                                    <a class="vt-tab" href="#vt-tab3">Files Previews</a>
                                 </div>
                             </div>
-                            <!-- Support Tabs -->
-                            <div class="tab-pane" id="tus_support">
-                                <div class="container">
-                                    <ul style="padding:0">
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check-circle"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            We provide 90 days bug-free support related to our module.
-                                        </li>
 
-                                        <!-- Newly added line -->
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check-circle"
-                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            We provide 5 hours of free configuration support. Additional configuration
-                                            or customization is billable.
-                                        </li>
 
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check-circle"
+                        </div>
+                        <!-- Features Tabs -->
+                        <div class="tab-pane" id="tus_feature">
+                            <div class="container">
+                                <ul style="padding:0">
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check"
                                                   style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            The support team is available from Monday to Friday 10:00 AM to 07:00 PM
-                                            (IST).
-                                        </li>
-                                        <li class="shadow rounded"
-                                            style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
-                                            <span class="fa fa-check-circle"
+                                        <strong>Chatter Attachment Preview</strong> - Instantly preview attachments
+                                        directly inside Odoo chatter (message thread)
+                                    </li>
+
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check"
                                                   style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
-                                            To create a ticket, send an email to support@techultra.in.
-                                        </li>
-                                    </ul>
-                                </div>
+                                        <strong>Many2many Binary Field Support</strong> - Full preview support for
+                                        attachments in Many2many binary fields across forms
+                                    </li>
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        <strong>Show File Size</strong> - Instantly view file size in both chatter and
+                                        Many2many fields before opening
+                                    </li>
+
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        <strong>No Download Required</strong> - Open files instantly without downloading
+                                    </li>
+
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        <strong>Multi-Format Preview</strong> - Supports PDF, images (JPG, PNG, and
+                                        etc), videos (MP4, WEBM, MOV and etc), and Office files (DOCX, XLSX,
+                                        PPT and etc).
+                                    </li>
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        <strong>Boost Productivity</strong> - Reduce clicks and save time in daily
+                                        workflows
+
+                                    </li>
+
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        <strong>Office File Viewer Integration</strong> - Preview Word, Excel, and
+                                        PowerPoint using Microsoft Office Online and optional Google Docs Viewer
+
+                                    </li>
+
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        <strong>Works Across All Modules</strong> - Compatible with Sales, Accounting,
+                                        HR, Projects, and custom modules
+
+                                    </li>
+
+
+                                </ul>
                             </div>
-                            <!-- FAQ Tabs -->
-                            <div class="tab-pane" id="tus_faq">
-                                <div class="container">
-                                    <div id="accordion">
+                        </div>
+                        <!-- Support Tabs -->
+                        <div class="tab-pane" id="tus_support">
+                            <div class="container">
+                                <ul style="padding:0">
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check-circle"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        We provide 90 days bug-free support related to our module.
+                                    </li>
 
-                                        <!-- FAQ 1 -->
-                                        <div class="card" style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
-                                            <div class="card-header pl-0 position-relative align-items-center d-flex"
-                                                 style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
-                                                <a class="card-link collapsed d-flex justify-content-center align-items-center"
-                                                   data-bs-toggle="collapse" href="#faq1"
-                                                   style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
-                                                   aria-expanded="false" aria-controls="faq1">
-                                                    <i class="fa fa-plus"
-                                                       style="font-size:16px; font-weight:300; color:#646464"></i>
-                                                </a>
-                                                <p class="pr-5 pl-3"
-                                                   style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
-                                                    Does this module support attachment preview in chatter?
+                                    <!-- Newly added line -->
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check-circle"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        We provide 5 hours of free configuration support. Additional configuration
+                                        or customization is billable.
+                                    </li>
+
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check-circle"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        The support team is available from Monday to Friday 10:00 AM to 07:00 PM
+                                        (IST).
+                                    </li>
+                                    <li class="shadow rounded"
+                                        style="font-family: Montserrat;padding:20px; margin-bottom:20px; font-size:16px; color:#212121; font-weight:600; letter-spacing:1px; display:block; border-radius:0.25rem !important">
+                                            <span class="fa fa-check-circle"
+                                                  style="color:#3363c1; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                        To create a ticket, send an email to support@techultra.in.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- FAQ Tabs -->
+                        <div class="tab-pane" id="tus_faq">
+                            <div class="container">
+                                <div id="accordion">
+
+                                    <!-- FAQ 1 -->
+                                    <div class="card"
+                                         style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
+                                        <div class="card-header pl-0 position-relative align-items-center d-flex"
+                                             style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
+                                            <a class="card-link collapsed d-flex justify-content-center align-items-center"
+                                               data-bs-toggle="collapse" href="#faq1"
+                                               style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
+                                               aria-expanded="false" aria-controls="faq1">
+                                                <i class="fa fa-plus"
+                                                   style="font-size:16px; font-weight:300; color:#646464"></i>
+                                            </a>
+                                            <p class="pr-5 pl-3"
+                                               style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
+                                                Does this module support attachment preview in chatter?
+                                            </p>
+                                        </div>
+                                        <div id="faq1" class="collapse" data-parent="#accordion" style="">
+                                            <div class="card-body pt-0 pl-4">
+                                                <p class="pl-5 font-italic"
+                                                   style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
+                                                    Yes, it allows you to preview attachments directly inside the Odoo
+                                                    chatter without downloading them.
+
                                                 </p>
                                             </div>
-                                            <div id="faq1" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body pt-0 pl-4">
-                                                    <p class="pl-5 font-italic"
-                                                       style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
-                                                       Yes, it allows you to preview attachments directly inside the Odoo chatter without downloading them.
-                                                    </p>
-                                                </div>
-                                            </div>
                                         </div>
-
-                                        <!-- FAQ 2 -->
-                                        <div class="card" style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
-                                            <div class="card-header pl-0 position-relative align-items-center d-flex"
-                                                 style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
-                                                <a class="card-link collapsed d-flex justify-content-center align-items-center"
-                                                   data-bs-toggle="collapse" href="#faq2"
-                                                   style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
-                                                   aria-expanded="false" aria-controls="faq2">
-                                                    <i class="fa fa-plus"
-                                                       style="font-size:16px; font-weight:300; color:#646464"></i>
-                                                </a>
-                                                <p class="pr-5 pl-3"
-                                                   style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
-                                                    Can I preview files in Many2many binary fields?
-                                                </p>
-                                            </div>
-                                            <div id="faq2" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body pt-0 pl-4">
-                                                    <p class="pl-5 font-italic"
-                                                       style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
-                                                        Absolutely. The module fully supports Many2many binary
-                                                        attachment fields, enabling inline preview in form views.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- FAQ 3 -->
-                                        <div class="card" style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
-                                            <div class="card-header pl-0 position-relative align-items-center d-flex"
-                                                 style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
-                                                <a class="card-link collapsed d-flex justify-content-center align-items-center"
-                                                   data-bs-toggle="collapse" href="#faq3"
-                                                   style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
-                                                   aria-expanded="false" aria-controls="faq3">
-                                                    <i class="fa fa-plus"
-                                                       style="font-size:16px; font-weight:300; color:#646464"></i>
-                                                </a>
-                                                <p class="pr-5 pl-3"
-                                                   style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
-                                                    What file types are supported?
-                                                </p>
-                                            </div>
-                                            <div id="faq3" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body pt-0 pl-4">
-                                                    <p class="pl-5 font-italic"
-                                                       style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
-                                                        You can preview PDFs, images, videos, and Office files like Word, Excel, and PowerPoint.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- FAQ 4 -->
-                                        <div class="card" style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
-                                            <div class="card-header pl-0 position-relative align-items-center d-flex"
-                                                 style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
-                                                <a class="card-link collapsed d-flex justify-content-center align-items-center"
-                                                   data-bs-toggle="collapse" href="#faq4"
-                                                   style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
-                                                   aria-expanded="false" aria-controls="faq4">
-                                                    <i class="fa fa-plus"
-                                                       style="font-size:16px; font-weight:300; color:#646464"></i>
-                                                </a>
-                                                <p class="pr-5 pl-3"
-                                                   style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
-                                                    How are Office files displayed?
-                                                </p>
-                                            </div>
-                                            <div id="faq4" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body pt-0 pl-4">
-                                                    <p class="pl-5 font-italic"
-                                                       style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
-                                                        Office files are rendered using Microsoft Office Online, with optional support for Google Docs Viewer.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- FAQ 5 -->
-                                        <div class="card" style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
-                                            <div class="card-header pl-0 position-relative align-items-center d-flex"
-                                                 style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
-                                                <a class="card-link collapsed d-flex justify-content-center align-items-center"
-                                                   data-bs-toggle="collapse" href="#faq5"
-                                                   style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
-                                                   aria-expanded="false" aria-controls="faq5">
-                                                    <i class="fa fa-plus"
-                                                       style="font-size:16px; font-weight:300; color:#646464"></i>
-                                                </a>
-                                                <p class="pr-5 pl-3"
-                                                   style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
-                                                    Will it work with all Odoo modules?
-                                                </p>
-                                            </div>
-                                            <div id="faq5" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body pt-0 pl-4">
-                                                    <p class="pl-5 font-italic"
-                                                       style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
-                                                        Yes, it works across standard modules like Sales, Accounting, HR, Projects, and any custom module using attachments.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- FAQ 6 -->
-                                        <div class="card" style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
-                                            <div class="card-header pl-0 position-relative align-items-center d-flex"
-                                                 style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
-                                                <a class="card-link collapsed d-flex justify-content-center align-items-center"
-                                                   data-bs-toggle="collapse" href="#faq6"
-                                                   style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
-                                                   aria-expanded="false" aria-controls="faq6">
-                                                    <i class="fa fa-plus"
-                                                       style="font-size:16px; font-weight:300; color:#646464"></i>
-                                                </a>
-                                                <p class="pr-5 pl-3"
-                                                   style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
-                                                    Can I see file size before opening attachments?
-                                                </p>
-                                            </div>
-                                            <div id="faq6" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body pt-0 pl-4">
-                                                    <p class="pl-5 font-italic"
-                                                       style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
-                                                        Yes, the module displays file size directly in chatter and
-                                                        Many2many fields, helping you decide before opening or
-                                                        downloading.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
 
+                                    <!-- FAQ 2 -->
+                                    <div class="card"
+                                         style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
+                                        <div class="card-header pl-0 position-relative align-items-center d-flex"
+                                             style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
+                                            <a class="card-link collapsed d-flex justify-content-center align-items-center"
+                                               data-bs-toggle="collapse" href="#faq2"
+                                               style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
+                                               aria-expanded="false" aria-controls="faq2">
+                                                <i class="fa fa-plus"
+                                                   style="font-size:16px; font-weight:300; color:#646464"></i>
+                                            </a>
+                                            <p class="pr-5 pl-3"
+                                               style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
+                                                Can I preview files in Many2many binary fields?
+                                            </p>
+                                        </div>
+                                        <div id="faq2" class="collapse" data-parent="#accordion" style="">
+                                            <div class="card-body pt-0 pl-4">
+                                                <p class="pl-5 font-italic"
+                                                   style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
+                                                    Absolutely. The module fully supports Many2many binary
+                                                    attachment fields, enabling inline preview in form views.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ 3 -->
+                                    <div class="card"
+                                         style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
+                                        <div class="card-header pl-0 position-relative align-items-center d-flex"
+                                             style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
+                                            <a class="card-link collapsed d-flex justify-content-center align-items-center"
+                                               data-bs-toggle="collapse" href="#faq3"
+                                               style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
+                                               aria-expanded="false" aria-controls="faq3">
+                                                <i class="fa fa-plus"
+                                                   style="font-size:16px; font-weight:300; color:#646464"></i>
+                                            </a>
+                                            <p class="pr-5 pl-3"
+                                               style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
+                                                What file types are supported?
+                                            </p>
+                                        </div>
+                                        <div id="faq3" class="collapse" data-parent="#accordion" style="">
+                                            <div class="card-body pt-0 pl-4">
+                                                <p class="pl-5 font-italic"
+                                                   style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
+                                                    You can preview PDFs, images, videos, and Office files like Word,
+                                                    Excel, and PowerPoint.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ 4 -->
+                                    <div class="card"
+                                         style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
+                                        <div class="card-header pl-0 position-relative align-items-center d-flex"
+                                             style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
+                                            <a class="card-link collapsed d-flex justify-content-center align-items-center"
+                                               data-bs-toggle="collapse" href="#faq4"
+                                               style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
+                                               aria-expanded="false" aria-controls="faq4">
+                                                <i class="fa fa-plus"
+                                                   style="font-size:16px; font-weight:300; color:#646464"></i>
+                                            </a>
+                                            <p class="pr-5 pl-3"
+                                               style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
+                                                How are Office files displayed?
+                                            </p>
+                                        </div>
+                                        <div id="faq4" class="collapse" data-parent="#accordion" style="">
+                                            <div class="card-body pt-0 pl-4">
+                                                <p class="pl-5 font-italic"
+                                                   style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
+                                                    Office files are rendered using Microsoft Office Online, with
+                                                    optional support for Google Docs Viewer.
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ 5 -->
+                                    <div class="card"
+                                         style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
+                                        <div class="card-header pl-0 position-relative align-items-center d-flex"
+                                             style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
+                                            <a class="card-link collapsed d-flex justify-content-center align-items-center"
+                                               data-bs-toggle="collapse" href="#faq5"
+                                               style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
+                                               aria-expanded="false" aria-controls="faq5">
+                                                <i class="fa fa-plus"
+                                                   style="font-size:16px; font-weight:300; color:#646464"></i>
+                                            </a>
+                                            <p class="pr-5 pl-3"
+                                               style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
+                                                Will it work with all Odoo modules?
+                                            </p>
+                                        </div>
+                                        <div id="faq5" class="collapse" data-parent="#accordion" style="">
+                                            <div class="card-body pt-0 pl-4">
+                                                <p class="pl-5 font-italic"
+                                                   style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
+                                                    Yes, it works across standard modules like Sales, Accounting, HR,
+                                                    Projects, and any custom module using attachments.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FAQ 6 -->
+                                    <div class="card"
+                                         style="border-bottom:1px solid #969696 !important; border:0px;background-color: transparent;">
+                                        <div class="card-header pl-0 position-relative align-items-center d-flex"
+                                             style="border:none; padding-bottom:0.3rem; padding-top:0.3rem;background-color: transparent;">
+                                            <a class="card-link collapsed d-flex justify-content-center align-items-center"
+                                               data-bs-toggle="collapse" href="#faq6"
+                                               style="width:25px; height:25px; line-height:11px; border-radius:2px; padding:0; font-size:24px"
+                                               aria-expanded="false" aria-controls="faq6">
+                                                <i class="fa fa-plus"
+                                                   style="font-size:16px; font-weight:300; color:#646464"></i>
+                                            </a>
+                                            <p class="pr-5 pl-3"
+                                               style="font-family: Montserrat; margin:0; font-weight:300; color:#646464; font-size:16px">
+                                                Can I see file size before opening attachments?
+                                            </p>
+                                        </div>
+                                        <div id="faq6" class="collapse" data-parent="#accordion" style="">
+                                            <div class="card-body pt-0 pl-4">
+                                                <p class="pl-5 font-italic"
+                                                   style="font-family: Montserrat; font-weight:300; color:#646464; font-size:16px">
+                                                    Yes, the module displays file size directly in chatter and
+                                                    Many2many fields, helping you decide before opening or
+                                                    downloading.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
         </div>
         <div class="px-md-5 py-md-4 p-2 mt-5 mb-4 shadow "
              style="background-color: transparent;margin-top: 41px;border-radius:20px; font-family: Montserrat;">
@@ -763,17 +1005,17 @@
                     <div class="section-heading-line"></div>
                     <style>
                         .section-heading-line {
-                          content: '';
-                          display: block;
-                          width: 224px;
-                          height: 3px;
-                          background: #3e4095;
-                          border-radius: 25%;
+                            content: '';
+                            display: block;
+                            width: 224px;
+                            height: 3px;
+                            background: #3e4095;
+                            border-radius: 25%;
 
 
-                          margin-top: 15px;
-                          margin-bottom: 5px;
-                          font-family: Montserrat;
+                            margin-top: 15px;
+                            margin-bottom: 5px;
+                            font-family: Montserrat;
                         }
                     </style>
                 </div>
@@ -811,7 +1053,8 @@
                                                              style="height: 100px;">
                                                         <div class="mt8"
                                                              style="color: #27AAE1 !important;font-family: Montserrat;font-size:20px;">
-                                                            Odoo Product Personalizer | Web-to-Print Studio | Product Editor, Designer & Customizer | Web2Print
+                                                            Odoo Product Personalizer | Web-to-Print Studio | Product
+                                                            Editor, Designer & Customizer | Web2Print
                                                         </div>
                                                     </div>
                                                 </a>
@@ -1274,11 +1517,14 @@
                                                 <a href="https://apps.odoo.com/apps/modules/19.0/tus_custom_currency_rate"
                                                    target="_blank">
                                                     <div>
-                                                        <img class="img img-responsive" src="sliders/tus_custom_currency_rate.gif"
+                                                        <img class="img img-responsive"
+                                                             src="sliders/tus_custom_currency_rate.gif"
                                                              style="height: 100px;">
                                                         <div class="mt8"
                                                              style="color: #27AAE1 !important;font-family: Montserrat;font-size:20px;">
-                                                            Manual Currency Rate for Sale Order, Purchase Order, Invoice, Bill & Payment
+                                                            Manual Currency Rate for Sale Order, Purchase Order,
+                                                            Invoice,
+                                                            Bill & Payment
                                                         </div>
                                                     </div>
                                                 </a>
@@ -1287,7 +1533,8 @@
                                                 <a href="https://apps.odoo.com/apps/modules/19.0/pos_close_session_from_bakcend"
                                                    target="_blank">
                                                     <div>
-                                                        <img class="img img-responsive" src="sliders/pos_close_session_from_bakcend_.gif"
+                                                        <img class="img img-responsive"
+                                                             src="sliders/pos_close_session_from_bakcend_.gif"
                                                              style="height: 100px;">
                                                         <div class="mt8"
                                                              style="color: #27AAE1 !important;font-family: Montserrat;font-size:20px;">
@@ -1370,17 +1617,17 @@
                                 </div>
                                 <a class="carousel-control-prev" href="#tus_carousel" data-bs-slide="prev"
                                    style="width:35px; color:#000; margin-left:-30px">
-                <span class="carousel-control-prev-icon"
-                      style="font-size:25px; font-family:Montserrat; color:#000000; margin-top:-50px">
-                  <i class="fa fa-chevron-left" aria-hidden="false"></i>
-                </span>
+                    <span class="carousel-control-prev-icon"
+                          style="font-size:25px; font-family:Montserrat; color:#000000; margin-top:-50px">
+                      <i class="fa fa-chevron-left" aria-hidden="false"></i>
+                    </span>
                                 </a>
                                 <a class="carousel-control-next" href="#tus_carousel" data-bs-slide="next"
                                    style="width:35px; color:#000; margin-right:-30px">
-                <span class="carousel-control-next-icon"
-                      style="font-size:25px; font-family:Montserrat; color:#000000; margin-top:-50px">
-                  <i class="fa fa-chevron-right" aria-hidden="false"></i>
-                </span>
+                    <span class="carousel-control-next-icon"
+                          style="font-size:25px; font-family:Montserrat; color:#000000; margin-top:-50px">
+                      <i class="fa fa-chevron-right" aria-hidden="false"></i>
+                    </span>
                                 </a>
                             </div>
                         </section>
@@ -1395,15 +1642,15 @@
             <div class="bgColor mt-4 mb-4" style="width: 100% !important;max-width: 100% !important;">
                 <img src="OurServices.jpg" width="100%" style="border-radius: 10px;"/>
             </div>
-            <div class="sh_center text-center justify-content-center my-5 row" style="isplay: flex;
-    justify-content: center;
-    align-items: center;">
+            <div class="sh_center text-center justify-content-center my-5 row" style="display: flex;
+        justify-content: center;
+        align-items: center;">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-12">
                     <a class="shadow rounded py-3 px-4 mb-2 d-flex align-items-center justify-content-center"
                        style="border-width:1px; border-style:solid; color:#fff; text-decoration:none; border-radius:0.25rem !important; display:inline-block; font-size:20px; font-weight:bold; width:100%; background-color: #27AAE1 !important;border-radius:20px !important;"
                        href="https://apps.odoo.com/apps/modules/browse?search=Techultra+Solutions" target="_blank">
-                        <span class="fa fa-cube mr-3"
-                              style="margin-right: 11px;border-radius:20px !important;font-size:20px; color:#fff"></span>
+                            <span class="fa fa-cube mr-3"
+                                  style="margin-right: 11px;border-radius:20px !important;font-size:20px; color:#fff"></span>
                         <span class="align-middle">Our Apps</span>
                     </a>
                 </div>
