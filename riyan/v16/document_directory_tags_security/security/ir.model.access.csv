@@ -1,9 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_document_directory_manager,document.directory.manager,model_document_directory,group_document_hub_manager,1,1,1,1
-access_document_directory_user,document.directory.user,model_document_directory,group_document_hub_user,1,0,0,0
-access_document_directory_tag_manager,document.directory.tag.manager,model_document_directory_tag,group_document_hub_manager,1,1,1,1
-access_document_directory_tag_user,document.directory.tag.user,model_document_directory_tag,group_document_hub_user,1,0,0,0
-access_document_directory_tag_employee,document.directory.tag.employee,model_document_directory_tag,group_document_hub_employee,1,0,0,0
-access_document_tag_manager,document.tag.manager,model_document_tag,group_document_hub_manager,1,1,1,1
-access_document_tag_user,document.tag.user,model_document_tag,group_document_hub_user,1,0,0,0
-access_document_tag_employee,document.tag.employee,model_document_tag,group_document_hub_employee,1,0,0,0
