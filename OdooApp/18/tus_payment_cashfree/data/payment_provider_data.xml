@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+	<record id="payment_acquirer_cashfree" model="payment.provider">
+		<field name="name">Cashfree</field>
+		<field name="image_128" type="base64" file="tus_payment_cashfree/static/description/icon.png" />
+		<field name="module_id" ref="base.module_tus_payment_cashfree"/>
+		<field name="code">cashfree</field>
+		<field name="company_id" ref="base.main_company" />
+		<field name="redirect_form_view_id" ref="cashfree_redirect_form" />
+		<field name="payment_method_ids"
+               eval="[Command.set([
+                         ref('payment.payment_method_card'),
+                         ref('payment.payment_method_netbanking'),
+                         ref('payment.payment_method_upi'),
+                     ])]"
+        />
+	</record>
+</odoo>
