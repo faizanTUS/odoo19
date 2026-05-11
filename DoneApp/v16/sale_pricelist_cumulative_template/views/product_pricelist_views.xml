@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="view_product_pricelist_form_cumulative" model="ir.ui.view">
+    <field name="name">product.pricelist.form.cumulative.by.template</field>
+    <field name="model">product.pricelist</field>
+    <field name="inherit_id" ref="product.product_pricelist_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+        <page string="Cumulative by Template">
+          <group>
+            <field name="cumulative_by_template"/>
+            <div class="text-muted" colspan="2">
+              If enabled, minimum quantity tiers use the sum of quantities of all variants
+              (same product template) on the order or cart.
+            </div>
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+</odoo>
