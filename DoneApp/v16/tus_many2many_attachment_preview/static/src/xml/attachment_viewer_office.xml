@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Odoo 16: Patch the main full-screen attachment viewer (chatter) -->
+    <t t-inherit="mail.AttachmentViewer" t-inherit-mode="extension">
+        
+        <!-- 1. Add Office icon in header -->
+        <xpath expr="//div[hasclass('o_AttachmentViewer_header')]//div[hasclass('o_AttachmentViewer_icon')]" position="inside">
+            <i t-if="attachmentViewer.attachmentViewerViewable.isMsOffice" class="fa fa-file-o" role="img" title="Office document"/>
+        </xpath>
+
+        <!-- 2. Add Office iframe in main area -->
+        <xpath expr="//div[hasclass('o_AttachmentViewer_main')]" position="inside">
+            <t t-if="attachmentViewer.attachmentViewerViewable.isMsOffice">
+                <div
+                    t-on-click.stop=""
+                    t-on-wheel="this.map2OnWheelOffice"
+                    class="o-map2-office-outer w-75 h-100 d-flex align-items-center justify-content-center overflow-auto"
+                    t-att-class="{ 'w-100': messaging.device.isSmall }"
+                >
+                    <div class="o-map2-office-shell w-100 h-100" t-att-style="this.map2OfficeShellStyle()">
+                        <iframe
+                            class="o_AttachmentViewer_view o_AttachmentViewer_viewIframe o-map2-office-iframe w-100 h-100 border-0"
+                            t-att-src="attachmentViewer.attachmentViewerViewable.defaultSource"
+                            title="Office preview"
+                        />
+                    </div>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- 3. Add Toolbar for Office documents -->
+        <xpath expr="//div[hasclass('o_AttachmentViewer_main')]" position="after">
+            <div t-if="attachmentViewer.attachmentViewerViewable.isMsOffice" class="o_AttachmentViewer_toolbar position-absolute bottom-0 d-flex" role="toolbar">
+                <div class="o_AttachmentViewer_toolbarButton p-3 rounded-0" t-on-click.stop="() => attachmentViewer.officeZoomIn()" title="Zoom In (+)" role="button">
+                    <i class="fa fa-fw fa-plus" role="img"/>
+                </div>
+                <div
+                    class="o_AttachmentViewer_toolbarButton p-3 rounded-0"
+                    t-att-class="{ 'o_disabled opacity-50': attachmentViewer.officeScale === 1 }"
+                    t-on-click.stop="() => attachmentViewer.officeResetZoom()"
+                    role="button"
+                    title="Reset Zoom (0)"
+                >
+                    <i class="fa fa-fw fa-search" role="img"/>
+                </div>
+                <div
+                    class="o_AttachmentViewer_toolbarButton p-3 rounded-0"
+                    t-att-class="{ 'o_disabled opacity-50': attachmentViewer.officeScale &lt;= 0.45 }"
+                    t-on-click.stop="() => attachmentViewer.officeZoomOut()"
+                    role="button"
+                    title="Zoom Out (-)"
+                >
+                    <i class="fa fa-fw fa-minus" role="img"/>
+                </div>
+                <div class="o_AttachmentViewer_toolbarButton p-3 rounded-0" t-on-click.stop="() => attachmentViewer.openOfficeInNewTab()" title="Open in new tab" role="button">
+                    <i class="fa fa-fw fa-external-link" role="img"/>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

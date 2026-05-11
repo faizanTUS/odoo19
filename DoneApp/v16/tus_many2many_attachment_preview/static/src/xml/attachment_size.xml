@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Many2many binary widget: show size next to extension -->
+    <t t-inherit="web.Many2ManyBinaryField.attachment_preview" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('caption')][hasclass('small')]/a" position="after">
+            <t t-if="file.file_size">
+                <small class="text-muted o_map2_attachment_size">
+                    (<t t-esc="this.map2FormatSize(file.file_size)"/>)
+                </small>
+            </t>
+        </xpath>
+    </t>
+
+    <!-- Chatter: show size in attachment card details -->
+    <t t-inherit="mail.AttachmentCard" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_AttachmentCard_details')]" position="inside">
+            <div t-if="attachmentCard.attachment.file_size_human"
+                   class="o_AttachmentCard_size text-muted small"
+                   t-esc="attachmentCard.attachment.file_size_human"
+                   style="font-size: 0.8em; opacity: 0.8;"
+            />
+        </xpath>
+    </t>
+
+</templates>
