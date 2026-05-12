@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_list_kanban_auto_refresh" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.list.kanban.auto.refresh</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='languages']" position="after">
+                <div id="list_kanban_auto_refresh_settings">
+                    <block
+                        title="Auto Refresh — List &amp; Kanban"
+                        name="list_kanban_auto_refresh_setting_container"
+                    >
+                        <setting
+                            id="list_kanban_auto_refresh_enabled_setting"
+                            string="Allow auto refresh data"
+                            help="Enable soft data reload on list (tree) and kanban views. When off, automatic refresh stays disabled until turned on here or per view (if globally allowed). Default: off."
+                        >
+                            <field name="list_kanban_auto_refresh_enabled"/>
+                        </setting>
+                        <setting
+                            id="list_kanban_auto_refresh_interval_setting"
+                            string="Refresh interval (ms)"
+                            help="Default delay between each soft reload, in milliseconds. Minimum 1000. Users start from this value on each new list or kanban screen; they can pause or resume from the view toolbar for the current session only."
+                        >
+                            <field
+                                name="list_kanban_auto_refresh_interval_ms"
+                                class="w-auto"
+                                placeholder="10000"
+                            />
+                        </setting>
+                    </block>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
