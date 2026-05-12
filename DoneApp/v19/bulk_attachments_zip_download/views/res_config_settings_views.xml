@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_bulk_zip" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.bulk.attachments.zip</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='languages']" position="after">
+                <div id="bulk_attachment">
+                    <block
+                    title="Bulk attachment ZIP"
+                    name="bulk_attachments_zip_setting"
+                >
+                    <setting
+                        string="Include chatter attachments by default"
+                        help="Files posted on the chatter of selected records are included in the preview when the wizard opens."
+                    >
+                        <field name="bulk_attach_include_chatter"/>
+                    </setting>
+                    <setting
+                        string="Maximum files per ZIP"
+                        help="Use 0 for no limit. Prevents accidental export of thousands of files."
+                    >
+                        <field name="bulk_attach_max_files"/>
+                    </setting>
+                    <setting
+                        string="Maximum total size (MB)"
+                        help="Use 0 for no limit. Compares the sum of attachment sizes before building the archive."
+                    >
+                        <field name="bulk_attach_max_total_mb"/>
+                    </setting>
+                </block>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
