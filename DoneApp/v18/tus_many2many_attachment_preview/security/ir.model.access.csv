@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_map2_attachment_example_user,map2.attachment.example.user,model_map2_attachment_example,base.group_user,1,1,1,1
