@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_team_view_form_quick_task" model="ir.ui.view">
+        <field name="name">crm.team.form.quick.task</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='right']" position="after">
+                <group string="Quick Task" name="quick_task">
+                    <field name="quick_task_project_id" placeholder="Default project for Quick Tasks from this team"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
