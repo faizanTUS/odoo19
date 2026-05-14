@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Put these under Accounting → Configuration → Settings -->
+        <record id="view_res_config_settings_ai_ageing" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.ai.ageing</field>
+            <field name="model">res.config.settings</field>
+            <!-- Use Accounting settings form as base -->
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//block[@id='emails']" position="before">
+                    <block title="Ageing Alerts" id="ageing_alerts">
+                        <setting id="ageing_enable_customer" string="Enable Customer Ageing Alerts">
+                            <field name="ageing_enable_customer"/>
+                        </setting>
+                        <setting id="ageing_enable_vendor" string="Enable Vendor Ageing Alerts">
+                            <field name="ageing_enable_vendor"/>
+                        </setting>
+                        <setting id="ageing_min_overdue_amount" string="Min Overdue Amount for Alert">
+                            <field name="ageing_min_overdue_amount"/>
+                        </setting>
+                        <setting id="ageing_alert_cooldown_days" string="Alert Cooldown (Days)">
+                            <field name="ageing_alert_cooldown_days"/>
+                        </setting>
+
+
+                        <setting id="ageing_critical_amount_and_day" string="Ageing Critical Amount and Day Alerts">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="ageing_critical_amount" string="Min Ageing Critical Amount"/>
+                                    <field name="ageing_critical_amount"/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="ageing_critical_days" string="Min Ageing Critical Days"/>
+                                    <field name="ageing_critical_days"/>
+                                </div>
+                            </div>
+
+                        </setting>
+                        <setting id="ageing_high_amount_and_day" string="Ageing High Amount and Day Alerts">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="ageing_high_amount" string="Min Ageing High Amount"/>
+                                    <field name="ageing_high_amount"/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="ageing_high_days" string="Min Ageing High Days"/>
+                                    <field name="ageing_high_days"/>
+                                </div>
+                            </div>
+                        </setting>
+                        <setting id="ageing_medium_amount_and_day" string="Ageing Medium Amount and Day Alerts">
+
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="ageing_medium_amount" string="Min Ageing Medium Amount"/>
+                                    <field name="ageing_medium_amount"/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="ageing_medium_days" string="Min Ageing Medium Days"/>
+                                    <field name="ageing_medium_days"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+
+</odoo>

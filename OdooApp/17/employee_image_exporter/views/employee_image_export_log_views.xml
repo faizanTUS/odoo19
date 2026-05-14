@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_employee_image_export_log_tree" model="ir.ui.view">
+        <field name="name">employee.image.export.log.tree</field>
+        <field name="model">employee.image.export.log</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Image Export Logs">
+                <field name="export_datetime"/>
+                <field name="user_id"/>
+                <field name="employee_count"/>
+                <field name="file_size"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_employee_image_export_log_form" model="ir.ui.view">
+        <field name="name">employee.image.export.log.form</field>
+        <field name="model">employee.image.export.log</field>
+        <field name="arch" type="xml">
+            <form string="Employee Image Export Log">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="user_id" readonly="1"/>
+                        <field name="export_datetime" readonly="1"/>
+                        <field name="employee_count" readonly="1"/>
+                        <field name="file_size" readonly="1"/>
+                        <field name="params_summary" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_employee_image_export_log" model="ir.actions.act_window">
+        <field name="name">Employee Image Export Logs</field>
+        <field name="res_model">employee.image.export.log</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="menu_employee_image_export_log"
+              name="Export Logs"
+              parent="hr.menu_hr_root"
+              sequence="101"
+              action="employee_image_exporter.action_employee_image_export_log"
+              groups="employee_image_exporter.group_employee_image_export_log_viewer"/>
+</odoo>
