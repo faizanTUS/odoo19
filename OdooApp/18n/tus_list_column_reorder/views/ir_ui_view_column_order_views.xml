@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_ir_ui_view_column_order_tree" model="ir.ui.view">
+        <field name="name">ir.ui.view.column.order.tree</field>
+        <field name="model">ir.ui.view.column.order</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="user_id"/>
+                <field name="view_id"/>
+                <field name="model"/>
+                <field name="arch_hash"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ir_ui_view_column_order_form" model="ir.ui.view">
+        <field name="name">ir.ui.view.column.order.form</field>
+        <field name="model">ir.ui.view.column.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="view_id"/>
+                        <field name="model"/>
+                        <field name="arch_hash"/>
+                        <field name="order_json"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="action_ir_ui_view_column_order" model="ir.actions.act_window">
+        <field name="name">Column Orders</field>
+        <field name="res_model">ir.ui.view.column.order</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_ir_ui_view_column_order_root"
+              name="Column Orders"
+              parent="base.menu_custom"
+              sequence="999"
+              action="tus_list_column_reorder.action_ir_ui_view_column_order"/>
+</odoo>

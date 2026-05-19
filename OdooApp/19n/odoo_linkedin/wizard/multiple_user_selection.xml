@@ -1,0 +1,28 @@
+<odoo>
+    <record id="view_multiple_user_selection" model="ir.ui.view">
+        <field name="name">multiple.user.selection.form</field>
+        <field name="model">multiple.user.selection</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="user_ids" required="1" widget="many2many_tags"/>
+                    <field name="post_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Cancel" class="oe_highlight" special="cancel"/>
+                    <button string="Confirm" class="oe_highlight" type="object"
+                            name="post_multiple_user_post_linkedin"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_multiple_user_selection" model="ir.actions.act_window">
+        <field name="name">Multiple User Selection</field>
+        <field name="res_model">multiple.user.selection</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="odoo_linkedin.view_multiple_user_selection"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

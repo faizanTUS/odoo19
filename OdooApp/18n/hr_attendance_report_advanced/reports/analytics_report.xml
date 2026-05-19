@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="action_analytics_report"
+        name="hr_attendance_report_advanced.analytics_report_template"
+        model="attendance.analytics.wizard"
+        string="Analytics Report"
+        report_type="qweb-pdf"
+        paperformat="a4"
+        file="hr_attendance_report_advanced.analytics_report_template"/>
+</odoo>

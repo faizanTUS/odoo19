@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Create a safe category for your module -->
+        <record id="module_category_tus_purchase_tools" model="ir.module.category">
+            <field name="name">Purchases</field>
+            <field name="sequence">25</field>
+        </record>
+
+        <record id="group_reversal_user" model="res.groups">
+            <field name="name">Reversal User</field>
+<!--            <field name="category_id" ref="tus_po_reversal_advanced.module_category_tus_purchase_tools"/>-->
+        </record>
+
+
+        <record id="group_reversal_manager" model="res.groups">
+            <field name="name">Reversal Manager</field>
+            <field name="implied_ids" eval="[(4, ref('tus_po_reversal_advanced.group_reversal_user'))]"/>
+<!--            <field name="category_id" ref="tus_po_reversal_advanced.module_category_tus_purchase_tools"/>-->
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Attendance Report Menu -->
+    <menuitem id="menu_attendance_report_main" name="Attendance Reports" parent="hr_attendance.menu_hr_attendance_root" sequence="10" groups="hr_attendance_report_advanced.group_attendance_report_user"/>
+
+    <!-- Submenus -->
+    <menuitem id="menu_attendance_report_generate" name="Generate Report" parent="menu_attendance_report_main" action="action_attendance_report_wizard" sequence="10" groups="hr_attendance_report_advanced.group_attendance_report_user"/>
+    <menuitem id="menu_attendance_report_analytics" name="Analytics Dashboard" parent="menu_attendance_report_main" action="action_attendance_analytics_wizard" sequence="20" groups="hr_attendance_report_advanced.group_attendance_report_manager"/>
+    <menuitem id="menu_attendance_report_import" name="Import Data" parent="menu_attendance_report_main" action="action_attendance_import_wizard" sequence="30" groups="hr_attendance_report_advanced.group_attendance_report_manager"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_attendance_report_configuration" name="Configuration" parent="menu_attendance_report_main" sequence="100" groups="hr_attendance_report_advanced.group_attendance_report_admin"/>
+    <menuitem id="menu_attendance_status_config" name="Attendance Statuses" parent="menu_attendance_report_configuration" action="action_hr_attendance_status" sequence="10" groups="hr_attendance_report_advanced.group_attendance_report_admin"/>
+    <menuitem id="menu_attendance_config_settings" name="Report Settings" parent="menu_attendance_report_configuration" action="action_attendance_config" sequence="20" groups="hr_attendance_report_advanced.group_attendance_report_admin"/>
+    <menuitem id="menu_attendance_matrix" name="Matrix View" parent="menu_attendance_report_main" action="action_attendance_matrix" sequence="40" groups="hr_attendance_report_advanced.group_attendance_report_user"/>
+</odoo>

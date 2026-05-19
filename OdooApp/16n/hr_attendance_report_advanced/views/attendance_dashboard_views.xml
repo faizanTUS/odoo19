@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Dashboard View -->
+    <record id="view_attendance_dashboard" model="ir.ui.view">
+        <field name="name">attendance.dashboard</field>
+        <field name="model">attendance.analytics.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Analytics Dashboard" class="o_attendance_dashboard">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_generate_analytics" string="Refresh" type="object" class="oe_stat_button" icon="fa-refresh"/>
+                        <button name="action_print_dashboard_pdf" string="Download PDF" type="object" class="oe_stat_button" icon="fa-file-pdf-o" title="Download this dashboard as PDF"/>
+                        <button name="%(action_attendance_report_wizard)d" string="Generate Report" type="action" class="oe_stat_button" icon="fa-file-text-o" title="Open Report Wizard (employee matrix report)"/>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="employee_ids" widget="many2many_tags"/>
+                            <field name="department_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    
+                    <div class="dashboard-container">
+                        <!-- KPIs Section (populated when you click Refresh Dashboard) -->
+                        <div class="kpi-section">
+                            <h3>Key Performance Indicators</h3>
+                            <group colspan="2">
+                                <group string="Summary">
+                                    <field name="kpi_total_employees"/>
+                                    <field name="kpi_present_today"/>
+                                    <field name="kpi_attendance_rate"/>
+                                </group>
+                                <group string="Hours">
+                                    <field name="kpi_total_hours"/>
+                                    <field name="kpi_avg_hours"/>
+                                </group>
+                            </group>
+                            <p class="text-muted">Click <strong>Refresh Dashboard</strong> to load data.</p>
+                        </div>
+                        <field name="dashboard_data_json" invisible="1"/>
+                        
+                        <!-- Server-rendered sections (no JavaScript required) -->
+                        <div class="charts-section">
+                            <div class="chart-container mb-3">
+                                <h4>Daily Attendance Trends</h4>
+                                <field name="trends_html" nolabel="1" widget="html"/>
+                            </div>
+                            <div class="chart-container mb-3">
+                                <h4>Department Attendance Rates</h4>
+                                <field name="department_stats_html" nolabel="1" widget="html"/>
+                            </div>
+                            <div class="chart-container mb-3">
+                                <h4>Punctuality Analysis</h4>
+                                <field name="punctuality_html" nolabel="1" widget="html"/>
+                            </div>
+                            <div class="chart-container mb-3">
+                                <h4>Overtime Distribution</h4>
+                                <field name="overtime_html" nolabel="1" widget="html"/>
+                            </div>
+                        </div>
+                        <div class="status-section">
+                            <h3>Current Employee Status</h3>
+                            <field name="current_status_html" nolabel="1" widget="html"/>
+                        </div>
+                    </div>
+                    
+                    <footer>
+                        <button name="action_generate_analytics" string="Refresh Dashboard" type="object" class="btn-primary"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Dashboard Action -->
+    <record id="action_attendance_dashboard" model="ir.actions.act_window">
+        <field name="name">Attendance Dashboard</field>
+        <field name="res_model">attendance.analytics.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'dashboard_mode': True}</field>
+    </record>
+</odoo>
+

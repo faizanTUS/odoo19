@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="view_cancel_reset_wizard_form" model="ir.ui.view">
+            <field name="name">tus.cancel.reset.wizard.form</field>
+            <field name="model">tus.cancel.reset.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Cancel / Reverse / Reset">
+                    <group>
+                        <field name="action" required="1"/>
+                        <field name="include_dependencies"/>
+                        <field name="require_reason" invisible="1"/>
+                        <field name="reason" attrs="{'required': [('require_reason', '=', True)]}"/>
+                    </group>
+                    <group string="Reversal Options" attrs="{'invisible': [('action','!=','reverse')]}">
+                        <field name="reverse_date"/>
+                        <field name="reverse_journal_id"/>
+                        <field name="create_refund_bill"/>
+                        <field name="create_return_picking"/>
+                    </group>
+                    <footer>
+                        <button name="action_execute" type="object" class="btn-primary" string="Apply"/>
+                        <button special="cancel" string="Close" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

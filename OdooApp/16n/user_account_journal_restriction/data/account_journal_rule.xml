@@ -1,0 +1,15 @@
+<odoo>
+
+    <record id="group_journal_user_create" model="res.groups">
+        <field name="name">Account Journal user</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="account_journal_user_rule" model="ir.rule">
+        <field name="name">Restrict Journals by User</field>
+        <field name="model_id" ref="account.model_account_journal"/>
+        <field name="domain_force">[('allowed_user_ids', 'in', [user.id])]</field>
+        <field name="groups" eval="[(4, ref('user_account_journal_restriction.group_journal_restricted_user'))]"/>
+    </record>
+
+</odoo>

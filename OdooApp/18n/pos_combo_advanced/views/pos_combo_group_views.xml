@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_combo_group_view_form" model="ir.ui.view">
+        <field name="name">pos.combo.group.form</field>
+        <field name="model">pos.combo.group</field>
+        <field name="arch" type="xml">
+            <form string="Combo Group">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Combo Lines" name="lines">
+                            <field name="line_ids" nolabel="1">
+                                <list editable="bottom" create="1" delete="1" string="Combo Lines">
+                                    <field name="product_id" string="Product"/>
+                                    <field name="min_qty" string="Min Qty"/>
+                                    <field name="max_qty" string="Max Qty"/>
+                                    <field name="default_qty" string="Default Qty"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pos_combo_group_view_tree" model="ir.ui.view">
+        <field name="name">pos.combo.group.tree</field>
+        <field name="model">pos.combo.group</field>
+        <field name="arch" type="xml">
+            <list string="Combo Groups" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Tree view for Combo Group Lines (used in One2many list) -->
+    <record id="pos_combo_group_line_view_tree" model="ir.ui.view">
+        <field name="name">pos.combo.group.line.tree</field>
+        <field name="model">pos.combo.group.line</field>
+        <field name="arch" type="xml">
+            <list editable="bottom" create="1" delete="1" string="Combo Lines">
+                <field name="product_id" string="Product"/>
+                <field name="min_qty" string="Min Qty"/>
+                <field name="max_qty" string="Max Qty"/>
+                <field name="default_qty" string="Default Qty"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="pos_combo_group_action" model="ir.actions.act_window">
+        <field name="name">Combo Groups</field>
+        <field name="res_model">pos.combo.group</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Combo Group
+            </p>
+            <p>
+                Combo groups define sets of products that can be selected when selling a combo product in POS.
+                Add a group, then add lines (product, min/max/default qty). Assign groups to combo products.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_pos_combo_group"
+        name="Combo Groups"
+        parent="point_of_sale.menu_point_config_product"
+        action="pos_combo_group_action"
+        sequence="45"/>
+</odoo>

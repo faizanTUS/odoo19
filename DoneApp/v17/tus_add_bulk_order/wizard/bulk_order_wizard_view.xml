@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <record id="action_bulk_order_grid" model="ir.actions.client">
-        <field name="name">Bulk Order Grid</field>
-        <field name="tag">bulk_order_grid_action</field>
-    </record>
-</odoo>

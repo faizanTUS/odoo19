@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view used by action: NO matrix_html so it always loads even if DB has old view -->
+    <record id="view_attendance_matrix_form" model="ir.ui.view">
+        <field name="name">hr.attendance.matrix.form</field>
+        <field name="model">hr.attendance.matrix</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Matrix" class="o_attendance_matrix">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="employee_ids" widget="many2many_tags"/>
+                            <field name="department_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <field name="id" invisible="1"/>
+                    <field name="matrix_data" invisible="1"/>
+                    <div class="matrix-container">
+                        <div class="matrix-header">
+                            <h3>Attendance Matrix View</h3>
+                            <div class="matrix-legend">
+                                <span class="legend-item"><span class="legend-color" style="background-color: #28a745;"></span><span>Present</span></span>
+                                <span class="legend-item"><span class="legend-color" style="background-color: #dc3545;"></span><span>Absent</span></span>
+                                <span class="legend-item"><span class="legend-color" style="background-color: #007bff;"></span><span>Half Day</span></span>
+                                <span class="legend-item"><span class="legend-color" style="background-color: #fd7e14;"></span><span>Leave</span></span>
+                                <span class="legend-item"><span class="legend-color" style="background-color: #6c757d;"></span><span>Work On</span></span>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-2">Set dates and filters above. When date range and filters (employees/departments) are set, click <strong>View Matrix</strong> below to open the attendance matrix in a new tab.</p>
+                        <div class="mt-2 mb-3">
+                            <button name="action_view_matrix_page" string="View Matrix" type="object" class="btn-primary"/>
+                            <button name="action_open_matrix_view" string="Refresh Matrix" type="object" class="btn-secondary"/>
+                        </div>
+                    </div>
+                    <footer>
+                        <button name="action_view_matrix_page" string="View Matrix" type="object" class="btn-primary"/>
+                        <button name="action_open_matrix_view" string="Refresh Matrix" type="object" class="btn-secondary"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Legacy view (may exist in DB with matrix_html); keep for compatibility -->
+    <record id="view_attendance_matrix" model="ir.ui.view">
+        <field name="name">attendance.matrix.form</field>
+        <field name="model">hr.attendance.matrix</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Matrix" class="o_attendance_matrix">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="employee_ids" widget="many2many_tags"/>
+                            <field name="department_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <field name="id" invisible="1"/>
+                    <field name="matrix_data" invisible="1"/>
+                    <div class="matrix-container">
+                        <div class="matrix-header">
+                            <h3>Attendance Matrix View</h3>
+                            <div class="matrix-legend">
+                                <span class="legend-item"><span class="legend-color" style="background-color: #28a745;"></span><span>Present</span></span>
+                                <span class="legend-item"><span class="legend-color" style="background-color: #dc3545;"></span><span>Absent</span></span>
+                                <span class="legend-item"><span class="legend-color" style="background-color: #007bff;"></span><span>Half Day</span></span>
+                                <span class="legend-item"><span class="legend-color" style="background-color: #fd7e14;"></span><span>Leave</span></span>
+                                <span class="legend-item"><span class="legend-color" style="background-color: #6c757d;"></span><span>Work On</span></span>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-2">Set dates and filters above. When date range and filters (employees/departments) are set, click <strong>View Matrix</strong> below to open the matrix in a new tab.</p>
+                        <div class="mt-2 mb-3">
+                            <button name="action_view_matrix_page" string="View Matrix" type="object" class="btn-primary"/>
+                            <button name="action_open_matrix_view" string="Refresh Matrix" type="object" class="btn-secondary"/>
+                        </div>
+                    </div>
+                    <footer>
+                        <button name="action_view_matrix_page" string="View Matrix" type="object" class="btn-primary"/>
+                        <button name="action_open_matrix_view" string="Refresh Matrix" type="object" class="btn-secondary"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Matrix Action: use view that has no matrix_html -->
+    <record id="action_attendance_matrix" model="ir.actions.act_window">
+        <field name="name">Attendance Matrix</field>
+        <field name="res_model">hr.attendance.matrix</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="view_id" ref="view_attendance_matrix_form"/>
+    </record>
+</odoo>
+

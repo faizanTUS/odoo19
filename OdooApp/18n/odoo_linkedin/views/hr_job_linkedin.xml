@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- job Form View -->
+        <record id="hr_job_linkedin_form" model="ir.ui.view">
+            <field name="name">hr.job.linkedin.form</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet" position="before">
+                    <header>
+                        <button name="share_linkedin" string="Share Post" type="object"
+                                invisible="update_key != False or post_type != 'share_post'"
+                                groups="base.group_user"/>
+                        <button name="share_linkedin_article" string="Share Article" type="object"
+                                invisible="update_key != False or post_type != 'share_article'"
+                                groups="base.group_user"/>
+                        <button name="share_linkedin_image" string="Share image" type="object"
+                                invisible="update_key != False or post_type != 'share_image_post'"
+                                groups="base.group_user"/>
+                        <button name="%(odoo_linkedin.action_multiple_user_selection)d" string="multiple Share Post"
+                                type="action"
+                                invisible="update_key != False"
+                                groups="base.group_user" context="{'default_post_type':post_type,
+                                                                    'default_user_ids': [(4, uid)] }"/>
+                        <button name="delete_post" string="Delete Post" type="object"
+                                invisible="update_key == False"
+                                groups="base.group_user"/>
+                        <button name="send_draft" string="Share To Draft" type="object"
+                                groups="base.group_user" invisible="1"/>
+                    </header>
+                </xpath>
+                <xpath expr="//field[@name='description']" position="before">
+                    <group>
+                        <field name="post_type" widget="radio"/>
+                        <field name="automate_post" readonly="update_key == True"/>
+                        <field name="post_date" readonly="update_key == True" invisible="automate_post == False"
+                               required="automate_post == True"/>
+                        <field name="user_ids" readonly="update_key == True" invisible="automate_post == False"
+                               required="automate_post == True" widget="many2many_tags"/>
+                    </group>
+                    <group invisible="post_type != 'share_article'">
+                        <field name="article_blog_url" placeholder="Ex:https://www.example.com/content.html"
+                               required="post_type == 'share_article'"/>
+                        <field name="article_blog_image_url" placeholder="Ex:https://www.example.com/image.jpg"
+                               required="post_type == 'share_article'"/>
+                        <field name="article_blog_title" placeholder="Ex:Example Blog"
+                               required="post_type == 'share_article'"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='description']" position="before">
+                    <field name="update_key" invisible="True"/>
+                    <field name="share_id" invisible="True"/>
+                    <field name="multiple_user_share_ids" invisible="True" string="Shared Via Users">
+                        <list>
+                            <field name="share_id"/>
+                            <field name="job_id"/>
+                            <field name="share_user_id" force_save="1"/>
+                        </list>
+                    </field>
+                    <div name="info_form" class="text-center text-danger d-inline-block"
+                         invisible="post_type != 'share_image_post'">
+                        Please be add your images into the attachment(Image Format Should Be PNG, JPEG, JPG, or GIF)
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

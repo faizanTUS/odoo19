@@ -1,0 +1,11 @@
+<odoo>
+    <record id="ir_cron_external_archive_master_scheduler" model="ir.cron">
+        <field name="name">External Archive: Master Scheduler</field>
+        <field name="model_id" ref="model_external_archive_config"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_master_scheduler()</field>
+        <field name="interval_number">15</field>
+        <field name="interval_type">minutes</field>
+        <field name="active">False</field>
+    </record>
+</odoo>

@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_move_form_tus_pdc" model="ir.ui.view">
+        <field name="name">account.move.form.tus.pdc</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+           <xpath expr="//button[@name='action_post']" position="after">
+                <button name="%(tus_pdc_management.action_tus_pdc_create_wizard)d"
+                        type="action"
+                        string="PDC"
+                        invisible="move_type not in ['out_invoice','in_invoice'] or state != 'posted'">
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

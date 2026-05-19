@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="pos_combo_advanced.SelectComboProductsPopup" owl="1">
+        <div class="popup combo-popup">
+
+            <!-- Header -->
+            <div class="combo-header">
+                <span class="combo-title" t-esc="props.product.display_name"/>
+                <button class="combo-close" t-on-click="cancel">×</button>
+            </div>
+
+            <!-- Body -->
+            <div class="combo-body">
+
+                <p class="combo-subtitle">Select combo products and quantities</p>
+
+                <!-- Over-limit warning (only shown when over max) -->
+                <t t-if="isOverMax">
+                    <div class="combo-limit-warning">
+                        You cannot add more than <t t-esc="maxComboItems"/> combo item(s) for this combo.
+                    </div>
+                </t>
+
+                <!-- ── LIST MODE ── -->
+                <t t-if="displayMode !== 'grid'">
+                    <div class="combo-list-wrapper">
+                        <t t-foreach="options" t-as="opt" t-key="opt.product_id">
+                            <div class="combo-list-row">
+
+                                <!-- Small thumbnail -->
+                                <img class="combo-list-img"
+                                    t-attf-src="/web/image?model=product.product&amp;id={{ opt.product_id }}&amp;field=image_128"
+                                    t-att-alt="opt.product.display_name"/>
+
+                                <!-- Name + qty range -->
+                                <span class="combo-list-name">
+                                    <t t-esc="opt.product.display_name"/>
+                                    <t t-if="opt.min_qty or opt.max_qty">
+                                        (<t t-esc="opt.min_qty"/> - <t t-esc="opt.max_qty"/>)
+                                    </t>
+                                </span>
+
+                                <!-- Qty controls -->
+                                <div class="combo-qty-row">
+                                    <button class="combo-qty-btn"
+                                        t-on-click="() => this.decrement(opt.product_id)"
+                                        t-att-disabled="getOptionQty(opt.product_id) &lt;= 0">-</button>
+                                    <span class="combo-qty-val" t-esc="getOptionQty(opt.product_id)"/>
+                                    <button class="combo-qty-btn"
+                                        t-on-click="() => this.increment(opt.product_id)"
+                                        t-att-disabled="getOptionQty(opt.product_id) >= (opt.max_qty || 9999)">+</button>
+                                </div>
+
+                                <!-- Price -->
+                                <span class="combo-list-price"
+                                    t-esc="env.pos.format_currency(getOptionPrice(opt))"/>
+
+                            </div>
+                        </t>
+                    </div>
+                </t>
+
+                <!-- ── GRID MODE ── -->
+                <t t-if="displayMode === 'grid'">
+                    <div class="combo-grid-wrapper">
+                        <t t-foreach="options" t-as="opt" t-key="opt.product_id">
+                            <div class="combo-grid-card">
+
+                                <!-- Large image -->
+                                <img class="combo-grid-img"
+                                    t-attf-src="/web/image?model=product.product&amp;id={{ opt.product_id }}&amp;field=image_256"
+                                    t-att-alt="opt.product.display_name"/>
+
+                                <!-- Name -->
+                                <span class="combo-grid-name" t-esc="opt.product.display_name"/>
+
+                                <!-- Qty + price row -->
+<!--                                <div class="combo-grid-bottom">-->
+<!--                                    <button class="combo-qty-btn"-->
+<!--                                        t-on-click="() => this.decrement(opt.product_id)"-->
+<!--                                        t-att-disabled="getOptionQty(opt.product_id) &lt;= 0">-</button>-->
+<!--                                    <span class="combo-qty-val" t-esc="getOptionQty(opt.product_id)"/>-->
+<!--                                    <button class="combo-qty-btn"-->
+<!--                                        t-on-click="() => this.increment(opt.product_id)"-->
+<!--                                        t-att-disabled="getOptionQty(opt.product_id) >= (opt.max_qty || 9999)">+</button>-->
+<!--                                    <span class="combo-grid-price"-->
+<!--                                        t-esc="env.pos.format_currency(getOptionPrice(opt))"/>-->
+<!--                                </div>-->
+
+                                <div class="combo-grid-bottom">
+                                    <!-- Quantity row -->
+                                    <div class="combo-qty-row">
+                                        <button class="combo-qty-btn"
+                                            t-on-click="() => this.decrement(opt.product_id)"
+                                            t-att-disabled="getOptionQty(opt.product_id) &lt;= 0">-</button>
+
+                                        <span class="combo-qty-val"
+                                            t-esc="getOptionQty(opt.product_id)"/>
+
+                                        <button class="combo-qty-btn"
+                                            t-on-click="() => this.increment(opt.product_id)"
+                                            t-att-disabled="getOptionQty(opt.product_id) >= (opt.max_qty || 9999)">+</button>
+                                    </div>
+
+                                    <!-- Price -->
+                                    <span class="combo-grid-price"
+                                        t-esc="env.pos.format_currency(getOptionPrice(opt))"/>
+
+                                </div>
+
+                            </div>
+
+                        </t>
+                    </div>
+                </t>
+
+                <!-- Total -->
+                <div class="combo-total-row">
+                    Total: <strong t-esc="env.pos.format_currency(totalAmount)"/>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="combo-footer">
+                <button class="combo-btn-cancel" t-on-click="cancel">Cancel</button>
+                <button t-attf-class="combo-btn-confirm{{ !canConfirm ? ' disabled' : '' }}"
+                    t-on-click="confirm"
+                    t-att-disabled="!canConfirm">Confirm</button>
+            </div>
+
+        </div>
+    </t>
+
+</templates>

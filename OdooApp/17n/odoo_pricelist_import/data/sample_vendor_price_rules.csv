@@ -1,0 +1,6 @@
+product_tmpl_id,partner_id,min_qty,price,date_start,date_end,delay,product_code,product_name
+Desk,AZURE Interior,1,10.00,2024-01-01,2024-12-31,1,DESK-001,Desk Unit
+Desk,China Export,1,15.00,2024-01-01,2024-12-31,14,DESK-CE,Office Desk
+Office Chair,AZURE Interior,1,180.00,2024-01-01,2024-12-31,3,CHAIR-001,Office Chair
+Office Chair,China Export,1,150.00,2024-01-01,2024-12-31,21,, 
+

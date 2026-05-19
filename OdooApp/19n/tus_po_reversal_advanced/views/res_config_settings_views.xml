@@ -1,0 +1,23 @@
+<odoo>
+  <record id="view_res_config_settings_reversal" model="ir.ui.view">
+    <field name="name">res.config.settings.tus.reversal</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+    <field name="arch" type="xml">
+      <xpath expr="//block[@name='purchase_setting_container']" position="after">
+        <div class="app_settings_block" data-string="Cancel/Reverse/Reset Policy" string="Cancel/Reverse/Reset Policy">
+          <h2>Cancel/Reverse/Reset Policy</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-12 col-lg-6">
+              <group>
+                <field name="allow_after_validation"/>
+                <field name="auto_handle_dependencies"/>
+                <field name="require_reason"/>
+              </group>
+            </div>
+          </div>
+        </div>
+      </xpath>
+    </field>
+  </record>
+</odoo>

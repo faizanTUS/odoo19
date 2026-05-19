@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree view -->
+    <record id="view_multi_company_transfer_tree" model="ir.ui.view">
+        <field name="name">multi.company.transfer.tree</field>
+        <field name="model">multi.company.transfer</field>
+        <field name="arch" type="xml">
+            <tree string="Multi-Company Transfers" create="1" delete="1" edit="1">
+                <field name="name"/>
+                <field name="from_company_id"/>
+                <field name="to_company_id"/>
+                <field name="source_location_id"/>
+                <field name="destination_location_id"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'"
+                       decoration-warning="state == 'ready'" decoration-success="state == 'done'"/>
+                <field name="outgoing_picking_id" column_invisible="1"/>
+                <field name="incoming_picking_id" column_invisible="1"/>
+                <button name="action_check_availability" type="object" string="Check Availability"
+                        invisible="state != 'draft'" icon="fa-check"/>
+                <button name="action_create_transfer" type="object" string="Create Transfer"
+                        invisible="state != 'ready'" icon="fa-truck"/>
+                <button name="action_set_to_draft" type="object" string="Set to Draft" invisible="state != 'ready'"
+                        icon="fa-undo"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_multi_company_transfer_form" model="ir.ui.view">
+        <field name="name">multi.company.transfer.form</field>
+        <field name="model">multi.company.transfer</field>
+        <field name="arch" type="xml">
+            <form string="Multi-Company Transfer">
+                <header>
+                    <button name="action_check_availability" type="object" string="Check Availability"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_create_transfer" type="object" string="Create Transfer" class="btn-primary"
+                            invisible="state != 'ready'"/>
+                    <button name="action_set_to_draft" type="object" string="Set to Draft"
+                            invisible="state != 'ready'"/>4
+                    <field name="state" widget="statusbar" statusbar_visible="draft,ready,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_outgoing_picking" type="object" class="oe_stat_button" icon="fa-truck"
+                                invisible="not outgoing_picking_id">
+                            <field name="outgoing_picking_id" widget="statinfo" string="Outgoing"/>
+                        </button>
+                        <button name="action_view_incoming_picking" type="object" class="oe_stat_button" icon="fa-truck"
+                                invisible="not incoming_picking_id">
+                            <field name="incoming_picking_id" widget="statinfo" string="Incoming"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Done" bg_color="text-bg-success" invisible="state != 'done'"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Transfer">
+
+                            <field name="from_company_id" options="{'no_create': True}"/>
+                            <field name="to_company_id" options="{'no_create': True}"/>
+                            <field name="source_location_id" options="{'no_create': True}"/>
+                            <field name="destination_location_id" options="{'no_create': True}"/>
+                        </group>
+
+                        <group string="Delivery Orders" invisible="not outgoing_picking_id and not incoming_picking_id">
+                            <field name="outgoing_picking_id" readonly="1" invisible="not outgoing_picking_id"/>
+                            <field name="incoming_picking_id" readonly="1" invisible="not incoming_picking_id"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Transfer Lines" name="lines">
+                            <field name="stock_line_ids" readonly="state != 'draft'">
+                                <tree create="1" delete="1" edit="1" editable="bottom">
+                                    <field name="product_id" readonly="transfer_state != 'draft'"/>
+                                    <field name="quantity" readonly="transfer_state != 'draft'"/>
+                                    <field name="product_uom_id"/>
+                                    <field name="available_qty"/>
+                                    <field name="done_qty"/>
+                                    <field name="transfer_state" column_invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_multi_company_transfer" model="ir.actions.act_window">
+        <field name="name">Multi Company Transfer</field>
+        <field name="res_model">multi.company.transfer</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'default_state': 'draft'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Multi-Company Transfer
+            </p>
+            <p>
+                Select the From Company and To Company (they must be different), then set the source and destination
+                locations.
+                Add products and quantities on the lines, then click "Check Availability" to validate stock at the
+                source location.
+                When ready, click "Create Transfer" to generate the outgoing and incoming delivery orders.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu: Inventory → Operations → Multi Company Transfer -->
+    <menuitem id="menu_multi_company_transfer"
+              name="Multi Company Transfer"
+              parent="stock.menu_stock_warehouse_mgmt"
+              action="action_multi_company_transfer"
+              groups="multi_company_transfer.multi_company_transfer_group_user"
+              sequence="50"/>
+</odoo>

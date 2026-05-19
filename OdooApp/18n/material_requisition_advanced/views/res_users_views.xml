@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_material_requisition" model="ir.ui.view">
+        <field name="name">res.users.form.material.requisition</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='access_rights']" position="inside">
+                <group string="Material Requisition">
+                    <field name="material_requisition_officer"/>
+                    <field name="material_requisition_stock_location_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

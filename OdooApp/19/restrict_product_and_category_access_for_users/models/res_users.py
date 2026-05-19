@@ -27,6 +27,39 @@ class ResUsers(models.Model):
     def _invalidate_access_rules_cache(self):
         self.env.registry.clear_cache()
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        users = super().create(vals_list)
+        if any(
+            key in vals
+            for vals in vals_list
+            for key in ('allowed_product_ids', 'allowed_category_ids', 'groups_id')
+        ):
+            users._invalidate_access_rules_cache()
+        return users
+
+    def write(self, vals):
+        if 'restriction_type' in vals:
+            if vals['restriction_type'] == 'product' and self.allowed_category_ids:
+                raise UserError(
+                    _(
+                        "Product category should be removed when you change the Product category to Product."
+                    )
+                )
+
+            if vals['restriction_type'] == 'category' and self.allowed_product_ids:
+                raise UserError(
+                    _("Product should be removed when you change the Product to Product category.")
+                )
+
+        res = super().write(vals)
+        if any(
+            key in vals
+            for key in ('allowed_product_ids', 'allowed_category_ids', 'groups_id')
+        ):
+            self._invalidate_access_rules_cache()
+        return res
+
     @api.onchange('restriction_type')
     def _onchange_restriction_type(self):
         if self.restriction_type == 'product' and self.allowed_category_ids:
@@ -52,32 +85,3 @@ class ResUsers(models.Model):
                     'type': 'notification',
                 }
             }
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        users = super().create(vals_list)
-        if any(
-            'allowed_product_ids' in vals or 'allowed_category_ids' in vals
-            for vals in vals_list
-        ):
-            users._invalidate_access_rules_cache()
-        return users
-
-    def write(self, vals):
-        if 'restriction_type' in vals:
-            if vals['restriction_type'] == 'product' and self.allowed_category_ids:
-                raise UserError(
-                    _(
-                        "Product category should be removed when you change the Product category to Product."
-                    )
-                )
-
-            if vals['restriction_type'] == 'category' and self.allowed_product_ids:
-                raise UserError(
-                    _("Product should be removed when you change the Product to Product category.")
-                )
-
-        res = super().write(vals)
-        if 'allowed_product_ids' in vals or 'allowed_category_ids' in vals:
-            self._invalidate_access_rules_cache()
-        return res

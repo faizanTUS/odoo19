@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem id="menu_external_archive_root" name="External Data Archiving" web_icon="external_archive_manager,static/description/icon.png" sequence="1"/>
+
+    <menuitem id="menu_external_archive_db_config" name="Database Configuration"
+              parent="menu_external_archive_root" action="action_external_archive_db_config"/>
+
+    <menuitem id="menu_external_archive_config" name="Archive Model Configuration"
+              parent="menu_external_archive_root" action="action_external_archive_config"/>
+
+</odoo>

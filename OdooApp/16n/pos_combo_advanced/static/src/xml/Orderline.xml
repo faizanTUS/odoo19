@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="Orderline" t-inherit="point_of_sale.Orderline">
+        <xpath expr="//ul[hasclass('info-list')]/t[@t-if='customerNote']" position="after">
+            <t t-if="isComboProduct">
+                <li class="info">
+                    <i class="fa fa-cubes"/> <strong>Combo Items:</strong>
+                </li>
+                <t t-foreach="comboLines" t-as="combo" t-key="combo_index">
+                    <li class="info" style="padding-left:12px;">
+<!--                        <t t-if="combo.group_name">-->
+<!--                            [<t t-esc="combo.group_name"/>]-->
+<!--                        </t>-->
+                        - <t t-esc="env.pos.db.get_product_by_id(combo.product_id).display_name"/>
+                        (x<t t-esc="combo.default_qty"/>)
+                    </li>
+                </t>
+            </t>
+        </xpath>
+    </t>
+</templates>

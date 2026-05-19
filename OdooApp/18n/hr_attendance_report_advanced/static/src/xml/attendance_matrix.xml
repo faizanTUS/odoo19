@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="hr_attendance_report_advanced.AttendanceMatrix">
+        <div class="o_attendance_matrix">
+            <div t-if="state.loading" class="matrix-loading">
+                <i class="fa fa-spinner"></i>
+                <p>Loading matrix data...</p>
+            </div>
+            <div t-else="" class="matrix-table-container" t-ref="matrix_table_container">
+                <!-- Matrix table will be populated by JavaScript -->
+            </div>
+        </div>
+    </t>
+</templates>
+

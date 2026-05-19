@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_project_task_stage_lifetime"
+              name="Task Stage Lifetime"
+              parent="project.menu_project_report"
+              action="project_task_stage_duration.action_project_task_stage_lifetime"
+              sequence="15"/>
+
+    <menuitem id="menu_project_stage_history"
+              name="Stage History"
+              parent="project.menu_project_report"
+              action="project_task_stage_duration.action_project_stage_history"
+              sequence="16"/>
+
+    <menuitem id="menu_project_stage_templates"
+              name="Stage Templates"
+              parent="project.menu_project_config"
+              action="project_task_stage_duration.action_project_stage_template"
+              sequence="11"/>
+</odoo>

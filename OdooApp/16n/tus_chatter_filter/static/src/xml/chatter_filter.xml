@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="tus_chatter_filter.ChatterTopbarFilter" t-inherit="mail.ChatterTopbar" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_ChatterTopbar_rightSection')]" position="before">
+            <div class="o-chatter-filter dropdown me-2" t-if="chatterTopbar.chatter.threadView">
+                <button
+                    class="o_ChatterTopbar_button btn btn-light text-nowrap o-chatter-filter-btn dropdown-toggle d-flex align-items-center"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                >
+                    <i class="fa fa-filter me-1"/>
+                    <span t-esc="chatterTopbar.chatter.filterLabel"/>
+                </button>
+                <div class="dropdown-menu o-chatter-filter-menu">
+                    <div class="dropdown-header text-uppercase fw-bold">By Type</div>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.chatterFilter === 'all' }"
+                       data-filter="all"
+                       t-on-click="chatterTopbar.chatter.onClickChatterFilterItem">
+                        <span>All Messages</span>
+                        <i t-if="chatterTopbar.chatter.chatterFilter === 'all'" class="fa fa-check ms-2"/>
+                    </a>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.chatterFilter === 'communication' }"
+                       data-filter="communication"
+                       t-on-click="chatterTopbar.chatter.onClickChatterFilterItem">
+                        <span>Communication</span>
+                        <i t-if="chatterTopbar.chatter.chatterFilter === 'communication'" class="fa fa-check ms-2"/>
+                    </a>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.chatterFilter === 'sent' }"
+                       data-filter="sent"
+                       t-on-click="chatterTopbar.chatter.onClickChatterFilterItem">
+                        <span>Sent</span>
+                        <i t-if="chatterTopbar.chatter.chatterFilter === 'sent'" class="fa fa-check ms-2"/>
+                    </a>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.chatterFilter === 'received' }"
+                       data-filter="received"
+                       t-on-click="chatterTopbar.chatter.onClickChatterFilterItem">
+                        <span>Received</span>
+                        <i t-if="chatterTopbar.chatter.chatterFilter === 'received'" class="fa fa-check ms-2"/>
+                    </a>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.chatterFilter === 'notes' }"
+                       data-filter="notes"
+                       t-on-click="chatterTopbar.chatter.onClickChatterFilterItem">
+                        <span>Notes</span>
+                        <i t-if="chatterTopbar.chatter.chatterFilter === 'notes'" class="fa fa-check ms-2"/>
+                    </a>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.chatterFilter === 'system' }"
+                       data-filter="system"
+                       t-on-click="chatterTopbar.chatter.onClickChatterFilterItem">
+                        <span>System</span>
+                        <i t-if="chatterTopbar.chatter.chatterFilter === 'system'" class="fa fa-check ms-2"/>
+                    </a>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.chatterFilter === 'activities' }"
+                       data-filter="activities"
+                       t-on-click="chatterTopbar.chatter.onClickChatterFilterItem">
+                        <span>Activities</span>
+                        <i t-if="chatterTopbar.chatter.chatterFilter === 'activities'" class="fa fa-check ms-2"/>
+                    </a>
+
+                    <div class="dropdown-divider"/>
+
+                    <div class="dropdown-header text-uppercase fw-bold">By Date</div>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.dateFilter === 'all' }"
+                       data-date-filter="all"
+                       t-on-click="chatterTopbar.chatter.onClickDateFilterItem">
+                        <span>All Time</span>
+                        <i t-if="chatterTopbar.chatter.dateFilter === 'all'" class="fa fa-check ms-2"/>
+                    </a>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.dateFilter === 'today' }"
+                       data-date-filter="today"
+                       t-on-click="chatterTopbar.chatter.onClickDateFilterItem">
+                        <span>Today</span>
+                        <i t-if="chatterTopbar.chatter.dateFilter === 'today'" class="fa fa-check ms-2"/>
+                    </a>
+                    <a href="#" class="dropdown-item d-flex justify-content-between align-items-center"
+                       t-att-class="{ 'active': chatterTopbar.chatter.dateFilter === 'yesterday' }"
+                       data-date-filter="yesterday"
+                       t-on-click="chatterTopbar.chatter.onClickDateFilterItem">
+                        <span>Yesterday</span>
+                        <i t-if="chatterTopbar.chatter.dateFilter === 'yesterday'" class="fa fa-check ms-2"/>
+                    </a>
+                    <div class="o-filter-custom-range pt-2 mt-1">
+                        <div class="dropdown-header text-uppercase fw-bold px-0 pb-1">Custom Range</div>
+                        <div class="d-flex align-items-center mb-1">
+                            <label class="o-filter-date-label me-2">From:</label>
+                            <input type="date" class="form-control form-control-sm o-filter-date-input"
+                                   t-att-value="chatterTopbar.chatter.startDate || ''"
+                                   t-on-change="chatterTopbar.chatter.onChangeFilterStartDate"/>
+                        </div>
+                        <div class="d-flex align-items-center mb-1">
+                            <label class="o-filter-date-label me-2">To:</label>
+                            <input type="date" class="form-control form-control-sm o-filter-date-input"
+                                   t-att-value="chatterTopbar.chatter.endDate || ''"
+                                   t-on-change="chatterTopbar.chatter.onChangeFilterEndDate"/>
+                        </div>
+                        <a href="#" class="small text-decoration-none o-filter-clear-link"
+                           t-on-click="chatterTopbar.chatter.onClickClearCustomDate">Clear range</a>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+    <t t-name="tus_chatter_filter.MessageListFilterState" t-inherit="mail.MessageList" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_MessageList')]" position="attributes">
+            <attribute name="t-att-class">{ 'o-empty align-items-center justify-content-center': (messageListView.messageListViewItems || []).length === 0, 'pb-4': (messageListView.messageListViewItems || []).length !== 0 }</attribute>
+        </xpath>
+        <xpath expr="//t[@t-if='messageListView.threadViewOwner.threadCache.orderedNonEmptyMessages.length === 0']" position="attributes">
+            <attribute name="t-if">(messageListView.filteredOrderedMessages || []).length === 0</attribute>
+        </xpath>
+    </t>
+
+</templates>

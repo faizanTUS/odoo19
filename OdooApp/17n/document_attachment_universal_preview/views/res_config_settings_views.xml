@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_uap" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.uap</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mail.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='emails']" position="inside">
+                <setting
+                    id="uap_office_preview_setting"
+                    string="Universal attachment preview — Microsoft Office"
+                    help="Preview Word, Excel, PowerPoint, CSV, and OpenDocument attachments inside Odoo. Uses Microsoft Office Online; web.base.url must be a correct HTTPS URL reachable by external viewers."
+                    title="Office document preview in chatter"
+                >
+                    <field name="uap_office_preview"/>
+                </setting>
+                <setting
+                    id="uap_google_fallback_setting"
+                    string="Use Google Docs viewer instead of Microsoft"
+                    help="Embeds files with Google Docs viewer instead of Office Online. Use only if allowed by your security policy (file URL is sent to Google)."
+                    title="Alternative online viewer"
+                >
+                    <field name="uap_google_viewer_fallback"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

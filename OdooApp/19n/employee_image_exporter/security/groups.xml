@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Privilege for exporting employee images -->
+    <record id="priv_employee_image_exporter" model="res.groups.privilege">
+        <field name="name">Download Employee Images as Zip</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+    </record>
+
+    <!-- Group that gets the privilege -->
+    <record id="group_employee_image_exporter" model="res.groups">
+        <field name="name">Employee Image Exporter</field>
+        <field name="privilege_id" ref="priv_employee_image_exporter"/>
+    </record>
+
+    <!-- Group for viewing export logs (inherits exporter group) -->
+    <record id="group_employee_image_export_log_viewer" model="res.groups">
+        <field name="name">Employee Image Export Log Viewer</field>
+        <field name="privilege_id" ref="priv_employee_image_exporter"/>
+        <field name="implied_ids" eval="[(4, ref('group_employee_image_exporter'))]"/>
+    </record>
+
+</odoo>

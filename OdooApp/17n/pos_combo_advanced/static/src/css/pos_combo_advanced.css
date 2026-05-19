@@ -1,0 +1,101 @@
+/* Indentation for combo child lines in cart */
+.orderline.is-combo-child {
+    padding-left: 35px !important;
+    position: relative;
+    border-left: 4px solid #714da6 !important;
+    /* Odoo primary color */
+    background-color: #f8f9fa;
+    margin-left: 10px;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.orderline.is-combo-child .product-name {
+    color: #495057;
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+.orderline.is-combo-child .combo-child-arrow {
+    color: #714da6;
+    font-weight: bold;
+}
+
+/* Hide price and info for combo children as they are part of the bundle */
+.orderline.is-combo-child .price,
+.orderline.is-combo-child .product-price {
+    display: none !important;
+}
+
+/* Parent styling */
+.orderline.combo-product.is-combo-parent {
+    font-weight: bold;
+    border-bottom: none !important;
+}
+
+/* Popup specific styling */
+.select-combo-products-popup .combo-list-row:last-child {
+    border-bottom: none !important;
+}
+
+.select-combo-products-popup .last-child-no-border:last-child {
+    border-bottom: none !important;
+}
+
+.select-combo-products-popup .combo-grid-card:hover {
+    border-color: #714da6;
+    cursor: pointer;
+}
+
+.select-combo-products-popup .input-group-sm>.form-control {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Receipt specific indentation */
+.pos-receipt .is-combo-child {
+    padding-left: 15px !important;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.combo-child-line {
+    padding-left: 24px;
+    font-size: 0.9em;
+    color: #666;
+    border-left: 3px solid #7c7bad;
+}
+
+.combo-child-line .price {
+    display: none; /* hide zero price for child lines */
+}
+
+
+/* new css*/
+.combo-child-receipt {
+    padding-left: 20px !important;
+    font-style: italic;
+    font-size: 0.9em;
+    color: #555;
+    border-left: 3px solid #7c7bad;
+}
+
+/* Hide the redundant $0.00 price for child lines */
+.combo-child-receipt .product-price {
+    display: none !important;
+}
+
+/* Print — make sure styles survive @media print */
+@media print {
+    .combo-parent-receipt {
+        font-weight: 700 !important;
+    }
+    .combo-child-receipt {
+        padding-left: 18px !important;
+        font-style: italic !important;
+        font-size: 0.9em !important;
+        border-left: 2px solid #7c7bad !important;
+    }
+    .combo-child-receipt .product-price {
+        display: none !important;
+    }
+}

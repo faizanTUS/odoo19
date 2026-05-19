@@ -1,0 +1,24 @@
+/* Highlight whole product card */
+.combo-product {
+    border: 2px solid #714B67;
+    background: linear-gradient(to bottom, #fff, #f7f0f6);
+}
+
+/* Badge */
+.combo-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #714B67;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Make article relative for badge positioning */
+.product.combo-product {
+    position: relative;
+}

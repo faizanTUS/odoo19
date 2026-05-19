@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="sale_multi_pricelist_group_user" model="res.groups">
+            <field name="name">Sale Multi Pricelist</field>
+        </record>
+    </data>
+</odoo>

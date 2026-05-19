@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Account Move Line Form - Add Multi Discount field (inside account move form) -->
+    <record id="view_account_move_line_form_multi_discount" model="ir.ui.view">
+        <field name="name">account.move.form.line.form.multi.discount</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@class='o_td_label']" position="before">
+                <field name="show_multi_discount_in_pdf" groups="multi_discount_advanced.tus_multi_discount_advanced_group_account"/>
+            </xpath>
+
+            <!-- Add multi-discount field after discount field in the embedded invoice line form -->
+            <xpath expr="//field[@name='invoice_line_ids']//form//field[@name='discount']" position="after">
+                <field name="multi_discount" groups="multi_discount_advanced.tus_multi_discount_advanced_group_account"/>
+            </xpath>
+             <!-- Add multi-discount column after price_unit in the embedded invoice lines list -->
+            <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='price_unit']" position="after">
+                <field name="multi_discount" optional="hide" groups="multi_discount_advanced.tus_multi_discount_advanced_group_account"/>
+            </xpath>
+            <!-- Add discount_amount and discounted_total_amount columns -->
+            <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='discount']" position="after">
+                <field name="discount_amount" optional="hide" groups="multi_discount_advanced.tus_multi_discount_advanced_group_account"/>
+                <field name="discounted_total_amount" optional="hide" groups="multi_discount_advanced.tus_multi_discount_advanced_group_account"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

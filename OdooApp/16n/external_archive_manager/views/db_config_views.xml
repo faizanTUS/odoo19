@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_external_archive_db_config_form" model="ir.ui.view">
+            <field name="name">external.archive.db.config.form</field>
+            <field name="model">external.archive.db.config</field>
+            <field name="arch" type="xml">
+                <form string="External Archive DB">
+                    <header>
+                        <button name="action_test_connection" type="object" string="Test Connection"
+                                class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Connection">
+                            <field name="host"/>
+                            <field name="port"/>
+                            <field name="database"/>
+                            <field name="user"/>
+                            <field name="password" password="1"/>
+                            <field name="ssl_mode"/>
+                            <field name="last_tested_at" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_external_archive_db_config_tree" model="ir.ui.view">
+            <field name="name">external.archive.db.config.list</field>
+            <field name="model">external.archive.db.config</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="host"/>
+                    <field name="database"/>
+                    <field name="active"/>
+                    <field name="last_tested_at"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_external_archive_db_config" model="ir.actions.act_window">
+            <field name="name">Database Configuration</field>
+            <field name="res_model">external.archive.db.config</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

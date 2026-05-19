@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_multi_approval_type_tree" model="ir.ui.view">
+        <field name="name">multi.approval.type.tree</field>
+        <field name="model">multi.approval.type</field>
+        <field name="arch" type="xml">
+            <list string="Approval Types">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_multi_approval_type_form" model="ir.ui.view">
+        <field name="name">multi.approval.type.form</field>
+        <field name="model">multi.approval.type</field>
+        <field name="arch" type="xml">
+            <form string="Approval Type">
+                <header>
+                    <button name="%(action_multi_approval_request)d" type="action" string="Create Request" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Approval Lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="user_id"/>
+                                    <field name="require_opt"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Model Configuration"  groups="advanced_approval_workflow.group_approval_manager">
+                            <group>
+                                <field name="apply_for_model"/>
+                                <field name="model_id" required="apply_for_model" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="domain" widget="text" required="apply_for_model"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_multi_approval_type_search" model="ir.ui.view">
+        <field name="name">multi.approval.type.search</field>
+        <field name="model">multi.approval.type</field>
+        <field name="arch" type="xml">
+            <search string="Approval Types">
+                <field name="name"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_multi_approval_type" model="ir.actions.act_window">
+        <field name="name">Approval Types</field>
+        <field name="res_model">multi.approval.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first approval type!
+            </p>
+            <p>
+                Define approval workflows with multiple levels of approvers.
+            </p>
+        </field>
+    </record>
+</odoo>
+

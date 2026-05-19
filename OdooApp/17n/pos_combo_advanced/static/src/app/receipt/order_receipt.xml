@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <!-- Add arrow prefix and class in receipt -->
+        <xpath expr="//div[hasclass('orderlines')]//t[@t-foreach='receipt.orderlines']//div[hasclass('product-name')]" position="before">
+            <span t-if="line.is_combo_child" style="padding-left: 15px;">→ </span>
+        </xpath>
+        <xpath expr="//div[hasclass('orderlines')]//t[@t-foreach='receipt.orderlines']//div[hasclass('product-name')]" position="attributes">
+            <attribute name="t-att-class">{ 'is-combo-child': line.is_combo_child }</attribute>
+        </xpath>
+        <!-- Hide price for combo children in receipt -->
+        <xpath expr="//div[hasclass('orderlines')]//t[@t-foreach='receipt.orderlines']//div[hasclass('price')]" position="attributes">
+            <attribute name="t-att-style">line.is_combo_child ? 'display: none !important;' : ''</attribute>
+        </xpath>
+    </t>
+</templates>

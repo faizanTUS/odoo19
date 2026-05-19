@@ -1,4 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"ir_model_bulk_order_wizard","ir_access_bulk_order_wizard","model_bulk_order_wizard",,1,1,1,1
-
-

@@ -1,0 +1,16 @@
+<odoo>
+  <data noupdate="1">
+    <record id="ir_config_parameter_defaults" model="ir.config_parameter">
+      <field name="key">tus_reversal.allow_after_validation</field>
+      <field name="value">True</field>
+    </record>
+    <record id="ir_config_parameter_defaults_dep" model="ir.config_parameter">
+      <field name="key">tus_reversal.auto_handle_dependencies</field>
+      <field name="value">True</field>
+    </record>
+    <record id="ir_config_parameter_defaults_reason" model="ir.config_parameter">
+      <field name="key">tus_reversal.require_reason</field>
+      <field name="value">True</field>
+    </record>
+  </data>
+</odoo>

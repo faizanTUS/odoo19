@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_move_form_remove_journal_invisible" model="ir.ui.view">
+        <field name="name">account.move.form.remove.journal.invisible</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//label[@for='journal_id']" position="after">
+                <field name="journal_id"
+                       options="{'no_create': True, 'no_open': True}"
+                       readonly="posted_before and name not in (False, '', '/')"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
