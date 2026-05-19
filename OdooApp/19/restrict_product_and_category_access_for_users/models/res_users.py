@@ -27,6 +27,36 @@ class ResUsers(models.Model):
     def _invalidate_access_rules_cache(self):
         self.env.registry.clear_cache()
 
+    def _get_restricted_product_template_ids(self):
+        """Templates a restricted user may read (configured allow-list + SO lines)."""
+        self.ensure_one()
+        template_ids = set()
+        if self.restriction_type == 'category':
+            if self.allowed_category_ids:
+                templates = self.env['product.template'].search([
+                    '|',
+                    ('categ_id', 'in', self.allowed_category_ids.ids),
+                    ('categ_id', 'child_of', self.allowed_category_ids.ids),
+                ])
+                template_ids.update(templates.ids)
+        else:
+            template_ids.update(self.allowed_product_ids.ids)
+        template_ids.update(self._get_sale_order_product_template_ids())
+        return list(template_ids)
+
+    def _get_sale_order_product_template_ids(self):
+        """Templates used on sale orders the current user can access."""
+        if 'sale.order' not in self.env:
+            return []
+        orders = self.env['sale.order'].search([])
+        if not orders:
+            return []
+        lines = self.env['sale.order.line'].search([
+            ('order_id', 'in', orders.ids),
+            ('product_id', '!=', False),
+        ])
+        return lines.product_id.product_tmpl_id.ids
+
     @api.model_create_multi
     def create(self, vals_list):
         users = super().create(vals_list)

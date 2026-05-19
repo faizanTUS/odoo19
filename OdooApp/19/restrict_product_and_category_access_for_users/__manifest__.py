@@ -38,7 +38,7 @@
     'author': 'TechUltra Solutions Private Limited',
     'company': 'TechUltra Solutions Private Limited',
     'website': "https://www.techultrasolutions.com/",
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'sale'],
     'description': """
         The Restrict Product and Category Access for Users module for Odoo allows administrators to manage product
         visibility based on user permissions. Using the Allow Product and Allow Category options, admins can restrict
