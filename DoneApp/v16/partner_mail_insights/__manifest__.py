@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Partner Mail Insights: Incoming & Outgoing Email Tracker for Contacts',
-    'version': '18.0.0.0',
+    'version': '16.0.0.0',
     'category': 'Contacts/mail',
     'author': 'TechUltra Solutions Private Limited',
     'company': 'TechUltra Solutions Private Limited',
