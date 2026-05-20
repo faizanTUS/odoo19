@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="full_screen_chatter_toggle.FullScreenSystray" owl="1">
+        <t t-if="state.show">
+            <div class="o_systrayItem o_full_screen_toggle_eye"
+                 t-on-click="toggleFullScreen">
+                <i t-if="state.enabled" class="fa fa-eye-slash fs_eye_icon"></i>
+                <i t-else="" class="fa fa-eye fs_eye_icon"></i>
+            </div>
+        </t>
+    </t>
+</templates>
