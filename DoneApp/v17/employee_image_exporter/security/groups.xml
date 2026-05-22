@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Group allowed to export employee images -->
+    <record id="group_employee_image_exporter" model="res.groups">
+        <field name="name">Download Employee Images as Zip</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+    </record>
+
+    <!-- Optional group to view export logs (can be same group if you want) -->
+    <record id="group_employee_image_export_log_viewer" model="res.groups">
+        <field name="name">View Employee Image Export Logs</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+        <field name="implied_ids" eval="[(4, ref('group_employee_image_exporter'))]"/>
+    </record>
+</odoo>
