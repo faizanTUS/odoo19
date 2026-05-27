@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_in_report_wizard_rec_funnel" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.rec.funnel.form</field>
+        <field name="model">hr.in.report.wizard.rec.funnel</field>
+        <field name="arch" type="xml">
+            <form string="Hiring funnel">
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="job_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_rec_funnel" model="ir.actions.act_window">
+        <field name="name">Hiring funnel</field>
+        <field name="res_model">hr.in.report.wizard.rec.funnel</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_rec_tth" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.rec.tth.form</field>
+        <field name="model">hr.in.report.wizard.rec.tth</field>
+        <field name="arch" type="xml">
+            <form string="Time to hire">
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="job_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_rec_tth" model="ir.actions.act_window">
+        <field name="name">Time to hire</field>
+        <field name="res_model">hr.in.report.wizard.rec.tth</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_rec_source" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.rec.source.form</field>
+        <field name="model">hr.in.report.wizard.rec.source</field>
+        <field name="arch" type="xml">
+            <form string="Source effectiveness">
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="job_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_rec_source" model="ir.actions.act_window">
+        <field name="name">Source effectiveness</field>
+        <field name="res_model">hr.in.report.wizard.rec.source</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Employees → Reporting → HR Reports → Recruitment -->
+    <menuitem id="menu_hr_in_reports_recruitment" name="Recruitment" parent="IndiaHrReportscommunity.menu_hr_in_reports_root" sequence="50"/>
+    <menuitem id="menu_rec_funnel" name="Hiring funnel" parent="menu_hr_in_reports_recruitment" action="action_hr_in_report_wizard_rec_funnel" sequence="10"/>
+    <menuitem id="menu_rec_tth" name="Time to hire" parent="menu_hr_in_reports_recruitment" action="action_hr_in_report_wizard_rec_tth" sequence="20"/>
+    <menuitem id="menu_rec_source" name="Source effectiveness" parent="menu_hr_in_reports_recruitment" action="action_hr_in_report_wizard_rec_source" sequence="30"/>
+
+    <!-- Recruitment app → Reporting (after Recruitment Analysis, sequence 50). -->
+    <menuitem
+        id="menu_rec_funnel_recruitment_app"
+        name="Hiring funnel"
+        parent="hr_recruitment.report_hr_recruitment"
+        action="action_hr_in_report_wizard_rec_funnel"
+        sequence="51"
+        groups="hr_recruitment.group_hr_recruitment_user"/>
+    <menuitem
+        id="menu_rec_tth_recruitment_app"
+        name="Time to hire"
+        parent="hr_recruitment.report_hr_recruitment"
+        action="action_hr_in_report_wizard_rec_tth"
+        sequence="52"
+        groups="hr_recruitment.group_hr_recruitment_user"/>
+    <menuitem
+        id="menu_rec_source_recruitment_app"
+        name="Source effectiveness"
+        parent="hr_recruitment.report_hr_recruitment"
+        action="action_hr_in_report_wizard_rec_source"
+        sequence="53"
+        groups="hr_recruitment.group_hr_recruitment_user"/>
+</odoo>

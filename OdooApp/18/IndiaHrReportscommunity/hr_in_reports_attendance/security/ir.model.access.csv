@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_report_wizard_att_daily,hr.in.report.wizard.att.daily,model_hr_in_report_wizard_att_daily,IndiaHrReportscommunity.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_att_monthly,hr.in.report.wizard.att.monthly,model_hr_in_report_wizard_att_monthly,IndiaHrReportscommunity.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_att_exceptions,hr.in.report.wizard.att.exceptions,model_hr_in_report_wizard_att_exceptions,IndiaHrReportscommunity.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_att_ot,hr.in.report.wizard.att.ot,model_hr_in_report_wizard_att_ot,IndiaHrReportscommunity.group_hr_in_reports_user,1,1,1,1

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_hr_in_reports_enterprise_payroll"
+        name="Payroll reports (Enterprise)"
+        parent="IndiaHrReportscommunity.menu_hr_in_reports_root"
+        action="action_hr_in_reports_enterprise_notice"
+        sequence="40"
+        groups="IndiaHrReportscommunity.group_hr_in_reports_user"/>
+
+    <menuitem
+        id="menu_hr_in_reports_enterprise_planning"
+        name="Planning reports (Enterprise)"
+        parent="IndiaHrReportscommunity.menu_hr_in_reports_root"
+        action="action_hr_in_reports_enterprise_notice"
+        sequence="50"
+        groups="IndiaHrReportscommunity.group_hr_in_reports_user"/>
+</odoo>

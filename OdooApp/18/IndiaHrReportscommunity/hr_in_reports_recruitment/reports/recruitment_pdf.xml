@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pay_rec_funnel_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="IndiaHrReportscommunity.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="pay_rec_tth_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="IndiaHrReportscommunity.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="pay_rec_source_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="IndiaHrReportscommunity.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_rec_funnel" model="ir.actions.report">
+        <field name="name">Hiring funnel (PDF)</field>
+        <field name="model">hr.in.report.wizard.rec.funnel</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">IndiaHrReportscommunity.pay_rec_funnel_document</field>
+        <field name="paperformat_id" ref="IndiaHrReportscommunity.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_rec_tth" model="ir.actions.report">
+        <field name="name">Time to hire (PDF)</field>
+        <field name="model">hr.in.report.wizard.rec.tth</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">IndiaHrReportscommunity.pay_rec_tth_document</field>
+        <field name="paperformat_id" ref="IndiaHrReportscommunity.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_rec_source" model="ir.actions.report">
+        <field name="name">Source effectiveness (PDF)</field>
+        <field name="model">hr.in.report.wizard.rec.source</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">IndiaHrReportscommunity.pay_rec_source_document</field>
+        <field name="paperformat_id" ref="IndiaHrReportscommunity.paperformat_hr_in_reports"/>
+    </record>
+</odoo>
