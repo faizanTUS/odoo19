@@ -20,7 +20,7 @@ def _vals(env, wizard_model, docids):
 
 
 class ReportAttDailyPdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.att_pdf_daily_document"
+    _name = "report.india_hr_reports.att_pdf_daily_document"
     _description = "PDF daily attendance (professional layout)"
 
     @api.model
@@ -29,7 +29,7 @@ class ReportAttDailyPdf(models.AbstractModel):
 
 
 class ReportAttMonthlyPdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.att_pdf_monthly_document"
+    _name = "report.india_hr_reports.att_pdf_monthly_document"
     _description = "PDF attendance matrix (professional layout)"
 
     @api.model
@@ -38,7 +38,7 @@ class ReportAttMonthlyPdf(models.AbstractModel):
 
 
 class ReportAttExceptionsPdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.att_pdf_exceptions_document"
+    _name = "report.india_hr_reports.att_pdf_exceptions_document"
     _description = "PDF attendance exceptions (professional layout)"
 
     @api.model
@@ -47,7 +47,7 @@ class ReportAttExceptionsPdf(models.AbstractModel):
 
 
 class ReportAttOtPdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.att_pdf_ot_document"
+    _name = "report.india_hr_reports.att_pdf_ot_document"
     _description = "PDF overtime summary (professional layout)"
 
     @api.model

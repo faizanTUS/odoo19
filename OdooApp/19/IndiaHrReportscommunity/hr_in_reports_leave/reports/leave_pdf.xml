@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Body uses table-based layout only (no Bootstrap flex rows) for reliable wkhtmltopdf output.
+        Company shell: web.external_layout (dispatches at render time to the layout chosen in
+        Settings → Companies → Configure Document Layout: Light, Boxed, Bold, Striped, Bubble,
+        Wave, Folder, Standard).
+    -->
+    <template id="leave_pdf_report_common_content">
+        <div class="o_hr_leave_pdf">
+            <p t-if="report_subtitle" class="o_leave_subtitle" t-out="report_subtitle"/>
+
+            <div class="o_leave_section_title" t-out="section_filters_label"/>
+            <table class="o_leave_filters" name="leave_report_filters">
+                <tbody>
+                    <tr t-foreach="filter_rows" t-as="frow">
+                        <td style="width: 32%;"><span t-out="frow['label']"/></td>
+                        <td><span t-out="frow['value']"/></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="o_leave_section_title" t-out="section_detail_label"/>
+            <t t-if="not table_rows">
+                <p class="text-muted fst-italic" t-out="table_empty_message"/>
+            </t>
+            <t t-else="">
+                <table class="o_leave_detail o_main_table" name="leave_report_lines">
+                    <thead style="display: table-header-group;">
+                        <tr>
+                            <t t-foreach="column_meta" t-as="col">
+                                <th t-attf-class="text-nowrap #{col['class']}" t-out="col['label']"/>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="table_rows" t-as="trow">
+                            <t t-foreach="trow" t-as="cell">
+                                <td t-att-class="cell['class']"><span t-out="cell['value']"/></td>
+                            </t>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+
+            <div class="o_leave_section_title" t-out="section_summary_label"/>
+            <table class="o_leave_summary" name="leave_report_summary">
+                <tbody>
+                    <tr t-foreach="summary_metrics" t-as="sm">
+                        <td><span t-out="sm['label']"/></td>
+                        <td class="fw-bold text-end"><span t-out="sm['value']"/></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="o_leave_footer_meta" t-out="prepared_footer"/>
+        </div>
+    </template>
+
+    <template id="leave_pdf_report_ledger">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="IndiaHrReportscommunity.leave_pdf_report_common_content"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="leave_pdf_report_balance">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="IndiaHrReportscommunity.leave_pdf_report_common_content"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="leave_pdf_report_accrual">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="IndiaHrReportscommunity.leave_pdf_report_common_content"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_leave_ledger" model="ir.actions.report">
+        <field name="name">Leave ledger (PDF)</field>
+        <field name="model">hr.in.report.wizard.leave.ledger</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">IndiaHrReportscommunity.leave_pdf_report_ledger</field>
+        <field name="print_report_name">'Leave_ledger_%s_%s' % (object.date_from, object.date_to)</field>
+        <field name="paperformat_id" ref="IndiaHrReportscommunity.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_leave_balance" model="ir.actions.report">
+        <field name="name">Leave balance (PDF)</field>
+        <field name="model">hr.in.report.wizard.leave.balance</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">IndiaHrReportscommunity.leave_pdf_report_balance</field>
+        <field name="print_report_name">'Leave_balance_%s' % (object.date_to,)</field>
+        <field name="paperformat_id" ref="IndiaHrReportscommunity.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_leave_accrual" model="ir.actions.report">
+        <field name="name">Accrual audit (PDF)</field>
+        <field name="model">hr.in.report.wizard.leave.accrual</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">IndiaHrReportscommunity.leave_pdf_report_accrual</field>
+        <field name="print_report_name">'Accrual_allocation_audit_%s_%s' % (object.date_from, object.date_to)</field>
+        <field name="paperformat_id" ref="IndiaHrReportscommunity.paperformat_hr_in_reports"/>
+    </record>
+</odoo>

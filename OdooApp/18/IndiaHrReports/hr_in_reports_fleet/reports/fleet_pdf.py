@@ -5,7 +5,7 @@ from odoo import api, models
 
 
 class ReportFleetAssign(models.AbstractModel):
-    _name = "report.IndiaHrReports.report_fleet_assign_document"
+    _name = "report.india_hr_reports.report_fleet_assign_document"
     _description = "PDF fleet assignment"
 
     @api.model

@@ -14,11 +14,11 @@
     <record id="exp_pdf_cons" model="ir.ui.view">
         <field name="name">exp_pdf_cons</field>
         <field name="type">qweb</field>
-        <field name="key">IndiaHrReports.exp_pdf_cons</field>
+        <field name="key">india_hr_reports.exp_pdf_cons</field>
         <field name="mode">primary</field>
         <field name="inherit_id" eval="False"/>
         <field name="arch" type="xml">
-            <t t-name="IndiaHrReports.exp_pdf_cons">
+            <t t-name="india_hr_reports.exp_pdf_cons">
                 <t t-call="web.html_container">
                     <t t-foreach="docs" t-as="doc">
                         <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
@@ -34,11 +34,11 @@
     <record id="exp_pdf_prod" model="ir.ui.view">
         <field name="name">exp_pdf_prod</field>
         <field name="type">qweb</field>
-        <field name="key">IndiaHrReports.exp_pdf_prod</field>
+        <field name="key">india_hr_reports.exp_pdf_prod</field>
         <field name="mode">primary</field>
         <field name="inherit_id" eval="False"/>
         <field name="arch" type="xml">
-            <t t-name="IndiaHrReports.exp_pdf_prod">
+            <t t-name="india_hr_reports.exp_pdf_prod">
                 <t t-call="web.html_container">
                     <t t-foreach="docs" t-as="doc">
                         <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
@@ -56,14 +56,14 @@
         <field name="name">Consolidated claims (PDF)</field>
         <field name="model">hr.in.report.wizard.exp.consolidated</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">IndiaHrReports.exp_pdf_cons</field>
+        <field name="report_name">india_hr_reports.exp_pdf_cons</field>
         <field name="paperformat_id" ref="IndiaHrReports.paperformat_hr_in_reports"/>
     </record>
     <record id="action_report_exp_product_analytic" model="ir.actions.report">
         <field name="name">Claims by product (PDF)</field>
         <field name="model">hr.in.report.wizard.exp.product_analytic</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">IndiaHrReports.exp_pdf_prod</field>
+        <field name="report_name">india_hr_reports.exp_pdf_prod</field>
         <field name="paperformat_id" ref="IndiaHrReports.paperformat_hr_in_reports"/>
     </record>
 </odoo>

@@ -20,7 +20,7 @@ def _report_vals(env, wizard_model, docids):
 
 
 class ReportHubHeadcountPdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.hub_pdf_headcount_document"
+    _name = "report.india_hr_reports.hub_pdf_headcount_document"
     _description = "PDF headcount wizard (professional layout)"
 
     @api.model
@@ -29,7 +29,7 @@ class ReportHubHeadcountPdf(models.AbstractModel):
 
 
 class ReportHubSnapshotPdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.hub_pdf_snapshot_document"
+    _name = "report.india_hr_reports.hub_pdf_snapshot_document"
     _description = "PDF employee snapshot wizard (professional layout)"
 
     @api.model

@@ -20,7 +20,7 @@ def _vals(env, model, docids):
 
 
 class ReportLeaveLedgerPdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.leave_pdf_report_ledger"
+    _name = "report.india_hr_reports.leave_pdf_report_ledger"
     _description = "Leave ledger PDF (company layout)"
 
     @api.model
@@ -29,7 +29,7 @@ class ReportLeaveLedgerPdf(models.AbstractModel):
 
 
 class ReportLeaveBalancePdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.leave_pdf_report_balance"
+    _name = "report.india_hr_reports.leave_pdf_report_balance"
     _description = "Leave balance PDF (company layout)"
 
     @api.model
@@ -38,7 +38,7 @@ class ReportLeaveBalancePdf(models.AbstractModel):
 
 
 class ReportLeaveAccrualPdf(models.AbstractModel):
-    _name = "report.IndiaHrReports.leave_pdf_report_accrual"
+    _name = "report.india_hr_reports.leave_pdf_report_accrual"
     _description = "Leave accrual audit PDF (company layout)"
 
     @api.model

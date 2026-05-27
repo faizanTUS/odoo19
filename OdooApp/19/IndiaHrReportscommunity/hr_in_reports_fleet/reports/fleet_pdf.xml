@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Vehicle assignment & cost slice: shared professional layout (title, applied
+        filters, detail table, summary) wrapped in web.external_layout so the company
+        header follows the layout picked in Settings → Companies → Configure Document
+        Layout. The view is declared via <record> (not <template>) so the upgrade
+        explicitly clears the legacy inherit_id from when this template used to extend
+        IndiaHrReportscommunity.hr_in_report_pdf_table; otherwise Odoo keeps the old parent on
+        upgrade and the new standalone arch fails to apply.
+    -->
+    <record id="report_fleet_assign_document" model="ir.ui.view">
+        <field name="name">report_fleet_assign_document</field>
+        <field name="type">qweb</field>
+        <field name="key">IndiaHrReportscommunity.report_fleet_assign_document</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" eval="False"/>
+        <field name="arch" type="xml">
+            <t t-name="IndiaHrReportscommunity.report_fleet_assign_document">
+                <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="doc">
+                        <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                        <t t-set="o" t-value="doc"/>
+                        <t t-call="web.external_layout">
+                            <t t-call="IndiaHrReportscommunity.hr_in_report_pdf_professional_body"/>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </field>
+    </record>
+
+    <record id="action_report_fleet_assign" model="ir.actions.report">
+        <field name="name">Fleet assignment (PDF)</field>
+        <field name="model">hr.in.report.wizard.fleet.assign</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">IndiaHrReportscommunity.report_fleet_assign_document</field>
+        <field name="paperformat_id" ref="IndiaHrReportscommunity.paperformat_hr_in_reports"/>
+    </record>
+</odoo>

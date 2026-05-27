@@ -68,7 +68,7 @@
         <field name="name">Headcount &amp; movement (PDF)</field>
         <field name="model">hr.in.report.wizard.hub.headcount</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">IndiaHrReports.hub_pdf_headcount_document</field>
+        <field name="report_name">india_hr_reports.hub_pdf_headcount_document</field>
         <field name="print_report_name">'Headcount_%s_%s' % (object.date_from, object.date_to)</field>
         <field name="paperformat_id" ref="IndiaHrReports.paperformat_hr_in_reports"/>
     </record>
@@ -77,7 +77,7 @@
         <field name="name">Employee snapshot (PDF)</field>
         <field name="model">hr.in.report.wizard.hub.snapshot</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">IndiaHrReports.hub_pdf_snapshot_document</field>
+        <field name="report_name">india_hr_reports.hub_pdf_snapshot_document</field>
         <field name="print_report_name">'Employee_snapshot_%s' % (object.date_to)</field>
         <field name="paperformat_id" ref="IndiaHrReports.paperformat_hr_in_reports_landscape"/>
     </record>

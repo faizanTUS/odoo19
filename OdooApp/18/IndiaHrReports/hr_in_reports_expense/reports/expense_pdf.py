@@ -20,7 +20,7 @@ def _vals(env, model, docids):
 
 
 class ReportExpConsolidated(models.AbstractModel):
-    _name = "report.IndiaHrReports.exp_pdf_cons"
+    _name = "report.india_hr_reports.exp_pdf_cons"
     _description = "PDF consolidated claims"
 
     @api.model
@@ -29,7 +29,7 @@ class ReportExpConsolidated(models.AbstractModel):
 
 
 class ReportExpProduct(models.AbstractModel):
-    _name = "report.IndiaHrReports.exp_pdf_prod"
+    _name = "report.india_hr_reports.exp_pdf_prod"
     _description = "PDF product analytic claims"
 
     @api.model

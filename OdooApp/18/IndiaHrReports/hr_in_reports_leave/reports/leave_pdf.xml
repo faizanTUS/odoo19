@@ -57,7 +57,7 @@
         </div>
     </template>
 
-    <template id="leave_pdf_report_ledger">
+    <template id="leave_pdf_report_ledger" key="india_hr_reports.leave_pdf_report_ledger">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
@@ -69,7 +69,7 @@
         </t>
     </template>
 
-    <template id="leave_pdf_report_balance">
+    <template id="leave_pdf_report_balance" key="india_hr_reports.leave_pdf_report_balance">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
@@ -81,7 +81,7 @@
         </t>
     </template>
 
-    <template id="leave_pdf_report_accrual">
+    <template id="leave_pdf_report_accrual" key="india_hr_reports.leave_pdf_report_accrual">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
@@ -97,7 +97,7 @@
         <field name="name">Leave ledger (PDF)</field>
         <field name="model">hr.in.report.wizard.leave.ledger</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">IndiaHrReports.leave_pdf_report_ledger</field>
+        <field name="report_name">india_hr_reports.leave_pdf_report_ledger</field>
         <field name="print_report_name">'Leave_ledger_%s_%s' % (object.date_from, object.date_to)</field>
         <field name="paperformat_id" ref="IndiaHrReports.paperformat_hr_in_reports"/>
     </record>
@@ -105,7 +105,7 @@
         <field name="name">Leave balance (PDF)</field>
         <field name="model">hr.in.report.wizard.leave.balance</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">IndiaHrReports.leave_pdf_report_balance</field>
+        <field name="report_name">india_hr_reports.leave_pdf_report_balance</field>
         <field name="print_report_name">'Leave_balance_%s' % (object.date_to,)</field>
         <field name="paperformat_id" ref="IndiaHrReports.paperformat_hr_in_reports"/>
     </record>
@@ -113,7 +113,7 @@
         <field name="name">Accrual audit (PDF)</field>
         <field name="model">hr.in.report.wizard.leave.accrual</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">IndiaHrReports.leave_pdf_report_accrual</field>
+        <field name="report_name">india_hr_reports.leave_pdf_report_accrual</field>
         <field name="print_report_name">'Accrual_allocation_audit_%s_%s' % (object.date_from, object.date_to)</field>
         <field name="paperformat_id" ref="IndiaHrReports.paperformat_hr_in_reports"/>
     </record>
