@@ -1,0 +1,13 @@
+// Section Collapse Advanced - styling for the collapse/expand toggle injected
+// next to each list-view section row.
+
+.sc_section_toggle {
+    float: right;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
