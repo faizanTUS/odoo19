@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "HR India Reports (Community) | Attendance, Leave, Recruitment, Expense, Fleet & HR MIS Reports",
-    "version": "18.0.1.0.0",
+    "version": "18.0.2.0.0",
     "category": "Human Resources",
     "summary": """Community HR reporting hub: XLSX/PDF exports, cockpit dashboard, core HR reports
      Comprehensive HR reporting hub for Odoo Community, providing XLSX and PDF exports for
