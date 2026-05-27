@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_in_report_wizard_in_pf" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.in.pf.form</field>
+        <field name="model">hr.in.report.wizard.in.pf</field>
+        <field name="arch" type="xml">
+            <form string="PF register">
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button name="action_export_csv" type="object" string="Export CSV"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_in_pf" model="ir.actions.act_window">
+        <field name="name">PF contribution register</field>
+        <field name="res_model">hr.in.report.wizard.in.pf</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_in_esi" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.in.esi.form</field>
+        <field name="model">hr.in.report.wizard.in.esi</field>
+        <field name="arch" type="xml">
+            <form string="ESI register">
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button name="action_export_csv" type="object" string="Export CSV"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_in_esi" model="ir.actions.act_window">
+        <field name="name">ESI register</field>
+        <field name="res_model">hr.in.report.wizard.in.esi</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_in_pt" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.in.pt.form</field>
+        <field name="model">hr.in.report.wizard.in.pt</field>
+        <field name="arch" type="xml">
+            <form string="PT register">
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_in_pt" model="ir.actions.act_window">
+        <field name="name">Professional tax register</field>
+        <field name="res_model">hr.in.report.wizard.in.pt</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_in_lwf" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.in.lwf.form</field>
+        <field name="model">hr.in.report.wizard.in.lwf</field>
+        <field name="arch" type="xml">
+            <form string="LWF register">
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_in_lwf" model="ir.actions.act_window">
+        <field name="name">LWF register</field>
+        <field name="res_model">hr.in.report.wizard.in.lwf</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_in_tds" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.in.tds.form</field>
+        <field name="model">hr.in.report.wizard.in.tds</field>
+        <field name="arch" type="xml">
+            <form string="TDS summary">
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_in_tds" model="ir.actions.act_window">
+        <field name="name">TDS summary</field>
+        <field name="res_model">hr.in.report.wizard.in.tds</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Employees → Reporting → Payroll reports → India statutory -->
+    <menuitem id="menu_hr_in_reports_payroll_in" name="India statutory" parent="IndiaHrReports.menu_hr_in_reports_payroll" sequence="40"/>
+    <menuitem id="menu_in_pf" name="PF register" parent="menu_hr_in_reports_payroll_in" action="action_hr_in_report_wizard_in_pf" sequence="10"/>
+    <menuitem id="menu_in_esi" name="ESI register" parent="menu_hr_in_reports_payroll_in" action="action_hr_in_report_wizard_in_esi" sequence="20"/>
+    <menuitem id="menu_in_pt" name="PT register" parent="menu_hr_in_reports_payroll_in" action="action_hr_in_report_wizard_in_pt" sequence="30"/>
+    <menuitem id="menu_in_lwf" name="LWF register" parent="menu_hr_in_reports_payroll_in" action="action_hr_in_report_wizard_in_lwf" sequence="40"/>
+    <menuitem id="menu_in_tds" name="TDS summary" parent="menu_hr_in_reports_payroll_in" action="action_hr_in_report_wizard_in_tds" sequence="50"/>
+
+    <!-- Payroll app → Reporting → India statutory -->
+    <menuitem
+        id="menu_hr_in_reports_payroll_in_native"
+        name="India statutory"
+        parent="hr_payroll.menu_hr_payroll_report"
+        groups="hr_payroll.group_hr_payroll_user"
+        sequence="35"/>
+    <menuitem id="menu_in_pf_native" name="PF register" parent="menu_hr_in_reports_payroll_in_native" action="action_hr_in_report_wizard_in_pf" sequence="10"/>
+    <menuitem id="menu_in_esi_native" name="ESI register" parent="menu_hr_in_reports_payroll_in_native" action="action_hr_in_report_wizard_in_esi" sequence="20"/>
+    <menuitem id="menu_in_pt_native" name="PT register" parent="menu_hr_in_reports_payroll_in_native" action="action_hr_in_report_wizard_in_pt" sequence="30"/>
+    <menuitem id="menu_in_lwf_native" name="LWF register" parent="menu_hr_in_reports_payroll_in_native" action="action_hr_in_report_wizard_in_lwf" sequence="40"/>
+    <menuitem id="menu_in_tds_native" name="TDS summary" parent="menu_hr_in_reports_payroll_in_native" action="action_hr_in_report_wizard_in_tds" sequence="50"/>
+</odoo>

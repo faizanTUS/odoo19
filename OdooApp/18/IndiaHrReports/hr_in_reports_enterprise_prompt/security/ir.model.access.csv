@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_reports_enterprise_notice_user,hr.in.reports.enterprise.notice user,model_hr_in_reports_enterprise_notice,IndiaHrReports.group_hr_in_reports_user,1,1,1,0

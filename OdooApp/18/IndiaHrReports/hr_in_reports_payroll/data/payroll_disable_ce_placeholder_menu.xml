@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Community placeholder menu is redundant once Enterprise payroll reports are installed. -->
+    <record id="IndiaHrReports.menu_hr_in_reports_enterprise_payroll" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+</odoo>

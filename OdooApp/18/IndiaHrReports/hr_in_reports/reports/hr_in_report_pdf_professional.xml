@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hr_in_report_pdf_professional_body">
+        <div t-attf-class="o_hr_in_pdf {{ report_wide_matrix and 'o_in_report_matrix_wide' or '' }}">
+            <p t-if="report_subtitle" class="o_in_report_subtitle" t-out="report_subtitle"/>
+
+            <div class="o_in_report_section_title" t-out="section_filters_label"/>
+            <table class="o_in_report_filters" name="hr_in_report_filters">
+                <tbody>
+                    <tr t-foreach="filter_rows" t-as="frow">
+                        <td style="width: 32%;"><span t-out="frow['label']"/></td>
+                        <td><span t-out="frow['value']"/></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="o_in_report_section_title" t-out="section_detail_label"/>
+            <t t-if="not table_rows">
+                <p class="text-muted fst-italic" t-out="table_empty_message"/>
+            </t>
+            <t t-else="">
+                <table t-attf-class="o_in_report_detail o_main_table {{ report_wide_matrix and 'o_in_report_matrix_table' or '' }}" name="hr_in_report_lines">
+                    <thead style="display: table-header-group;">
+                        <tr>
+                            <t t-foreach="column_meta" t-as="col">
+                                <th t-attf-class="#{'' if report_wide_matrix else 'text-nowrap '}#{col['class']}" t-out="col['label']"/>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="table_rows" t-as="trow">
+                            <t t-foreach="trow" t-as="cell">
+                                <td t-att-class="cell['class']"><span t-out="cell['value']"/></td>
+                            </t>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+
+            <div class="o_in_report_section_title" t-out="section_summary_label"/>
+            <table class="o_in_report_summary" name="hr_in_report_summary">
+                <tbody>
+                    <tr t-foreach="summary_metrics" t-as="sm">
+                        <td><span t-out="sm['label']"/></td>
+                        <td class="fw-bold text-end"><span t-out="sm['value']"/></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="o_in_report_footer_meta" t-out="prepared_footer"/>
+        </div>
+    </template>
+
+    <!--
+        Use web.external_layout (not external_layout_standard): it dispatches at render
+        time to whichever layout is selected in Settings → Companies → Configure Document
+        Layout (Light, Boxed, Bold, Striped, Bubble, Wave, Folder, Standard).
+    -->
+    <template id="hub_pdf_headcount_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="IndiaHrReports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="hub_pdf_snapshot_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="IndiaHrReports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

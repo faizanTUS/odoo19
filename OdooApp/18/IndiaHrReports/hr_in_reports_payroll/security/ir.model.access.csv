@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_report_wizard_pay_register,hr.in.report.wizard.pay.register,model_hr_in_report_wizard_pay_register,IndiaHrReports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_pay_bank,hr.in.report.wizard.pay.bank,model_hr_in_report_wizard_pay_bank,IndiaHrReports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_pay_register_payroll,hr.in.report.wizard.pay.register payroll officer,model_hr_in_report_wizard_pay_register,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_hr_in_report_wizard_pay_bank_payroll,hr.in.report.wizard.pay.bank payroll officer,model_hr_in_report_wizard_pay_bank,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_hr_in_report_wizard_pay_register_admin,hr.in.report.wizard.pay.register settings,model_hr_in_report_wizard_pay_register,base.group_system,1,1,1,1
+access_hr_in_report_wizard_pay_bank_admin,hr.in.report.wizard.pay.bank settings,model_hr_in_report_wizard_pay_bank,base.group_system,1,1,1,1

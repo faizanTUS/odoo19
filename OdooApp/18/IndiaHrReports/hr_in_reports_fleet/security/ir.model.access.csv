@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_report_wizard_fleet_assign,hr.in.report.wizard.fleet.assign,model_hr_in_report_wizard_fleet_assign,IndiaHrReports.group_hr_in_reports_user,1,1,1,1
