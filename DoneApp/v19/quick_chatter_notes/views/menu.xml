@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem id="menu_quick_notes_root" name="Quick Notes" sequence="10"
+              web_icon="quick_chatter_notes,static/description/icon.png"/>
+    <menuitem id="menu_quick_chatter_notes"
+              name="Quick Chatter Notes"
+              parent="menu_quick_notes_root"
+              action="action_quick_chatter_notes"/>
+</odoo>
