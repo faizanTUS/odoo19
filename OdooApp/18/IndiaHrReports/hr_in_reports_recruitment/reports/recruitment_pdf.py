@@ -20,7 +20,7 @@ def _vals(env, model, docids):
 
 
 class ReportRecFunnel(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_rec_funnel_document"
+    _name = "report.india_hr_reports.pay_rec_funnel_document"
     _description = "PDF hiring funnel"
 
     @api.model
@@ -29,7 +29,7 @@ class ReportRecFunnel(models.AbstractModel):
 
 
 class ReportRecTth(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_rec_tth_document"
+    _name = "report.india_hr_reports.pay_rec_tth_document"
     _description = "PDF time to hire"
 
     @api.model
@@ -38,7 +38,7 @@ class ReportRecTth(models.AbstractModel):
 
 
 class ReportRecSource(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_rec_source_document"
+    _name = "report.india_hr_reports.pay_rec_source_document"
     _description = "PDF source mix"
 
     @api.model

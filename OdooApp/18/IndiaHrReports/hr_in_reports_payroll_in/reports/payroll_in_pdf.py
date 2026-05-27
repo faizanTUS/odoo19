@@ -20,7 +20,7 @@ def _vals(env, model, docids):
 
 
 class ReportInPf(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_in_pf_document"
+    _name = "report.india_hr_reports.pay_in_pf_document"
     _description = "PDF PF register"
 
     @api.model
@@ -29,7 +29,7 @@ class ReportInPf(models.AbstractModel):
 
 
 class ReportInEsi(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_in_esi_document"
+    _name = "report.india_hr_reports.pay_in_esi_document"
     _description = "PDF ESI register"
 
     @api.model
@@ -38,7 +38,7 @@ class ReportInEsi(models.AbstractModel):
 
 
 class ReportInPt(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_in_pt_document"
+    _name = "report.india_hr_reports.pay_in_pt_document"
     _description = "PDF PT register"
 
     @api.model
@@ -47,7 +47,7 @@ class ReportInPt(models.AbstractModel):
 
 
 class ReportInLwf(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_in_lwf_document"
+    _name = "report.india_hr_reports.pay_in_lwf_document"
     _description = "PDF LWF register"
 
     @api.model
@@ -56,7 +56,7 @@ class ReportInLwf(models.AbstractModel):
 
 
 class ReportInTds(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_in_tds_document"
+    _name = "report.india_hr_reports.pay_in_tds_document"
     _description = "PDF TDS summary"
 
     @api.model

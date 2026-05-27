@@ -20,7 +20,7 @@ def _vals(env, model, docids):
 
 
 class ReportPayRegister(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_pdf_register_document"
+    _name = "report.india_hr_reports.pay_pdf_register_document"
     _description = "PDF payroll register"
 
     @api.model
@@ -29,7 +29,7 @@ class ReportPayRegister(models.AbstractModel):
 
 
 class ReportPayBank(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_pdf_bank_document"
+    _name = "report.india_hr_reports.pay_pdf_bank_document"
     _description = "PDF bank advice"
 
     @api.model

@@ -20,7 +20,7 @@ def _vals(env, model, docids):
 
 
 class ReportPlanCoverage(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_plan_coverage_document"
+    _name = "report.india_hr_reports.pay_plan_coverage_document"
     _description = "PDF shift coverage"
 
     @api.model
@@ -29,7 +29,7 @@ class ReportPlanCoverage(models.AbstractModel):
 
 
 class ReportPlanUnderOver(models.AbstractModel):
-    _name = "report.IndiaHrReports.pay_plan_under_over_document"
+    _name = "report.india_hr_reports.pay_plan_under_over_document"
     _description = "PDF under/over planning"
 
     @api.model
