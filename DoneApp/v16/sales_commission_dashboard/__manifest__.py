@@ -69,7 +69,7 @@
     Best Odoo sales dashboard module
     """,
     'license': 'OPL-1',
-    'depends': ['base', 'sale', 'sales_team', 'stock', 'account', 'sale_commission'],
+    'depends': ['base', 'sale', 'sales_team'],
     'data': [
         'views/sales_commission_dashboard_view.xml',
     ],
