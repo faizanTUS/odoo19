@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_res_users_journal_inherit_form" model="ir.ui.view">
+        <field name="name">res.users.journal.restriction.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <!-- Put under Access Rights tab. Classic and expected. -->
+            <xpath expr="//page[@name='access_rights']" position="inside">
+                <group string="Journal Restrictions" groups="user_account_journal_restriction.group_journal_restricted_user">
+                    <field name="allowed_journal_ids" widget="many2many_tags"
+                           options="{'no_create_edit': True}"
+                           context="{'default_type': 'general'}"/>
+                    <label string="Only these journals will be visible and usable for this user." for="allowed_journal_ids"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

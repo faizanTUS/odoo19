@@ -1,0 +1,17 @@
+<odoo>
+    <data noupdate="1">
+
+        <record model="res.groups.privilege" id="privilege_journal_restrictions">
+            <field name="name">Journal Restrictions</field>
+            <field name="category_id" ref="base.module_category_accounting"/>
+            <field name="sequence">15</field>
+        </record>
+
+        <record id="group_journal_restricted_user" model="res.groups">
+            <field name="name">Journal Restricted User</field>
+            <field name="privilege_id" ref="privilege_journal_restrictions"/>
+        </record>
+
+
+    </data>
+</odoo>
