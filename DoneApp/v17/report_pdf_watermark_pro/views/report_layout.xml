@@ -1,0 +1,12 @@
+<odoo>
+    <record id="base_document_layout_hide_layout_when_bg" model="ir.ui.view">
+        <field name="name">base.document.layout.hide.layout.bg</field>
+        <field name="model">base.document.layout</field>
+        <field name="inherit_id" ref="web.view_base_document_layout"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='report_layout_id']" position="attributes">
+                <attribute name="invisible">hide_report_layout</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
