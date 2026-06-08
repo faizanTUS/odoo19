@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_petty_cash_approval_rule_tree" model="ir.ui.view">
+        <field name="name">petty.cash.approval.rule.list</field>
+        <field name="model">petty.cash.approval.rule</field>
+        <field name="arch" type="xml">
+            <tree string="Approval Rules" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="fund_id"/>
+                <field name="amount_from"/>
+                <field name="amount_to"/>
+                <field name="approver_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
