@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_matrix" inherit_id="website_sale.product" name="Product Matrix Quick Order">
+        <xpath expr="//p[contains(@class, 'css_not_available_msg')]" position="before">
+            <t t-if="color_size_matrix and color_size_matrix.get('rows')">
+                <t t-set="matrix" t-value="color_size_matrix"/>
+                <t t-set="matrix_currency" t-value="matrix.get('currency') or {}"/>
+                <div class="o_color_size_matrix card border mt-4 mb-4"
+                     t-att-data-product-template-id="matrix.get('product_template_id')">
+                    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <div>
+                            <span class="fw-semibold">Quick order by color &amp; size</span>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-sm o_matrix_show_colors_btn">
+                            <i class="fa fa-palette me-1"/>
+                            Choose color
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="o_matrix_color_palette row g-2 d-none">
+                            <div class="col-6 col-md-4 col-lg-4"
+                                 t-foreach="matrix.get('rows', [])"
+                                 t-as="matrix_row"
+                                 t-key="matrix_row['color_id']">
+                                <button type="button"
+                                        class="btn btn-outline-secondary w-100 text-start o_matrix_color_option"
+                                        t-att-data-color-id="matrix_row['color_id']"
+                                        t-att-data-color-name="matrix_row['color_name']">
+                                    <span class="o_matrix_color_chip me-2"
+                                          t-if="matrix_row.get('html_color')"
+                                          t-att-style="'background-color: %s' % matrix_row['html_color']"/>
+                                    <span t-esc="matrix_row['color_name']"/>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="o_matrix_selection_placeholder text-center text-muted py-4">
+                            Click "Choose color" to view all colors and pick one.
+                        </div>
+                        <div class="o_matrix_color_sections">
+                            <div class="o_matrix_color_section card mb-3 d-none"
+                                 t-foreach="matrix.get('rows', [])"
+                                 t-as="matrix_row"
+                                 t-key="'section-' + matrix_row['color_id']"
+                                 t-att-data-color-id="matrix_row['color_id']"
+                                 t-att-data-color-name="matrix_row['color_name']">
+                                <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                    <div>
+                                        <span class="text-muted">Color:</span>
+                                        <strong class="ms-1" t-esc="matrix_row['color_name']"/>
+                                    </div>
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-secondary o_matrix_remove_color_btn"
+                                            t-att-data-color-id="matrix_row['color_id']">
+                                        Remove
+                                    </button>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm align-middle mb-0 o_color_size_matrix_table o_matrix_size_table">
+                                            <thead>
+                                                <tr>
+                                                    <th t-foreach="matrix.get('column_headers', [])"
+                                                        t-as="col_header"
+                                                        t-key="col_header['id']"
+                                                        class="text-center fw-semibold text-muted">
+                                                        <span t-esc="col_header['name']"/>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td t-foreach="matrix_row.get('entries', [])"
+                                                        t-as="matrix_cell"
+                                                        t-key="matrix_cell.get('combo_key', matrix_cell.get('size_id'))"
+                                                        class="text-center">
+                                                        <t t-if="matrix_cell['variant_id']">
+                                                            <input type="number"
+                                                                   min="0"
+                                                                   step="1"
+                                                                   value="0"
+                                                                   class="form-control form-control-sm o_matrix_qty_input"
+                                                                   t-att-data-variant-id="matrix_cell.get('variant_id', False)"
+                                                                   t-att-data-unit-price="matrix_cell.get('unit_price', 0.0)"
+                                                                   t-att-disabled="not matrix_cell.get('can_add_to_cart') and 'disabled' or None"/>
+                                                            <small class="text-muted d-block mt-1"
+                                                                   t-if="matrix_cell.get('stock_message')">
+                                                                <span t-esc="matrix_cell.get('stock_message')"/>
+                                                            </small>
+                                                        </t>
+                                                        <span t-else="" class="text-muted">—</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between flex-wrap gap-2">
+                        <div>
+                            <span class="text-muted small d-block">
+                                Leave quantities at 0 for sizes you do not need.
+                            </span>
+                        </div>
+                        <div class="text-end">
+                            <span class="text-muted small d-block">Matrix total</span>
+                            <strong class="o_matrix_total_amount"
+                                    t-att-data-currency-symbol="matrix_currency.get('symbol', '')"
+                                    t-att-data-currency-position="matrix_currency.get('position', 'after')"
+                                    t-att-data-decimal-places="matrix_currency.get('decimal_places', 2)">0.00</strong>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-light btn-sm o_matrix_clear_btn">Clear</button>
+                            <button type="button" class="btn btn-primary btn-sm o_matrix_submit_btn">
+                                <i class="fa fa-shopping-cart me-1"/>
+                                Add selections
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

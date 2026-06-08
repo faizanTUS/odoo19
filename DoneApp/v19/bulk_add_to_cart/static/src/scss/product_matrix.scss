@@ -1,0 +1,36 @@
+.o_color_size_matrix {
+    .o_matrix_color_chip {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        display: inline-block;
+    }
+
+    .o_matrix_qty_input {
+        text-align: center;
+        min-width: 80px;
+    }
+
+    .o_matrix_color_palette {
+        margin-bottom: 1.5rem;
+    }
+
+    .o_matrix_color_option.active {
+        border-color: var(--bs-primary);
+        color: white;
+        box-shadow: 0 0 0 1px var(--bs-primary);
+    }
+
+    .o_matrix_color_sections {
+        .o_matrix_color_section {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: none;
+        }
+
+        .o_matrix_color_section:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
