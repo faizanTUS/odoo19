@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="group_restrict_m2o_create_edit_sales" model="res.groups">
+        <field name="name">Sales Restrictions</field>
+        <field name="comment">
+            Users in this group will NOT see:
+            * "Create" / "Create and Edit" buttons
+        </field>
+    </record>
+
+    <record id="group_restrict_m2o_create_edit_purchase" model="res.groups">
+        <field name="name">Purchase Restrictions</field>
+        <field name="comment">
+            Users in this group will NOT see:
+            * "Create" / "Create and Edit" buttons
+        </field>
+    </record>
+
+    <record id="group_restrict_m2o_create_edit_products" model="res.groups">
+        <field name="name">Products and Products Variants Restrictions</field>
+        <field name="comment">
+            Users in this group will NOT see:
+            * "Create" / "Create and Edit" buttons
+        </field>
+    </record>
+
+    <record id="group_restrict_m2o_create_edit_inventory" model="res.groups">
+        <field name="name">Inventory Restrictions</field>
+        <field name="comment">
+            Users in this group will NOT see:
+            * "Create" / "Create and Edit" buttons
+        </field>
+    </record>
+
+    <record id="group_restrict_m2o_create_edit_invoices" model="res.groups">
+        <field name="name">Invoices Restrictions</field>
+        <field name="comment">
+            Users in this group will NOT see:
+            * "Create" / "Create and Edit" buttons
+        </field>
+    </record>
+
+</odoo>
