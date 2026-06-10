@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_stock_card_wizard_form" model="ir.ui.view">
+        <field name="name">stock.card.wizard.form</field>
+        <field name="model">stock.card.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Stock Card Report">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                        <field name="warehouse_id"/>
+                        <field name="location_id"/>
+                    </group>
+                </group>
+
+                <group>
+                    <group>
+                        <field name="group_by"/>
+                        <field name="output_format"/>
+                    </group>
+                    <group>
+                        <field name="product_ids" widget="many2many_tags"
+                               invisible="group_by == 'category'"/>
+                        <field name="category_id"
+                               invisible = "group_by == 'product'"/>
+                    </group>
+                </group>
+
+                <footer>
+                    <button name="action_print" type="object" string="Print" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_card_wizard" model="ir.actions.act_window">
+        <field name="name">Stock Card Report</field>
+        <field name="res_model">stock.card.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
