@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="email_template_approval_request" model="mail.template">
+        <field name="name">Approval Request</field>
+        <field name="model_id" ref="model_multi_approval"/>
+        <field name="subject">Approval Request: ${object.name}</field>
+        <field name="email_from">${(object.user_id.email_formatted or user.email_formatted)}</field>
+        <field name="email_to">${object.line_id.user_id.email_formatted}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p>Dear ${object.line_id.user_id.name},</p>
+                <p>
+                    You have a new approval request: <strong>${object.name}</strong>
+                </p>
+                <p>
+                    Request Code: <strong>${object.code}</strong><br/>
+                    Requested by: ${object.user_id.name}<br/>
+                    Approval Type: ${object.type_id.name}
+                </p>
+                <p>
+                    Please review and approve or refuse this request.
+                </p>
+                <p>Thank you,</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="email_template_approval_approved" model="mail.template">
+        <field name="name">Approval Approved</field>
+        <field name="model_id" ref="model_multi_approval"/>
+        <field name="subject">Approval Request Approved: ${object.name}</field>
+        <field name="email_from">${(object.line_id.user_id.email_formatted or user.email_formatted)}</field>
+        <field name="email_to">${object.user_id.email_formatted}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p>Dear ${object.user_id.name},</p>
+                <p>
+                    Your approval request <strong>${object.name}</strong> has been approved.
+                </p>
+                <p>
+                    Request Code: <strong>${object.code}</strong><br/>
+                    Approved by: ${object.line_id.user_id.name}
+                </p>
+                <p>Thank you,</p>
+            </div>
+        </field>
+    </record>
+
+    <record id="email_template_approval_refused" model="mail.template">
+        <field name="name">Approval Refused</field>
+        <field name="model_id" ref="model_multi_approval"/>
+        <field name="subject">Approval Request Refused: ${object.name}</field>
+        <field name="email_from">${(object.line_id.user_id.email_formatted or user.email_formatted)}</field>
+        <field name="email_to">${object.user_id.email_formatted}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p>Dear ${object.user_id.name},</p>
+                <p>
+                    Your approval request <strong>${object.name}</strong> has been refused.
+                </p>
+                <p>
+                    Request Code: <strong>${object.code}</strong><br/>
+                    Refused by: ${object.line_id.user_id.name}<br/>
+                    Reason: ${object.line_id.refused_reason or 'No reason provided'}
+                </p>
+                <p>Thank you,</p>
+            </div>
+        </field>
+    </record>
+</odoo>
+

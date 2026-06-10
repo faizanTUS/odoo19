@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_approval_change_approver_wizard_form" model="ir.ui.view">
+        <field name="name">approval.change.approver.wizard.form</field>
+        <field name="model">approval.change.approver.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Change Approver">
+                <group>
+                    <field name="line_id" options="{'no_create': True}"/>
+                    <field name="new_user_id" options="{'no_create': True}"/>
+                </group>
+                <footer>
+                    <button string="Change" name="action_change_approver" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_approval_change_approver_wizard" model="ir.actions.act_window">
+        <field name="name">Change Approver</field>
+        <field name="res_model">approval.change.approver.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
+
