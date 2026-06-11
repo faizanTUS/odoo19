@@ -1,0 +1,6 @@
+<odoo>
+    <record id="group_contact_category_manager" model="res.groups">
+        <field name="name">Contact Category Manager</field>
+        <field name="comment">Can manage Contact Categories</field>
+    </record>
+</odoo>
