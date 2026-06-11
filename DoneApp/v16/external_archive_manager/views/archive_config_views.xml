@@ -1,0 +1,77 @@
+<odoo>
+    <record id="view_external_archive_config_form" model="ir.ui.view">
+        <field name="name">external.archive.config.form</field>
+        <field name="model">external.archive.config</field>
+        <field name="arch" type="xml">
+            <form string="Archive Model Configuration">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                        <field name="model_id"/>
+                    </group>
+
+                    <group string="Fields">
+                        <field name="field_ids" widget="many2many_tags"/>
+                    </group>
+
+                    <group string="Modes">
+                        <field name="offload_mode"/>
+                        <field name="delete_mode"/>
+                    </group>
+
+                    <group string="Offload Rules">
+                        <field name="offload_domain" placeholder="[('state','=','done')]"/>
+                        <field name="archive_age_days"/>
+                    </group>
+
+                    <group string="Delete Rules">
+                        <field name="delete_age_days"/>
+                    </group>
+
+                    <group string="Offload Schedule">
+                        <field name="offload_interval_number"/>
+                        <field name="offload_interval_type"/>
+                        <field name="offload_batch_size"/>
+                        <field name="last_offload_run_at" readonly="1"/>
+                        <field name="next_offload_run_at" readonly="1"/>
+                    </group>
+
+                    <group string="Delete Schedule">
+                        <field name="interval_number"/>
+                        <field name="interval_type"/>
+                        <field name="batch_size"/>
+                        <field name="last_run_at" readonly="1"/>
+                        <field name="next_run_at" readonly="1"/>
+                    </group>
+
+                    <group string="Injected View">
+                        <field name="injected_view_id" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_external_archive_config_tree" model="ir.ui.view">
+        <field name="name">external.archive.config.tree</field>
+        <field name="model">external.archive.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="active"/>
+                <field name="offload_mode"/>
+                <field name="delete_mode"/>
+                <field name="next_offload_run_at"/>
+                <field name="next_run_at"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_external_archive_config" model="ir.actions.act_window">
+        <field name="name">Archive Model Configuration</field>
+        <field name="res_model">external.archive.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
