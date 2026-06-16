@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Add Pricelist column and Multi Pricelist button to order lines list -->
+    <record id="view_order_form_multi_pricelist" model="ir.ui.view">
+        <field name="name">sale.order.form.multi.pricelist</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add Pricelist column after Unit Price in order lines list -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="after">
+                <field name="effective_pricelist_id" optional="show" readonly="1" context="{'hide_currency_in_name': True}" string="Pricelist" groups="sale_multi_pricelist.sale_multi_pricelist_group_user"/>
+                <field name="pricelist_id" optional="hide" column_invisible="1" groups="sale_multi_pricelist.sale_multi_pricelist_group_user"/>
+            </xpath>
+            <!-- Add Multi Pricelist button in list: after price_unit block, add button -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='technical_price_unit']" position="after">
+                <button name="action_open_multi_pricelist_wizard"
+                        type="object"
+                        string="Multi Pricelist"
+                        title="Compare and apply a pricelist for this line"
+                        class="btn-link"
+                        invisible="display_type or not product_id or is_downpayment" groups="sale_multi_pricelist.sale_multi_pricelist_group_user"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inline form: allow editing line pricelist next to price -->
+    <record id="view_order_form_multi_pricelist_line_form" model="ir.ui.view">
+        <field name="name">sale.order.form.multi.pricelist.line.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                <field name="pricelist_id" options="{'no_create': True}" context="{'order_id': parent.id}" groups="sale_multi_pricelist.sale_multi_pricelist_group_user"/>
+                <field name="effective_pricelist_id" column_invisible="1" groups="sale_multi_pricelist.sale_multi_pricelist_group_user"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
