@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_face_attendance" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.face.attendance</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="81"/>
+        <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='kiosk_mode_setting_container']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box" id="face_attendance_location">
+                    <div class="o_setting_left_pane">
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <div class="row">
+                            <b>Face Attendance Locations</b>
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="multi_location_ids" class="w-100">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Location Name"/>
+                                        <field name="face_attendance_latitude" string="Latitude"/>
+                                        <field name="face_attendance_longitude" string="Longitude"/>
+                                        <field name="face_attendance_radius" string="Radius (meters)"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>
