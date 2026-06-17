@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_petty_cash_replenishment_tree" model="ir.ui.view">
+        <field name="name">petty.cash.replenishment.list</field>
+        <field name="model">petty.cash.replenishment</field>
+        <field name="arch" type="xml">
+            <list string="Replenishments">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="fund_id"/>
+                <field name="requested_by_id"/>
+                <field name="amount" sum="Total"/>
+                <field name="state" widget="badge"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_petty_cash_replenishment_form" model="ir.ui.view">
+        <field name="name">petty.cash.replenishment.form</field>
+        <field name="model">petty.cash.replenishment</field>
+        <field name="arch" type="xml">
+            <form string="Replenishment">
+                <header>
+                    <button name="action_submit" type="object" string="Submit" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_approve" type="object" string="Approve" class="btn-primary" invisible="state != 'submitted'" groups="tus_petty_cash_management.group_petty_cash_manager"/>
+                    <button name="action_done" type="object" string="Post" class="btn-primary" invisible="state != 'approved'" groups="tus_petty_cash_management.group_petty_cash_manager"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state not in ('draft','submitted','approved')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="fund_id"/>
+                        <field name="requested_by_id"/>
+                        <field name="date"/>
+                        <field name="amount"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <group string="Accounting">
+                        <field name="move_id" readonly="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>
