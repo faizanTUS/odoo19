@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Configuration Form View -->
+    <record id="view_attendance_config_form" model="ir.ui.view">
+        <field name="name">hr.attendance.report.config.form</field>
+        <field name="model">hr.attendance.report.config</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Report Configuration">
+                <sheet>
+                    <group>
+                        <group string="Company">
+                            <field name="company_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Working Hours" name="working_hours">
+                            <group>
+                                <group>
+                                    <field name="standard_working_hours"/>
+                                    <field name="half_day_threshold"/>
+                                </group>
+                                <group>
+                                    <field name="late_arrival_threshold"/>
+                                    <field name="early_departure_threshold"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Status Colors" name="colors">
+                            <group>
+                                <group>
+                                    <field name="color_present" widget="color"/>
+                                    <field name="color_absent" widget="color"/>
+                                    <field name="color_half_day" widget="color"/>
+                                </group>
+                                <group>
+                                    <field name="color_leave" widget="color"/>
+                                    <field name="color_work_on" widget="color"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Display Settings" name="display">
+                            <group>
+                                <group>
+                                    <field name="default_date_range_days"/>
+                                    <field name="show_break_time"/>
+                                    <field name="show_overtime"/>
+                                    <field name="show_punctuality"/>
+                                </group>
+                                <group>
+                                    <field name="include_weekends"/>
+                                    <field name="include_holidays"/>
+                                    <field name="auto_calculate_overtime"/>
+                                    <field name="round_hours"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Dashboard Settings" name="dashboard">
+                            <group>
+                                <group>
+                                    <field name="dashboard_refresh_interval"/>
+                                    <field name="show_live_status"/>
+                                    <field name="enable_alerts"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Export Templates" name="templates">
+                            <group>
+                                <group>
+                                    <field name="excel_template_id"/>
+                                    <field name="pdf_template_id"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Configuration Tree View -->
+    <record id="view_attendance_config_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.report.config.tree</field>
+        <field name="model">hr.attendance.report.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="company_id"/>
+                <field name="standard_working_hours"/>
+                <field name="half_day_threshold"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Configuration Action -->
+    <record id="action_attendance_config" model="ir.actions.act_window">
+        <field name="name">Report Configuration</field>
+        <field name="res_model">hr.attendance.report.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new configuration
+            </p>
+            <p>
+                Configure attendance report settings including working hours, status colors, and display options.
+            </p>
+        </field>
+    </record>
+</odoo>
+

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Analytics Wizard Form View -->
+    <record id="view_attendance_analytics_wizard_form" model="ir.ui.view">
+        <field name="name">attendance.analytics.wizard.form</field>
+        <field name="model">attendance.analytics.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Analytics">
+                <sheet>
+                    <group>
+                        <group string="Date Range">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group string="Filters">
+                            <field name="employee_ids" widget="many2many_tags"/>
+                            <field name="department_ids" widget="many2many_tags"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Analytics Options">
+                        <group>
+                            <field name="chart_type"/>
+                            <field name="metric"/>
+                            <field name="group_by"/>
+                        </group>
+                        <group>
+                            <field name="compare_with_previous"/>
+                            <field name="previous_period" invisible="compare_with_previous == False"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="action_generate_analytics" string="Generate Analytics" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Analytics Dashboard View -->
+    <record id="view_attendance_analytics_dashboard" model="ir.ui.view">
+        <field name="name">attendance.analytics.dashboard</field>
+        <field name="model">attendance.analytics.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Analytics Dashboard">
+                <header>
+                    <button name="action_generate_analytics" string="Refresh" type="object" class="btn-secondary"/>
+                    <button name="action_export_data" string="Export Data" type="object" class="btn-primary"/>
+                    <button string="Back" class="btn-secondary" special="cancel"/>
+                    <widget name="web_ribbon" title="Analytics Dashboard" bg_color="bg-success"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group string="Date Range">
+                            <field name="date_from" readonly="1"/>
+                            <field name="date_to" readonly="1"/>
+                        </group>
+                        <group string="Filters">
+                            <field name="employee_ids" readonly="1" widget="many2many_tags"/>
+                            <field name="department_ids" readonly="1" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Analytics Options">
+                        <field name="chart_type" readonly="1"/>
+                        <field name="metric" readonly="1"/>
+                        <field name="group_by" readonly="1"/>
+                    </group>
+                    
+                    <div class="alert alert-info" role="alert">
+                        <strong>Note:</strong> Analytics dashboard with charts will be displayed after clicking "Generate Analytics". 
+                        Use the dashboard view for interactive charts and visualizations.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Analytics Wizard -->
+    <record id="action_attendance_analytics_wizard" model="ir.actions.act_window">
+        <field name="name">Attendance Analytics</field>
+        <field name="res_model">attendance.analytics.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_chart_type': 'bar', 'default_metric': 'working_hours'}</field>
+    </record>
+</odoo>

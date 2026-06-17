@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Full record ensures report_name and report_file are set (Odoo 18) -->
+    <record id="action_attendance_report" model="ir.actions.report">
+        <field name="name">Attendance Report</field>
+        <field name="model">attendance.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_attendance_report_advanced.attendance_report_template</field>
+        <field name="report_file">hr_attendance_report_advanced.attendance_report_template</field>
+        <field name="paperformat_id" ref="hr_attendance_report_advanced.paperformat_attendance_landscape"/>
+    </record>
+</odoo>

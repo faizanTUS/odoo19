@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Employee Form View Extension -->
+    <record id="view_hr_employee_form_inherit_attendance" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.attendance</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[2]" position="after">
+                <page string="Attendance" name="attendance_tab">
+                    <group string="Attendance Settings">
+                        <field name="standard_hours" help="Standard working hours per day for this employee"/>
+                    </group>
+
+                    <group string="Attendance Summary">
+                        <label for="current_month_summary" string="Current Month Summary" />
+                        <div class="o_row">
+                            <field name="attendance_summary" id="current_month_summary" nolabel="1" readonly="1"/>
+                        </div>
+                    </group>
+
+                    <group string="Recent Attendance">
+                        <field name="attendance_status_ids" 
+                               context="{'default_employee_id': id, 'search_default_employee_id': id, 'form_view_ref': False}"
+                               options="{'no_create': True, 'no_create_edit': True}"
+                               widget="one2many_list">
+                            <list string="Attendance Records" limit="10" decoration-info="attendance_status_id.is_leave" decoration-danger="attendance_status_id.is_absent">
+                                <field name="check_in"/>
+                                <field name="check_out"/>
+                                <field name="worked_hours"/>
+                                <field name="attendance_status_id" widget="selection"/>
+                                <field name="overtime_hours"/>
+                            </list>
+                        </field>
+                    </group>
+
+                    <footer>
+                        <button name="action_view_attendance_report" string="View Attendance Report" type="object" class="btn-primary"/>
+                        <button name="action_view_attendance_records" string="View All Attendance Records" type="object" class="btn-secondary"/>
+                    </footer>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
