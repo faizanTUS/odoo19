@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_hr_attendance_employee_simple_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.attendance.employee.simple.tree.inherit.location</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_employee_simple_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='check_in']" position="after">
+                <field name="check_in_address"/>
+            </xpath>
+            <xpath expr="//field[@name='check_out']" position="after">
+                <field name="check_out_address"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
