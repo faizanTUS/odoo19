@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template_ext" xml:space="preserve">
+    <t t-name="ChatterExt" t-inherit="mail.Chatter" t-inherit-mode="extension" owl="1">
+        <xpath
+            expr="//button[hasclass('o-mail-Chatter-sendMessage')]"
+            position="attributes"
+        >
+
+             <attribute
+                name="t-if"
+            >props.hasMessageList and state.thread.DisableSendMessageBtn</attribute>
+        </xpath>
+    </t>
+</templates>
