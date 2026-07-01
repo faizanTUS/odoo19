@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pay_plan_coverage_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="pay_plan_under_over_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_plan_coverage" model="ir.actions.report">
+        <field name="name">Shift coverage (PDF)</field>
+        <field name="model">hr.in.report.wizard.plan.coverage</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.pay_plan_coverage_document</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_plan_under_over" model="ir.actions.report">
+        <field name="name">Under/over planned hours (PDF)</field>
+        <field name="model">hr.in.report.wizard.plan.under_over</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.pay_plan_under_over_document</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+</odoo>

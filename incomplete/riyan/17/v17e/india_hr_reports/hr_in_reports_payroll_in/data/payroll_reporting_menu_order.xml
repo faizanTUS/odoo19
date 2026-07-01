@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        In Odoo 17 EE, l10n_in_hr_payroll does not provide the
+        "Salary Register" menu/action (it was introduced in 18+).
+        This file is intentionally minimal so the manifest entry stays
+        valid; reordering and the Salary Register shortcut are skipped
+        on v17.
+    -->
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="att_pdf_daily_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="att_pdf_monthly_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="att_pdf_exceptions_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="att_pdf_ot_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_att_daily" model="ir.actions.report">
+        <field name="name">Daily attendance register (PDF)</field>
+        <field name="model">hr.in.report.wizard.att.daily</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.att_pdf_daily_document</field>
+        <field name="print_report_name">'Daily_attendance_%s_%s' % (object.date_from, object.date_to)</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_att_monthly" model="ir.actions.report">
+        <field name="name">Monthly attendance matrix (PDF)</field>
+        <field name="model">hr.in.report.wizard.att.monthly</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.att_pdf_monthly_document</field>
+        <field name="print_report_name">'Attendance_matrix_%s_%s' % (object.date_from, object.date_to)</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports_landscape"/>
+    </record>
+    <record id="action_report_att_exceptions" model="ir.actions.report">
+        <field name="name">Attendance exceptions (PDF)</field>
+        <field name="model">hr.in.report.wizard.att.exceptions</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.att_pdf_exceptions_document</field>
+        <field name="print_report_name">'Attendance_exceptions_%s_%s' % (object.date_from, object.date_to)</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_att_ot" model="ir.actions.report">
+        <field name="name">Overtime summary (PDF)</field>
+        <field name="model">hr.in.report.wizard.att.ot</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.att_pdf_ot_document</field>
+        <field name="print_report_name">'Overtime_summary_%s_%s' % (object.date_from, object.date_to)</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+</odoo>

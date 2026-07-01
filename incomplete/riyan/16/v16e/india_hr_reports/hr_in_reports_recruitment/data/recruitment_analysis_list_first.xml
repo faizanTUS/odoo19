@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Recruitment → Reporting → Recruitment Analysis: list first (not graph). -->
+    <record id="hr_recruitment.hr_applicant_action_analysis" model="ir.actions.act_window">
+        <field name="view_mode">tree,graph,pivot</field>
+        <field name="view_ids" eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'tree'}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('hr_recruitment.hr_applicant_view_graph')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('hr_recruitment.hr_applicant_view_pivot')}),
+        ]"/>
+    </record>
+</odoo>

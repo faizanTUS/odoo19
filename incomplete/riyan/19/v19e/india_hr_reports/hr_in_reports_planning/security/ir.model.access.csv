@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_report_wizard_plan_coverage,hr.in.report.wizard.plan.coverage,model_hr_in_report_wizard_plan_coverage,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_plan_under_over,hr.in.report.wizard.plan.under_over,model_hr_in_report_wizard_plan_under_over,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_plan_coverage_planning,hr.in.report.wizard.plan.coverage planning,model_hr_in_report_wizard_plan_coverage,planning.group_planning_user,1,1,1,1
+access_hr_in_report_wizard_plan_under_over_planning,hr.in.report.wizard.plan.under_over planning,model_hr_in_report_wizard_plan_under_over,planning.group_planning_user,1,1,1,1
+access_hr_in_report_wizard_plan_coverage_admin,hr.in.report.wizard.plan.coverage admin,model_hr_in_report_wizard_plan_coverage,base.group_system,1,1,1,1
+access_hr_in_report_wizard_plan_under_over_admin,hr.in.report.wizard.plan.under_over admin,model_hr_in_report_wizard_plan_under_over,base.group_system,1,1,1,1

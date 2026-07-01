@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="pay_in_pf_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="pay_in_esi_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="pay_in_pt_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="pay_in_lwf_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="pay_in_tds_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_ids[:1] or env.company"/>
+                <t t-set="o" t-value="doc"/>
+                <t t-call="web.external_layout">
+                    <t t-call="india_hr_reports.hr_in_report_pdf_professional_body"/>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_in_pf" model="ir.actions.report">
+        <field name="name">PF register (PDF)</field>
+        <field name="model">hr.in.report.wizard.in.pf</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.pay_in_pf_document</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_in_esi" model="ir.actions.report">
+        <field name="name">ESI register (PDF)</field>
+        <field name="model">hr.in.report.wizard.in.esi</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.pay_in_esi_document</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_in_pt" model="ir.actions.report">
+        <field name="name">PT register (PDF)</field>
+        <field name="model">hr.in.report.wizard.in.pt</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.pay_in_pt_document</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_in_lwf" model="ir.actions.report">
+        <field name="name">LWF register (PDF)</field>
+        <field name="model">hr.in.report.wizard.in.lwf</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.pay_in_lwf_document</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+    <record id="action_report_in_tds" model="ir.actions.report">
+        <field name="name">TDS summary (PDF)</field>
+        <field name="model">hr.in.report.wizard.in.tds</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.pay_in_tds_document</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+</odoo>

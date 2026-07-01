@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_report_wizard_rec_funnel,hr.in.report.wizard.rec.funnel,model_hr_in_report_wizard_rec_funnel,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_rec_tth,hr.in.report.wizard.rec.tth,model_hr_in_report_wizard_rec_tth,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_rec_source,hr.in.report.wizard.rec.source,model_hr_in_report_wizard_rec_source,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_rec_funnel_rec,hr.in.report.wizard.rec.funnel recruitment,model_hr_in_report_wizard_rec_funnel,hr_recruitment.group_hr_recruitment_user,1,1,1,1
+access_hr_in_report_wizard_rec_tth_rec,hr.in.report.wizard.rec.tth recruitment,model_hr_in_report_wizard_rec_tth,hr_recruitment.group_hr_recruitment_user,1,1,1,1
+access_hr_in_report_wizard_rec_source_rec,hr.in.report.wizard.rec.source recruitment,model_hr_in_report_wizard_rec_source,hr_recruitment.group_hr_recruitment_user,1,1,1,1
+access_hr_in_report_wizard_rec_funnel_admin,hr.in.report.wizard.rec.funnel admin,model_hr_in_report_wizard_rec_funnel,base.group_system,1,1,1,1
+access_hr_in_report_wizard_rec_tth_admin,hr.in.report.wizard.rec.tth admin,model_hr_in_report_wizard_rec_tth,base.group_system,1,1,1,1
+access_hr_in_report_wizard_rec_source_admin,hr.in.report.wizard.rec.source admin,model_hr_in_report_wizard_rec_source,base.group_system,1,1,1,1

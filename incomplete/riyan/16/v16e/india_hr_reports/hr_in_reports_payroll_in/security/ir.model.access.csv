@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_report_wizard_in_pf,hr.in.report.wizard.in.pf,model_hr_in_report_wizard_in_pf,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_in_esi,hr.in.report.wizard.in.esi,model_hr_in_report_wizard_in_esi,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_in_pt,hr.in.report.wizard.in.pt,model_hr_in_report_wizard_in_pt,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_in_lwf,hr.in.report.wizard.in.lwf,model_hr_in_report_wizard_in_lwf,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_in_tds,hr.in.report.wizard.in.tds,model_hr_in_report_wizard_in_tds,india_hr_reports.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_in_pf_payroll,hr.in.report.wizard.in.pf payroll,model_hr_in_report_wizard_in_pf,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_hr_in_report_wizard_in_esi_payroll,hr.in.report.wizard.in.esi payroll,model_hr_in_report_wizard_in_esi,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_hr_in_report_wizard_in_pt_payroll,hr.in.report.wizard.in.pt payroll,model_hr_in_report_wizard_in_pt,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_hr_in_report_wizard_in_lwf_payroll,hr.in.report.wizard.in.lwf payroll,model_hr_in_report_wizard_in_lwf,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_hr_in_report_wizard_in_tds_payroll,hr.in.report.wizard.in.tds payroll,model_hr_in_report_wizard_in_tds,hr_payroll.group_hr_payroll_user,1,1,1,1
+access_hr_in_report_wizard_in_pf_admin,hr.in.report.wizard.in.pf admin,model_hr_in_report_wizard_in_pf,base.group_system,1,1,1,1
+access_hr_in_report_wizard_in_esi_admin,hr.in.report.wizard.in.esi admin,model_hr_in_report_wizard_in_esi,base.group_system,1,1,1,1
+access_hr_in_report_wizard_in_pt_admin,hr.in.report.wizard.in.pt admin,model_hr_in_report_wizard_in_pt,base.group_system,1,1,1,1
+access_hr_in_report_wizard_in_lwf_admin,hr.in.report.wizard.in.lwf admin,model_hr_in_report_wizard_in_lwf,base.group_system,1,1,1,1
+access_hr_in_report_wizard_in_tds_admin,hr.in.report.wizard.in.tds admin,model_hr_in_report_wizard_in_tds,base.group_system,1,1,1,1

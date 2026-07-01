@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Portrait A4 for all Greet HR India PDFs.
+        margin_top + header_spacing must reserve room for web.external_layout (which
+        dispatches to Light, Boxed, Bold, Striped, Bubble, Wave, Folder or Standard):
+        wkhtmltopdf lifts .header out of the body; if the reserve is too small, the
+        rendered logo + multi-line address + tax id push the body's first heading on
+        top of the header. Values were picked to host a typical Indian header
+        (logo + 7-line address + GSTIN); customers with even taller headers should
+        increase margin_top / header_spacing further from Settings → Paper Formats.
+    -->
+    <record id="paperformat_hr_in_reports" model="report.paperformat">
+        <field name="name">HR India Reports A4</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">75</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">65</field>
+        <field name="dpi">90</field>
+<!--        <field name="css_margins" eval="True"/>-->
+    </record>
+
+    <!-- Wide tables (e.g. attendance day matrix): same header reserve, landscape body. -->
+    <record id="paperformat_hr_in_reports_landscape" model="report.paperformat">
+        <field name="name">HR India Reports A4 landscape</field>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">75</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">65</field>
+        <field name="dpi">90</field>
+<!--        <field name="css_margins" eval="True"/>-->
+    </record>
+
+    <template id="hr_in_report_pdf_table">
+        <t t-call="web.html_container">
+            <div class="page o_hr_in_report_pdf p-2">
+                <h2><span t-esc="doc_title"/></h2>
+                <p class="text-muted small"><span t-esc="filter_summary"/></p>
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th t-foreach="column_labels" t-as="lab">
+                                <span t-esc="lab"/>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="row_values" t-as="row">
+                            <td t-foreach="row" t-as="cell">
+                                <span t-esc="cell"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <record id="action_report_hub_headcount" model="ir.actions.report">
+        <field name="name">Headcount &amp; movement (PDF)</field>
+        <field name="model">hr.in.report.wizard.hub.headcount</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.hub_pdf_headcount_document</field>
+        <field name="print_report_name">'Headcount_%s_%s' % (object.date_from, object.date_to)</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports"/>
+    </record>
+
+    <record id="action_report_hub_snapshot" model="ir.actions.report">
+        <field name="name">Employee snapshot (PDF)</field>
+        <field name="model">hr.in.report.wizard.hub.snapshot</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">india_hr_reports.hub_pdf_snapshot_document</field>
+        <field name="print_report_name">'Employee_snapshot_%s' % (object.date_to)</field>
+        <field name="paperformat_id" ref="india_hr_reports.paperformat_hr_in_reports_landscape"/>
+    </record>
+</odoo>

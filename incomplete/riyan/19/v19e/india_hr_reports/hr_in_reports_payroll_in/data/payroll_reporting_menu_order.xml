@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Payroll → Reporting: after "Payslip Other Inputs" (14): Salary Register, Payroll register, Bank net pay advice -->
+    <record id="l10n_in_hr_payroll.menu_salary_register" model="ir.ui.menu">
+        <field name="parent_id" ref="hr_payroll.menu_hr_payroll_report"/>
+        <field name="sequence">15</field>
+    </record>
+
+    <menuitem
+        id="menu_pay_salary_register_hr_hub"
+        name="Salary Register"
+        parent="india_hr_reports.menu_hr_in_reports_payroll"
+        action="l10n_in_hr_payroll.action_salary_register"
+        groups="india_hr_reports.group_hr_in_reports_user,hr_payroll.group_hr_payroll_user,base.group_system"
+        sequence="5"/>
+</odoo>

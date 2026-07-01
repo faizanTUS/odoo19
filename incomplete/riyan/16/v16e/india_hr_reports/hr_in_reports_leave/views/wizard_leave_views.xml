@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_in_report_wizard_leave_ledger" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.leave.ledger.form</field>
+        <field name="model">hr.in.report.wizard.leave.ledger</field>
+        <field name="arch" type="xml">
+            <form string="Leave ledger">
+                <div class="alert alert-info mb-3" role="status">
+                    Official-style export: filters are repeated on the PDF/XLSX cover, detail lines follow,
+                    then a short summary (line count and totals for days). Use departments or employees to narrow scope.
+                </div>
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_leave_ledger" model="ir.actions.act_window">
+        <field name="name">Leave ledger</field>
+        <field name="res_model">hr.in.report.wizard.leave.ledger</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_leave_balance" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.leave.balance.form</field>
+        <field name="model">hr.in.report.wizard.leave.balance</field>
+        <field name="arch" type="xml">
+            <form string="Leave balance">
+                <div class="alert alert-info mb-3" role="status">
+                    Allocation snapshot as-of the reference date: the export lists valid allocation lines and totals allocated days.
+                    Pair with the leave ledger for movements and with the accrual audit for creations in a period.
+                </div>
+                <group>
+                    <group><field name="date_from" invisible="1"/><field name="date_to" placeholder="Reference date"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_leave_balance" model="ir.actions.act_window">
+        <field name="name">Leave balance</field>
+        <field name="res_model">hr.in.report.wizard.leave.balance</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_leave_accrual" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.leave.accrual.form</field>
+        <field name="model">hr.in.report.wizard.leave.accrual</field>
+        <field name="arch" type="xml">
+            <form string="Accrual allocation audit">
+                <div class="alert alert-info mb-3" role="status">
+                    Lists allocations created in the period (system or manual). Ideal for verifying accrual batches.
+                    The PDF follows the standard Odoo company layout with filter recap, detail grid, and summary.
+                </div>
+                <group>
+                    <group><field name="date_from"/><field name="date_to"/></group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_leave_accrual" model="ir.actions.act_window">
+        <field name="name">Accrual allocation audit</field>
+        <field name="res_model">hr.in.report.wizard.leave.accrual</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Time Off → Reporting: after standard "Balance" (sequence 4) -->
+    <menuitem
+        id="menu_hr_holidays_report_leave_ledger"
+        name="Leave ledger"
+        parent="hr_holidays.menu_hr_holidays_report"
+        action="action_hr_in_report_wizard_leave_ledger"
+        groups="hr_holidays.group_hr_holidays_user"
+        sequence="5"/>
+    <menuitem
+        id="menu_hr_holidays_report_leave_balance"
+        name="Leave balance"
+        parent="hr_holidays.menu_hr_holidays_report"
+        action="action_hr_in_report_wizard_leave_balance"
+        groups="hr_holidays.group_hr_holidays_user"
+        sequence="6"/>
+    <menuitem
+        id="menu_hr_holidays_report_leave_accrual_audit"
+        name="Accrual allocation audit"
+        parent="hr_holidays.menu_hr_holidays_report"
+        action="action_hr_in_report_wizard_leave_accrual"
+        groups="hr_holidays.group_hr_holidays_user"
+        sequence="7"/>
+
+    <record id="action_leave_allocation_pivot" model="ir.actions.act_window">
+        <field name="name">Leave allocations</field>
+        <field name="res_model">hr.leave.allocation</field>
+        <field name="view_mode">tree,pivot,form</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem id="menu_hr_in_reports_leave" name="Leave" parent="india_hr_reports.menu_hr_in_reports_root" sequence="30"/>
+    <menuitem id="menu_leave_ledger" name="Leave ledger" parent="menu_hr_in_reports_leave" action="action_hr_in_report_wizard_leave_ledger" sequence="10"/>
+    <menuitem id="menu_leave_balance" name="Leave balance" parent="menu_hr_in_reports_leave" action="action_hr_in_report_wizard_leave_balance" sequence="20"/>
+    <menuitem id="menu_leave_accrual" name="Accrual allocation audit" parent="menu_hr_in_reports_leave" action="action_hr_in_report_wizard_leave_accrual" sequence="30"/>
+    <menuitem id="menu_leave_accrual_pivot" name="Allocations pivot (native)" parent="menu_hr_in_reports_leave" action="action_leave_allocation_pivot" sequence="40"/>
+</odoo>
