@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_type_form_inherit_stage_duration" model="ir.ui.view">
+        <field name="name">project.task.type.form.inherit.stage.duration</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[field[@name='project_ids']]" position="inside">
+                <field name="is_project_stage"/>
+                <field name="track_duration_start" attrs="{'invisible':[('is_project_stage','=', False)]}"/>
+                <field name="track_duration_stop" attrs="{'invisible':[('is_project_stage','=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_task_type_tree_inherit_stage_duration" model="ir.ui.view">
+        <field name="name">project.task.type.list.inherit.stage.duration</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_tree_inherited"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_ids']" position="after">
+                <field name="is_project_stage" optional="hide"/>
+                <field name="track_duration_start" optional="hide" string="Start"/>
+                <field name="track_duration_stop" optional="hide" string="Stop"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

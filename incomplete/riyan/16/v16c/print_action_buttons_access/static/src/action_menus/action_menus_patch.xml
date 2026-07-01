@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web.ActionMenus" t-inherit="web.ActionMenus" t-inherit-mode="extension">
+        <xpath expr="/*" position="attributes">
+            <attribute name="t-if">isAccessAllowed()</attribute>
+        </xpath>
+    </t>
+</templates>
