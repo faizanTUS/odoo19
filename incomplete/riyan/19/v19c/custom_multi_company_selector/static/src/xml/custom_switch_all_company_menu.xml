@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="custom_multi_company_selector.SwitchAllCompanyMenu"
+        t-inherit="web.SwitchCompanyMenu.Items"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//t[@t-key='entry.company.id']" position="before">
+            <DropdownItem class="'p-0 bg-white'">
+                <div class="d-flex">
+                    <div
+                        role="menuitemcheckbox"
+                        tabindex="0"
+                        class="border-end"
+                        t-att-class="state.isAllCompaniesSelected ? 'border-primary' : ''"
+                        t-on-click.stop="() => this.toggleSelectAllCompanies()"
+                    >
+                        <span class="btn btn-light border-0 p-2">
+                            <i
+                                class="fa fa-fw py-2"
+                                t-att-class="state.isAllCompaniesSelected ? 'fa-check-square text-primary' : 'fa-square-o'"
+                            />
+                        </span>
+                    </div>
+                    <div
+                        role="button"
+                        tabindex="0"
+                        class="d-flex flex-grow-1 align-items-center py-0 ps-2 ms-1 me-2 all-companies-item"
+                        title="Select All Companies"
+                        t-on-click.stop="() => this.toggleSelectAllCompanies()"
+                    >
+                        <span class="company_label pe-3 text-900 fw-bold">Select all</span>
+                    </div>
+                </div>
+            </DropdownItem>
+        </xpath>
+    </t>
+</templates>
