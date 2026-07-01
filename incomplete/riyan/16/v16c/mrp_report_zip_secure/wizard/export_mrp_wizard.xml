@@ -1,0 +1,64 @@
+<odoo>
+    <record id="view_mrp_pdf_export_wizard_form" model="ir.ui.view">
+        <field name="name">pdf.export.wizard.form</field>
+        <field name="model">export.mrp.pdf.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="is_production" invisible="1"/>
+                    <field name="is_sale" invisible="1"/>
+                    <field name="is_work_order" invisible="1"/>
+
+                    <div attrs="{'invisible':[('is_production','!=',True)]}"
+                         groups="mrp_report_zip_secure.group_export_mrp_production_orders">
+                        <h1>Production Order</h1>
+                    </div>
+
+                    <div attrs="{'invisible':[('is_work_order','!=',True)]}" groups="mrp_report_zip_secure.group_export_mrp_workorders">
+                        <h1>Work Order</h1>
+                    </div>
+                    <div>
+                        <group>
+                            <group>
+                            <field name="zip_password" password="True" string="Zip Password"/>
+                            </group>
+                        </group>
+                    </div>
+                    <field name="workorder_ids" attrs="{'invisible':[('is_work_order','!=',True)]}" nolabel="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="workcenter_id"/>
+                            <field name="product_id"/>
+                            <field name="qty_remaining"/>
+                            <field name="duration_expected"/>
+                            <field name="duration"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+
+                    <field name="production_ids" attrs="{'invisible':['|',('is_production','!=',True),('is_sale','==',True)]}" nolabel="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="date_start"/>
+                            <field name="product_id"/>
+                            <field name="activity_ids"/>
+                            <field name="origin"/>
+                            <field name="components_availability"/>
+                            <field name="product_qty"/>
+                            <field name="company_id"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button string="Export Production Order Zip" type="object"
+                            attrs="{'invisible':['|',('is_production','!=',True),('is_sale','==',True)]}" name="action_mrp_production"
+                            class="oe_highlight"/>
+                    <button string="Export Work Order Zip" type="object" attrs="{'invisible':[('is_work_order','!=',True)]}"
+                            name="action_work_order" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
