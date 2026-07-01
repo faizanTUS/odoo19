@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Put these under Accounting → Configuration → Settings -->
+        <record id="view_res_config_settings_ai_ageing" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.ai.ageing</field>
+            <field name="model">res.config.settings</field>
+            <!-- Use Accounting settings form as base -->
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[@id='companies']" position="before">
+                    <h2>Ageing Alerts</h2>
+                    <div class="row mt16 o_settings_container" id="ageing">
+                        <div class="col-12 col-lg-6 o_setting_box" id="ageing_enable_customer">
+                            <div class="o_setting_left_pane">
+                                <field name="ageing_enable_customer"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Enable Customer Ageing Alerts</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="ageing_enable_vendor">
+                            <div class="o_setting_left_pane">
+                                <field name="ageing_enable_vendor"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Enable Vendor Ageing Alerts</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box" id="ageing_min_overdue_amount">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Min Overdue Amount for Alert</span><br/>
+                                <field name="ageing_min_overdue_amount"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="ageing_alert_cooldown_days">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Alert Cooldown (Days)</span><br/>
+                                <field name="ageing_alert_cooldown_days"/>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box" id="ageing_critical_amount_and_day">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Ageing Critical Amount and Day Alerts</span><br/>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <span class="o_form_label">Min Ageing Critical Amount</span><br/>
+                                        <field name="ageing_critical_amount"/>
+                                    </div>
+                                    <div class="row">
+                                        <span class="o_form_label">Min Ageing Critical Days</span><br/>
+                                        <field name="ageing_critical_days"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="ageing_high_amount_and_day">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Ageing High Amount and Day Alerts</span><br/>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <span class="o_form_label">Min Ageing High Amount</span><br/>
+                                        <field name="ageing_high_amount"/>
+                                    </div>
+                                    <div class="row">
+                                        <span class="o_form_label">Min Ageing High Days</span><br/>
+                                        <field name="ageing_high_days"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box" id="ageing_medium_amount_and_day">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Ageing Medium Amount and Day Alerts</span><br/>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <span class="o_form_label">Min Ageing Medium Amount</span><br/>
+                                        <field name="ageing_medium_amount"/>
+                                    </div>
+                                    <div class="row">
+                                        <span class="o_form_label">Min Ageing Medium Days</span><br/>
+                                        <field name="ageing_medium_days"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+
+</odoo>
