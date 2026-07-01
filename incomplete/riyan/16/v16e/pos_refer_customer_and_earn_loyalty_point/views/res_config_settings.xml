@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="pos_config_settings_loyalty_point">
+            <field name="name">res.config.setting.loyalty.point.form.view</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='pos_technical_section']" position="after">
+                    <h2 groups="base.group_no_one">Loyalty Membership Point</h2>
+                    <div class="row mt16 o_settings_container" id="loyalty_membership" groups="base.group_no_one">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group mt16">
+                                    <div class="row">
+                                        <label for="referral_reward_points" id="referral_reward_points"
+                                               string="Referral Reward Points"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="referral_reward_points" class="oe_inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

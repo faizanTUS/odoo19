@@ -1,0 +1,101 @@
+<odoo>
+    <!-- Email Template for Referral Code Notifications -->
+    <record id="email_template_generate_referral_code" model="mail.template">
+        <field name="name">Generate Referral Code Notification</field>
+        <field name="model_id" ref="pos_refer_customer_and_earn_loyalty_point.model_res_partner"/>
+        <field name="subject">Share and Earn with Your Exclusive Referral Code!</field>
+        <field name="email_from">{{ user.company_id.email }}</field>
+        <field name="body_html" type="html">
+            <div style="background-color: #F1F1F1; padding: 20px;">
+                <div style="background-color: white; padding: 20px; border-radius: 10px;">
+
+                    <h2 style="color: #875A7B; text-align: center;">Referral Code</h2>
+
+                    <p>Dear <t t-out="object.name"/>,
+                    </p>
+                    <p>Thank you for being a valued customer of us! We’re excited to introduce a special way for you to
+                        share
+                        the benefits you enjoy and earn loyalty points.
+                    </p>
+
+                    <div style="background-color: #875A7B; color: white; padding: 15px; border-radius: 5px; text-align: center; margin: 20px 0;">
+                        <h3 style="margin: 10px 0;">Your Exclusive Referral Code:
+                            <t t-out="object.generate_unique_ref_code"/>
+                        </h3>
+                    </div>
+
+                    <h3>
+                        <strong>Here’s how it works:</strong>
+                    </h3>
+                    <ol>
+                        <li>Share your referral code with friends and family.</li>
+                        <li>You’ll earn Loyalty Points for every successful referral.</li>
+                        <li>When they use your code while shopping with us, You’ll earn Loyalty Points for every
+                            successful
+                            referral.
+                        </li>
+                    </ol>
+
+                    <h3>
+                        <strong>Start Sharing Today!</strong>
+                    </h3>
+                    <p>Feel free to share your code via email, social media, or even a quick text. The more you share,
+                        the
+                        more you earn loyalty points!
+                    </p>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p>Thank you for being a part of our family!</p>
+                    </div>
+                </div>
+            </div>
+        </field>
+        <field name="lang">{{ object.env.user.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <!-- Email Template for Customer Used Referral Code Notifications -->
+    <record id="email_template_earn_loyalty_points" model="mail.template">
+        <field name="name">Earn Loyalty Points Notifications</field>
+        <field name="model_id" ref="pos_refer_customer_and_earn_loyalty_point.model_pos_order"/>
+        <field name="subject">Congratulations! You've Earned Loyalty Points 🎉</field>
+        <field name="email_from">{{ user.company_id.email }}</field>
+        <field name="body_html" type="html">
+            <div style="background-color: #F1F1F1; padding: 20px;">
+                <div style="background-color: white; padding: 20px; border-radius: 10px;">
+
+                    <h2 style="color: #875A7B; text-align: center;">Congratulations <t t-out="ctx.get('referrer','')"/>! 🎉 🎉</h2>
+
+                    <p>Dear  <t t-out="ctx.get('referrer','')"/>,
+                    </p>
+                    <p>We are thrilled to inform you that you’ve been rewarded loyalty points for sharing your referral
+                        code! Here are the details of your updated loyalty points balance:
+                    </p>
+
+                    <div style="background-color: #875A7B; color: white; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                        <h3 style="margin: 10px 0;">
+                            <ul>
+                                <li>Points Earned for Referral:
+<!--                                    <t t-out="ctx['points_earned'] or ''"/>-->
+                                    <t t-out="ctx.get('points_earned', '')"/>
+                                </li>
+                                <li>Current Loyalty Points Balance: <t t-out="ctx.get('total_points','')"/></li>
+                            </ul>
+                        </h3>
+                    </div>
+
+                    <p>Thank you for introducing others to our platform and being a valued part of our community. Your continued engagement means a lot to us!
+                    </p>
+                    <p>Keep sharing your referral code and earn more rewards as a token of our appreciation.</p>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p>Thank you for being a part of our family!</p>
+                    </div>
+                </div>
+            </div>
+        </field>
+        <field name="lang">{{ object.env.user.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+</odoo>
