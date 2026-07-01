@@ -1,0 +1,46 @@
+<odoo>
+    <record id="view_reversal_audit_log_tree" model="ir.ui.view">
+        <field name="name">tus.reversal.audit.log.tree</field>
+        <field name="model">tus.reversal.audit.log</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="create_date"/>
+                <field name="origin"/>
+                <field name="user_id"/>
+                <field name="model"/>
+                <field name="display_name_related"/>
+                <field name="reason"/>
+                <field name="note"/>
+                <field name="action" widget="badge" decoration-info="action == 'reset'"
+                       decoration-warning="action == 'reverse'" decoration-danger="action == 'cancel'"/>
+
+            </tree>
+        </field>
+    </record>
+
+<!--  <record id="view_reversal_audit_log_search" model="ir.ui.view">-->
+<!--    <field name="name">tus.reversal.audit.log.search</field>-->
+<!--    <field name="model">tus.reversal.audit.log</field>-->
+<!--    <field name="arch" type="xml">-->
+<!--      <search>-->
+<!--        <field name="action"/>-->
+<!--        <field name="model"/>-->
+<!--        <field name="user_id"/>-->
+<!--        <field name="origin"/>-->
+<!--        <filter string="Purchases" domain="[('model','=','purchase.order')]"/>-->
+<!--        <filter string="Pickings" domain="[('model','=','stock.picking')]"/>-->
+<!--        <filter string="Bills" domain="[('model','=','account.move')]"/>-->
+<!--      </search>-->
+<!--    </field>-->
+<!--  </record>-->
+
+  <record id="action_reversal_audit_logs" model="ir.actions.act_window">
+    <field name="name">Reversal Audit Logs</field>
+    <field name="res_model">tus.reversal.audit.log</field>
+    <field name="view_mode">tree,pivot,graph,form</field>
+  </record>
+
+  <menuitem id="menu_reversal_logs_root" name="Audit Logs"
+            parent="purchase.menu_purchase_root" action="action_reversal_audit_logs"
+            groups="tus_po_reversal_advanced.group_reversal_manager"/>
+</odoo>
