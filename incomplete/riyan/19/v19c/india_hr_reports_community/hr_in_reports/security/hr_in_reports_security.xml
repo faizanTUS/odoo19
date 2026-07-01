@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!--
+    Access model:
+    - HRMS Manager (group_hr_in_reports_manager): all employees, all HR reports, full HR admin (hr.group_hr_manager).
+    - HR Reports Employee (group_hr_in_reports_user): own employee data and records for employees in their
+      reporting hierarchy (manager chain on hr.employee.parent_id). Enforced in hr.in.report.access and wizards.
+    - Users without either group cannot open HR Reports menus or export data.
+  -->
+  <record id="module_category_hr_in_reports" model="ir.module.category">
+    <field name="name">HR India Reports</field>
+    <field name="description">Access to HR reporting hub and exports</field>
+    <field name="sequence">55</field>
+  </record>
+
+  <record id="res_groups_privilege_hr_in_reports" model="res.groups.privilege">
+    <field name="name">HR India Reports</field>
+    <field name="sequence">55</field>
+    <field name="category_id" ref="module_category_hr_in_reports"/>
+  </record>
+
+  <record id="group_hr_in_reports_user" model="res.groups">
+    <field name="name">HR Reports Employee</field>
+    <field name="privilege_id" ref="res_groups_privilege_hr_in_reports"/>
+    <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    <field name="comment">Access HR Reports for their own employee record and employees who report to them (direct and indirect subordinates). Does not grant company-wide HR officer rights.</field>
+  </record>
+
+  <record id="group_hr_in_reports_manager" model="res.groups">
+    <field name="name">HRMS Manager</field>
+    <field name="privilege_id" ref="res_groups_privilege_hr_in_reports"/>
+    <field name="implied_ids" eval="[(4, ref('group_hr_in_reports_user')), (4, ref('hr.group_hr_manager'))]"/>
+    <field name="comment">Full access to all employee records, HR Reports, and HR configuration (implies HR Reports Employee and HR Administrator).</field>
+  </record>
+</odoo>

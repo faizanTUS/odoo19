@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_in_report_wizard_fleet_assign" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.fleet.assign.form</field>
+        <field name="model">hr.in.report.wizard.fleet.assign</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle assignment">
+                <group>
+                    <group><field name="date_from" invisible="1"/><field name="date_to" invisible="1"/></group>
+                    <group><field name="company_ids" widget="many2many_tags"/></group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_fleet_assign" model="ir.actions.act_window">
+        <field name="name">Vehicle assignment &amp; cost</field>
+        <field name="res_model">hr.in.report.wizard.fleet.assign</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_hr_in_reports_fleet" name="Fleet" parent="india_hr_reports_community.menu_hr_in_reports_root" sequence="55"/>
+    <menuitem id="menu_fleet_assign" name="Vehicle assignment &amp; cost" parent="menu_hr_in_reports_fleet" action="action_hr_in_report_wizard_fleet_assign" sequence="10"/>
+</odoo>

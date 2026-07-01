@@ -1,0 +1,329 @@
+/* HR Cockpit — reference-style executive dashboard */
+
+$o-hr-dash-card-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+$o-hr-dash-radius: 14px;
+$o-hr-dash-accent: #2563eb;
+$o-hr-dash-success: #16a34a;
+$o-hr-dash-warning: #ea580c;
+$o-hr-dash-danger: #dc2626;
+$o-hr-dash-info: #0891b2;
+$o-hr-dash-pay: #7c3aed;
+
+.o_hr_in_reports_cockpit.o_hr_dash-root {
+    background: #f1f5f9;
+
+    .o_hr_dash-body {
+        min-height: 0;
+    }
+
+    .o_hr_dash-kpi {
+        background: #fff;
+        border-radius: $o-hr-dash-radius;
+        padding: 1rem 1.1rem;
+        box-shadow: $o-hr-dash-card-shadow;
+        border: 1px solid rgba(15, 23, 42, 0.06);
+        border-top: 4px solid $o-hr-dash-accent;
+        height: 100%;
+
+        &--success {
+            border-top-color: $o-hr-dash-success;
+        }
+        &--warning {
+            border-top-color: $o-hr-dash-warning;
+        }
+        &--danger {
+            border-top-color: $o-hr-dash-danger;
+        }
+        &--info {
+            border-top-color: $o-hr-dash-info;
+        }
+        &--pay {
+            border-top-color: $o-hr-dash-pay;
+        }
+        &--primary {
+            border-top-color: $o-hr-dash-accent;
+        }
+        &--clickable {
+            cursor: pointer;
+            outline: none;
+            transition: box-shadow 0.15s ease, transform 0.12s ease;
+            &:hover {
+                box-shadow: 0 8px 28px rgba(15, 23, 42, 0.1);
+            }
+            &:focus-visible {
+                box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.45);
+            }
+        }
+    }
+
+    .o_hr_dash-kpi-label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        font-weight: 600;
+    }
+
+    .o_hr_dash-kpi-value {
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.2;
+        margin-top: 0.25rem;
+    }
+
+    .o_hr_dash-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 300px;
+        gap: 1.25rem;
+        align-items: start;
+
+        @media (max-width: 1399px) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            .o_hr_dash-sidebar {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .o_hr_dash-columns {
+        display: contents;
+    }
+
+    .o_hr_dash-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        min-width: 0;
+    }
+
+    .o_hr_dash-sidebar {
+        min-width: 0;
+    }
+
+    .o_hr_dash-card {
+        background: #fff;
+        border-radius: $o-hr-dash-radius;
+        box-shadow: $o-hr-dash-card-shadow;
+        border: 1px solid rgba(15, 23, 42, 0.05);
+        overflow: hidden;
+    }
+
+    .o_hr_dash-card--clickable .o_hr_dash-card-main--clickable {
+        cursor: pointer;
+        outline: none;
+        &:hover .o_hr_dash-card-head {
+            background: linear-gradient(180deg, #eff6ff 0%, #fafbff 100%);
+        }
+        &:focus-visible {
+            box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.35);
+        }
+    }
+
+    .o_hr_dash-card-head {
+        padding: 0.85rem 1.1rem;
+        border-bottom: 1px solid #f1f5f9;
+        background: linear-gradient(180deg, #fafbfc 0%, #fff 100%);
+    }
+
+    .o_hr_dash-card-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+    }
+
+    .o_hr_dash-card-body {
+        padding: 1rem 1.1rem 1.1rem;
+    }
+
+    .o_hr_dash-card-foot {
+        padding: 0.5rem 1rem 0.85rem;
+        border-top: 1px solid #f1f5f9;
+        background: #fafbfc;
+    }
+
+    .o_hr_dash-card-link {
+        color: $o-hr-dash-accent;
+        text-decoration: none;
+        font-weight: 600;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .o_hr_dash-chart-wrap {
+        min-height: 200px;
+    }
+
+    .o_hr_dash-chart-half {
+        min-height: 160px;
+        max-height: 200px;
+    }
+
+    .o_hr_in_cockpit_chart {
+        min-height: 200px;
+    }
+
+    .o_hr_dash-metric-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .o_hr_dash-metric-cell {
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 0.65rem 0.75rem;
+        border: 1px solid #e2e8f0;
+    }
+
+    .o_hr_dash-metric-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #64748b;
+    }
+
+    .o_hr_dash-metric-value {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .o_hr_dash-funnel-row {
+        margin-bottom: 0.45rem;
+    }
+
+    .o_hr_dash-funnel-bar {
+        min-height: 36px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        max-width: 100%;
+        transition: width 0.25s ease;
+    }
+
+    .o_hr_dash-gauge-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+
+    .o_hr_dash-gauge {
+        --pct: 75;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: conic-gradient(
+            $o-hr-dash-accent calc(var(--pct) * 1%),
+            #e2e8f0 0
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 0 0 0 10px #fff;
+    }
+
+    .o_hr_dash-gauge-inner {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    .o_hr_dash-gauge-val {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .o_hr_dash-cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+        text-align: center;
+        font-size: 0.75rem;
+    }
+
+    .o_hr_dash-cal-dow {
+        padding: 0.2rem 0;
+    }
+
+    .o_hr_dash-cal-day {
+        padding: 0.35rem 0;
+        border-radius: 6px;
+        font-weight: 500;
+    }
+
+    .o_hr_dash-cal-muted {
+        opacity: 0.35;
+    }
+
+    .o_hr_dash-cal-today {
+        background: $o-hr-dash-accent;
+        color: #fff !important;
+        font-weight: 700;
+    }
+
+    .o_hr_dash-quicklinks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .o_hr_dash-quicklink {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        padding: 0.65rem 0.35rem;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #334155;
+        text-decoration: none;
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-align: center;
+        transition: background 0.15s ease, border-color 0.15s ease;
+
+        .fa {
+            font-size: 1.1rem;
+            color: $o-hr-dash-accent;
+        }
+
+        &:hover {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+            color: #0f172a;
+        }
+    }
+
+    .o_hr_dash-footer {
+        margin-top: 0.5rem;
+    }
+
+    .o_hr_dash-flag {
+        font-size: 1rem;
+    }
+}

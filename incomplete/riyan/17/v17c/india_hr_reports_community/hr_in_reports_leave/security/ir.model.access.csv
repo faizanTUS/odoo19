@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_report_wizard_leave_ledger,hr.in.report.wizard.leave.ledger,model_hr_in_report_wizard_leave_ledger,india_hr_reports_community.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_leave_balance,hr.in.report.wizard.leave.balance,model_hr_in_report_wizard_leave_balance,india_hr_reports_community.group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_leave_accrual,hr.in.report.wizard.leave.accrual,model_hr_in_report_wizard_leave_accrual,india_hr_reports_community.group_hr_in_reports_user,1,1,1,1

@@ -1,0 +1,90 @@
+// Print / wkhtmltopdf-safe helpers for leave PDF reports (no flexbox in QWeb body).
+
+.o_hr_leave_pdf {
+    width: 100%;
+    clear: both;
+    position: relative;
+    font-size: 0.875rem;
+    line-height: 1.45;
+
+    .o_leave_section_title {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #6c757d;
+        border-bottom: 1px solid #dee2e6;
+        margin: 0.75rem 0 0.35rem;
+        padding-bottom: 0.2rem;
+    }
+
+    table.o_leave_filters {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0.75rem;
+
+        th,
+        td {
+            padding: 5px 8px;
+            vertical-align: top;
+            border: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+    }
+
+    table.o_leave_detail {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        margin-bottom: 0.5rem;
+
+        th,
+        td {
+            padding: 4px 6px;
+            vertical-align: top;
+            border: 1px solid #dee2e6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        thead th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+    }
+
+    table.o_leave_summary {
+        width: auto;
+        max-width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.25rem;
+
+        td {
+            padding: 3px 10px 3px 0;
+            vertical-align: top;
+        }
+    }
+
+    .o_leave_subtitle {
+        margin: 0.35rem 0 0.75rem;
+        color: #6c757d;
+    }
+
+    .o_leave_footer_meta {
+        margin-top: 0.75rem;
+        padding-top: 0.35rem;
+        border-top: 1px solid #dee2e6;
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+}
+
+// Extra separation after the external layout title (wkhtmltopdf; complements paperformat
+// header_spacing). Matches every layout variant via [class*="o_report_layout_"].
+div.article[class*="o_report_layout_"] .o_hr_leave_pdf {
+    margin-top: 0.35rem;
+}

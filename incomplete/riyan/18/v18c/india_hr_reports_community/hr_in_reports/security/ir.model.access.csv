@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_in_cockpit_user,hr.in.cockpit user,model_hr_in_cockpit,group_hr_in_reports_user,1,0,0,0
+access_hr_in_report_wizard_hub_headcount,hr.in.report.wizard.hub.headcount,model_hr_in_report_wizard_hub_headcount,group_hr_in_reports_user,1,1,1,1
+access_hr_in_report_wizard_hub_snapshot,hr.in.report.wizard.hub.snapshot,model_hr_in_report_wizard_hub_snapshot,group_hr_in_reports_user,1,1,1,1

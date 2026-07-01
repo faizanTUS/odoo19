@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_in_report_wizard_att_daily" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.att.daily.form</field>
+        <field name="model">hr.in.report.wizard.att.daily</field>
+        <field name="arch" type="xml">
+            <form string="Daily attendance register">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_att_daily" model="ir.actions.act_window">
+        <field name="name">Daily attendance register</field>
+        <field name="res_model">hr.in.report.wizard.att.daily</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_att_monthly" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.att.monthly.form</field>
+        <field name="model">hr.in.report.wizard.att.monthly</field>
+        <field name="arch" type="xml">
+            <form string="Monthly attendance matrix">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_att_monthly" model="ir.actions.act_window">
+        <field name="name">Monthly attendance matrix</field>
+        <field name="res_model">hr.in.report.wizard.att.monthly</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_att_exceptions" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.att.exceptions.form</field>
+        <field name="model">hr.in.report.wizard.att.exceptions</field>
+        <field name="arch" type="xml">
+            <form string="Attendance exceptions">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_att_exceptions" model="ir.actions.act_window">
+        <field name="name">Attendance exceptions</field>
+        <field name="res_model">hr.in.report.wizard.att.exceptions</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_hr_in_report_wizard_att_ot" model="ir.ui.view">
+        <field name="name">hr.in.report.wizard.att.ot.form</field>
+        <field name="model">hr.in.report.wizard.att.ot</field>
+        <field name="arch" type="xml">
+            <form string="Overtime summary">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="daily_threshold"/>
+                    </group>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                        <field name="department_ids" widget="many2many_tags"/>
+                        <field name="employee_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx" type="object" string="Export XLSX" class="btn-primary"/>
+                    <button name="action_export_pdf" type="object" string="Export PDF"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_hr_in_report_wizard_att_ot" model="ir.actions.act_window">
+        <field name="name">Overtime summary</field>
+        <field name="res_model">hr.in.report.wizard.att.ot</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_hr_in_reports_attendance" name="Attendance" parent="india_hr_reports_community.menu_hr_in_reports_root" sequence="20"/>
+    <menuitem id="menu_att_daily" name="Daily attendance register" parent="menu_hr_in_reports_attendance" action="action_hr_in_report_wizard_att_daily" sequence="10"/>
+    <menuitem id="menu_att_monthly" name="Monthly attendance matrix" parent="menu_hr_in_reports_attendance" action="action_hr_in_report_wizard_att_monthly" sequence="20"/>
+    <menuitem id="menu_att_exceptions" name="Attendance exceptions" parent="menu_hr_in_reports_attendance" action="action_hr_in_report_wizard_att_exceptions" sequence="30"/>
+    <menuitem id="menu_att_ot" name="Overtime summary" parent="menu_hr_in_reports_attendance" action="action_hr_in_report_wizard_att_ot" sequence="40"/>
+</odoo>

@@ -1,0 +1,126 @@
+// Hub + attendance professional PDF (wkhtml-friendly; mirrors leave report styling).
+
+.o_hr_in_pdf {
+    width: 100%;
+    clear: both;
+    position: relative;
+    font-size: 0.875rem;
+    line-height: 1.45;
+
+    .o_in_report_section_title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: black;
+        border-bottom: 2px solid black;
+        margin: 0.75rem 0 0.35rem;
+        padding-bottom: 0.2rem;
+    }
+
+    table.o_in_report_filters {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0.75rem;
+
+        th,
+        td {
+            padding: 5px 8px;
+            vertical-align: top;
+            border: 2px solid black;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+    }
+
+    table.o_in_report_detail {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        margin-bottom: 0.5rem;
+
+        th,
+        td {
+            padding: 4px 6px;
+            vertical-align: top;
+            border: 2px solid black;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        thead th {
+            background-color: #dee2e6;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+    }
+
+    table.o_in_report_summary {
+        width: auto;
+        max-width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.25rem;
+
+        td {
+            padding: 3px 10px 3px 0;
+            vertical-align: top;
+        }
+    }
+
+    .o_in_report_subtitle {
+        margin: 0.35rem 0 0.75rem;
+        color: black;
+    }
+
+    .o_in_report_footer_meta {
+        margin-top: 0.75rem;
+        padding-top: 0.35rem;
+        border-top: 2px solid black;
+        font-size: 0.8rem;
+        color: black;
+    }
+}
+
+// Day-matrix: many columns — landscape + auto table layout (wkhtmltopdf).
+.o_hr_in_pdf.o_in_report_matrix_wide {
+    table.o_in_report_detail.o_in_report_matrix_table {
+        table-layout: auto;
+        font-size: 0.62rem;
+
+        th,
+        td {
+            padding: 2px 4px;
+            white-space: normal;
+            vertical-align: middle;
+        }
+    }
+}
+
+// Small gap after the external header to reduce title/body crowding for every layout
+// variant (Light/Boxed/Bold/Striped/Bubble/Wave/Folder/Standard).
+div.article[class*="o_report_layout_"] .o_hr_in_pdf {
+    margin-top: 0.35rem;
+}
+.o_hr_in_pdf.o_in_report_matrix_wide {
+    table.o_in_report_detail {
+        table-layout: fixed;
+        font-size: 0.72rem;
+
+        th,
+        td {
+            padding: 3px 4px;
+            white-space: normal;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            line-height: 1.25;
+        }
+
+        thead th {
+            font-size: 0.68rem;
+            vertical-align: middle;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+from odoo import _
+# Part of Odoo. See COPYRIGHT & LICENSE files for full copyright and licensing details.
+# -*- coding: utf-8 -*-
+
+from odoo.addons.india_hr_reports_community.hr_in_reports.models.cockpit_registry import register_cockpit_provider
+
+
+class FleetCockpitProvider:
+    @staticmethod
+    def collect(env, filters):
+        return {
+            "id": "fleet",
+            "label": _("Fleet"),
+            "kpis": [
+                {
+                    "key": "fleet_placeholder",
+                    "label": _("Status"),
+                    "value": _("Configured"),
+                }
+            ],
+            "charts": [],
+        }
+
+
+register_cockpit_provider("fleet", FleetCockpitProvider)
