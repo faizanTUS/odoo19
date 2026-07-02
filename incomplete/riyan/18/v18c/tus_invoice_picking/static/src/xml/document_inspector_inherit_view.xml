@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-inherit="documents.DocumentsInspector.documentsInfo" t-inherit-mode="extension">
+        <xpath expr="//table[hasclass('o_inspector_table')]//tbody//t[2]//t[2]" position="attributes">
+            <attribute name="t-value">{canOpen: false, canCreate: false, canCreateEdit: false, canQuickCreate: false}</attribute>
+        </xpath>
+    </t>
+</templates>
