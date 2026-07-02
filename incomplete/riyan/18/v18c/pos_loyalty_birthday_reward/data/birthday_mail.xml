@@ -1,0 +1,44 @@
+<odoo>
+    <!-- Email Template for Birthday Notifications -->
+    <record id="email_template_birthday_reward" model="mail.template">
+        <field name="name">Birthday Reward Notification</field>
+        <field name="model_id" ref="loyalty.model_loyalty_card"/>
+        <field name="subject">Happy Birthday, {{object.partner_id.name}}! Your Free Drink is Waiting</field>
+        <field name="email_from">{{ user.company_id.email }}</field>
+        <field name="partner_to">{{ object.partner_id.id }}</field>
+        <field name="body_html" ><![CDATA[
+            <div style="background-color: #F1F1F1; padding: 20px;">
+                <div style="background-color: white; padding: 20px; border-radius: 10px;">
+                    <h2 style="color: #875A7B; text-align: center;">Happy Birthday!</h2>
+
+                    <p>Dear <t t-esc="object.partner_id.name"/> ,</p>
+
+                    <p>We hope your birthday month is filled with joy and celebration!</p>
+
+                    <p>As our valued member, we're delighted to offer you a complimentary drink of your choice.</p>
+
+                    <div style="background-color: #875A7B; color: white; padding: 15px; border-radius: 5px; text-align: center; margin: 20px 0;">
+                        <p style="font-size: 18px; margin: 0;">Your Birthday Reward Code:</p>
+                        <h3 style="margin: 10px 0;"><t t-esc="object.code"/></h3>
+                    </div>
+
+                    <p><strong>How to redeem your free drink:</strong></p>
+                    <ol>
+                        <li>Visit any of our branches</li>
+                        <li>Show this code to our staff</li>
+                        <li>Choose your favorite drink</li>
+                        <li>Enjoy your birthday treat!</li>
+                    </ol>
+
+                    <p><strong>Valid until:</strong> <t t-esc="object.expiration_date"/></p>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p>Thank you for being a part of our loyalty program!</p>
+                    </div>
+                </div>
+            </div>
+        ]]></field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</odoo>
