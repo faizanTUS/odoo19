@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_order_portal_quotation_edit_inherit"
+              inherit_id="sale.sale_order_portal_content"
+              name="Extend SO Portal Edit">
+        <!-- Replace quantity cell with input box for normal product lines -->
+        <xpath expr="//tr[@name='tr_product']/td[@name='td_product_quantity']"
+               position="replace">
+            <td class="text-end">
+                <t t-if="sale_order.state in ('draft', 'sent')">
+                    <div class="input-group input-group-sm" style="width: 120px; margin-left: auto;">
+                        <input type="number"
+                               class="form-control text-end js_portal_so_qty"
+                               t-att-data-line-id="line.id"
+                               t-att-value="line.product_uom_qty"
+                               min="0"
+                               step="1"/>
+                        <span class="input-group-text" t-field="line.product_uom_id"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <span t-field="line.product_uom_qty"/>
+                    <span t-field="line.product_uom_id"/>
+                </t>
+            </td>
+        </xpath>
+
+        <xpath expr="//tr[@name='tr_combo']/td[@name='td_combo_subtotal']"
+               position="after">
+            <td name="td_combo_actions" class="text-center">
+                <button t-if="sale_order.state in ['draft','sent']"
+                        type="button"
+                        class="btn btn-sm btn-outline-danger js_portal_so_delete"
+                        t-att-data-line-id="line.id"
+                        title="Delete Line">
+                    <i class="fa fa-trash"/>
+                </button>
+            </td>
+        </xpath>
+
+        <xpath expr="//tr[@name='tr_product']/td[@name='td_product_subtotal']"
+               position="after">
+            <td class="text-center">
+                <button t-if="sale_order.state in ['draft','sent']"
+                        type="button"
+                        class="btn btn-sm btn-outline-danger js_portal_so_delete"
+                        t-att-data-line-id="line.id"
+                        title="Delete Line">
+                    <i class="fa fa-trash"/>
+                </button>
+            </td>
+        </xpath>
+    </template>
+</odoo>

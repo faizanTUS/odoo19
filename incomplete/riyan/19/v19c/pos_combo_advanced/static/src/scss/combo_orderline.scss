@@ -1,0 +1,20 @@
+// Styles for the advanced combo price display on the parent order line.
+// This positions our injected price where Odoo would normally show $0.00.
+
+.order-line {
+    // Make sure the parent is positioned so our absolute child works
+    position: relative;
+
+    .advanced-combo-price {
+        // Position at the right side of the order line, same spot as normal price
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 600;
+        min-width: 70px;
+        text-align: right;
+        color: inherit;
+        pointer-events: none; // don't interfere with line selection clicks
+    }
+}
