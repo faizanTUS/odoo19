@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- Extend the OWL mail composer actions to inject our quick-notes button -->
+    <t t-name="quick_chatter_notes.mail.Composer.Actions"
+       t-inherit="mail.Composer.quickActions"
+       t-inherit-mode="extension"
+       >
+
+        <!-- Insert our button right after the emoji picker -->
+        <xpath expr="//div[hasclass('o-mail-Composer-mainActions')]" position="inside">
+            <button
+                class="btn border-0 rounded-circle p-0 o_quick_notes_button"
+                title="Quick notes"
+                aria-label="Quick notes"
+                type="button"
+                t-on-click="openQuickNotes">
+                <i class="fa fa-file-text-o"/>
+            </button>
+        </xpath>
+
+    </t>
+
+</templates>
