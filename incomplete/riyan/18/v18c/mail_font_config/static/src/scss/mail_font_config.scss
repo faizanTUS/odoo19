@@ -1,0 +1,44 @@
+// mail_font_config.scss
+//
+// Two responsibilities:
+//
+// 1. DEFAULT FONT (via CSS variable):
+//    When an admin selects a default font in Settings → Emails, the JS boot
+//    service writes it to --mail-font-family on <html>.  These rules pick that
+//    variable up and apply it as a visual baseline to every editable area.
+//    If the user manually selects a different font via the toolbar, the
+//    inline style on the selected text takes precedence (higher specificity).
+//
+// 2. FONT-FAMILY SELECTOR TOOLBAR (via FontFamilyPlugin):
+//    The FontFamilyPlugin adds a dropdown to the chatter/template toolbar.
+//    When the user selects text and picks a font, an inline <span
+//    style="font-family:..."> is inserted.  No extra CSS is needed for that –
+//    it is standard inline styling.
+
+// ─── Chatter: Send Message & Log Note ───────────────────────────────────────
+.o-mail-Composer .o-mail-Composer-html .odoo-editor-editable {
+    font-family: var(--mail-font-family, inherit);
+}
+
+// ─── Chatter: plain textarea fallback (no Wysiwyg) ──────────────────────────
+.o-mail-Composer .o-mail-Composer-input {
+    font-family: var(--mail-font-family, inherit);
+}
+
+// ─── Mail Template body editor (form view html field) ───────────────────────
+.o_field_html .odoo-editor-editable {
+    font-family: var(--mail-font-family, inherit);
+}
+
+// ─── Full-window compose dialog ──────────────────────────────────────────────
+.o_mail_compose_message .odoo-editor-editable {
+    font-family: var(--mail-font-family, inherit);
+}
+
+// ─── Font family selector dropdown menu ─────────────────────────────────────
+// Ensure each font option renders in its own typeface for a visual preview.
+.o_font_family_selector_menu .dropdown-item {
+    &[data-font-family] {
+        font-family: attr(data-font-family);
+    }
+}
