@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sale Order Form - Add PDF checkbox -->
+    <record id="view_sale_order_form_multi_discount" model="ir.ui.view">
+        <field name="name">sale.order.form.multi.discount</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add checkbox in order details group -->
+            <xpath expr="//group[@name='order_details']" position="inside">
+                <field name="show_multi_discount_in_pdf" groups="multi_discount_advanced.tus_multi_discount_advanced_group_sale"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Sale Order Line Form - Add Multi Discount field (inside sale order form) -->
+    <record id="view_sale_order_line_form_multi_discount" model="ir.ui.view">
+        <field name="name">sale.order.form.line.multi.discount</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add multi-discount field after discount field in the embedded line form -->
+            <xpath expr="//field[@name='order_line']//form//div[@name='discount']" position="after">
+                <label for="multi_discount" groups="multi_discount_advanced.tus_multi_discount_advanced_group_sale"/>
+                <div name="multi_discount" groups="multi_discount_advanced.tus_multi_discount_advanced_group_sale">
+                    <field name="multi_discount" class="oe_inline" groups="multi_discount_advanced.tus_multi_discount_advanced_group_sale"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Sale Order Line Tree - Add Multi Discount column (inside sale order form) -->
+    <record id="view_sale_order_line_tree_multi_discount" model="ir.ui.view">
+        <field name="name">sale.order.form.line.tree.multi.discount</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add multi-discount column after price_unit in the embedded line widget -->
+            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="after">
+                <field name="multi_discount" optional="hide" groups="multi_discount_advanced.tus_multi_discount_advanced_group_sale"/>
+            </xpath>
+            <!-- Add discount_amount and discounted_total_amount columns -->
+            <xpath expr="//field[@name='order_line']//list//field[@name='discount']" position="after">
+                <field name="discount_amount" optional="hide" groups="multi_discount_advanced.tus_multi_discount_advanced_group_sale"/>
+                <field name="discounted_total_amount" optional="hide" groups="multi_discount_advanced.tus_multi_discount_advanced_group_sale"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
