@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="group_export_repair_order" model="res.groups">
+            <field name="name">Export Repair Order</field>
+        </record>
+    </data>
+</odoo>
