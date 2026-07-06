@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_dynamic_warnings" model="ir.module.category">
+        <field name="name">Dynamic Warnings</field>
+    </record>
+
+    <record id="group_dynamic_warning_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_dynamic_warnings"/>
+        <field name="comment">Can see dynamic warnings on forms (rules define who sees which).</field>
+    </record>
+
+    <record id="group_dynamic_warning_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_dynamic_warnings"/>
+        <field name="implied_ids" eval="[(4, ref('group_dynamic_warning_user'))]"/>
+        <field name="comment">Can create, edit and delete warning rules.</field>
+    </record>
+</odoo>
