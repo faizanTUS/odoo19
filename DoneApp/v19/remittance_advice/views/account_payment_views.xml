@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_form_remittance_advice" model="ir.ui.view">
+        <field name="name">account.payment.form.remittance.advice</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook[@name='payment_notebook']" position="before">
+                <group string="Remittance Advice Configuration" name="remittance_advice_config" invisible="partner_type != 'supplier'">
+                    <field name="remittance_advice"/>
+                    <field name="remittance_advice_template_id" invisible="not remittance_advice"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

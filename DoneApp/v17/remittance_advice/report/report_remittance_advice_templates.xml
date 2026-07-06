@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_remittance_advice_document">
+    <t t-call="web.external_layout">
+        <t t-set="o" t-value="o.with_context(lang=lang)"/>
+        <t t-set="values" t-value="o._get_remittance_advice_report_values()"/>
+        <t t-set="company" t-value="o.company_id"/>
+
+        <div class="page" style="margin:0; padding:0 15px; background:white; font-family:'DejaVu Sans', Arial, Helvetica, sans-serif; color:#1f2937; line-height:1.38;">
+
+            <!-- Title block -->
+            <div style="text-align:center; padding:14px 0 10px 0; border-bottom:3px solid #0f766e;">
+                <h2 style="margin:0; font-size:22px; font-weight:700; color:#0f766e;">
+                    REMITTANCE ADVICE
+                </h2>
+                <div style="margin-top:5px; font-size:13px; color:#4b5563;">
+                    <strong>Reference:</strong> <span t-field="o.name"/>
+                       •   
+                    <strong>Date:</strong> <span t-out="values.get('payment_date')" t-options="{'widget': 'date'}"/>
+                </div>
+            </div>
+
+            <!-- Sender & Recipient side by side – no duplication of company address -->
+            <table width="100%" style="margin:16px 0 18px 0; border-collapse:collapse;">
+                <tr>
+                    <!-- PAID TO -->
+                    <td width="50%" style="vertical-align:top;">
+                        <div style="background:#0f766e; color:white; padding:7px 11px; font-weight:600; font-size:12.8px; text-transform:uppercase; letter-spacing:0.4px;">PAID TO</div>
+                        <div style=" border-top:none; padding:10px 11px; background:#f9fafb; min-height:110px;">
+                            <div style="font-weight:700; font-size:14.5px; color:#0f172a;">
+                                <span t-out="values.get('recipient_name')"/>
+                            </div>
+                            <t t-if="values.get('recipient_address')">
+                                <div style="margin-top:6px; white-space:pre-line; font-size:12px; line-height:1.32; color:#334155;">
+                                    <t t-out="values.get('recipient_address')"/>
+                                </div>
+                            </t>
+                            <t t-if="values.get('recipient_phone')">
+                                <div style="margin-top:6px; font-size:12px;">
+                                    <strong>Phone:</strong> <span t-out="values.get('recipient_phone')"/>
+                                </div>
+                            </t>
+                            <t t-if="values.get('recipient_email')">
+                                <div style="margin-top:6px; font-size:12px;">
+                                    <strong>Email:</strong> <span t-out="values.get('recipient_email')"/>
+                                </div>
+                            </t>
+                        </div>
+                    </td>
+
+                    <!-- BY ORDER OF (using company data – avoid duplicating address) -->
+                    <td width="50%" style="vertical-align:top;">
+                        <div style="background:#0f766e; color:white; padding:7px 11px; font-weight:600; font-size:12.8px; text-transform:uppercase; letter-spacing:0.4px;">BY ORDER OF</div>
+                        <div style="border:1px solid #5f7d7a; border-top:none; padding:10px 11px; background:#f9fafb; min-height:110px;">
+                            <div style="font-weight:700; font-size:14.5px; color:#0f172a;">
+                                <span t-out="values.get('company_name') or company.name"/>
+                            </div>
+                            <t t-if="values.get('company_address')">
+                                <div style="margin-top:6px; white-space:pre-line; font-size:12px; line-height:1.32; color:#334155;">
+                                    <t t-out="values.get('company_address')"/>
+                                </div>
+                            </t>
+                            <t t-if="values.get('company_phone') or company.phone">
+                                <div style="margin-top:6px; font-size:12px;">
+                                    <strong>Phone:</strong> <span t-out="values.get('company_phone') or company.phone"/>
+                                </div>
+                            </t>
+                            <t t-if="values.get('company_email') or company.email">
+                                <div style="font-size:12px;">
+                                    <strong>Email:</strong> <span t-out="values.get('company_email') or company.email"/>
+                                </div>
+                            </t>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Payment Summary -->
+            <div style="margin-bottom:12px;">
+                <div style="background:#0f766e; color:white; padding:7px 12px; font-weight:600; font-size:13.5px; text-transform:uppercase;">PAYMENT SUMMARY</div>
+                <table width="100%" style="border-collapse:collapse; border:1px solid #5f7d7a;">
+                    <thead>
+                        <tr style="background:#f0f4f5;">
+                            <th style="padding:8px 10px; text-align:left; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Date</th>
+                            <th style="padding:8px 10px; text-align:left; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Vendor</th>
+                            <th style="padding:8px 10px; text-align:left; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Method</th>
+                            <th style="padding:8px 10px; text-align:right; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Amount</th>
+                            <th style="padding:8px 10px; text-align:left; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Memo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:9px 10px; border-bottom:1px solid #d1e0df; font-size:12.5px;">
+                                <span t-out="values.get('payment_date')" t-options="{'widget': 'date'}"/>
+                            </td>
+                            <td style="padding:9px 10px; border-bottom:1px solid #d1e0df; font-size:12.5px;">
+                                <span t-out="values.get('payment_vendor')"/>
+                            </td>
+                            <td style="padding:9px 10px; border-bottom:1px solid #d1e0df; font-size:12.5px;">
+                                <span t-out="values.get('payment_method_name')"/>
+                            </td>
+                            <td style="padding:9px 10px; text-align:right; border-bottom:1px solid #d1e0df; font-weight:700; color:#0f766e; font-size:13.5px;">
+                                <span t-out="values.get('payment_amount')" t-options="{'widget': 'monetary', 'display_currency': values.get('payment_currency')}"/>
+                            </td>
+                            <td style="padding:9px 10px; border-bottom:1px solid #d1e0df; font-size:12.5px; color:#4b5563;">
+                                <span t-out="values.get('payment_memo') or '-'"/>
+                            </td>
+                        </tr>
+                        <tr t-if="values.get('reconciled_bills_total_formatted')">
+                            <td colspan="4" style="padding:9px 10px; text-align:right; font-weight:600; border-top:1px solid #cbd5d0;">Related Bill(s) Total</td>
+                            <td style="padding:9px 10px; text-align:right; font-weight:700; color:#0f766e; border-top:1px solid #cbd5d0;">
+                                <span t-out="values.get('reconciled_bills_total_formatted')"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Bills table (only if present) -->
+            <t t-if="values.get('bill_table_rows')">
+                <div style="margin:18px 0 12px 0;">
+                    <div style="background:#0f766e; color:white; padding:7px 12px; font-weight:600; font-size:13.5px; text-transform:uppercase;">RECONCILED BILLS</div>
+                    <table width="100%" style="border-collapse:collapse; border:1px solid #5f7d7a;">
+                        <thead>
+                            <tr style="background:#f0f4f5;">
+                                <th style="padding:8px 10px; text-align:left; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Bill Date</th>
+                                <th style="padding:8px 10px; text-align:left; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Bill Number</th>
+                                <th style="padding:8px 10px; text-align:left; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Reference</th>
+                                <th style="padding:8px 10px; text-align:right; border-bottom:2px solid #5f7d7a; font-size:12px; font-weight:600;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="values.get('bill_table_rows') or []" t-as="row">
+                                <tr t-att-style="(row_index % 2 == 1) and 'background:#f9fafb;' or ''">
+                                    <td style="padding:8px 10px; border-bottom:1px solid #d1e0df; font-size:12.5px;"><t t-out="row.get('date_formatted') or '-'"/></td>
+                                    <td style="padding:8px 10px; border-bottom:1px solid #d1e0df; font-size:12.5px;"><t t-out="row.get('number') or '-'"/></td>
+                                    <td style="padding:8px 10px; border-bottom:1px solid #d1e0df; font-size:12.5px; color:#4b5563;"><t t-out="row.get('reference') or '-'"/></td>
+                                    <td style="padding:8px 10px; text-align:right; border-bottom:1px solid #d1e0df; font-weight:700; color:#0f766e;"><t t-out="row.get('amount_formatted')"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+
+            <!-- Footer / signature – compact & prevents page break issues -->
+            <div style="margin-top:20px; padding-top:14px; border-top:1px dashed #94a3b8; text-align:center; color:#64748b; font-size:11.8px; page-break-inside:avoid;">
+                <div style="margin-bottom:18px; letter-spacing:1.5px;">_______________________________</div>
+                <div style="font-weight:500; color:#2d3748; margin-bottom:3px;">Authorized Signature</div>
+                <div style="margin-bottom:10px;">
+                    Thank you for your business. For inquiries please contact our accounts department.
+                </div>
+                <div>
+                    Generated on <span t-out="o.create_date" t-options="{'widget': 'datetime'}"/>.
+                </div>
+            </div>
+
+        </div>
+    </t>
+</template>
+
+    <template id="report_remittance_advice">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>
+                <t t-call="remittance_advice.report_remittance_advice_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>
