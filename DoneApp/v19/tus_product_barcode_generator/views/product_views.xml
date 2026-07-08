@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_product_template_form_barcode" model="ir.ui.view">
+        <field name="name">product.template.form.barcode</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='barcode']" position="after">
+                <field name="barcode_type"/>
+                <field name="barcode_image" widget="image" readonly="1"/>
+                <button name="action_generate_barcode" string="Generate Barcode" type="object" class="btn-primary" invisible="barcode != False"/>
+                <button name="generate_barcode_image" string="Generate Image" type="object" class="btn-secondary" invisible="barcode == False"/><br/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_generate_barcode_multi" model="ir.actions.server">
+        <field name="name">Generate Barcodes</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+         <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = {
+            'name': 'Generate Barcodes',
+            'type': 'ir.actions.act_window',
+            'res_model': 'generate.barcode.wizard',
+            'view_mode': 'form',
+            'target': 'new'
+        }
+        </field>
+    </record>
+</odoo>

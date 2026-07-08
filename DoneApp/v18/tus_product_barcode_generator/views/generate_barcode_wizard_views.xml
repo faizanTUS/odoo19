@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_generate_barcode_wizard" model="ir.ui.view">
+        <field name="name">generate.barcode.wizard.form</field>
+        <field name="model">generate.barcode.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Barcode">
+                <group>
+                    <group>
+                        <field name="override_existing"/>
+                        <field name="barcode_type"/>
+                        <field name="prefix"/>
+                        <field name="barcode_length"/>
+                        <field name="generate_qr_from" invisible="barcode_type != 'qrcode'"/>
+                    </group>
+                    <group string="Preview">
+                        <field name="sample_barcode" readonly="1"/>
+                        <field name="preview_image" widget="image" class="oe_avatar"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_barcodes" type="object" string="Generate Barcodes" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+
+
+            </form>
+        </field>
+    </record>
+</odoo>
