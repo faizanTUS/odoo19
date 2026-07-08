@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- noupdate=0 so upgrades apply rate-limit fixes on existing databases -->
+    <data noupdate="0">
+        <!-- Legacy finalize cron is deactivated in code via ringcentral.config._deactivate_legacy_finalize_cron() -->
+        <record id="ir_cron_sync_call_history" model="ir.cron">
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+        </record>
+    </data>
+</odoo>

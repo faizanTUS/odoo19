@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ringcentral_contact_sync_result_form" model="ir.ui.view">
+        <field name="name">ringcentral.contact.sync.result.form</field>
+        <field name="model">ringcentral.contact.sync.result</field>
+        <field name="arch" type="xml">
+            <form string="Contact Sync Summary">
+                <group>
+                    <group>
+                        <field name="config_id"/>
+                        <field name="processed"/>
+                        <field name="partners_updated"/>
+                        <field name="leads_updated"/>
+                    </group>
+                    <group>
+                        <field name="skipped"/>
+                        <field name="failed"/>
+                        <field name="rate_limited" invisible="not rate_limited"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Close" class="btn-primary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

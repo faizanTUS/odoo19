@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ringcentral_call_history_tree" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.tree</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <list string="Call History" decoration-success="status=='completed'" 
+                  decoration-info="status=='answered'" decoration-warning="status=='ringing'"
+                  decoration-danger="status in ('failed', 'busy', 'no-answer')">
+                <field name="start_time"/>
+                <field name="direction" widget="badge" decoration-info="direction=='inbound'" 
+                       decoration-primary="direction=='outbound'"/>
+                <field name="from_number"/>
+                <field name="from_partner_id" optional="hide"/>
+                <field name="to_number"/>
+                <field name="to_partner_id" optional="hide"/>
+                <field name="user_id" optional="hide"/>
+                <field name="duration_formatted"/>
+                <field name="status" widget="badge"/>
+                <field name="has_recording" widget="boolean_toggle"/>
+                <field name="transcript_available" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ringcentral_call_history_form" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.form</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <form string="Call History">
+                <header>
+                    <button name="action_fetch_transcript" string="Fetch Transcript" type="object" 
+                            invisible="transcript_available or not has_recording"/>
+                    <button name="action_download_recording" string="Download Recording" type="object" 
+                            invisible="not has_recording"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="config_id" readonly="1"/>
+                            <field name="ringcentral_call_id" readonly="1"/>
+                            <field name="user_id"/>
+                            <field name="direction" widget="radio"/>
+                            <field name="status" widget="badge"/>
+                        </group>
+                        <group>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="duration_formatted" readonly="1"/>
+                            <field name="cost"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="From">
+                            <field name="from_number"/>
+                            <field name="from_partner_id" options="{'no_create': True}"/>
+                        </group>
+                        <group string="To">
+                            <field name="to_number"/>
+                            <field name="to_partner_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Transcript" name="transcript">
+                            <group>
+                                <field name="transcript" widget="text" nolabel="1" 
+                                       readonly="not transcript_available"/>
+                            </group>
+                        </page>
+                        <page string="Recording" name="recording">
+                            <group>
+                                <field name="recording_id" readonly="1"/>
+                                <field name="has_recording" readonly="1"/>
+                                <field name="recording_url" widget="url" readonly="1" invisible="1"/>
+                            </group>
+                            <div class="alert alert-info" role="alert" invisible="not has_recording">
+                                <p><strong>Call Recording</strong></p>
+                                <p>Use the audio player below to listen to the recording.</p>
+                            </div>
+                            <div invisible="not has_recording">
+                                <field name="recording_playback_url" widget="html" readonly="1" nolabel="1"/>
+                            </div>
+                            <div class="alert alert-warning" role="alert" invisible="has_recording">
+                                <p>No recording available for this call.</p>
+                            </div>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Add notes about this call..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ringcentral_call_history_search" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.search</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="from_number"/>
+                <field name="to_number"/>
+                <field name="from_partner_id"/>
+                <field name="to_partner_id"/>
+                <filter name="inbound" string="Inbound" domain="[('direction', '=', 'inbound')]"/>
+                <filter name="outbound" string="Outbound" domain="[('direction', '=', 'outbound')]"/>
+                <filter name="completed" string="Completed" domain="[('status', '=', 'completed')]"/>
+                <filter name="failed" string="Failed" domain="[('status', 'in', ['failed', 'busy', 'no-answer'])]"/>
+                <separator/>
+                <filter name="filter_start_time" string="Start Date" date="start_time"/>
+                <group name="group_by">
+                    <filter name="group_direction" string="Direction" context="{'group_by': 'direction'}"/>
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'start_time:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ringcentral_call_history" model="ir.actions.act_window">
+        <field name="name">Call History</field>
+        <field name="res_model">ringcentral.call.history</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_ringcentral_call_history_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_ringcentral_call_history_form')})
+        ]"/>
+    </record>
+</odoo>
+

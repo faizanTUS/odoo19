@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ringcentral_integration.RingCentralAudioPlayer">
+        <div class="o_ringcentral_audio_player">
+            <t t-if="hasRecording and playbackUrl">
+                <audio controls="controls"
+                       preload="none"
+                       class="w-100 d-block"
+                       style="min-height: 40px;"
+                       t-att-src="playbackUrl"
+                       t-on-error="onAudioError"/>
+                <div class="mt-2 small">
+                    <a t-att-href="playbackUrl" target="_blank" class="me-3">
+                        <i class="fa fa-external-link me-1" aria-hidden="true"/>Open in new tab
+                    </a>
+                    <a t-att-href="downloadUrl">
+                        <i class="fa fa-download me-1" aria-hidden="true"/>Download
+                    </a>
+                </div>
+            </t>
+            <t t-else="">
+                <span class="text-muted">No recording available for this call.</span>
+            </t>
+            <t t-if="state.hasError">
+                <div class="alert alert-warning mt-2 mb-0" role="alert">
+                    <t t-esc="state.errorMessage"/>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

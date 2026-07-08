@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Dashboard Pivot View -->
+    <record id="view_ringcentral_dashboard" model="ir.ui.view">
+        <field name="name">ringcentral.dashboard</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <pivot string="RingCentral Call Analytics" display_quantity="1">
+                <field name="company_id" type="row" groups="base.group_multi_company"/>
+                <field name="start_time" type="row" interval="day"/>
+                <field name="direction" type="col"/>
+                <field name="status" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Calls Over Time - Line Chart -->
+    <record id="view_ringcentral_graph_time" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.graph.time</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Calls Over Time" type="line" stacked="True">
+                <field name="start_time" type="row" interval="day"/>
+                <field name="direction" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Calls by Direction - Pie Chart -->
+    <record id="view_ringcentral_pie_direction" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.pie.direction</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Calls by Direction" type="pie">
+                <field name="direction" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Calls by Status - Pie Chart -->
+    <record id="view_ringcentral_pie_status" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.pie.status</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Calls by Status and Direction" type="pie">
+                <field name="status" type="row"/>
+                <field name="direction" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Calls by Status and Direction - Bar Chart -->
+    <record id="view_ringcentral_bar_status_direction" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.bar.status.direction</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Calls by Status and Direction" type="bar" stacked="True">
+                <field name="status" type="row"/>
+                <field name="direction" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Duration Analysis - Bar Chart -->
+    <record id="view_ringcentral_bar_duration" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.bar.duration</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Average Call Duration by Status and Direction" type="bar" stacked="True">
+                <field name="status" type="row"/>
+                <field name="direction" type="col"/>
+                <field name="duration" type="measure" operator="avg"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Calls by Partner - Bar Chart -->
+    <record id="view_ringcentral_bar_partner" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.bar.partner</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Top Contacts by Call Volume" type="bar" stacked="True">
+                <field name="from_partner_id" type="row"/>
+                <field name="direction" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Hourly Distribution - Bar Chart -->
+    <record id="view_ringcentral_bar_hourly" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.bar.hourly</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Calls by Hour of Day" type="bar" stacked="True">
+                <field name="start_time" type="row" interval="hour"/>
+                <field name="direction" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Weekly Distribution - Bar Chart -->
+    <record id="view_ringcentral_bar_weekly" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.bar.weekly</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Calls by Day of Week" type="bar" stacked="True">
+                <field name="start_time" type="row" interval="week"/>
+                <field name="direction" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Success Rate Over Time - Line Chart -->
+    <record id="view_ringcentral_line_success" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.line.success</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <graph string="Call Success Rate Over Time" type="line" stacked="True">
+                <field name="start_time" type="row" interval="day"/>
+                <field name="status" type="col"/>
+                <field name="direction" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Detailed Pivot by Partner -->
+    <record id="view_ringcentral_pivot_partner" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.pivot.partner</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <pivot string="Calls by Contact" display_quantity="1">
+                <field name="from_partner_id" type="row"/>
+                <field name="direction" type="col"/>
+                <field name="status" type="col"/>
+                <field name="duration" type="measure" operator="sum"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Detailed Pivot by Date and Status -->
+    <record id="view_ringcentral_pivot_date_status" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.pivot.date.status</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <pivot string="Calls by Date and Status" display_quantity="1">
+                <field name="start_time" type="row" interval="day"/>
+                <field name="status" type="col"/>
+                <field name="direction" type="col"/>
+                <field name="duration" type="measure" operator="avg"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Main Dashboard - Client Action -->
+    <record id="action_ringcentral_kpi_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">ringcentral_kpi_dashboard</field>
+    </record>
+
+    <!-- Call History Action -->
+    <record id="action_ringcentral_dashboard" model="ir.actions.act_window">
+        <field name="name">Call History</field>
+        <field name="res_model">ringcentral.call.history</field>
+        <field name="view_mode">pivot,graph,list,form</field>
+        <field name="search_view_id" ref="ringcentral_integration.view_ringcentral_call_history_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{
+            'pivot_measures': ['__count'],
+            'group_by': ['start_time:day']
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No call data yet!
+            </p>
+            <p>
+                Call history will appear here once calls are synchronized from RingCentral.
+            </p>
+        </field>
+    </record>
+
+    <!-- Dashboard View Mappings - Only one view per view_mode allowed -->
+    <record id="action_ringcentral_dashboard_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_ringcentral_dashboard"/>
+        <field name="act_window_id" ref="action_ringcentral_dashboard"/>
+    </record>
+
+    <record id="action_ringcentral_dashboard_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_ringcentral_graph_time"/>
+        <field name="act_window_id" ref="action_ringcentral_dashboard"/>
+    </record>
+
+    <!-- Note: Multiple graph/pivot views are available but users switch between them 
+         using the view selector dropdown in the UI. Only one view per view_mode 
+         can be mapped to an action. -->
+</odoo>
+

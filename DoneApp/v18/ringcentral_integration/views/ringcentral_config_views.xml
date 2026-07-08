@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ringcentral_config_form" model="ir.ui.view">
+        <field name="name">ringcentral.config.form</field>
+        <field name="model">ringcentral.config</field>
+        <field name="arch" type="xml">
+            <form string="RingCentral Configuration">
+                <header>
+                    <button name="action_connect_oauth" string="Connect (OAuth)" type="object" class="btn-primary"
+                            invisible="is_connected"/>
+                    <button name="refresh_access_token" string="Refresh Token" type="object" 
+                            invisible="not is_connected"/>
+                    <button name="sync_call_history" string="Sync Call History" type="object" 
+                            invisible="not is_connected"/>
+                    <button name="action_test_connection" string="Test Connection" type="object" class="btn-secondary"/>
+                    <field name="status_html" readonly="1" nolabel="1" widget="html"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_call_history" type="object" 
+                                class="oe_stat_button" icon="fa-phone" 
+                                invisible="not is_connected">
+                            <field name="call_history_count" widget="statinfo" string="Calls"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" 
+                                   help="Name for this RingCentral configuration"/>
+                            <field name="active" 
+                                   help="Enable or disable this RingCentral configuration. When disabled, webhooks and sync will stop."/>
+                            <field name="server_url" 
+                                   help="Select Production for live environment or Sandbox for testing"/>
+                        </group>
+                        <group>
+                            <field name="is_connected" readonly="1" 
+                                   help="Shows if the configuration is authenticated and connected to RingCentral"/>
+                            <field name="last_sync" readonly="1" 
+                                   help="Last time call history was synchronized from RingCentral"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Credentials" name="credentials">
+                            <group>
+                                <group string="Application Credentials (OAuth)">
+                                    <field name="client_id" password="True" 
+                                           help="RingCentral Application Client ID from Developer Portal"/>
+                                    <field name="client_secret" password="True" 
+                                           help="RingCentral Application Client Secret from Developer Portal"/>
+                                </group>
+                            </group>
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>OAuth Authentication:</strong></p>
+                                <p>• Use the "Connect (OAuth)" button to authenticate via OAuth</p>
+                                <p>• Each user authenticates individually through the embedded widget</p>
+                                <p>• Account-level OAuth tokens are stored here for webhooks and background sync</p>
+                                <p>• User extensions are configured in User Preferences</p>
+                            </div>
+                            <group string="Authentication Status" invisible="is_connected">
+                                <field name="access_token" readonly="1" widget="text" nolabel="1" 
+                                       invisible="not access_token"/>
+                                <field name="token_expires_at" readonly="1" 
+                                       invisible="not token_expires_at"/>
+                            </group>
+                        </page>
+                        <page string="Webhook" name="webhook">
+                            <group>
+                                <group string="Webhook Information">
+                                    <field name="webhook_url" readonly="1" widget="url" 
+                                           help="URL where RingCentral sends webhook events"/>
+                                    <field name="subscription_id" readonly="1" 
+                                           help="RingCentral subscription ID for this webhook"/>
+                                    <field name="subscription_expires_at" readonly="1" 
+                                           help="When this webhook subscription expires (automatically renewed)"/>
+                                </group>
+                                <group string="Webhook Actions">
+                                    <button name="create_webhook_subscription" string="Create/Update Subscription" 
+                                            type="object" class="btn-primary" 
+                                            invisible="not is_connected"
+                                            help="Create or update the webhook subscription (usually done automatically)"/>
+                                    <button name="renew_webhook_subscription" string="Renew Subscription" 
+                                            type="object" class="btn-secondary" 
+                                            invisible="not subscription_id"
+                                            help="Manually renew the webhook subscription before it expires"/>
+                                    <button name="delete_webhook_subscription" string="Delete Subscription" 
+                                            type="object" class="btn-secondary" 
+                                            invisible="not subscription_id"
+                                            help="Delete the webhook subscription (automatically deleted when configuration is disabled)"/>
+                                </group>
+                            </group>
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Automatic Webhook Management:</strong></p>
+                                <p>Webhook subscriptions are automatically created when you authenticate. 
+                                   The subscription will be renewed automatically and deleted when the configuration is deactivated.</p>
+                                <p><strong>Supported Events:</strong> Call notifications, recordings, and transcripts</p>
+                            </div>
+                        </page>
+                        <page string="Network" name="network">
+                            <group string="Proxy &amp; SSL Settings">
+                                <group>
+                                    <field name="proxy_enabled" 
+                                        help="Enable this if your network requires a proxy server to access RingCentral API"/>
+                                    <!-- <group string="Proxy Configuration" invisible="not proxy_enabled"> -->
+                                        <field name="http_proxy" invisible="not proxy_enabled"
+                                            help="HTTP proxy URL (e.g., http://user:pass@proxy.company.com:8080)"/>
+                                        <field name="https_proxy" invisible="not proxy_enabled"
+                                            help="HTTPS proxy URL (e.g., https://user:pass@proxy.company.com:8080)"/>
+                                    <!-- </group> -->
+                                </group>
+                                <group>
+                                <field name="verify_ssl" 
+                                       help="Enable SSL certificate verification. Disable only for self-signed certificates (not recommended for production)"/>
+                                </group>                                
+                            </group>
+                            <div class="alert alert-info" role="alert">
+                                    <p><strong>Network Configuration:</strong></p>
+                                    <p>• Enable proxy settings if your network requires a proxy to access RingCentral</p>
+                                    <p>• SSL verification should be enabled in production environments</p>
+                                    <p>• Click "Test Connection" button in the header to verify your network settings</p>
+                                </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ringcentral_config_tree" model="ir.ui.view">
+        <field name="name">ringcentral.config.tree</field>
+        <field name="model">ringcentral.config</field>
+        <field name="arch" type="xml">
+            <list string="RingCentral Configurations">
+                <field name="name"/>
+                <field name="server_url"/>
+                <field name="status_html" widget="html" string="Status"/>
+                <field name="is_connected" widget="boolean_toggle"/>
+                <field name="last_sync"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ringcentral_config_search" model="ir.ui.view">
+        <field name="name">ringcentral.config.search</field>
+        <field name="model">ringcentral.config</field>
+        <field name="arch" type="xml">
+            <search string="RingCentral Configurations">
+                <field name="name"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Has Access Token" name="has_token" domain="[('access_token', '!=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ringcentral_config" model="ir.actions.act_window">
+        <field name="name">RingCentral Configuration</field>
+        <field name="res_model">ringcentral.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'default_active': True}</field>
+    </record>
+</odoo>
+

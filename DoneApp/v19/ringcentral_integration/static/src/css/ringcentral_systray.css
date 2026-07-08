@@ -1,0 +1,164 @@
+/* RingCentral Widget Positioning - Ensure it doesn't cover Odoo */
+#rc-widget {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 1000 !important;
+    max-width: 400px !important;
+    max-height: 600px !important;
+    pointer-events: none !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Hide widget's minimize button - we control visibility via systray only */
+#rc-widget button[aria-label*="minimize"],
+#rc-widget button[aria-label*="Minimize"],
+#rc-widget [class*="minimize"],
+#rc-widget [class*="Minimize"],
+#rc-widget iframe[src*="ringcentral"] + * button,
+#rc-widget .rc-widget-header button:last-child {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Hide status/presence/adapter elements from widget header to prevent hiding
+   Users can change status via systray phone icon dropdown instead
+   Only target elements within header, not the widget container itself */
+#rc-widget header [class*="presence" i],
+#rc-widget header [class*="adapter" i],
+#rc-widget header [class*="Adapter" i],
+#rc-widget header [class*="Presence" i],
+#rc-widget header [aria-label*="presence" i],
+#rc-widget header [aria-label*="adapter" i],
+#rc-widget .rc-widget-header [class*="presence" i],
+#rc-widget .rc-widget-header [class*="adapter" i],
+#rc-widget .rc-widget-header [class*="Adapter" i],
+#rc-widget .rc-widget-header [class*="Presence" i],
+#rc-widget .rc-widget-header [class*="status" i],
+#rc-widget header [class*="status" i],
+/* Also target iframe content if accessible */
+#rc-widget iframe[src*="ringcentral"] ~ * [class*="presence" i],
+#rc-widget iframe[src*="ringcentral"] ~ * [class*="adapter" i] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Prevent widget from covering entire screen */
+#rc-widget iframe {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    border: none !important;
+}
+
+/* Ensure Odoo interface is always accessible */
+body {
+    overflow: visible !important;
+}
+
+/* Only show widget when explicitly toggled via systray or calls */
+#rc-widget.rc-widget-visible {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Ensure systray button is clickable and icons are visible */
+.o_nav_entry button {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* RC icon container with status overlay */
+.rc-icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.rc-icon-button {
+    position: relative;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.rc-icon-image {
+    display: block;
+}
+
+/* Make hidden SVG icon white */
+.rc-icon-image[src*="rc_icon_hidden.svg"] {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Status icon overlay positioned in top-right corner */
+.rc-status-overlay {
+    position: absolute !important;
+    top: 25px !important;
+    right: -4px !important;
+    font-size: 10px !important;
+    width: 10px !important;
+    height: 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    background: white !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    box-shadow: 0 0 2px rgba(0,0,0,0.4) !important;
+    line-height: 1 !important;
+}
+
+/* Dropdown menu styling */
+.ringcentral_integration .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.ringcentral_integration .dropdown-menu {
+    background: white !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+    padding: 4px 0 !important;
+    margin-top: 4px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.ringcentral_integration .dropdown-item {
+    padding: 8px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    color: #212529 !important;
+    text-decoration: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.ringcentral_integration .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.ringcentral_integration .dropdown-item.active {
+    background-color: #e9ecef;
+    font-weight: 500;
+}
+
+.ringcentral_integration .dropdown-divider {
+    height: 1px;
+    margin: 4px 0;
+    background-color: #dee2e6;
+}
+

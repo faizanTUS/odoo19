@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_ringcentral" model="ir.ui.view">
+        <field name="name">res.users.form.ringcentral</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//h5[@name='h5_phone']" position="after">
+                <h5 name="h5_ringcentral_extension" class="d-flex align-items-baseline mb-0">
+                    <i class="fa fa-fw fa-phone text-primary" title="RingCentral Extension"/>
+                    <field name="ringcentral_extension" placeholder="e.g. 101"/>
+                </h5>
+                <h5 name="h5_ringcentral_extension_id" class="d-flex align-items-baseline mb-0">
+                    <i class="fa fa-fw fa-phone text-primary" title="RingCentral Extension ID"/>
+                    <field name="ringcentral_extension_id"  placeholder="Optional numeric ID" groups="base.group_system"/>
+                </h5>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_preferences_form_ringcentral" model="ir.ui.view">
+        <field name="name">res.users.preferences.form.ringcentral</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('d-flex') and .//field[@name='phone']]" position="after">
+                <div class="d-flex align-items-baseline w-100">
+                    <i class="fa fa-fw me-1 fa-phone-square text-primary" title="RingCentral Extension"/>
+                    <field name="ringcentral_extension" class="w-100" placeholder="e.g. 101"
+                           string="RingCentral Extension Number"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_ringcentral" model="ir.ui.view">
+        <field name="name">res.users.form.ringcentral</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']" position="after">
+                <field name="ringcentral_extension" placeholder="e.g. 101"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_preferences_form_ringcentral" model="ir.ui.view">
+        <field name="name">res.users.preferences.form.ringcentral</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//h1" position="after">
+                <div class="d-flex align-items-baseline w-100">
+                    <i class="fa fa-fw me-1 fa-phone text-primary" title="RingCentral Extension"/>
+                    <field name="ringcentral_extension" class="w-100" placeholder="e.g. 101" 
+                           help="Your personal RingCentral extension number. Leave empty to use the default extension from configuration."/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

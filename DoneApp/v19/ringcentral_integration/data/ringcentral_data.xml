@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_sync_call_history" model="ir.cron">
+            <field name="name">RingCentral: Sync Call History</field>
+            <field name="model_id" ref="ringcentral_integration.model_ringcentral_config"/>
+            <field name="state">code</field>
+            <field name="code">model.search([('active', '=', True)]).sync_call_history_recent()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="ir_cron_sync_contacts" model="ir.cron">
+            <field name="name">RingCentral: Sync Contacts</field>
+            <field name="model_id" ref="ringcentral_integration.model_ringcentral_config"/>
+            <field name="state">code</field>
+            <field name="code">model.search([('active', '=', True)]).sync_contacts_recent()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="ir_cron_maintain_tokens_and_subscription" model="ir.cron">
+            <field name="name">RingCentral: Maintain Tokens and Subscription</field>
+            <field name="model_id" ref="ringcentral_integration.model_ringcentral_config"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_maintain_tokens_and_subscription()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="ir_cron_poll_transcript_jobs" model="ir.cron">
+            <field name="name">RingCentral: Poll Transcript Jobs</field>
+            <field name="model_id" ref="ringcentral_integration.model_ringcentral_call_history"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_poll_transcript_jobs()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="action_backfill_call_history_contacts" model="ir.actions.server">
+            <field name="name">Backfill Contact Links</field>
+            <field name="model_id" ref="ringcentral_integration.model_ringcentral_call_history"/>
+            <field name="binding_model_id" ref="ringcentral_integration.model_ringcentral_call_history"/>
+            <field name="state">code</field>
+            <field name="code">records.action_backfill_partner_links()</field>
+        </record>
+    </data>
+</odoo>
+

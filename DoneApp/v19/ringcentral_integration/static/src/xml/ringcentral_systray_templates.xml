@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ringcentral_integration.RCPhoneSystray">
+        <div class="d-flex align-items-center ringcentral_integration">
+            <!-- RC icon button with status overlay -->
+            <div class="dropdown rc-icon-container" t-att-class="{'show': state.showStatusDropdown}">
+                <button class="btn d-flex justify-content-center align-items-center o_nav_entry rc-icon-button"
+                        title="Toggle RingCentral Visiblity" 
+                        t-on-click="onClick">
+                    <img t-att-src="iconPath" 
+                         alt="RC" 
+                         class="rc-icon-image"
+                         style="height:20px;width:20px;border-radius:3px;"/>
+                    <!-- Status icon overlay in corner -->
+                    <i t-att-class="statusIconClass" 
+                       class="rc-status-overlay"
+                       t-att-style="statusIconStyle"
+                       t-att-title="statusTitle"
+                       t-on-click.stop="onPhoneClick"/>
+                    <t t-if="state.loading">
+                        <i class="fa fa-spinner fa-spin ms-1"/>
+                    </t>
+                </button>
+                <t t-if="state.showStatusDropdown">
+                    <div class="dropdown-menu show" style="position: absolute; right: 0; top: 100%; z-index: 10000; min-width: 200px; display: block !important; visibility: visible !important;">
+                        <t t-if="!state.isLoggedIn">
+                            <div class="dropdown-item" style="color: #6c757d; cursor: default; font-style: italic;">
+                                <i class="fa fa-info-circle" style="margin-right: 8px;"/> Please log in to RingCentral widget
+                            </div>
+                            <div class="dropdown-divider"/>
+                        </t>
+                        <a class="dropdown-item" 
+                           t-att-class="{'active': state.userStatus === 'Available', 'disabled': !state.isLoggedIn}"
+                           t-att-style="!state.isLoggedIn ? 'opacity: 0.5; cursor: not-allowed; pointer-events: none;' : ''"
+                           t-on-click="setStatus" 
+                           data-status="Available" 
+                           data-dnd="TakeAllCalls">
+                            <i class="fa fa-circle" style="color: #28a745; margin-right: 8px;"/> Available
+                        </a>
+                        <a class="dropdown-item" 
+                           t-att-class="{'active': state.userStatus === 'Busy', 'disabled': !state.isLoggedIn}"
+                           t-att-style="!state.isLoggedIn ? 'opacity: 0.5; cursor: not-allowed; pointer-events: none;' : ''"
+                           t-on-click="setStatus" 
+                           data-status="Busy" 
+                           data-dnd="TakeAllCalls">
+                            <i class="fa fa-circle" style="color: #dc3545; margin-right: 8px;"/> Busy
+                        </a>
+                        <a class="dropdown-item" 
+                           t-att-class="{'active': state.userStatus === 'DND', 'disabled': !state.isLoggedIn}"
+                           t-att-style="!state.isLoggedIn ? 'opacity: 0.5; cursor: not-allowed; pointer-events: none;' : ''"
+                           t-on-click="setStatus" 
+                           data-status="Available" 
+                           data-dnd="DoNotAcceptAnyCalls"
+                           style="display: block !important; visibility: visible !important;">
+                            <i class="fa fa-ban" style="color:rgb(248, 4, 16); margin-right: 8px;"/> Do Not Disturb
+                        </a>
+                        <div class="dropdown-divider" style="display: block !important; visibility: visible !important;"/>
+                        <a class="dropdown-item" 
+                           t-att-class="{'active': state.userStatus === 'Offline', 'disabled': !state.isLoggedIn}"
+                           t-att-style="!state.isLoggedIn ? 'opacity: 0.5; cursor: not-allowed; pointer-events: none;' : ''"
+                           t-on-click="setStatus" 
+                           data-status="Offline" 
+                           data-dnd="TakeAllCalls">
+                            <i class="fa fa-circle" style="color: #adb5bd; margin-right: 8px;"/> Offline
+                        </a>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+    
+</templates>
+
+

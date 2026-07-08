@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="ringcentral_integration.RingCentralDashboard">
+        <div class="o_rc_dashboard o_action">
+            <div class="o_rc_dashboard_scroll">
+                <section class="o_rc_filters_bar">
+                    <div class="o_rc_toolbar">
+                        <div class="o_rc_toolbar_title">
+                            <span class="o_rc_hero_badge"><i class="fa fa-phone"/> Call Analytics</span>
+                        </div>
+                        <div class="o_rc_filters_row">
+                        <RcFilterSelect icon="'fa-calendar'"
+                                        choices="datePresetChoices"
+                                        value="state.datePreset"
+                                        placeholder="'Period'"
+                                        onSelect.bind="onDatePresetSelect"/>
+
+                        <t t-if="state.datePreset === 'custom'">
+                            <div class="o_rc_filter_pill o_rc_filter_pill_date" title="From date">
+                                <i class="fa fa-calendar-o o_rc_filter_icon"/>
+                                <input type="date" class="o_rc_filter_input"
+                                       t-att-value="state.dateFrom"
+                                       t-on-change="onDateFromChange"/>
+                            </div>
+                            <div class="o_rc_filter_pill o_rc_filter_pill_date" title="To date">
+                                <i class="fa fa-calendar-check-o o_rc_filter_icon"/>
+                                <input type="date" class="o_rc_filter_input"
+                                       t-att-value="state.dateTo"
+                                       t-on-change="onDateToChange"/>
+                            </div>
+                        </t>
+
+                        <RcFilterSelect t-if="showUserFilter"
+                                        icon="'fa-user'"
+                                        choices="userChoices"
+                                        value="state.userId"
+                                        placeholder="'All users'"
+                                        searchPlaceholder="'Search users…'"
+                                        searchable="true"
+                                        autoSort="true"
+                                        disabled="!canFilterUsers"
+                                        onSelect.bind="onUserSelect"/>
+
+                        <RcFilterSelect t-if="isMultiCompany"
+                                        icon="'fa-building-o'"
+                                        choices="companyChoices"
+                                        value="state.companyId"
+                                        placeholder="'All companies'"
+                                        searchPlaceholder="'Search companies…'"
+                                        searchable="true"
+                                        autoSort="true"
+                                        onSelect.bind="onCompanySelect"/>
+
+                        <RcFilterSelect icon="'fa-exchange'"
+                                        choices="directionChoices"
+                                        value="state.direction"
+                                        placeholder="'All directions'"
+                                        onSelect.bind="onDirectionSelect"/>
+
+                        <RcFilterSelect icon="'fa-info-circle'"
+                                        choices="statusChoices"
+                                        value="state.status"
+                                        placeholder="'All statuses'"
+                                        onSelect.bind="onStatusSelect"/>
+
+                        <RcFilterSelect icon="'fa-signal'"
+                                        choices="granularityChoices"
+                                        value="state.granularity"
+                                        placeholder="'Volume'"
+                                        onSelect.bind="onGranularitySelect"/>
+
+                        <div class="o_rc_filters_actions">
+                            <button type="button" class="o_rc_filter_btn o_rc_filter_btn_clear"
+                                    t-if="hasActiveFilters" t-on-click="onClearFilters"
+                                    title="Clear all filters">
+                                <i class="fa fa-times"/>
+                            </button>
+                            <button type="button" class="o_rc_filter_btn o_rc_filter_btn_refresh"
+                                    t-on-click="loadData" t-att-disabled="state.loading"
+                                    title="Refresh dashboard">
+                                <i class="fa fa-refresh" t-att-class="{'fa-spin': state.loading}"/>
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="o_rc_active_filters" t-if="activeFilterTags.length">
+                        <t t-foreach="activeFilterTags" t-as="tag" t-key="tag.key">
+                            <span class="o_rc_filter_tag">
+                                <i t-if="tag.icon" t-attf-class="fa #{tag.icon}"/>
+                                <t t-esc="tag.label"/>
+                                <button type="button" class="o_rc_filter_tag_remove"
+                                        t-on-click="() => this.onRemoveFilterTag(tag.key)"
+                                        title="Remove filter">
+                                    <i class="fa fa-times"/>
+                                </button>
+                            </span>
+                        </t>
+                    </div>
+                </section>
+
+                <t t-if="state.loading">
+                    <RcLoading/>
+                </t>
+                <t t-else="">
+                    <section class="o_rc_kpi_grid">
+                        <t t-foreach="state.data.kpis or []" t-as="kpi" t-key="kpi.key">
+                            <RcKpiCard kpi="kpi" onClick.bind="onKpiClick"/>
+                        </t>
+                    </section>
+
+                    <section class="o_rc_charts_row">
+                        <RcChartPanel title="'Call Trend Analysis'" subtitle="'Daily incoming vs outgoing calls'"
+                                      icon="'fa-area-chart'"
+                                      empty="!hasChartData(charts.call_trend)"
+                                      emptyMessage="'No call trend data for this period.'">
+                            <canvas t-ref="callTrendChart"/>
+                        </RcChartPanel>
+                        <RcChartPanel title="'Incoming vs Outgoing'" subtitle="'Call volume by direction'"
+                                      icon="'fa-bar-chart'"
+                                      empty="!hasBarData(charts.direction_bar)"
+                                      emptyMessage="'No direction data for this period.'">
+                            <canvas t-ref="directionChart"/>
+                        </RcChartPanel>
+                    </section>
+
+                    <section class="o_rc_charts_row">
+                        <RcChartPanel title="'Call Status Distribution'" subtitle="'Breakdown by call status'"
+                                      icon="'fa-pie-chart'"
+                                      empty="!hasBarData(charts.status_doughnut)"
+                                      emptyMessage="'No status data for this period.'">
+                            <canvas t-ref="statusChart"/>
+                        </RcChartPanel>
+                        <RcChartPanel t-if="isAdmin" title="'Top Users by Calls'" subtitle="'Most active agents'"
+                                      icon="'fa-users'"
+                                      empty="!hasBarData(charts.top_users)"
+                                      emptyMessage="'No user call data for this period.'">
+                            <canvas t-ref="topUsersChart"/>
+                        </RcChartPanel>
+                    </section>
+
+                    <section class="o_rc_charts_row">
+                        <RcChartPanel title="'Call Volume'" subtitle="'Calls grouped by selected period'"
+                                      icon="'fa-signal'"
+                                      empty="!hasBarData(charts.call_volume)"
+                                      emptyMessage="'No volume data for this period.'">
+                            <canvas t-ref="volumeChart"/>
+                        </RcChartPanel>
+                        <RcChartPanel title="'Call Duration Trend'" subtitle="'Average duration per day (seconds)'"
+                                      icon="'fa-clock-o'"
+                                      empty="!hasBarData(charts.duration_trend)"
+                                      emptyMessage="'No duration data for this period.'">
+                            <canvas t-ref="durationChart"/>
+                        </RcChartPanel>
+                    </section>
+
+                    <section class="o_rc_charts_row o_rc_charts_row_single">
+                        <RcChartPanel title="'Missed vs Answered'" subtitle="'Answered vs missed call comparison'"
+                                      icon="'fa-balance-scale'"
+                                      empty="!hasBarData(charts.missed_vs_answered)"
+                                      emptyMessage="'No answered/missed data for this period.'">
+                            <canvas t-ref="missedAnsweredChart"/>
+                        </RcChartPanel>
+                    </section>
+
+                    <section class="o_rc_analytics_section">
+                        <h4 class="o_rc_section_title">Analytics</h4>
+                        <div class="o_rc_analytics_grid">
+                            <RcAnalyticsCard label="'Call Success Rate'" icon="'fa-check-circle'" accent="'#28a745'"
+                                             value="analyticsSuccessRate"
+                                             onClick.bind="onSuccessRateClick"/>
+                            <RcAnalyticsCard label="'Missed Call Rate'" icon="'fa-times-circle'" accent="'#dc3545'"
+                                             value="analyticsMissedRate"
+                                             onClick.bind="onMissedRateClick"/>
+                            <RcAnalyticsCard label="'Avg Response Time'" icon="'fa-bolt'" accent="'#17a2b8'"
+                                             value="analytics.avg_response_time or '0s'"/>
+                            <RcAnalyticsCard label="'Avg Call Duration'" icon="'fa-hourglass'" accent="'#6f42c1'"
+                                             value="analytics.avg_call_duration or '0s'"/>
+                        </div>
+                        <div class="o_rc_analytics_lists">
+                            <RcLeaderboard title="'Peak Calling Hours'" entries="peakHourEntries"
+                                           valueKey="'count'" onEntryClick.bind="onLeaderboardClick"/>
+                            <RcLeaderboard t-if="isAdmin" title="'Top Performing Agents'" entries="topAgents"
+                                           valueKey="'count'" onEntryClick.bind="onLeaderboardClick"/>
+                            <RcLeaderboard title="'Most Contacted Customers'" entries="mostContacted"
+                                           valueKey="'count'" onEntryClick.bind="onLeaderboardClick"/>
+                        </div>
+                    </section>
+                </t>
+            </div>
+        </div>
+    </t>
+
+</templates>

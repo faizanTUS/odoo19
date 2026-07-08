@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ringcentral_integration.KPIDashboard" owl="1">
+        <div class="o_kpi_dashboard_container" style="padding: 20px; background-color: #f8f9fa; height: 100vh; overflow-y: auto; overflow-x: hidden;">
+            <div class="container-fluid">
+                <h2 class="mb-4">RingCentral KPI Dashboard</h2>
+                <t t-if="state.loading">
+                    <div class="text-center p-5">
+                        <i class="fa fa-spinner fa-spin fa-3x"></i>
+                        <p class="mt-3">Loading KPIs...</p>
+                    </div>
+                </t>
+                <t t-else="">
+                    <!-- Chart Tiles Row -->
+                    <div class="row mb-4">
+                        <!-- Inbound vs Outbound Chart -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm" style="border-radius: 8px; border: 1px solid #dee2e6; height: 100%;">
+                                <div class="card-body" style="padding: 25px;">
+                                    <h5 class="card-title mb-4" style="color: #212529; font-weight: 600;">
+                                        <i class="fa fa-phone" style="margin-right: 10px; color: #007bff;"></i>
+                                        Calls by Direction
+                                    </h5>
+                                    <div class="row align-items-end" style="height: 200px; position: relative;">
+                                        <div class="col-6 text-center">
+                                            <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;">
+                                                <div style="width: 60px; background: linear-gradient(180deg, #17a2b8 0%, #138496 100%); border-radius: 4px 4px 0 0; margin-bottom: 10px; transition: height 0.6s ease; min-height: 5px;" 
+                                                     t-att-style="'height: ' + getBarChartHeightSafe(state.chartData.directionChart.inbound, getMaxValue(state.chartData.directionChart)) + '%;'">
+                                                </div>
+                                                <strong style="color: #17a2b8; font-size: 1.2em; min-height: 24px; display: block;">
+                                                    <t t-esc="state.chartData.directionChart.inbound"/>
+                                                </strong>
+                                                <small style="color: #6c757d; margin-top: 5px;">Inbound</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; position: relative;">
+                                                <div style="width: 60px; background: linear-gradient(180deg, #28a745 0%, #218838 100%); border-radius: 4px 4px 0 0; margin-bottom: 10px; transition: height 0.6s ease; min-height: 5px;" 
+                                                     t-att-style="'height: ' + getBarChartHeightSafe(state.chartData.directionChart.outbound, getMaxValue(state.chartData.directionChart)) + '%;'">
+                                                </div>
+                                                <strong style="color: #28a745; font-size: 1.2em; min-height: 24px; display: block;">
+                                                    <t t-esc="state.chartData.directionChart.outbound"/>
+                                                </strong>
+                                                <small style="color: #6c757d; margin-top: 5px;">Outbound</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Answered vs Missed Chart -->
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm" style="border-radius: 8px; border: 1px solid #dee2e6; height: 100%;">
+                                <div class="card-body" style="padding: 25px;">
+                                    <h5 class="card-title mb-4" style="color: #212529; font-weight: 600;">
+                                        <i class="fa fa-chart-pie" style="margin-right: 10px; color: #007bff;"></i>
+                                        Calls by Status
+                                    </h5>
+                                    <div class="row align-items-center" style="height: 200px;">
+                                        <div class="col-12 text-center">
+                                            <t t-set="pieData" t-value="getPieChartData(state.chartData.statusChart)"/>
+                                            <t t-set="total" t-value="state.chartData.statusChart.answered + state.chartData.statusChart.missed"/>
+                                            <svg width="200" height="200" viewBox="0 0 100 100" style="margin: 0 auto; display: block;">
+                                                <!-- Background circle (shown when no data) -->
+                                                <circle cx="50" cy="50" r="40" fill="#e9ecef" stroke="#dee2e6" stroke-width="1"
+                                                        t-if="total === 0"/>
+                                                <!-- Answered slice -->
+                                                <path t-att-d="getPieSlicePath(50, 50, 40, 0, pieData.answered.angle)" 
+                                                      fill="#28a745" 
+                                                      stroke="#fff" 
+                                                      stroke-width="2"
+                                                      t-if="pieData.answered.angle > 0"/>
+                                                <!-- Missed slice -->
+                                                <path t-att-d="getPieSlicePath(50, 50, 40, pieData.answered.angle, pieData.answered.angle + pieData.missed.angle)" 
+                                                      fill="#dc3545" 
+                                                      stroke="#fff" 
+                                                      stroke-width="2"
+                                                      t-if="pieData.missed.angle > 0"/>
+                                                <!-- Full circle when only one type exists -->
+                                                <circle cx="50" cy="50" r="40" fill="#28a745" stroke="#fff" stroke-width="2"
+                                                        t-if="total > 0 and state.chartData.statusChart.missed === 0"/>
+                                                <circle cx="50" cy="50" r="40" fill="#dc3545" stroke="#fff" stroke-width="2"
+                                                        t-if="total > 0 and state.chartData.statusChart.answered === 0"/>
+                                                <!-- Center text -->
+                                                <text x="50" y="48" text-anchor="middle" 
+                                                      style="font-size: 16px; font-weight: bold; fill: #212529;">
+                                                    <t t-esc="total"/>
+                                                </text>
+                                                <text x="50" y="60" text-anchor="middle" 
+                                                      style="font-size: 10px; fill: #6c757d;">Total</text>
+                                            </svg>
+                                            <div class="mt-3" style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                                                <div style="display: flex; align-items: center;">
+                                                    <div style="width: 20px; height: 20px; background: #28a745; border-radius: 4px; margin-right: 8px;"></div>
+                                                    <span style="color: #6c757d;">
+                                                        <strong style="color: #28a745;"><t t-esc="state.chartData.statusChart.answered"/></strong> Answered
+                                                    </span>
+                                                </div>
+                                                <div style="display: flex; align-items: center;">
+                                                    <div style="width: 20px; height: 20px; background: #dc3545; border-radius: 4px; margin-right: 8px;"></div>
+                                                    <span style="color: #6c757d;">
+                                                        <strong style="color: #dc3545;"><t t-esc="state.chartData.statusChart.missed"/></strong> Missed
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPI Tiles Row -->
+                    <div class="row">
+                        <t t-foreach="state.kpis" t-as="kpi" t-key="kpi.id">
+                            <div class="col-md-3 col-sm-6 mb-4">
+                                <div class="card shadow-sm" style="border-radius: 8px; border: 1px solid #dee2e6; transition: transform 0.2s; height: 100%;" t-on-mouseenter="(ev) => ev.currentTarget.style.transform = 'translateY(-5px)'" t-on-mouseleave="(ev) => ev.currentTarget.style.transform = 'translateY(0)'">
+                                    <div class="card-body" style="padding: 25px;">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i t-attf-class="fa fa-{{getIconClass(kpi)}} fa-2x" t-att-style="'color: ' + getValueColor(kpi) + '; margin-right: 15px;'"></i>
+                                            <h6 class="card-subtitle mb-0" style="color: #6c757d; font-weight: 600; flex: 1;">
+                                                <t t-esc="kpi.name"/>
+                                            </h6>
+                                        </div>
+                                        <h2 class="card-title mb-0" t-att-style="'font-size: 2.5em; font-weight: bold; color: ' + getValueColor(kpi) + ';'">
+                                            <t t-esc="kpi.value || '0'"/>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <t t-if="!state.kpis.length">
+                        <div class="alert alert-info text-center">
+                            <i class="fa fa-info-circle fa-2x mb-3"></i>
+                            <p class="mb-0">No KPI data available. KPIs will appear here once call history data is synchronized.</p>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>
+

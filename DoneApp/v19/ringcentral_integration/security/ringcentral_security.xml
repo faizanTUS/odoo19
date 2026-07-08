@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Access Rules -->
+        <!-- Config: Only admins can access -->
+        <record id="ringcentral_config_rule_admin" model="ir.rule">
+            <field name="name">RingCentral Config: Admin Only</field>
+            <field name="model_id" ref="model_ringcentral_config"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('ringcentral_integration.group_ringcentral_admin'))]"/>
+        </record>
+
+        <record id="ringcentral_config_rule_user" model="ir.rule">
+            <field name="name">RingCentral Config: Users Cannot Access</field>
+            <field name="model_id" ref="model_ringcentral_config"/>
+            <field name="domain_force">[(0, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('ringcentral_integration.group_ringcentral_user'))]"/>
+        </record>
+
+        <!-- Call History: Admins see all, Users see only their own -->
+        <record id="ringcentral_call_history_rule_admin" model="ir.rule">
+            <field name="name">RingCentral Call History: Admin - All Records</field>
+            <field name="model_id" ref="model_ringcentral_call_history"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('ringcentral_integration.group_ringcentral_admin'))]"/>
+        </record>
+
+        <record id="ringcentral_call_history_rule_user" model="ir.rule">
+            <field name="name">RingCentral Call History: User - Own Records Only</field>
+            <field name="model_id" ref="model_ringcentral_call_history"/>
+            <field name="domain_force">['|', '|', ('user_id', '=', user.id), ('initiated_by_id', '=', user.id), ('answered_by_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('ringcentral_integration.group_ringcentral_user'))]"/>
+        </record>
+
+        <record id="ringcentral_config_rule_multi_company" model="ir.rule">
+            <field name="name">RingCentral Config multi-company</field>
+            <field name="model_id" ref="model_ringcentral_config"/>
+            <field name="domain_force">['|', ('company_ids', '=', False), ('company_ids', 'in', company_ids)]</field>
+        </record>
+
+        <record id="ringcentral_call_history_rule_multi_company" model="ir.rule">
+            <field name="name">RingCentral Call History multi-company</field>
+            <field name="model_id" ref="model_ringcentral_call_history"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

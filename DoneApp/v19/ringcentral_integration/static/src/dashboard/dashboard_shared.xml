@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="ringcentral_integration.RcFilterSelect">
+        <div class="o_rc_filter_pill o_rc_filter_dropdown"
+             t-att-class="{'o_rc_filter_dropdown_open': uiState.isOpen, 'o_rc_filter_dropdown_disabled': props.disabled}">
+            <i t-attf-class="fa #{props.icon} o_rc_filter_icon"/>
+            <SelectMenu
+                choices="props.choices"
+                value="props.value"
+                placeholder="selectMenuPlaceholder"
+                searchPlaceholder="props.searchPlaceholder"
+                required="true"
+                disabled="props.disabled"
+                searchable="props.searchable"
+                autoSort="props.autoSort"
+                onSelect.bind="onSelect"
+                onOpened.bind="onOpened"
+                onClosed.bind="onClosed"
+                class="'o_rc_select_menu'"
+                menuClass="'o_rc_select_menu_dropdown'"
+                togglerClass="'o_rc_select_menu_toggler'"
+            >
+                <t t-set-slot="default">
+                    <span class="o_rc_filter_trigger_label text-truncate" t-esc="selectedLabel"/>
+                </t>
+                <t t-set-slot="choice" t-slot-scope="scope">
+                    <div class="o_rc_filter_choice" t-att-class="{'o_rc_filter_choice_selected': isSelected(scope.data)}">
+                        <span class="o_rc_filter_choice_label" t-esc="scope.data.label"/>
+                        <i t-if="isSelected(scope.data)" class="fa fa-check o_rc_filter_choice_check"/>
+                    </div>
+                </t>
+            </SelectMenu>
+        </div>
+    </t>
+
+    <t t-name="ringcentral_integration.RcKpiCard">
+        <div class="o_rc_kpi" t-attf-style="--rc-kpi-accent: #{props.kpi.accent or '#714B67'}"
+             t-on-click="onCardClick" role="button" tabindex="0">
+            <div class="o_rc_kpi_icon" t-if="props.kpi.icon">
+                <i t-attf-class="fa #{props.kpi.icon}"/>
+            </div>
+            <div class="o_rc_kpi_body">
+                <div class="o_rc_kpi_value" t-esc="props.kpi.value"/>
+                <div class="o_rc_kpi_label" t-esc="props.kpi.label"/>
+                <div t-if="deltaInfo" class="o_rc_kpi_delta" t-att-class="deltaInfo.className">
+                    <t t-esc="deltaInfo.text"/>
+                    <span class="o_rc_kpi_delta_hint">vs previous period</span>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="ringcentral_integration.RcChartPanel">
+        <div class="o_rc_panel o_rc_chart_panel">
+            <div class="o_rc_panel_head">
+                <h5>
+                    <i t-if="props.icon" t-attf-class="fa #{props.icon}"/>
+                    <t t-esc="props.title"/>
+                </h5>
+                <p t-if="props.subtitle" class="o_rc_panel_sub" t-esc="props.subtitle"/>
+            </div>
+            <div class="o_rc_chart_wrap" t-att-class="{'o_rc_chart_empty': props.empty}">
+                <t t-if="props.empty">
+                    <RcEmptyState message="emptyMessageText"/>
+                </t>
+                <t t-else="">
+                    <t t-slot="default"/>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="ringcentral_integration.RcLoading">
+        <div class="o_rc_loading">
+            <i class="fa fa-spinner fa-spin fa-2x"/>
+            <p t-esc="props.message or 'Loading dashboard…'"/>
+        </div>
+    </t>
+
+    <t t-name="ringcentral_integration.RcEmptyState">
+        <div class="o_rc_empty">
+            <i class="fa fa-bar-chart o_rc_empty_icon"/>
+            <p t-esc="props.message or 'No data available.'"/>
+        </div>
+    </t>
+
+    <t t-name="ringcentral_integration.RcLeaderboard">
+        <div class="o_rc_panel o_rc_leaderboard_panel">
+            <div class="o_rc_panel_head">
+                <h5 t-esc="props.title"/>
+            </div>
+            <ul class="o_rc_leaderboard" t-if="items.length">
+                <t t-foreach="items" t-as="entry" t-key="entry.id or entry_index">
+                    <li class="o_rc_leaderboard_item" t-on-click="() => this.onClickEntry(entry)">
+                        <span class="o_rc_leaderboard_rank" t-esc="entry_index + 1"/>
+                        <span class="o_rc_leaderboard_name" t-esc="entry.name"/>
+                        <span class="o_rc_leaderboard_value" t-esc="entry.count"/>
+                    </li>
+                </t>
+            </ul>
+            <RcEmptyState t-else="" message="'No records for this period.'"/>
+        </div>
+    </t>
+
+    <t t-name="ringcentral_integration.RcAnalyticsCard">
+        <div class="o_rc_analytics_card" t-attf-style="--rc-kpi-accent: #{props.accent or '#714B67'}"
+             t-on-click="onCardClick" role="button" tabindex="0">
+            <div class="o_rc_analytics_icon" t-if="props.icon">
+                <i t-attf-class="fa #{props.icon}"/>
+            </div>
+            <div class="o_rc_analytics_body">
+                <div class="o_rc_analytics_value" t-esc="props.value"/>
+                <div class="o_rc_analytics_label" t-esc="props.label"/>
+            </div>
+        </div>
+    </t>
+
+</templates>

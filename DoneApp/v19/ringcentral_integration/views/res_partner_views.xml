@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_ringcentral" model="ir.ui.view">
+        <field name="name">res.partner.form.ringcentral</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_ringcentral_calls" type="object"
+                        class="oe_stat_button" icon="fa-phone">
+                    <field name="ringcentral_call_count" widget="statinfo" string="Calls"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="before">
+                <field name="ringcentral_multi_config" invisible="1"/>
+                <field name="ringcentral_available_config_ids" invisible="1"/>
+                <field name="ringcentral_config_id"
+                       invisible="not ringcentral_multi_config"
+                       domain="[('id', 'in', ringcentral_available_config_ids)]"
+                       options="{'no_create': True}"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="RingCentral Calls" name="ringcentral_calls">
+                    <field name="ringcentral_linked_call_ids" nolabel="1">
+                        <list>
+                            <field name="start_time"/>
+                            <field name="direction" widget="badge"/>
+                            <field name="from_number"/>
+                            <field name="from_partner_id"/>
+                            <field name="to_number"/>
+                            <field name="to_partner_id"/>
+                            <field name="duration_formatted"/>
+                            <field name="status" widget="badge"/>
+                            <field name="transcript_available" widget="boolean_toggle"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_ringcentral" model="ir.ui.view">
+        <field name="name">res.partner.tree.ringcentral</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='complete_name']" position="after">
+                <field name="ringcentral_call_count" widget="statinfo" string="Calls" optional="hide"/>
+                <field name="ringcentral_last_call" widget="date" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

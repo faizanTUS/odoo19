@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ringcentral_call_history_tree" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.tree</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <list string="Call History" decoration-success="status=='completed'" 
+                  decoration-info="status=='answered'" decoration-warning="status=='ringing'"
+                  decoration-danger="status in ('failed', 'busy', 'no-answer')">
+                <field name="start_time"/>
+                <field name="direction" widget="badge" decoration-info="direction=='inbound'" 
+                       decoration-primary="direction=='outbound'"/>
+                <field name="from_number"/>
+                <field name="caller_name" optional="hide"/>
+                <field name="from_partner_id" optional="hide"/>
+                <field name="to_number"/>
+                <field name="to_partner_id" optional="hide"/>
+                <field name="initiated_by_id" optional="show"/>
+                <field name="answered_by_id" optional="show"/>
+                <field name="user_id" optional="hide"/>
+                <field name="company_id" optional="show" groups="base.group_multi_company"/>
+                <field name="duration_formatted"/>
+                <field name="status" widget="badge"/>
+                <field name="call_result" widget="badge" optional="hide"/>
+                <field name="has_recording" widget="boolean_toggle"/>
+                <field name="transcript_available" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ringcentral_call_history_form" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.form</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <form string="Call History">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="config_id" readonly="1"/>
+                            <field name="company_id" readonly="1" groups="base.group_multi_company"/>
+                            <field name="ringcentral_call_id" readonly="1"/>
+                            <field name="ringcentral_telephony_session_id" readonly="1"/>
+                            <field name="ringcentral_call_log_id" readonly="1"/>
+                            <field name="direction" widget="radio"/>
+                            <field name="status" widget="badge"/>
+                            <field name="call_result" widget="badge"/>
+                        </group>
+                        <group>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="duration_formatted" readonly="1"/>
+                            <field name="cost"/>
+                        </group>
+                    </group>
+                    <group string="Agents">
+                        <group>
+                            <field name="initiated_by_id" readonly="1"/>
+                            <field name="answered_by_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="user_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="From">
+                            <field name="caller_name"/>
+                            <field name="from_number"/>
+                            <field name="from_partner_id" options="{'no_create': True}"/>
+                        </group>
+                        <group string="To">
+                            <field name="to_number"/>
+                            <field name="to_partner_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Transcript / Recording" name="transcript_recording">
+                            <div class="mb-2">
+                                <button name="action_refresh_recording" string="Refresh Recording" type="object"
+                                        class="btn btn-secondary me-2"
+                                        invisible="has_recording"/>
+                                <button name="action_fetch_transcript" string="Fetch Transcript" type="object" 
+                                        class="btn btn-primary me-2"
+                                        invisible="transcript_available or not has_recording"/>
+                                <button name="action_download_recording" string="Download Recording" type="object"
+                                        class="btn btn-secondary"
+                                        invisible="not has_recording"/>
+                            </div>
+                            <group>
+                                <group>
+                                    <field name="has_recording" readonly="1"/>
+                                    <field name="transcript_available" readonly="1"/>
+                                    <field name="transcript_source" readonly="1" invisible="not transcript_source"/>
+                                    <field name="recording_id" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="transcript_job_id" readonly="1" invisible="not transcript_job_id"/>
+                                    <field name="recording_url" widget="url" readonly="1" invisible="1"/>
+                                </group>
+                            </group>
+                            <div class="alert alert-info" role="alert" 
+                                 invisible="not transcript_job_id or transcript_available">
+                                <p><strong>Transcription in progress.</strong> Check back in a few minutes.</p>
+                            </div>
+                            <group string="Transcript">
+                                <field name="transcript" widget="text" nolabel="1" 
+                                       readonly="not transcript_available"
+                                       placeholder="No transcript available yet."/>
+                            </group>
+                            <div class="alert alert-info" role="alert" invisible="not has_recording">
+                                <p><strong>Call Recording</strong> — use the player below to listen.</p>
+                            </div>
+                            <group string="Recording" invisible="not has_recording">
+                                <field name="recording_id" widget="ringcentral_audio_player" readonly="1" nolabel="1"/>
+                            </group>
+                            <div class="alert alert-warning" role="alert" invisible="has_recording">
+                                <p>No recording available for this call.</p>
+                            </div>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Add notes about this call..."/>
+                        </page>
+                        <page string="Webhook Debug" name="webhook_debug"
+                              groups="ringcentral_integration.group_ringcentral_admin">
+                            <group>
+                                <field name="termination_type" readonly="1"/>
+                                <field name="last_webhook_sequence" readonly="1"/>
+                            </group>
+                            <field name="webhook_payloads" readonly="1" widget="text"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ringcentral_call_history_search" model="ir.ui.view">
+        <field name="name">ringcentral.call.history.search</field>
+        <field name="model">ringcentral.call.history</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="from_number"/>
+                <field name="to_number"/>
+                <field name="from_partner_id"/>
+                <field name="to_partner_id"/>
+                <field name="initiated_by_id"/>
+                <field name="answered_by_id"/>
+                <field name="user_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <filter name="inbound" string="Inbound" domain="[('direction', '=', 'inbound')]"/>
+                <filter name="outbound" string="Outbound" domain="[('direction', '=', 'outbound')]"/>
+                <filter name="answered" string="Answered" domain="[('status', 'in', ['answered', 'completed'])]"/>
+                <filter name="missed" string="Missed" domain="[('status', 'in', ['no-answer', 'busy', 'failed'])]"/>
+                <filter name="active" string="Active" domain="[('status', 'in', ['initiated', 'ringing'])]"/>
+                <filter name="completed" string="Completed" domain="[('status', '=', 'completed')]"/>
+                <filter name="failed" string="Failed" domain="[('status', '=', 'failed')]"/>
+                <separator/>
+                <filter name="filter_start_time" string="Start Date" date="start_time"/>
+                <group name="group_by">
+                    <filter name="group_user" string="Agent" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_initiated_by" string="Initiated By" context="{'group_by': 'initiated_by_id'}"/>
+                    <filter name="group_answered_by" string="Answered By" context="{'group_by': 'answered_by_id'}"/>
+                    <filter name="group_direction" string="Direction" context="{'group_by': 'direction'}"/>
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'start_time:day'}"/>
+                    <filter name="group_company" string="Company" context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ringcentral_call_history" model="ir.actions.act_window">
+        <field name="name">Call History</field>
+        <field name="res_model">ringcentral.call.history</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>

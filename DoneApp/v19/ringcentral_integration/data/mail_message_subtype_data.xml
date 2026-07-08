@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mt_call_log" model="mail.message.subtype">
+            <field name="name">RingCentral Call Log</field>
+            <field name="res_model">res.partner</field>
+            <field name="default" eval="False"/>
+            <field name="internal" eval="True"/>
+            <field name="parent_id" ref="mail.mt_note"/>
+            <field name="description">RingCentral call linked to this contact</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_ringcentral_root" name="RingCentral"
+              sequence="100" web_icon="ringcentral_integration,static/description/icon.png"
+              groups="ringcentral_integration.group_ringcentral_user,ringcentral_integration.group_ringcentral_admin"/>
+
+    <menuitem id="menu_ringcentral_dashboard" name="Dashboard"
+              parent="menu_ringcentral_root" action="action_ringcentral_kpi_dashboard" sequence="10"
+              groups="ringcentral_integration.group_ringcentral_user,ringcentral_integration.group_ringcentral_admin"/>
+
+    <menuitem id="menu_ringcentral_call_history" name="Call History"
+              parent="menu_ringcentral_root" action="action_ringcentral_dashboard" sequence="15"
+              groups="ringcentral_integration.group_ringcentral_user,ringcentral_integration.group_ringcentral_admin"/>
+
+    <menuitem id="menu_ringcentral_config" name="Configuration"
+              parent="menu_ringcentral_root" action="action_ringcentral_config" sequence="20"
+              groups="ringcentral_integration.group_ringcentral_admin"/>
+</odoo>
