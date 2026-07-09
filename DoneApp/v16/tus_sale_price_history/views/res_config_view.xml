@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record
+        id="res_config_settings_product_sale_order_history_inherit"
+        model="ir.ui.view"
+    >
+            <field
+            name="name"
+        >res.config.settings.view.product.sale.order.history.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40" />
+            <field name="inherit_id" ref="sale.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='sale_management']" position="inside">
+                    <h2>Sale Price History</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        title="These accounts are set in any new PDC payment entry created."
+                    >
+                            <div class="o_setting_left_pane" />
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Product Item Limit</span>
+                                <div class="text-muted">
+                                    Number of items display in product sale price history
+                                </div>
+                                <div class="text-muted">
+                                    <field name="product_item_limit" />
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        title="These accounts are set in any new PDC payment entry created."
+                    >
+                            <div class="o_setting_left_pane" />
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Price History Data</span>
+                                <div class="text-muted">
+                                    Sale order product price history Data
+                                </div>
+                                <div class="text-muted">
+                                    <field
+                                    name="price_history_data"
+                                    class="o_light_label"
+                                    widget="radio"
+                                    options="{'horizontal': true}"
+                                />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+</odoo>

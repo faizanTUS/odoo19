@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Product Sale History -->
+        <record id="product_sale_history_group_user" model="res.groups">
+            <field name="name">Product Sale History</field>
+        </record>
+    </data>
+
+</odoo>
