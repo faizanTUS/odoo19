@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="project_profitability.ProfitabilityDashboard">
+        <div class="o_profitability_dashboard container-fluid p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">
+                    <i class="fa fa-area-chart me-2"/>
+                    Project Profitability Dashboard
+                </h2>
+                <div>
+                    <button class="btn btn-secondary me-2" t-on-click="onRefresh" t-att-disabled="state.loading">
+                        <i class="fa fa-refresh me-1"/>
+                        Refresh
+                    </button>
+                    <button class="btn btn-outline-primary" t-on-click="onExport">
+                        <i class="fa fa-file-excel-o me-1"/>
+                        Export Excel
+                    </button>
+                </div>
+            </div>
+
+            <t t-if="state.loading">
+                <div class="text-center py-5">
+                    <i class="fa fa-spinner fa-spin fa-3x text-muted"/>
+                    <p class="mt-2 text-muted">Loading dashboard...</p>
+                </div>
+            </t>
+
+            <t t-elif="state.error">
+                <div class="alert alert-danger">
+                    <i class="fa fa-exclamation-triangle me-2"/>
+                    <t t-esc="state.error"/>
+                </div>
+                <button class="btn btn-secondary" t-on-click="onRefresh">Retry</button>
+            </t>
+
+            <t t-elif="state.data">
+                <!-- KPI Cards -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="text-muted text-uppercase small">Active Projects</h6>
+                                <h3 class="mb-0" t-esc="state.data.kpis.active_projects"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="text-muted text-uppercase small">Total Revenue</h6>
+                                <h3 class="mb-0 text-success" t-esc="formatCurrency(state.data.kpis.total_revenue)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="text-muted text-uppercase small">Total Cost</h6>
+                                <h3 class="mb-0 text-danger" t-esc="formatCurrency(state.data.kpis.total_cost)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="text-muted text-uppercase small">Margin / Avg %</h6>
+                                <h3 class="mb-0">
+                                    <span t-esc="formatCurrency(state.data.kpis.total_margin)"/>
+                                    <small class="text-muted">/</small>
+                                    <span t-esc="formatPercent(state.data.kpis.avg_margin_percentage)"/>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lead &amp; Sales Order Details (First) -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                <h5 class="mb-0"><i class="fa fa-line-chart me-2"/>Lead &amp; Sales Order Details</h5>
+                                <div class="o_profitability_sort_toolbar">
+                                    <span class="o_profitability_sort_label"><i class="fa fa-sort me-1"/>Sort by</span>
+                                    <select class="o_profitability_sort_select" t-att-value="state.sortBy" t-on-change="(ev) => this.setSortBy(ev.target.value)">
+                                        <t t-foreach="sortOptions" t-as="opt" t-key="opt.value">
+                                            <option t-att-value="opt.value" t-esc="opt.label"/>
+                                        </t>
+                                    </select>
+                                    <button class="o_profitability_sort_btn" t-on-click="() => this.setSortBy(state.sortBy)" title="Toggle sort direction">
+                                        <i t-att-class="state.sortDirection === 'asc' ? 'fa fa-sort-amount-asc' : 'fa fa-sort-amount-desc'"/>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="o_profitability_table_scroll o_lead_so_table_scroll">
+                                    <t t-if="!state.data.lead_so_details_by_customer || state.data.lead_so_details_by_customer.length === 0">
+                                        <p class="text-muted p-3 mb-0">No projects with analytic accounts. Create projects linked to leads and sales orders.</p>
+                                    </t>
+                                    <t t-else="">
+                                        <table class="table table-hover mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Lead / Opportunity</th>
+                                                    <th class="text-end">Lead Expected Revenue</th>
+                                                    <th>Sales Order</th>
+                                                    <th class="text-end">SO Total</th>
+                                                    <th class="text-end">Revenue</th>
+                                                    <th class="text-end">Expense</th>
+                                                    <th class="text-end">Budget Revenue</th>
+                                                    <th class="text-end">Budget Cost</th>
+                                                    <th class="text-end">Margin</th>
+                                                    <th class="text-end">Margin %</th>
+                                                    <th class="text-end">Progress</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="getSortedLeadData()" t-as="group" t-key="group.customer">
+                                                    <t t-set="totals" t-value="getCustomerTotals(group)"/>
+                                                    <tr class="table-secondary o_profitability_customer_row" role="button" t-on-click="() => this.toggleCustomer(group.customer)" t-att-data-customer="group.customer">
+                                                        <td class="fw-bold py-2">
+                                                            <i class="fa o_profitability_chevron me-2" t-att-class="isCustomerExpanded(group.customer) ? 'fa-chevron-down' : 'fa-chevron-right'"/>
+                                                            <i class="fa fa-user me-2"/>
+                                                            <t t-esc="group.customer"/>
+                                                            <span class="badge bg-secondary ms-2" t-esc="group.projects.length"/>
+                                                        </td>
+                                                        <td class="text-end fw-bold py-2" t-esc="formatCurrency(totals.lead_value)"/>
+                                                        <td class="py-2">—</td>
+                                                        <td class="text-end fw-bold py-2" t-esc="formatCurrency(totals.so_total)"/>
+                                                        <td class="text-end fw-bold py-2 text-success" t-esc="formatCurrency(totals.revenue)"/>
+                                                        <td class="text-end fw-bold py-2 text-danger" t-esc="formatCurrency(totals.cost)"/>
+                                                        <td class="text-end fw-bold py-2 text-muted" t-esc="formatCurrency(totals.budget_revenue)"/>
+                                                        <td class="text-end fw-bold py-2 text-muted" t-esc="formatCurrency(totals.budget_cost)"/>
+                                                        <td class="text-end fw-bold py-2" t-att-class="totals.margin >= 0 ? 'text-success' : 'text-danger'" t-esc="formatCurrency(totals.margin)"/>
+                                                        <td class="text-end fw-bold py-2" t-esc="formatPercent(totals.margin_percentage)"/>
+                                                        <td class="text-end fw-bold py-2" t-esc="formatPercent(totals.progress)"/>
+                                                    </tr>
+                                                    <t t-if="isCustomerExpanded(group.customer)">
+                                                        <t t-foreach="group.projects" t-as="row" t-key="row.lead_id || row.project_name">
+                                                            <tr class="o_profitability_lead_row">
+                                                                <td>
+                                                                    <span t-if="row.lead_id" role="button" class="o_profitability_lead_link text-primary text-decoration-underline cursor-pointer" t-on-click="(ev) => { ev.stopPropagation(); this.onOpenLead(row.lead_id); }">
+                                                                        <strong t-esc="row.lead_name || row.project_name || '-'"/>
+                                                                    </span>
+                                                                    <strong t-else="" t-esc="row.lead_name || row.project_name || '-'"/>
+                                                                    <span t-if="row.stage_name" class="badge ms-2" t-att-class="getStatusBadgeClass(row.stage_name)" t-esc="row.stage_name"/>
+                                                                </td>
+                                                                <td class="text-end" t-esc="formatCurrency(row.lead_value)"/>
+                                                                <td t-esc="row.so_reference || '-'"/>
+                                                                <td class="text-end" t-esc="formatCurrency(row.so_total)"/>
+                                                                <td class="text-end text-success" t-esc="formatCurrency(row.revenue?.recognized ?? 0)"/>
+                                                                <td class="text-end text-danger" t-esc="formatCurrency(row.costs?.total ?? 0)"/>
+                                                                <td class="text-end text-muted" t-esc="formatCurrency(row.budget?.revenue ?? 0)"/>
+                                                                <td class="text-end text-muted" t-esc="formatCurrency(row.budget?.cost ?? 0)"/>
+                                                                <td class="text-end" t-att-class="(row.profitability?.margin ?? 0) >= 0 ? 'text-success' : 'text-danger'" t-esc="formatCurrency(row.profitability?.margin ?? 0)"/>
+                                                                <td class="text-end" t-esc="formatPercent(row.profitability?.margin_percentage ?? 0)"/>
+                                                                <td class="text-end" t-esc="formatPercent(row.progress ?? 0)"/>
+                                                            </tr>
+                                                        </t>
+                                                    </t>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Top Performers -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0"><i class="fa fa-trophy me-2"/>Top 5 Performers</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="o_profitability_table_scroll" style="max-height: 400px; overflow: auto;">
+                                    <t t-if="state.data.top_performers.length === 0">
+                                        <p class="text-muted p-3 mb-0">No data yet. Calculate profitability on projects.</p>
+                                    </t>
+                                    <t t-else="">
+                                        <table class="table table-hover mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Project</th>
+                                                    <th class="text-end">Margin</th>
+                                                    <th class="text-end">Margin %</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="state.data.top_performers" t-as="p" t-key="p.lead_id or p.project_name">
+                                                    <tr>
+                                                        <td>
+                                                            <strong t-esc="p.project_name"/>
+                                                            <br/>
+                                                            <small class="text-muted" t-esc="p.customer"/>
+                                                        </td>
+                                                        <td class="text-end text-success" t-esc="formatCurrency(p.profitability?.margin ?? 0)"/>
+                                                        <td class="text-end" t-esc="formatPercent(p.profitability?.margin_percentage ?? 0)"/>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Performers -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-warning text-dark">
+                                <h5 class="mb-0"><i class="fa fa-arrow-down me-2"/>Bottom 5 Performers</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="o_profitability_table_scroll" style="max-height: 400px; overflow: auto;">
+                                    <t t-if="state.data.bottom_performers.length === 0">
+                                        <p class="text-muted p-3 mb-0">No data yet.</p>
+                                    </t>
+                                    <t t-else="">
+                                        <table class="table table-hover mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Project</th>
+                                                    <th class="text-end">Margin</th>
+                                                    <th class="text-end">Margin %</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="state.data.bottom_performers" t-as="p" t-key="p.lead_id or p.project_name">
+                                                    <tr>
+                                                        <td>
+                                                            <strong t-esc="p.project_name"/>
+                                                            <br/>
+                                                            <small class="text-muted" t-esc="p.customer"/>
+                                                        </td>
+                                                        <td class="text-end" t-att-class="(p.profitability?.margin ?? 0) >= 0 ? 'text-success' : 'text-danger'" t-esc="formatCurrency(p.profitability?.margin ?? 0)"/>
+                                                        <td class="text-end" t-esc="formatPercent(p.profitability?.margin_percentage ?? 0)"/>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Over Budget -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-danger text-white">
+                                <h5 class="mb-0"><i class="fa fa-exclamation-circle me-2"/>Over Budget Projects</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="o_profitability_table_scroll" style="max-height: 400px; overflow: auto;">
+                                    <t t-if="state.data.over_budget_projects.length === 0">
+                                        <p class="text-muted p-3 mb-0">No projects over budget.</p>
+                                    </t>
+                                    <t t-else="">
+                                        <table class="table table-hover mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Project</th>
+                                                    <th class="text-end">Cost</th>
+                                                    <th class="text-end">Budget</th>
+                                                    <th class="text-end">Variance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="state.data.over_budget_projects" t-as="p" t-key="p.project_name">
+                                                    <tr>
+                                                        <td>
+                                                            <strong t-esc="p.project_name"/>
+                                                            <br/>
+                                                            <small class="text-muted" t-esc="p.customer"/>
+                                                        </td>
+                                                        <td class="text-end" t-esc="formatCurrency(p.costs?.total ?? 0)"/>
+                                                        <td class="text-end" t-esc="formatCurrency(p.budget?.cost ?? 0)"/>
+                                                        <td class="text-end text-danger" t-esc="formatCurrency(-(p.variance?.cost ?? 0))"/>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>
