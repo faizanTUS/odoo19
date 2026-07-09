@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inject custom font CSS into report layout head (use data URI for PDF - wkhtmltopdf cannot access URLs) -->
+        <template id="report_layout_custom_fonts" inherit_id="web.report_layout">
+            <xpath expr="//head" position="inside">
+                <style>
+                    <t t-foreach="env['custom.font.file'].search([('active', '=', True)])" t-as="font_file">
+                        <t t-set="font_data_uri" t-value="font_file.get_font_data_uri()"/>
+                        <t t-if="font_data_uri">
+                            @font-face {
+                                font-family: <t t-esc="font_file.font_family_name"/>;
+                                <t t-if="font_file.font_filename and font_file.font_filename.endswith('.woff')">
+                                src: url('<t t-esc="font_data_uri"/>') format('woff');
+                                </t>
+                                <t t-elif="font_file.font_filename and font_file.font_filename.endswith('.woff2')">
+                                src: url('<t t-esc="font_data_uri"/>') format('woff2');
+                                </t>
+                                <t t-elif="font_file.font_filename and font_file.font_filename.endswith('.otf')">
+                                src: url('<t t-esc="font_data_uri"/>') format('opentype');
+                                </t>
+                                <t t-else="">
+                                src: url('<t t-esc="font_data_uri"/>') format('truetype');
+                                </t>
+                                font-weight: normal;
+                                font-style: normal;
+                                font-display: swap;
+                            }
+                        </t>
+                    </t>
+                    <!-- Ensure custom fonts are applied to report body -->
+                    <t t-set="company" t-value="company or (o and o.company_id) or env.user.company_id"/>
+                    <t t-if="company and company.custom_font_file_id and company.custom_font_file_id.active">
+                        <t t-set="custom_font_name" t-value="company.custom_font_file_id.font_family_name"/>
+                        body, .o_company_<t t-esc='company.id'/>_layout, .article, .footer, * {
+                            font-family: <t t-esc="custom_font_name"/>, sans-serif !important;
+                        }
+                    </t>
+                </style>
+            </xpath>
+        </template>
+
+        <!-- Also inject into preview layout (use URLs for browser performance) -->
+        <template id="report_preview_layout_custom_fonts" inherit_id="web.report_preview_layout">
+            <xpath expr="//head" position="inside">
+                <style>
+                    <t t-foreach="env['custom.font.file'].search([('active', '=', True)])" t-as="font_file">
+                        <t t-set="font_url" t-value="font_file.get_font_url()"/>
+                        <t t-if="font_url">
+                            @font-face {
+                                font-family: '<t t-esc="font_file.font_family_name"/>';
+                                <t t-if="font_file.font_filename and font_file.font_filename.endswith('.woff')">
+                                src: url('<t t-esc="font_url"/>') format('woff');
+                                </t>
+                                <t t-elif="font_file.font_filename and font_file.font_filename.endswith('.woff2')">
+                                src: url('<t t-esc="font_url"/>') format('woff2');
+                                </t>
+                                <t t-elif="font_file.font_filename and font_file.font_filename.endswith('.otf')">
+                                src: url('<t t-esc="font_url"/>') format('opentype');
+                                </t>
+                                <t t-elif="font_file.font_filename and font_file.font_filename.endswith('.eot')">
+                                src: url('<t t-esc="font_url"/>') format('embedded-opentype');
+                                </t>
+                                <t t-else="">
+                                src: url('<t t-esc="font_url"/>') format('truetype');
+                                </t>
+                                font-weight: normal;
+                                font-style: normal;
+                                font-display: swap;
+                            }
+                        </t>
+                    </t>
+                    <!-- Ensure custom fonts are applied to report body -->
+                    <t t-set="company" t-value="company or env.user.company_id"/>
+                    <t t-if="company and company.custom_font_file_id and company.custom_font_file_id.active">
+                        <t t-set="custom_font_name" t-value="company.custom_font_file_id.font_family_name"/>
+                        body, .o_company_<t t-esc='company.id'/>_layout, .article, .footer, * {
+                            font-family: <t t-esc="custom_font_name"/>, sans-serif !important;
+                        }
+                    </t>
+                </style>
+            </xpath>
+        </template>
+
+        <!-- Override styles_company_report to use custom font if selected and inject @font-face -->
+        <template id="styles_company_report_custom_font" inherit_id="web.styles_company_report">
+            <!-- Inject @font-face rules at the beginning of the styles -->
+            <xpath expr="//t[@t-set='font']" position="before">
+                <!-- Inject @font-face for all active custom fonts -->
+                <t t-foreach="env['custom.font.file'].search([('active', '=', True)])" t-as="font_file">
+                    <t t-set="font_data_uri" t-value="font_file.get_font_data_uri()"/>
+                    <t t-if="font_data_uri">
+                        @font-face {
+                            font-family: <t t-esc="font_file.font_family_name"/>;
+                            <t t-if="font_file.font_filename and font_file.font_filename.endswith('.woff')">
+                            src: url('<t t-esc="font_data_uri"/>') format('woff');
+                            </t>
+                            <t t-elif="font_file.font_filename and font_file.font_filename.endswith('.woff2')">
+                            src: url('<t t-esc="font_data_uri"/>') format('woff2');
+                            </t>
+                            <t t-elif="font_file.font_filename and font_file.font_filename.endswith('.otf')">
+                            src: url('<t t-esc="font_data_uri"/>') format('opentype');
+                            </t>
+                            <t t-else="">
+                            src: url('<t t-esc="font_data_uri"/>') format('truetype');
+                            </t>
+                            font-weight: normal;
+                            font-style: normal;
+                            font-display: swap;
+                        }
+                    </t>
+                </t>
+            </xpath>
+            <!-- Override font variable to use custom font if selected -->
+            <xpath expr="//t[@t-set='font']" position="replace">
+                <t t-if="company.custom_font_file_id">
+                    <t t-set="font" t-value="company.custom_font_file_id.font_family_name" />
+                </t>
+                <t t-else="">
+                    <t t-set="font" t-value="company.font or 'Lato'" />
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>
