@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <function model="ir.rule" name="write">
+        <value model="ir.rule" search="[('id', '=', ref('document_directory_tags_security.rule_ir_attachment_document_user'))]"/>
+        <value eval="{
+            'domain_force': &quot;['&amp;', '|', '|', ('res_id', '!=', False), ('create_uid', '=', user.id), ('public', '=', True), '|', ('directory_id', '=', False), '&amp;', ('directory_id.allowed_document_user_ids', 'in', [user.id]), '|', ('directory_id.group_ids', '=', False), ('directory_id.group_ids', 'in', user.groups_id.ids)]&quot;
+        }"/>
+    </function>
+</odoo>
