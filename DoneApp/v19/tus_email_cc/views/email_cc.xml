@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="email_compose_message_wizard_form_inherit" model="ir.ui.view">
+            <field name="name">mail.compose.message.form.inherit</field>
+            <field name="model">mail.compose.message</field>
+            <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='subject']" position="after">
+                    <field name="email_to" placeholder="Email CC" />
+                </xpath>
+            </field>
+        </record>
+
+         <record id="account_move_send_form_inherit" model="ir.ui.view">
+<!--             change because of in o18 account move send is include in wizard before this changes error rise on move_id does not exist-->
+            <field name="name">account.move.send.wizard.form.inherit</field>
+            <field name="model">account.move.send.wizard</field>
+<!--             change ref because it changes in odoo 18 -->
+            <field name="inherit_id" ref="account.account_move_send_wizard_form"/>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='subject']" position="after">
+                    <field name="email_to" placeholder="Email CC" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
