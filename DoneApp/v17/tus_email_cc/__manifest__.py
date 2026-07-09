@@ -1,6 +1,6 @@
 # Part of Techultra Solutions. See LICENSE file for full copyright and licensing details.
 {
-    "name": "Email CC for Sales Orders &amp; Invoices",
+    "name": "Email CC for Sales Orders & Invoices",
     "version": "17.0.0.0",
     "category": "Email",
     'author': 'TechUltra Solutions Private Limited',
