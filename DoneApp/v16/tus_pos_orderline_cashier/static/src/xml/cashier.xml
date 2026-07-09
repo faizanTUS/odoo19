@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t
+        t-name="Orderline"
+        t-inherit="point_of_sale.Orderline"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//ul[hasclass('info-list')]/t[1]/li" position="inside">
+            <span class="orderline-cashier" t-if="env.pos.config.allow_orderline_user">
+
+                <img
+                    src="/tus_pos_orderline_cashier/static/src/image/user.png"
+                    t-if="props.line.get_cashier()"
+                    role="img"
+                    style="max-width:20px;"
+                    t-att-title="props.line.get_cashier()"
+                    t-att-alt="props.line.get_cashier()"
+                />
+                <i
+                    t-if="props.line.get_cashier()"
+                    t-on-click="removecashier"
+                    class="oe_link_icon fa fa-remove oe_icon oe_red"
+                    role="img"
+                />
+
+            </span>
+        </xpath>
+    </t>
+    <t t-name="OrderlineCashierButton" owl="1">
+        <div class='control-button'>
+            <i class="fa fa-list" />
+            Cashier
+        </div>
+    </t>
+
+</templates>

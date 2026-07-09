@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="tus_pos_orderline_cashier.OrderlineCashierButton" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
+        <xpath expr="//SelectPartnerButton[@t-if='!props.showRemainingButtons']" position="after">
+            <button class="set-partner btn btn-light btn-lg lh-lg text-truncate w-auto" t-on-click="() => this.pos.selectCashier()">
+            <div t-if="props.partner" t-esc="props.partner.name" class="text-truncate text-action" />
+            <t t-else="">Cashier</t>
+        </button>
+        </xpath>
+    </t>
+</templates>
