@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sorting_record_user,sorting.record.user,model_sorting_record,,1,1,1,1
+access_sorting_record_line,sorting.record.line,model_sorting_record_line,,1,1,1,1
