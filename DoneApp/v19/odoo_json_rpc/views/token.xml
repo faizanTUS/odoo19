@@ -1,0 +1,47 @@
+<odoo>
+	<!-- FORM -->
+	<record  model="ir.ui.view" id="jsonrpc_token_id_form">
+		<field name="name">JSON.RPC.Token</field>
+		<field name="model">jsonrpc.token</field>
+		<field name="arch" type="xml">
+			<form string="JSON-RPC Token">
+				<sheet>
+					<group>
+						<field name="user_id" />
+						<field name="token" />
+					</group>
+					<group>
+						<field name="actived" />
+						<field name="reg_remote_addr_uses" />
+						<field name="url" />
+						<field name="uses" readonly="True"/>
+					</group>
+				</sheet>
+				<chatter/>
+			</form>
+		</field>
+	</record>
+
+	<!-- TREE -->
+	<record id="jsonrpc_token_tree" model="ir.ui.view">
+		<field name="name">JSON-RPC Token</field>
+		<field name="model">jsonrpc.token</field>
+		<field name="arch" type="xml">
+			<list string="JSON-RPC Token">
+				<field name="user_id" />
+				<field name="token"/>
+				<field name="actived" />
+			</list>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="jsonrpc_token_action">
+		<field name="name">JSON-RPC token</field>
+		<field name="res_model">jsonrpc.token</field>
+		<field name="view_mode">list,form</field>
+	</record>
+
+    <menuitem id="jsonrpc" name="JSON-RPC" parent="base.menu_administration" sequence="110"/>
+	<menuitem id="jsonrpc_token" name="Token" parent="jsonrpc" sequence="10" action="jsonrpc_token_action"/>
+
+</odoo>
