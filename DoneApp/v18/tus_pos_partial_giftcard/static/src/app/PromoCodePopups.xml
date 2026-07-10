@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+
+	<t t-name="tus_pos_partial_giftcard.PromoCodePopups">
+        <Dialog title="Hello">
+            <t t-set-slot="header">
+                <h4 class="modal-title"><t t-esc="props.title" /></h4>
+            </t>
+            <div>
+                <p class="sub-line-title">Hello, <t t-esc=" props.partner_id || '' " /></p>
+                <p class="sub-line-title">Your Coupon Code: <t t-esc=" props.code" /></p>
+                <p class="sub-line-title">Your Coupon Amount : <t t-esc=" props.points" /></p>
+                <input class="form-control form-control-lg w-75 mx-auto" type="text" t-model="state.inputValue" t-ref="RedemptionInputRef" t-att-placeholder="props.placeholder"/>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary btn-lg lh-lg o-default-button" t-on-click="_onClickLoad"><t t-esc="props.confirmText" /></button>
+                <button class="btn btn-secondary btn-lg lh-lg o-default-button" t-on-click="_onClickCancel"><t t-esc="props.cancelText" /></button>
+            </t>
+        </Dialog>
+	</t>
+
+</templates>
