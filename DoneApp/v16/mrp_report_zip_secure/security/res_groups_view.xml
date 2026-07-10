@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="0">
+         <record id="group_export_mrp_production_orders" model="res.groups">
+            <field name="name">Export Production Order</field>
+        </record>
+         <record id="group_export_mrp_workorders" model="res.groups">
+            <field name="name">Export Workorder</field>
+        </record>
+    </data>
+</odoo>
