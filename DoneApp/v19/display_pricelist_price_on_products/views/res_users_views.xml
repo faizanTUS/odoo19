@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- User Preferences: allow user to show/hide pricelist section on product form -->
+    <record id="res_users_preferences_display_pricelist_on_product" model="ir.ui.view">
+        <field name="name">res.users.preferences.display.pricelist.on.product</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//group[@name='preferences']" position="inside">-->
+            <xpath expr="//page[@name='preferences_page']/group" position="inside">
+                <group string="Product Form">
+                    <field name="display_pricelist_on_product"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <!-- Admin: User form (Settings → Users) so admins can set it per user -->
+    <record id="res_users_form_display_pricelist_on_product" model="ir.ui.view">
+        <field name="name">res.users.form.display.pricelist.on.product</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//page[@name='preferences']//group[@name='other_preferences']" position="after">-->
+            <xpath expr="//page[@name='preferences']//group" position="after">
+                <group string="Product Form">
+                    <field name="display_pricelist_on_product"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
