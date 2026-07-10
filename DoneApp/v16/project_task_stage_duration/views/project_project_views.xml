@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_project_form_inherit_stage_duration" model="ir.ui.view">
+        <field name="name">project.project.form.inherit.stage.duration</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='label_tasks']" position="after">
+                <field name="task_stage_duration_enabled"/>
+                <field name="stage_history_enabled"/>
+                <field name="stage_template_id"
+                       options="{'no_create': True}"
+                       placeholder="Select a stage template..."/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
