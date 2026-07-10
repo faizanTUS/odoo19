@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_pos_session_form_inherit_ext" model="ir.ui.view">
+            <field name="name">close.session.wizard</field>
+            <field name="model">close.session.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="total_orders" readonly="True"/>
+                        </group>
+                        <group>
+                            <field name="total_amount" readonly="True"/>
+                        </group>
+                    </group>
+                    <field name="payment_method_ids">
+                        <list create="0" editable="bottom">
+                            <field name="is_default" column_invisible="True"/>
+                            <field name="payment_type" column_invisible="True"/>
+                            <field name="payment_method_id" readonly="True"/>
+                            <field name="expected_counted" readonly="1"/>
+                            <field name="counted" readonly="is_default == False and payment_type != 'bank'"/>
+                            <field name="differences" readonly="True"/>
+                        </list></field>
+                    <group>
+                        <field name="note" placeholder="Add a closing note..."/>
+                    </group>
+                    <footer>
+                        <button class="btn-primary" data-hotkey="q" name="action_close_session" string="Close Session" type="object"/>
+                        <button class="btn-secondary" data-hotkey="z" special="cancel" string="Cancel"/>
+                    </footer>
+                </form></field>
+        </record>
+    </data>
+</odoo>
