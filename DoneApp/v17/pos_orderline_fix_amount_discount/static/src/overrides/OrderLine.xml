@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_orderline_fix_amount_discount.Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        <xpath expr="//t[@t-slot='default']" position="before">
+            <li t-if="line.price !== 0 and line.discount_amount">
+                With a <em><t t-esc="line.discount_amount_formatted" /> </em> discount amount
+            </li>
+        </xpath>
+    </t>
+</templates>

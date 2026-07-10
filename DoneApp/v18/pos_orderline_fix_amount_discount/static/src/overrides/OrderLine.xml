@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_orderline_fix_amount_discount.Orderline" t-inherit="point_of_sale.Orderline"
+       t-inherit-mode="extension">
+        <xpath expr="//li[@t-if and contains(@t-if, 'line.discount')]" position="replace">
+            <li t-if="!props.basic_receipt"
+                class="info-discount">
+                With a
+                <em>
+                    <t t-esc="
+                        env.utils.formatCurrency(
+                            this.priceWithoutDiscountNumber - this.priceNumber
+                        )
+                    "/>
+                </em>
+                discount amount
+            </li>
+        </xpath>
+    </t>
+</templates>
