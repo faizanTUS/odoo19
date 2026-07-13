@@ -1,0 +1,28 @@
+// @media only screen and (max-width: 323px) {
+//     .o-popover.popover{
+//         left: 0px;
+//         position: fixed !important;
+//         top: 65.3281px !important;;
+//     }
+// }
+.o-mail-DiscussSystray.o-dropdown--menu {
+    left: 1128px !important;
+    top: 53.5156px !important;
+    position: fixed !important;
+}
+
+@media (max-width: 768px)  {
+    .o-mail-DiscussSystray.o-dropdown--menu {
+        left: 0 !important;
+        right: 0 !important;
+        top: 50px !important;
+        border-radius: 0 !important;
+    }
+}
+
+
+@media (max-width: 768px)  {
+    .o-mail-ChatWindow {
+        z-index: 1060;
+    }
+}

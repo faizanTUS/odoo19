@@ -1,0 +1,74 @@
+@media only screen and (max-width: 323px) {
+    .o-popover.popover {
+        left: 0px;
+        position: fixed !important;
+        top: 65.3281px !important;
+    }
+}
+
+// Custom Portal Chat "New Message" Modal
+// #o_portal_chat_new_message_modal {
+//     .o_portal_chat_new_message_backdrop {
+//         position: fixed;
+//         top: 0;
+//         left: 0;
+//         width: 100vw;
+//         height: 100vh;
+//         z-index: 1040;
+//     }
+
+.o_portal_chat_new_message_panel {
+    position: fixed;
+    bottom: 0;
+    right: 1rem;
+    width: 350px;
+    max-width: 90vw;
+    height: 450px;
+    max-height: 80vh;
+    background: #fff;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .card-header {
+        background-color: #714B67;
+        color: white;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+    }
+
+    .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        overflow-y: auto;
+    }
+
+    .o_portal_chat_new_message_results {
+        margin-top: 0.5rem;
+
+        .list-group-item {
+            border-left: 0;
+            border-right: 0;
+            border-radius: 0;
+            padding: 0.75rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f8f9fa;
+            }
+
+            img {
+                object-fit: cover;
+            }
+        }
+    }
+}

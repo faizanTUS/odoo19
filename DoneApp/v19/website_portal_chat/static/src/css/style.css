@@ -1,0 +1,239 @@
+.navbar .o-mail-DiscussSystray-class .badge {
+    margin-right: -.5em;
+    border: 0;
+    padding: 3px 6px;
+    background-color: var(--o-navbar-badge-bg, #dc3545);
+    font-size: 0.7em;
+    color: var(--o-navbar-badge-color, #FFF);
+    text-shadow: var(--o-navbar-badge-text-shadow, none);
+    transform: translate(-0.6em, -30%);
+}
+
+.navbar .dropdown-toggle:not(.o-dropdown-toggle-custo) {
+    border-color: transparent;
+}
+
+.navbar .dropdown-toggle:not(.o-dropdown-toggle-custo) {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    width: auto;
+    border-radius: 4px;
+    user-select: none;
+    background: transparent;
+    font-size: 1em;
+    color: #714b67;
+}
+
+
+.o-mail-DiscussSystray.o-dropdown--menu {
+    left: 1128px !important;
+    top: 53.5156px !important;
+    position: fixed !important;
+}
+
+@media (max-width: 768px) {
+    .o-mail-DiscussSystray.o-dropdown--menu {
+        left: 0 !important;
+        right: 0 !important;
+        top: 0 !important;
+        margin-top: 0 !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        position: fixed !important;
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        z-index: 9999 !important;
+        /* Ensure it is on top of everything for interactivity */
+    }
+
+    /* Fix header overlap if needed, typically navbar is around 50-60px */
+    /* Adjusting internal layout for mobile look */
+    .o-mail-DiscussSystray.o-dropdown--menu .o_mail_MessagingMenu_header {
+        padding: 10px;
+        flex-shrink: 0;
+        order: 1;
+        /* Header at top */
+    }
+
+    /* Main content list should grow and scroll */
+    .o-mail-DiscussSystray.o-dropdown--menu .o_mail_MessagingMenu_main {
+        flex: 1;
+        overflow-y: auto;
+        order: 2;
+        /* Content in middle */
+    }
+
+    .o-mail-DiscussSystray.o-dropdown--menu .o_mail_MessagingMenu_tabBar {
+        justify-content: space-around;
+        border-top: 1px solid #dee2e6;
+        border-bottom: none;
+        order: 3;
+        /* Tabs at bottom */
+        padding-bottom: 5px;
+        background: white;
+        /* Ensure it hasn't transparent background overlapping content */
+        flex-shrink: 0;
+    }
+
+    .o-mail-DiscussSystray.o-dropdown--menu .o_mail_MessagingMenu_tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .o-mail-DiscussSystray.o-dropdown--menu .o_mail_MessagingMenu_tab.o-active {
+        border-top: 2px solid #714b67;
+        border-bottom: none;
+        color: #714b67;
+    }
+
+    .o-mail-DiscussSystray.o-dropdown--menu .o_mail_MessagingMenu_tab i {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+        margin-right: 0 !important;
+    }
+}
+
+
+/* New message panel (separate modal like livechat) */
+.o_portal_chat_new_message_backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1999;
+}
+
+.o_portal_chat_new_message_panel {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+}
+
+.o_portal_chat_new_message_wrapper {
+    background: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+}
+
+.o_portal_chat_new_message_header {
+    background: #714b67;
+    color: #fff;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.o_portal_chat_new_message_header i {
+    font-size: 1.1rem;
+}
+
+.o_portal_chat_new_message_header span {
+    flex: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.o_portal_chat_new_message_header .btn-close {
+    background: transparent;
+    border: none;
+    color: #fff;
+    opacity: 0.8;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+}
+
+.o_portal_chat_new_message_header .btn-close:hover {
+    opacity: 1;
+}
+
+.o_portal_chat_new_message_content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .o_portal_chat_new_message_panel {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+#o_portal_chat_new_message_modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    width: 16%;
+    justify-self: right;
+}
+
+/*.o_portal_chat_new_message_backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+.o_portal_chat_new_message_panel {
+    position: absolute;
+    top: 80px;
+    right: 24px;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+}
+@media (max-width: 768px) {
+    .o_portal_chat_new_message_panel {
+        left: 16px;
+        right: 16px;
+        top: 64px;
+        width: auto;
+    }
+}*/
+
+/* Chat Window Container */
+.o-mail-ChatWindowContainer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 10000;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    pointer-events: none;
+    padding: 10px;
+    gap: 10px;
+}
+
+.o-mail-ChatWindowContainer>* {
+    pointer-events: auto;
+}
+
+/* Ensure Chat Window has a decent size and look */
+.o-mail-ChatWindow {
+    width: 350px;
+    max-width: 90vw;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}

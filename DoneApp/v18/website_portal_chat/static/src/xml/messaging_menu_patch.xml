@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.MessagingMenu.content" t-inherit-mode="extension">
+        <xpath expr="//t[@t-if='installationRequest.isShown and !store.discuss.searchTerm']" position="replace">
+        </xpath>
+        <xpath expr="//t[@t-if='notificationRequest.isShown and !store.discuss.searchTerm']" position="replace">
+        </xpath>
+    </t>
+</templates>
