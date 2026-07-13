@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="pos_combo_advanced.ProductItem"
+       t-inherit="point_of_sale.ProductItem"
+       t-inherit-mode="extension"
+       owl="1">
+
+        <!-- Add combo highlight class -->
+<!--        <xpath expr="//article" position="attributes">-->
+<!--            <attribute name="t-att-class">-->
+<!--                props.product.is_combo_product ? 'product combo-product' : 'product'-->
+<!--            </attribute>-->
+<!--        </xpath>-->
+
+        <!-- Add COMBO badge -->
+        <xpath expr="//div[hasclass('product-content')]" position="inside">
+            <t t-if="props.product.is_combo_product">
+                <span class="combo-badge">COMBO</span>
+            </t>
+        </xpath>
+
+    </t>
+
+</templates>
