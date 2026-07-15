@@ -1,7 +1,7 @@
 # Part of Odoo. See COPYRIGHT & LICENSE files for full copyright and licensing details.
 
 {
-    'name': 'Portal User Chat | Portal to Internal &amp; Portal Messaging',
+    'name': 'Portal User Chat | Portal to Internal & Portal Messaging',
     'category': 'Services',
     'version': '19.0.0.0',
     'author': 'TechUltra Solutions Private Limited',

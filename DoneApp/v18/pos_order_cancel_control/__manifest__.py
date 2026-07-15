@@ -62,7 +62,7 @@
     techultra solutions private limited
     """,
     'description': """
-    Bulk POS Order Cancellation | POS Order, Invoice &amp; Delivery Management extends Odoo's Point of Sale functionality by providing efficient tools for managing and canceling POS orders directly from the list view. The module enables users to perform bulk order operations, reducing manual effort and simplifying order correction processes.
+    Bulk POS Order Cancellation | POS Order, Invoice & Delivery Management extends Odoo's Point of Sale functionality by providing efficient tools for managing and canceling POS orders directly from the list view. The module enables users to perform bulk order operations, reducing manual effort and simplifying order correction processes.
     Odoo 18 POS order cancellation
     Cancel POS orders in Odoo
     POS order cancel module
