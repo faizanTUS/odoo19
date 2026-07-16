@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_res_users_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='preferences']" position="after">
+                <page name="Linkedin" string="Linkedin">
+                    <group>
+                        <group>
+                            <field name="linkedin_username"/>
+                            <field name="linkedin_password" password="True"/>
+                            <field name="linkedin_token" readonly="1"/>
+                            <field name="last_token_generate_date" attrs="{'invisible':[('linkedin_token','=',False)]}" readonly="1"/>
+                            <field name="linkedin_token_expiry_date" attrs="{'invisible':[('linkedin_token','=',False)]}" readonly="1"/>
+                        </group>
+                        <group>
+                            <button style="width:max-content;" name="generate_token" string="Generate Token"
+                                    attrs="{'invisible':[('linkedin_token','not in',[None,False])]}"
+                                    type="object" class="btn-primary"/>
+
+                            <button style="width:max-content;" name="revoke_token" string="Revoke Token"
+                                   attrs="{'invisible':[('linkedin_token','=',False)]}"
+                                    confirm="Are you sure you want to revoke the LinkedIn token?"
+                                    type="object" class="btn-danger"/>
+
+                        </group>
+                    </group>
+
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>
