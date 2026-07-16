@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_pos_combo_group_user,pos.combo.group.user,model_pos_combo_group,point_of_sale.group_pos_user,1,0,0,0
-access_pos_combo_group_manager,pos.combo.group.manager,model_pos_combo_group,point_of_sale.group_pos_manager,1,1,1,1
-access_pos_combo_group_line_user,pos.combo.group.line.user,model_pos_combo_group_line,point_of_sale.group_pos_user,1,0,0,0
-access_pos_combo_group_line_manager,pos.combo.group.line.manager,model_pos_combo_group_line,point_of_sale.group_pos_manager,1,1,1,1
-access_pos_product_combo_line_user,pos.product.combo.line.user,model_pos_product_combo_line,point_of_sale.group_pos_user,1,0,0,0
-access_pos_product_combo_line_manager,pos.product.combo.line.manager,model_pos_product_combo_line,point_of_sale.group_pos_manager,1,1,1,1

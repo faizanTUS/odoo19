@@ -1,7 +1,0 @@
-<odoo noupdate="1">
-    <!-- Default category used as a safe fallback for required field on contacts -->
-    <record id="contact_category_default" model="contact.category">
-        <field name="name">General</field>
-        <field name="active">True</field>
-    </record>
-</odoo>

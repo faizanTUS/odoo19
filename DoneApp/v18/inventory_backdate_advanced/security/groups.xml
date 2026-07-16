@@ -1,8 +1,0 @@
-<odoo>
-    <record model="res.groups" id="group_inventory_backdate_manager">
-        <field name="name">Inventory Backdate Manager</field>
-        <field name="category_id" ref="base.module_category_inventory_inventory"/>
-        <field name="implied_ids" eval="[(4, ref('stock.group_stock_manager'))]"/>
-        <field name="comment">Allows users to perform mass backdating of inventory operations.</field>
-    </record>
-</odoo>

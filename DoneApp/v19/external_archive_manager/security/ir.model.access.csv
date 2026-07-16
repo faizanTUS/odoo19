@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_external_archive_db_config,external.archive.db.config,model_external_archive_db_config,external_archive_manager.group_external_archive_admin,1,1,1,1
-access_external_archive_config,external.archive.config,model_external_archive_config,external_archive_manager.group_external_archive_admin,1,1,1,1

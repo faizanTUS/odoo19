@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_custom_font_file_user,custom.font.file.user,model_custom_font_file,base.group_user,1,1,1,1
-access_custom_font_file_manager,custom.font.file.manager,model_custom_font_file,base.group_system,1,1,1,1
-

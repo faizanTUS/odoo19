@@ -1,7 +1,0 @@
-pricelist_id,product_tmpl_id,min_quantity,fixed_price,compute_price,applied_on,date_start,date_end,base
-Public Pricelist,Desk,1,250.00,fixed,1_product,,,list_price
-Public Pricelist,Office Chair,1,350.00,fixed,1_product,,,list_price
-Sale Pricelist,Desk,1,500.00,fixed,1_product,2024-01-01,2024-12-31,list_price
-Sale Pricelist,Office Chair,1,450.00,fixed,1_product,2024-01-01,2024-12-31,list_price
-Wholesale Pricelist,Desk,10,220.00,fixed,1_product,,,list_price
-Wholesale Pricelist,Office Chair,5,320.00,fixed,1_product,,,list_price

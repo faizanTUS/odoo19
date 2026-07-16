@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_contact_category_user,tus.contact.category user,model_contact_category,base.group_user,1,0,0,0
-access_contact_category_manager,tus.contact.category manager,model_contact_category,tus_contact_category.group_contact_category_manager,1,1,1,1

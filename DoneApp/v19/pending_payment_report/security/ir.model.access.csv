@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_pending_payment_report_wizard,access.pending.payment.report.wizard,model_pending_payment_report_wizard,,1,1,1,1
-access_pending_payment_report_line,access.pending.payment.report.line,model_pending_payment_report_line,,1,1,1,1
-access_pending_payment_report_line_detail,access.pending.payment.report.line.detail,model_pending_payment_report_line_detail,,1,1,1,1
-access_advance_pending_payment_report_wizard,access.advance.pending.payment.report.wizard,model_advance_pending_payment_report_wizard,,1,1,1,1
-access_advance_pending_payment_report_line,access.advance.pending.payment.report.line,model_advance_pending_payment_report_line,,1,1,1,1

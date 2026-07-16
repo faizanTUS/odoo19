@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_lead_profitability_user,lead.profitability.user,project_profitability.model_lead_profitability,base.group_user,1,0,0,0
-access_lead_profitability_manager,lead.profitability.manager,project_profitability.model_lead_profitability,project.group_project_manager,1,1,1,1
-access_project_profitability_user,project.profitability.user,model_project_profitability,project.group_project_user,1,0,0,0
-access_project_profitability_manager,project.profitability.manager,model_project_profitability,project.group_project_manager,1,1,1,1
-access_profitability_alert_user,profitability.alert.user,model_profitability_alert,project.group_project_user,1,0,0,0
-access_profitability_alert_manager,profitability.alert.manager,model_profitability_alert,project.group_project_manager,1,1,1,1

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-     <record id="partner_last_order_info_group_user" model="res.groups">
-            <field name="name">Partner Last PO and SO Order</field>
-     </record>
-</odoo>

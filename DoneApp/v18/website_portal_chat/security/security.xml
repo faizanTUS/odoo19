@@ -1,6 +1,0 @@
-<odoo>
-    <function model="ir.rule" name="write">
-        <value eval="[ref('base.res_partner_portal_public_rule')]"/>
-            <value eval="{'active': False }"/>
-    </function>
-</odoo>

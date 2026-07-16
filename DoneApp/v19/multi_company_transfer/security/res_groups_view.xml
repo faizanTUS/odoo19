@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-<odoo>
-    <data>
-        <record id="multi_company_transfer_group_user" model="res.groups">
-            <field name="name">Multi Company Stock Transfer</field>
-        </record>
-    </data>
-</odoo>
