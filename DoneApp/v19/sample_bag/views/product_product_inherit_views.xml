@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sample_bag_product_product_form_view_inherit" model="ir.ui.view">
+        <field name="name">sample_bag_product_product_form_view_inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form//div[@class='oe_button_box']" position="inside">
+                <button
+                    class="oe_stat_button"
+                    type="object"
+                    name="get_products_in_sample_bag_count"
+                    icon="fa-shopping-basket"
+                    invisible="sample_bag_count == 0"
+                >
+                    <!--                    attrs="{'invisible': [('sample_bag_count', '=', 0)]}"-->
+                    <field
+                        string="Sample Bags"
+                        name="sample_bag_count"
+                        widget="statinfo"
+                    />
+                </button>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
