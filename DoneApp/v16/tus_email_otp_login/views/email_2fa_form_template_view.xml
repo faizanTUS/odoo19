@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <template id="email_2fa_form_template" name="Email OTP Verification">-->
+    <!--        <t t-call="web.login_layout">-->
+    <!--            <div class="oe_login_form">-->
+    <!--                <form method="post" action="/web/login/email-2fa-submit">-->
+    <!--                    <div class="form-group">-->
+    <!--                        <label>Enter OTP</label>-->
+    <!--                        <input type="text" name="otp" class="form-control"/>-->
+    <!--                    </div>-->
+    <!--                    <t t-if="error">-->
+    <!--                        <div class="alert alert-danger mt-2" t-esc="error"/>-->
+    <!--                    </t>-->
+    <!--                    <button type="submit" class="btn btn-primary mt-3">Verify</button>-->
+    <!--                </form>-->
+    <!--            </div>-->
+    <!--        </t>-->
+    <!--    </template>-->
+    <template id="email_2fa_template" name="Email 2FA Page">
+        <t t-call="website.layout">
+            <div class="container py-5">
+                <div class="card shadow-sm p-4 mx-auto" style="max-width: 400px;">
+                    <h3 class="mb-3">Verify Your Email</h3>
+                    <form action="/web/login/email-2fa-submit" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div class="mb-3">
+                            <label class="form-label">Verification Code</label>
+                            <input type="text" name="otp" class="form-control" required="required"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Verify</button>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+
+     <template id="otp_session_error_template" name="OTP Session Error">
+        <t t-call="website.layout">
+            <div class="container py-5 text-center">
+                <h2>Session Expired</h2>
+                <p>Your session has expired or is invalid. Please log in again.</p>
+                <a href="/web/login" class="btn btn-primary mt-3">Back to Login</a>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="otp_invalid_error_template" name="OTP Invalid Error">
+        <t t-call="website.layout">
+            <div class="container py-5 text-center">
+                <h2>Invalid OTP</h2>
+                <p>The OTP you entered is incorrect. Please try again.</p>
+                <a href="/web/login" class="btn btn-danger mt-3">Try Again</a>
+            </div>
+        </t>
+    </template>
+
+</odoo>

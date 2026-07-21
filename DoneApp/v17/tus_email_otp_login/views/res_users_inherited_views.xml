@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_2fa_email_users_preference">
+        <field name="name">2FA Email User Preference</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="auth_totp.view_totp_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_horizontal_separator d-flex align-items-center mt-2 mb-4 text-uppercase fw-bolder small']"
+                   position="before">
+                <field name="two_fa_enable" invisible="1"/>
+                <div>
+                    <div class="o_horizontal_separator mt-2 mb-4 text-uppercase fw-bolder small">Two-Factor
+                        Authentication (2FA) with mail
+                        <button invisible="two_fa_enable" name="action_enable_two_fa_email_wizard"
+                                type="object" class="fa fa-toggle-off o_auth_2fa_btn" aria-label="Enable 2FA"/>
+                        <button invisible="not two_fa_enable" name="action_disable_two_fa_email_wizard"
+                                type="object" class="fa fa-toggle-on o_auth_2fa_btn text-primary"
+                                aria-label="Disable 2FA"/>
+                    </div>
+                    <span invisible="not two_fa_enable" class="text-muted">Your account is protected!</span>
+                    <span invisible="two_fa_enable" class="text-muted">
+                        Two-Factor Authentication (2FA) via email adds an extra layer of security by requiring both your
+                        password and a verification code sent to your email.
+                        This ensures that only you can access your account, even if your password is compromised.
+                    </span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

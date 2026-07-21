@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_otp_verification,sttl_custom_reports_so.access_otp_verification,model_otp_verification,,1,1,1,1
+access_email_auth_otp_wizard,tus_email_otp_login.access_email_auth_otp_wizard,model_email_auth_otp_wizard,,1,1,1,1
