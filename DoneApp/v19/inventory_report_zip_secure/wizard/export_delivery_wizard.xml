@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_delivery_pdf_export_wizard_form" model="ir.ui.view">
+        <field name="name">delivery.pdf.export.wizard.form</field>
+        <field name="model">export.delivery.pdf.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="is_production" invisible="1"/>
+                    <field name="has_incoming" invisible="1"/>
+                    <field name="has_outgoing" invisible="1"/>
+                    <field name="has_both" invisible="1"/>
+                    <field name="is_delivery" invisible="1"/>
+                    <div>
+                        <group>
+                            <group>
+                            <field name="zip_password" password="True" string="Zip Password"/>
+                            </group>
+                        </group>
+                    </div>
+                    <field name="picking_ids" invisible="is_delivery != True" nolabel="1">
+                        <list>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="scheduled_date"/>
+                            <field name="origin"/>
+                            <field name="company_id"/>
+                            <field name="state"/>
+                        </list>
+                    </field>
+                </sheet>
+                <footer>
+                    <button string="Export Receipts/Deliveries (Incoming and Outgoing) Zip" type="object" invisible="has_both != True"
+                            name="action_delivery_report" class="oe_highlight"/>
+                    <button string="Export Receipts(Incoming) Zip" type="object"
+                            invisible="has_incoming != True or has_both == True" name="action_incoming_delivery"
+                            class="oe_highlight"/>
+                    <button string="Export Deliveries(Outgoing) Zip" type="object"
+                            invisible="has_outgoing != True or has_both == True" name="action_outgoing_delivery"
+                            class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

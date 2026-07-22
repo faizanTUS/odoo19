@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="0">
+         <record id="group_export_deliveries_receipts" model="res.groups">
+            <field name="name">Export Delivery</field>
+        </record>
+    </data>
+</odoo>
