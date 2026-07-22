@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="assets_pos_payment_method_access" model="ir.asset">
+        <field name="name">POS Payment Method Access - Filter JS</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">pos_payment_method_access_tus/static/src/js/payment_method_filter.js</field>
+    </record>
+</odoo>
