@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_customer_rma" model="ir.actions.report">
+        <field name="name">RMA Report</field>
+        <field name="model">customer.rma</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rma_management.report_rma_template</field>
+        <field name="report_file">rma_management.report_rma_template</field>
+        <field name="binding_model_id" ref="model_customer_rma"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

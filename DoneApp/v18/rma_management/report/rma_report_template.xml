@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_rma_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-family: 'Helvetica Neue', Arial, sans-serif; color: #2b2b2b;">
+                        <div class="oe_structure"/>
+
+                        <div style="background-color: #4da6ff; border-radius: 8px; padding: 26px 32px; margin-bottom: 26px; color: #ffffff; text-align: center;">
+                            <div style="font-size: 24px; font-weight: 700;">
+                                Return Order <span t-field="o.name"/>
+                            </div>
+                            <div style="margin-top: 8px;">
+                                <span style="display: inline-block; padding: 5px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background-color: #ffffff; color: #16213e;">
+                                    <span t-field="o.state"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <table style="width: 100%; border: none; margin-bottom: 26px;">
+                            <tr>
+                                <td style="border: none; width: 48%; vertical-align: top; padding: 16px 18px; background-color: #f7f7fa; border-radius: 6px; border-left: 3px solid #16213e;">
+                                    <strong>Customer:</strong> <span t-field="o.partner_id.name"/><br/>
+                                    <span t-field="o.partner_id.street"/><br/>
+                                    <span t-field="o.partner_id.city"/> <span t-field="o.partner_id.zip"/>
+                                </td>
+                                <td style="border: none; width: 4%;"/>
+                                <td style="border: none; width: 48%; vertical-align: top; padding: 16px 18px; background-color: #f7f7fa; border-radius: 6px; border-left: 3px solid #16213e;">
+                                    <strong>Date:</strong> <span t-field="o.date"/><br/>
+                                    <strong>Order:</strong> <span t-field="o.sale_order_id.name"/><br/>
+                                    <strong>Responsible:</strong> <span t-field="o.user_id.name"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h3 style="font-size: 15px; font-weight: 700; letter-spacing: .3px; border-left: 4px solid #16213e; padding-left: 10px; margin-bottom: 12px;">Returned Products</h3>
+                        <table class="table table-sm" style="width: 100%; margin-bottom: 26px; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background-color: #4da6ff; color: #ffffff;">
+                                    <th style="padding: 8px 10px; border: none;">Product</th>
+                                    <th style="padding: 8px 10px; border: none; text-align: right;">Return Quantity</th>
+                                    <th style="padding: 8px 10px; border: none; text-align: right;">Unit Price</th>
+                                    <th style="padding: 8px 10px; border: none;">Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.rma_line_ids" t-as="line">
+                                    <tr t-attf-style="background-color: {{ '#f7f7fa' if line_index % 2 == 0 else '#ffffff' }};">
+                                        <td style="padding: 8px 10px; border-bottom: 1px solid #ececf1;"><span t-field="line.product_id.name"/></td>
+                                        <td style="padding: 8px 10px; border-bottom: 1px solid #ececf1; text-align: right;"><span t-field="line.quantity"/></td>
+                                        <td style="padding: 8px 10px; border-bottom: 1px solid #ececf1; text-align: right;"><span t-field="line.unit_price"/></td>
+                                        <td style="padding: 8px 10px; border-bottom: 1px solid #ececf1;"><span t-field="line.reason_id.name"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <t t-if="o.replacement_line_ids">
+                            <h3 style="font-size: 15px; font-weight: 700; letter-spacing: .3px; border-left: 4px solid #0d6efd; padding-left: 10px; margin-bottom: 12px;">Replaced Product</h3>
+                            <table class="table table-sm" style="width: 100%; margin-bottom: 26px; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background-color: #0d6efd; color: #ffffff;">
+                                        <th style="padding: 8px 10px; border: none;">Product</th>
+                                        <th style="padding: 8px 10px; border: none; text-align: right;">Quantity</th>
+                                        <th style="padding: 8px 10px; border: none; text-align: right;">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.replacement_line_ids" t-as="line">
+                                        <tr t-attf-style="background-color: {{ '#f7faff' if line_index % 2 == 0 else '#ffffff' }};">
+                                            <td style="padding: 8px 10px; border-bottom: 1px solid #ececf1;"><span t-field="line.product_id.name"/></td>
+                                            <td style="padding: 8px 10px; border-bottom: 1px solid #ececf1; text-align: right;"><span t-field="line.quantity"/></td>
+                                            <td style="padding: 8px 10px; border-bottom: 1px solid #ececf1; text-align: right;"><span t-field="line.price"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <div style="background-color: #fff8f0; border-left: 3px solid #fd7e14; border-radius: 4px; padding: 14px 18px;">
+                            <strong>RMA Notes:</strong><br/>
+                            <p style="margin: 4px 0 0;" t-field="o.reject_reason"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

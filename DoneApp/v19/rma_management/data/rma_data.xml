@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequence for Customer RMA -->
+        <record id="seq_customer_rma" model="ir.sequence">
+            <field name="name">Customer RMA</field>
+            <field name="code">customer.rma</field>
+            <field name="prefix">CRMA-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequence for Supplier RMA -->
+        <record id="seq_supplier_rma" model="ir.sequence">
+            <field name="name">Supplier RMA</field>
+            <field name="code">supplier.rma</field>
+            <field name="prefix">SRMA-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Initial Reasons -->
+        <record id="reason_wrong_color" model="rma.reason">
+            <field name="name">Wrong quantity, size, or colour received</field>
+            <field name="action">replacement</field>
+        </record>
+        <record id="reason_damaged" model="rma.reason">
+            <field name="name">Damaged or Defective item</field>
+            <field name="action">return_refund</field>
+        </record>
+        <record id="reason_not_needed" model="rma.reason">
+            <field name="name">Do not need / ordered wrong color, size, or quantity</field>
+            <field name="action">return_refund</field>
+        </record>
+        <record id="reason_missing" model="rma.reason">
+            <field name="name">Item missing</field>
+            <field name="action">replacement</field>
+        </record>
+        <record id="reason_wrong_address" model="rma.reason">
+            <field name="name">Shipped to the wrong address / Lost box / Other</field>
+            <field name="action">contact_support</field>
+        </record>
+        <record id="reason_excess" model="rma.reason">
+            <field name="name">Received excess quantity</field>
+            <field name="action">only_return</field>
+        </record>
+
+        <!-- Default restocking fee (inactive so it doesn't auto-apply) -->
+        <record id="restock_fee_standard" model="rma.restock.fee">
+            <field name="name">Standard 15% Handling Fee</field>
+            <field name="fee_type">percentage</field>
+            <field name="amount">15.0</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <!-- Default product types -->
+        <record id="product_type_electronics" model="rma.product.type">
+            <field name="name">Electronics</field>
+            <field name="description">Electronics and gadgets that accept returns.</field>
+        </record>
+        <record id="product_type_fragile" model="rma.product.type">
+            <field name="name">Fragile</field>
+            <field name="description">Fragile items requiring extra packaging on return.</field>
+        </record>
+    </data>
+</odoo>

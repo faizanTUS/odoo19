@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rma_mgt_action_dashboard" model="ir.actions.act_window">
+        <field name="name">RMA Dashboard</field>
+        <field name="res_model">customer.rma</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                RMA Analysis Dashboard
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="rma_mgt_menu_root" name="RMA Management" sequence="1" action="rma_mgt_action_dashboard"/>
+
+    <menuitem id="rma_mgt_menu_dashboard" name="Dashboard" parent="rma_mgt_menu_root" action="rma_mgt_action_dashboard" sequence="1"/>
+
+    <menuitem id="rma_mgt_menu_customer_root" name="Customer RMA" parent="rma_mgt_menu_root" sequence="10"/>
+    <menuitem id="rma_mgt_menu_customer_record" name="Returns" parent="rma_mgt_menu_customer_root" action="action_customer_rma" sequence="10"/>
+
+    <menuitem id="rma_mgt_menu_supplier_root" name="Supplier RMA" parent="rma_mgt_menu_root" sequence="20"/>
+    <menuitem id="rma_mgt_menu_supplier_record" name="Returns" parent="rma_mgt_menu_supplier_root" action="action_supplier_rma" sequence="10"/>
+
+    <record id="action_rma_mail_template" model="ir.actions.act_window">
+        <field name="name">RMA Mail Templates</field>
+        <field name="res_model">mail.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('model','in',['customer.rma','supplier.rma'])]</field>
+        <field name="context">{'default_model': 'customer.rma'}</field>
+    </record>
+
+    <menuitem id="rma_mgt_menu_config" name="Configuration" parent="rma_mgt_menu_root"
+              sequence="100" groups="rma_management.group_rma_manager"/>
+    <menuitem id="rma_mgt_menu_reason" name="Reasons" parent="rma_mgt_menu_config" action="action_rma_reason" sequence="10"/>
+    <menuitem id="rma_mgt_menu_restock_fee" name="Restock Fees" parent="rma_mgt_menu_config" action="action_rma_restock_fee" sequence="20"/>
+    <menuitem id="rma_mgt_menu_product_type" name="Product Types" parent="rma_mgt_menu_config" action="action_rma_product_type" sequence="30"/>
+    <menuitem id="rma_mgt_menu_mail_template" name="Mail Templates" parent="rma_mgt_menu_config" action="action_rma_mail_template" sequence="40"/>
+</odoo>

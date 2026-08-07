@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rma_restock_fee_tree" model="ir.ui.view">
+        <field name="name">rma.restock.fee.tree</field>
+        <field name="model">rma.restock.fee</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="fee_type"/>
+                <field name="amount"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_rma_restock_fee" model="ir.actions.act_window">
+        <field name="name">Restocking Fee</field>
+        <field name="res_model">rma.restock.fee</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>
