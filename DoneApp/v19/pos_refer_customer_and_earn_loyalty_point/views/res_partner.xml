@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+             <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="referral_by_code"/>
+            </xpath>
+
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="loyalty_points" string="Loyalty Points">
+                    <group>
+                        <group>
+                            <field name="member_loyalty_point" invisible="1"/>
+                            <field name="total_loyalty_point"/>
+                            <field name="ref_by_code" invisible="1"/>
+                            <field name="ref_by_partner_id"/>
+                            <field name="generate_unique_ref_code" readonly="1"/>
+                            <field name="partner_loyalty_ids" invisible="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_res_partner_list_inherit" model="ir.ui.view">
+        <field name="name">res.partner.list.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="points"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
