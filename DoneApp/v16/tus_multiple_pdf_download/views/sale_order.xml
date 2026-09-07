@@ -1,0 +1,73 @@
+<odoo>
+    <record id="action_sale_quotation_export" model="ir.actions.server">
+        <field name="name">Export Sale Quotation</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="groups_id" eval="[(6, 0, [ref('tus_multiple_pdf_download.group_export_sale_order')])]"/>
+        <field name="code">
+            action = {
+            'name': 'Export Sale Quotation',
+            'type': 'ir.actions.act_window',
+            'res_model': 'export.pdf.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_sale_order_ids': [record.id for record in records],
+            'default_is_quotation':True,
+            },
+
+            }
+        </field>
+    </record>
+    <record id="sale_quotation_list_action" model="ir.ui.view">
+        <field name="name">sale.quotation.list.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <header>
+                    <button name="%(action_sale_quotation_export)d" type="action" string="Export Sale Quotation"
+                            groups="tus_multiple_pdf_download.group_export_sale_order"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_sale_order_export" model="ir.actions.server">
+        <field name="name">Export Sale Orders</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="groups_id" eval="[(6, 0, [ref('tus_multiple_pdf_download.group_export_sale_order')])]"/>
+        <field name="code">
+            action = {
+            'name': 'Export Sale Order',
+            'type': 'ir.actions.act_window',
+            'res_model': 'export.pdf.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_sale_order_ids': [record.id for record in records],
+            'default_is_sale':True,
+            },
+
+            }
+        </field>
+    </record>
+
+
+    <record id="sale_order_list_action" model="ir.ui.view">
+        <field name="name">sale.order.list.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <header>
+                    <button name="%(action_sale_order_export)d" type="action" string="Export Sale Order"
+                            groups="tus_multiple_pdf_download.group_export_sale_order"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

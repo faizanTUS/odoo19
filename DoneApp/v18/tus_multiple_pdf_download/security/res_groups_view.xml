@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="group_export_invoice" model="res.groups">
+            <field name="name">Export Invoice</field>
+        </record>
+
+        <record id="group_export_sale_order" model="res.groups">
+            <field name="name">Export Quotation/Sale Order</field>
+        </record>
+         <record id="group_export_vendor_bill" model="res.groups">
+            <field name="name">Export Vendor Bill</field>
+        </record>
+         <record id="group_export_credit_notes" model="res.groups">
+            <field name="name">Export Customer Credit Notes</field>
+        </record>
+
+         <record id="group_export_vendor_credit_notes" model="res.groups">
+            <field name="name">Export Vendor Credit Notes</field>
+        </record>
+
+         <record id="group_export_customer_payment" model="res.groups">
+            <field name="name">Export Payment</field>
+        </record>
+
+         <record id="group_export_deliveries" model="res.groups">
+            <field name="name">Export Delivery</field>
+        </record>
+
+         <record id="group_export_mrp_production_order" model="res.groups">
+            <field name="name">Export Production Order</field>
+        </record>
+
+         <record id="group_export_mrp_workorder" model="res.groups">
+            <field name="name">Export Workorder</field>
+        </record>
+
+        <record id="group_export_purchase_order" model="res.groups">
+            <field name="name">Export Purchase Order</field>
+        </record>
+
+    </data>
+
+</odoo>
