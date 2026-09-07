@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="pos_password_reset.ResetPopup">
+		<Dialog title="Reset_Popup">
+			<div class="popup product-line-popup val" style="max-width: 450px;">
+				<t t-set-slot="header">
+					<h4 class="modal-title title"><span>Reset password</span></h4>
+					<i class="fa fa-times" style="float:right" t-on-click="props.close"/>
+				</t>
+				<main class="modal-body">
+					<div>
+						<header>
+							 <div class="field_div" style="display:flex; margin-bottom: 15px;">
+								<label for="password" class="field_label" style="margin-right:10px; margin-top: 10px; width: 120px; display: inline-block; text-align: left;font-size: 9pt;">Confirm Password</label>
+								<input type="password" name="password" class="field_input" id="password" t-ref="password"/>
+							</div>
+
+						</header>
+					</div>
+				</main>
+				<t t-set-slot="footer">
+					<button class="btn btn-primary btn-lg lh-lg o-default-button" t-on-click="onClickConfirmButton"><t t-esc="props.confirmText" /></button>
+<!--					<button class="btn btn-secondary btn-lg lh-lg o-default-button" t-on-click="cancel"><t t-esc="props.cancelText" /></button>-->
+					<button class="btn btn-secondary btn-lg lh-lg o-default-button" t-on-click="close"><t t-esc="props.cancelText" /></button>
+
+				</t>
+
+
+			</div>
+		</Dialog>
+	</t>
+</templates>
+

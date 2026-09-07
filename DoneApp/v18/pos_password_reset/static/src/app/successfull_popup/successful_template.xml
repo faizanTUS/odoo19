@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="pos_password_reset.SuccessfullPopuptus">
+		<Dialog title="successful_template">
+			<div class="popup product-line-popup val" style="max-width: 450px;">
+				<t t-set-slot="header">
+					<h4 class="modal-title title"><span style="color:green;">Success</span></h4>
+					<i class="fa fa-times" style="float:right" t-on-click="props.close"/>
+				</t>
+				<main class="modal-body">
+					<div>
+						<header>
+							<div class="field_div" style="text-align:center;font-size:18px;">
+								 <span>
+									<b>Password updated successfully!</b>
+								 </span>
+							</div>
+						</header>
+					</div>
+				</main>
+				<t t-set-slot="footer">
+					<button class="btn btn-primary btn-lg lh-lg o-default-button" t-on-click="confirm"><t t-esc="props.confirmText" /></button>
+				</t>
+			</div>
+		</Dialog>
+	</t>
+</templates>

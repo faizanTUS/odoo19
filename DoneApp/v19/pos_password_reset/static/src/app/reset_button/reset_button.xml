@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_password_reset.CashierSelectionPopup"
+       t-inherit="pos_hr.CashierSelectionPopup"
+       t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('selection-item')]/i[hasclass('oi-chevron-right')]" position="before">
+            <button type="button"
+                    class="btn-reset btn btn-primary me-2"
+                    t-on-click.stop="(ev) => this.resetPassword(ev, employee)">
+                <b>Reset</b>
+            </button>
+        </xpath>
+    </t>
+</templates>

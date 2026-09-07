@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_password_reset.CustomSelectionPopup" t-inherit="point_of_sale.SelectionPopup"
+       t-inherit-mode="extension">
+        <xpath expr="//i[hasclass('oi-chevron-right')]" position="attributes">
+            <attribute name="class">oi-chevron-right d-none</attribute>
+        </xpath>
+        <xpath expr="//i[hasclass('oi-chevron-right')]" position="before">
+<!--            <div class="reset-btn">-->
+                                <button style="height:40px; width:75px;"
+                                        t-if="item.item.user_id == env.services.pos.user.id || env.services.user.isAdmin"
+                                        t-attf-id="#{item.id}"
+                                        class="btn-reset selection-item d-flex align-items-center btn btn-lg btn-primary p-3 text-start"
+                                        data-popup="reset-button-popup"
+                                        t-on-click="resetPassword">
+                                    <span style="text-align:center;"><b>Reset</b></span>
+                                </button>
+<!--                            </div>-->
+        </xpath>
+    </t>
+</templates>

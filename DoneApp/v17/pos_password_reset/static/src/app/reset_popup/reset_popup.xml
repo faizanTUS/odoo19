@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="pos_password_reset.ResetPopup">
+		<div class="popup product-line-popup val" style="max-width: 450px;">
+			<main class="modal-body">
+				<div>
+					<header>
+						<h3>
+							<span>
+								Reset password
+							</span>
+
+							<i class="fa fa-times" style="float:right" t-on-click="cancel"/>
+                            <hr/>
+						</h3>
+
+                         <div class="field_div" style="display:flex; margin-bottom: 15px;">
+							<label for="password" class="field_label" style="margin-right:10px; margin-top: 10px; width: 120px; display: inline-block; text-align: left;font-size: 9pt;">Confirm Password</label>
+                            <input type="password" name="password" class="field_input" id="password" t-ref="password"/>
+						</div>
+
+					</header>
+				</div>
+			</main>
+			<footer class="footer modal-footer">
+                <div class="button confirm btn btn-lg btn-primary" t-on-click="onClickConfirmButton">
+                    <t t-esc="props.confirmText" />
+                </div>
+                <div class="button cancel btn btn-lg btn-secondary" t-on-click="cancel">
+                    <t t-esc="props.cancelText" />
+                </div>
+            </footer>
+		</div>
+	</t>
+</templates>

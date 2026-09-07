@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="SuccessfullPopup" owl="1">
+        <Draggable>
+            <div class="popup" style="background: green">
+                <header
+                    class="title drag-handle"
+                    style="background:green; color:white;"
+                >
+                    <t t-esc="props.title" />
+                </header>
+                <body style="background: green; color:white;">
+                    Password updated successfully!
+                </body>
+                <footer class="footer centered">
+                    <div
+                        class="button confirm highlight"
+                        style="color:white"
+                        t-on-click="confirm"
+                    >
+                        <t t-esc="props.confirmText" />
+                    </div>
+                </footer>
+            </div>
+        </Draggable>
+    </t>
+</templates>

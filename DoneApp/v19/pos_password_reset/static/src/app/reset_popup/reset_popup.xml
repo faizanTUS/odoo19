@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_password_reset.ResetPopup">
+        <Dialog title.translate="Reset password" size="'md'">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <label for="pos_password_reset_pin" class="mb-0" style="min-width: 130px;">Confirm Password</label>
+                <input type="password"
+                       name="password"
+                       class="form-control"
+                       id="pos_password_reset_pin"
+                       t-ref="password"
+                       autocomplete="new-password"/>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary btn-lg lh-lg" t-on-click="onClickConfirmButton">
+                    <t t-esc="props.confirmText"/>
+                </button>
+                <button class="btn btn-secondary btn-lg lh-lg" t-on-click="close">
+                    <t t-esc="props.cancelText"/>
+                </button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

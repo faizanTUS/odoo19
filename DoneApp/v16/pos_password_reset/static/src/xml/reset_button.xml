@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="SelectionPopup" t-inherit="point_of_sale.SelectionPopup" owl="1">
+        <xpath expr="//div[@class='selection-item']" position="inside">
+            <div style="float: right;" t-if="!env.pos.cashier.id">
+                <button
+                    t-if="item.item.user_id == env.session.user_id[0] || env.session.is_admin"
+                    t-attf-id="#{item.item.id}"
+                    type="button"
+                    class="btn-reset"
+                    data-popup="reset-button-popup"
+                    string="Reset"
+                    style="width:50px; height:25px;"
+                    t-on-click.prevent="resetbutton"
+                >
+                <b>Reset</b>
+            </button>
+            </div>
+        </xpath>
+    </t>
+</templates>
